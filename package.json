@@ -2,7 +2,7 @@
   "name": "custom-tours",
   "version": "0.1.0",
   "description": "![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)",
-  "main": "index.js",
+  "main": "dist/assets/CustomTourBuilder.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
