@@ -1,6 +1,6 @@
 ![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)
 
-# Custom Tours
+# Custom Tours ![Build status badge](https://github.com/art-institute-of-chicago/custom-tours/actions/workflows/build.yml/badge.svg)
 
 > [!WARNING]<br>
 > This README is currently a work in progress.
