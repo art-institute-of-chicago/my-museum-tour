@@ -1,120 +1,167 @@
 ![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)
 
-# Name of Project
-> Additional Sub-Title If Necessary
+# Custom Tours
 
-Summary of the project. This is the first thing you read when you view this
-project. This is a great place to summarize the goals or intentions of this
-project. Generally speaking, this section is optional, but is a nice way to
-get a snapshot of what this project is about.
+> [!WARNING]<br>
+> This README is currently a work in progress.
 
-Also include information on the maturity of the project, like when it was
-launched, what its current production environment is like, and who it is
-maintained by.
+
+> [!NOTE]<br>
+> TODO:
+> Summary of the project. This is the first thing you read when you view this project.
+> This is a great place to summarize the goals or intentions of this project.
+> Generally speaking, this section is optional, but is a nice way to get a snapshot of what this project is about.
+> Also include information on the maturity of the project, like when it was launched, what its current production environment is like, and who it is maintained by.
+
 
 ## Features
 
-What are all the bells and whistles that are significant or unique to this project?
-
-* What's the main functionality
-* What new thing does this project provide?
-* What unique feature does this project include?
+> [!NOTE]<br>
+> TODO:
+> What are all the bells and whistles that are significant or unique to this project?
+>
+> * What's the main functionality
+> * What new thing does this project provide?
+> * What unique feature does this project include?
 
 ## Overview
-
-Describe the architecture in which this project fits, and point to any other repos
-that make up the full stack of software. Describe how each piece fits
-together.
+> [!NOTE]<br>
+> TODO:
+>
+> Describe the architecture in which this project fits, and point to any other repos that make up the full stack of software. Describe how each piece fits together.
 
 ## Requirements
 
-List any and all requirements, included hardware, server software, and third-party
-libraries.
+- [Node.js / npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+
+> [!IMPORTANT]<br>
+> Although optional, we recommend using [nvm](https://github.com/nvm-sh/nvm) to match the version of Node used in this project before running the install command, or the npm scripts described below.
+>
+> If you encounter problems and aren't using the version of Node shown in the [.nvmrc](.nvmrc) file, you should try aligning your node version to this first. This represents a known compatibility with the code here and our dependencies.
+
 
 ## Installing
 
-A quick introduction of the minimal setup you need to get a hello world up and
-running.
+Install the dependencies in the project root with:
 
-```shell
-# Comment your code
-packagemanager install aic-project
-
-# Descibe in brief what each step does
-aic-project start
-
-# Or why this step is required
-aic-project some-setup-function-if-necessary
-```
-
-Here you should say more thoroughly what actually happens when you execute the code above.
-
-## Developing
-
-Here is a brief intro about what a developer must do in order to start developing
-the project further:
-
-```shell
-git clone https://github.com/your/aic-project.git
-cd aic-project/
-packagemanager install
-```
-
-And state what happens step-by-step.
-
-If a developer needs to copy a sample configuration file to get their local instance
-going, provide the most minimum effort needed here. More details on configuration can
-be included in a later section on [Configuration](#configuration).
-
-### Building
-
-If your project needs some additional steps for the developer to build the
-project after some code changes, state them here:
-
-```shell
-./configure
-make
-make install
-```
-
-Here again you should state what actually happens when the code above gets
-executed.
-
-### Deploying / Publishing
-
-In case there's some step you have to take that publishes this project to a
-server, here is where to state it.
-
-```shell
-packagemanager deploy aic-project -s server.com -u username -p password
-```
-
-And again you'd need to tell what the previous code actually does.
-
-## Configuration
-
-Here you should write what are all of the configurations a user can enter when
-using the project, and which file each config is set if applicable.
-
-### Configuration file path
-
-#### Configuration 1 Name
-Type: `String`
-Default: `'default value'`
-
-State what it does and how you can use it. If needed, you can provide
-an example below.
-
-Example:
 ```bash
-aic-project "Some other value"  # Prints "Hello World"
+npm ci
 ```
 
-#### Configuration 2 Name
-Type: `Number|Boolean`
-Default: 100
+## Developing locally
 
-Copy-paste as many of these as you need.
+If you want to develop new features on this project locally, there's various commands and actions you can perform using the npm scripts as described below.
+
+A full list of thse scripts is available in [`package.json`](package.json), or by running `npm run`.
+
+### Compiling and previewing changes
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="300px">Command</th>
+      <th width="800px">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>npm run dev</code></td>
+      <td>Watches files in the <a href="./src"><code>src</code></a> directory for changes and serves a preview at <a href="https://localhost:43110">https://localhost:43110</a> with hot module replacement</td>
+    </tr>
+    <tr>
+      <td><code>npm run build</code></td>
+      <td>Builds the package for use in production. See "<a href="#consuming-this-package">Consuming this package</a>" for how this package can be used</td>
+    </tr>
+  </tbody>
+</table>
+
+
+### Running the tests
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="300px">Command</th>
+      <th width="800px">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>npm run test:gui</code></td>
+      <td>Will start the local dev server and run the component tests with the interactive GUI</td>
+    </tr>
+    <tr>
+      <td><code>npm run test</code></td>
+      <td>Starts the dev server as above, but instead runs the tests without the GUI</td>
+    </tr>
+  </tbody>
+</table>
+
+> [!NOTE]<br>
+> `npm run cypress:gui` and `npm run cypress` will also do the same as the above _without_ starting the dev server, if you already have it running.
+
+
+### Linting the code
+
+<table width="100%">
+  <thead>
+    <tr>
+      <th width="300px">Command</th>
+      <th width="800px">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>npm run lint</code></td>
+      <td>Will lint (and fix where possible) all problems in the code</td>
+    </tr>
+  </tbody>
+</table>
+
+## Consuming this package
+
+The expectation is that the code generated by this project will live within [artic.edu](https://www.artic.edu/), but technically the same rules apply if another website or application wants to use it.
+
+
+### Requirements
+
+- Node.js
+- React (>=16)
+- ReactDOM (>=16)
+
+### Installation
+
+1. In your `package.json` file add a new dependency that points to this repository:
+
+```json
+{
+  "custom-tour-builder": "git+ssh://git@github.com/art-institute-of-chicago/custom-tours.git#main",
+}
+```
+
+> [!NOTE]<br>
+> The fragment (i.e. "#main") of the url shown above refers to the branch. There might be some instances (such as developing a new feature) where you'd like to reference a different branch, which can be achieved by updating this to the corresponding branch and running `npm i custom-tour-builder`
+
+2. Run `npm i custom-tour-builder`
+
+3. The default export for the primary component of this app can be accessed as you would any other npm package using ESModules:
+```js
+import CustomTourBuilder from 'custom-tour-builder';
+```
+
+4. Your app is responsible for mounting this component to the DOM using ReactDOM
+
+React 16:
+```js
+  ReactDOM.render(<CustomTourBuilder/>, container);
+```
+
+
+React > 16:
+```js
+ReactDOM.createRoot(container).render(<CustomTourBuilder/>);
+```
+
 
 ## Contributing
 
@@ -122,13 +169,10 @@ We encourage your contributions. Please fork this repository and make your chang
 
 ```bash
 # Clone the repo to your computer
-git clone git@github.com:your-github-account/aic-project.git
+git clone git@github.com:art-institute-of-chicago/custom-tours.git
 
 # Enter the folder that was created by the clone
-cd aic-project
-
-# Run the install script
-./install.sh
+cd custom-tours
 
 # Start a feature branch
 git checkout -b feature/good-short-description
@@ -147,18 +191,9 @@ this project you agree to abide by its [terms](CODE_OF_CONDUCT.md).
 
 We welcome bug reports and questions under GitHub's [Issues](issues). For other concerns, you can reach our engineering team at [engineering@artic.edu](mailto:engineering@artic.edu)
 
-If there's anything else a developer needs to know (e.g. the code style
-guide), you should link it here. If there's a lot of things to take into
-consideration, separate this section to its own file called `CONTRIBUTING.md`
-and say that it exists here.
-
 ## Acknowledgements
 
-Name who designed and developed this project. Reference someone's code you used,
-list contributors, insert an external link or thank people. If there's a lot to
-inclue here, separate this section to its own file called `CONTRIBUTORS.md` and
-say that it exists here.
-
+Developed in collaboration with Cogapp and Art Institute of Chicago.
 ## Licensing
 
 This project is licensed under the [GNU Affero General Public License
