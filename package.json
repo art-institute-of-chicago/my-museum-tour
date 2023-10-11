@@ -4,7 +4,15 @@
   "description": "![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)",
   "main": "dist/assets/CustomTourBuilder.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "vite build",
+    "cypress": "cypress run --component",
+    "cypress:gui": "cypress open --component",
+    "dev": "vite",
+    "lint": "run-p lint:* prettier",
+    "lint:scripts": "eslint --fix \"src/**/*.{js,jsx}\"",
+    "prettier": "prettier -w \"src/**/*.{js,jsx}\"",
+    "test": "run-p -r dev cypress",
+    "test:gui": "run-p -r dev cypress:gui"
   },
   "dependencies": {
     "react": "^16.9.0",
