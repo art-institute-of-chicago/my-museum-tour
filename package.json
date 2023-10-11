@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)",
   "main": "dist/assets/CustomTourBuilder.js",
+  "files": [
+    "dist/assets/CustomTourBuilder.js"
+  ],
   "scripts": {
     "build": "vite build",
     "cypress": "cypress run --component",
