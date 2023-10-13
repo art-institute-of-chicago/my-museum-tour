@@ -41,7 +41,11 @@ function SearchBar(props) {
         type="search"
         placeholder="Search"
         onChange={(e) => {
+          if (e.target.value) e.target.setCustomValidity("");
           setInputValue(e.target.value);
+        }}
+        onInvalid={(e) => {
+          e.target.setCustomValidity("You must enter a search term");
         }}
         required
       />
