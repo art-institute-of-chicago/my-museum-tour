@@ -1,13 +1,12 @@
 import React from "react";
 import SearchResultItem from "./SearchResultItem";
-import SearchLoading from "./SearchLoading";
 
 function SearchResults(props) {
   const { searchError, searchFetching, searchResultItems, iiifBaseUrl } = props;
 
   // Render only the loading message while fetching
   if (searchFetching) {
-    return <SearchLoading />;
+    return <div>Loading...</div>;
   }
 
   // Render only the error message if there is an error
