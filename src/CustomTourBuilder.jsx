@@ -8,11 +8,15 @@ const CustomTourBuilder = () => {
   const [searchFetching, setSearchFetching] = useState(false);
   const [searchError, setSearchError] = useState(null);
 
-  const handleSearch = () => {};
-
   return (
     <>
-      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SearchBar
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+        setSearchFetching={setSearchFetching}
+        setSearchError={setSearchError}
+        setSearchResultItems={setSearchResultItems}
+      />
       <SearchResults
         searchError={searchError}
         searchFetching={searchFetching}
