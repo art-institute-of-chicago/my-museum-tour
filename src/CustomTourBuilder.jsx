@@ -1,18 +1,22 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import SearchResults from "./components/SearchResults";
 
-const CustomTourBuilder = (props) => {
-  const { initMessage } = props;
-  const [message, setMessage] = useState(initMessage);
+const CustomTourBuilder = () => {
+  const [searchResultItems, setSearchResultItems] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchFetching, setSearchFetching] = useState(false);
+  const [searchError, setSearchError] = useState(null);
+
+  const handleSearch = () => {};
+
   return (
     <>
-      <h1 className="f-headline" style={{ marginBottom: "20px" }}>
-        {message}
-      </h1>
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      <SearchResults
+        searchError={searchError}
+        searchFetching={searchFetching}
+        searchResultItems={searchResultItems}
       />
     </>
   );
