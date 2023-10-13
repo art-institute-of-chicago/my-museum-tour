@@ -7,6 +7,7 @@ const CustomTourBuilder = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFetching, setSearchFetching] = useState(false);
   const [searchError, setSearchError] = useState(null);
+  const [iiifBaseUrl, setIiifBaseUrl] = useState("");
 
   return (
     <>
@@ -16,11 +17,13 @@ const CustomTourBuilder = () => {
         setSearchFetching={setSearchFetching}
         setSearchError={setSearchError}
         setSearchResultItems={setSearchResultItems}
+        setIiifBaseUrl={setIiifBaseUrl}
       />
       <SearchResults
         searchError={searchError}
         searchFetching={searchFetching}
         searchResultItems={searchResultItems}
+        iiifBaseUrl={iiifBaseUrl}
       />
     </>
   );

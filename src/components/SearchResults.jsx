@@ -3,7 +3,7 @@ import SearchResultItem from "./SearchResultItem";
 import SearchLoading from "./SearchLoading";
 
 function SearchResults(props) {
-  const { searchError, searchFetching, searchResultItems } = props;
+  const { searchError, searchFetching, searchResultItems, iiifBaseUrl } = props;
 
   // Render only the loading message while fetching
   if (searchFetching) {
@@ -23,11 +23,15 @@ function SearchResults(props) {
   // Render the results if there are results
   if (searchResultItems?.length > 0) {
     return (
-      <div>
+      <ul>
         {searchResultItems.map((item) => (
-          <SearchResultItem key={item.id} item={item} />
+          <SearchResultItem
+            key={item.id}
+            item={item}
+            iiifBaseUrl={iiifBaseUrl}
+          />
         ))}
-      </div>
+      </ul>
     );
   }
 

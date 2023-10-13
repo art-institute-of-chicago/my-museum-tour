@@ -8,6 +8,7 @@ function SearchBar(props) {
     setSearchResultItems,
     setSearchError,
     setSearchFetching,
+    setIiifBaseUrl,
   } = props;
   const [inputValue, setInputValue] = useState("");
   const { data, error, fetching } = useFetchItems(searchQuery);
@@ -21,7 +22,8 @@ function SearchBar(props) {
     // "data" is contingent on handleSubmit being called
     if (!data) return;
     setSearchResultItems(data.data);
-  }, [data, setSearchResultItems]);
+    setIiifBaseUrl(data.config.iiif_url);
+  }, [data, setSearchResultItems, setIiifBaseUrl]);
 
   useEffect(() => {
     setSearchError(error);
