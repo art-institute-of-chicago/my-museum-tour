@@ -52,7 +52,7 @@ const useFetchItems = (keywords) => {
         // Explicity ignore AbortError's as they aren't really errors as far as we're concerned
         if (error.name === "AbortError") return;
 
-        setError(error.message);
+        setError("Error fetching results");
         setFetching(false);
       }
     }
