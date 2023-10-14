@@ -2,9 +2,9 @@ import React from "react";
 import { iiifUrl } from "../utils";
 
 function SearchResultItem(props) {
-  const { item, iiifBaseUrl } = props;
+  const { id, item, iiifBaseUrl } = props;
   return (
-    <li>
+    <li id={`aic-ct-search__item-${id}`}>
       {item.title && <h2>{item.title}</h2>}
       {item.image_id && (
         <img
