@@ -6,23 +6,23 @@ function SearchResults(props) {
 
   // Render only the loading message while fetching
   if (searchFetching) {
-    return <div>Loading...</div>;
+    return <div id="aic-ct-search__loading">Loading...</div>;
   }
 
   // Render only the error message if there is an error
   if (searchError) {
-    return <div>{searchError}</div>;
+    return <div id="aic-ct-search__error">{searchError}</div>;
   }
 
   // Render only a no results message if there are no results
   if (searchResultItems?.length === 0) {
-    return <div>No results found</div>;
+    return <div id="aic-ct-search__no-results">No results found</div>;
   }
 
   // Render the results if there are results
   if (searchResultItems?.length > 0) {
     return (
-      <ul>
+      <ul id="aic-ct-search__results">
         {searchResultItems.map((item) => (
           <SearchResultItem
             key={item.id}
