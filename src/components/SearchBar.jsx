@@ -35,11 +35,13 @@ function SearchBar(props) {
 
   return (
     <form
+      id="aic-ct-search"
       role="search"
       aria-label="Objects for your tour"
       onSubmit={handleSubmit}
     >
       <input
+        id="aic-ct-search__input"
         type="search"
         placeholder="Search"
         onChange={(e) => {
@@ -51,7 +53,9 @@ function SearchBar(props) {
         }}
         required
       />
-      <button type="submit">Search</button>
+      <button id="aic-ct-search__button" type="submit">
+        Search
+      </button>
     </form>
   );
 }
