@@ -8,14 +8,12 @@
   ],
   "scripts": {
     "build": "vite build",
-    "cypress": "cypress run --component",
-    "cypress:gui": "cypress open --component",
     "dev": "vite",
     "lint": "run-p lint:* prettier",
     "lint:scripts": "eslint --fix \"src/**/*.{js,jsx}\"",
     "prettier": "prettier -w \"src/**/*.{js,jsx}\"",
-    "test": "run-p -r dev cypress",
-    "test:gui": "run-p -r dev cypress:gui"
+    "test": "cypress run --component --port=3000",
+    "test:gui": "cypress open --component --port=3000"
   },
   "peerDependencies": {
     "react": "^16.9.0",
