@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import PropTypes from "prop-types";
 
 export const AppContext = createContext();
 
@@ -16,3 +17,13 @@ export function AppProvider({ children }) {
     </AppContext.Provider>
   );
 }
+
+AppProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+AppContext.Provider.propTypes = {
+  value: PropTypes.shape({
+    iiifBaseUrl: PropTypes.string,
+  }),
+};

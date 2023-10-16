@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { iiifUrl } from "../utils";
 import { AppContext } from "../contexts/AppContext";
+import PropTypes from "prop-types";
 
 /**
  * SearchResultItem
@@ -25,5 +26,18 @@ function SearchResultItem(props) {
     </li>
   );
 }
+
+SearchResultItem.propTypes = {
+  id: PropTypes.string.isRequired,
+  item: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    image_id: PropTypes.string,
+    thumbnail: PropTypes.shape({
+      alt_text: PropTypes.string,
+    }),
+    artist_title: PropTypes.string,
+    description: PropTypes.string,
+  }),
+};
 
 export default SearchResultItem;
