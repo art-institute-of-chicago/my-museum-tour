@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import SearchResultItem from "./SearchResultItem";
+import { AppContext } from "../contexts/AppContext";
+import { SearchContext } from "../contexts/SearchContext";
 
-function SearchResults(props) {
-  const { searchError, searchFetching, searchResultItems, iiifBaseUrl } = props;
+function SearchResults() {
+  const { iiifBaseUrl } = useContext(AppContext);
+  const { searchError, searchFetching, searchResultItems } =
+    useContext(SearchContext);
 
   // Render only the loading message while fetching
   if (searchFetching) {

@@ -1,6 +1,7 @@
 import React from "react";
 import SearchResultItem from "./SearchResultItem";
 import item from "../../cypress/fixtures/json/item.json";
+import { AppProvider } from "../contexts/AppContext";
 
 describe("<SearchBar />", () => {
   it("Renders", () => {
@@ -12,12 +13,9 @@ describe("<SearchBar />", () => {
       },
     );
     cy.mount(
-      <SearchResultItem
-        key={item.id}
-        id={item.id}
-        item={item}
-        iiifBaseUrl="https://artic.edu/iiif/2"
-      />,
+      <AppProvider>
+        <SearchResultItem key={item.id} id={item.id} item={item} />
+      </AppProvider>,
     );
     cy.get("#aic-ct-search__item-1 img")
       .should(

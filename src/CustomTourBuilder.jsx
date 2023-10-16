@@ -1,31 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
+import { SearchProvider } from "./contexts/SearchContext";
+import { AppProvider } from "./contexts/AppContext";
 
 const CustomTourBuilder = () => {
-  const [searchResultItems, setSearchResultItems] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [searchFetching, setSearchFetching] = useState(false);
-  const [searchError, setSearchError] = useState(null);
-  const [iiifBaseUrl, setIiifBaseUrl] = useState("");
-
   return (
-    <>
-      <SearchBar
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        setSearchFetching={setSearchFetching}
-        setSearchError={setSearchError}
-        setSearchResultItems={setSearchResultItems}
-        setIiifBaseUrl={setIiifBaseUrl}
-      />
-      <SearchResults
-        searchError={searchError}
-        searchFetching={searchFetching}
-        searchResultItems={searchResultItems}
-        iiifBaseUrl={iiifBaseUrl}
-      />
-    </>
+    <AppProvider>
+      <SearchProvider>
+        <SearchBar />
+        <SearchResults />
+      </SearchProvider>
+    </AppProvider>
   );
 };
 

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { iiifUrl } from "../utils";
+import { AppContext } from "../contexts/AppContext";
 
 function SearchResultItem(props) {
-  const { id, item, iiifBaseUrl } = props;
+  const { iiifBaseUrl } = useContext(AppContext);
+  const { id, item } = props;
   return (
     <li id={`aic-ct-search__item-${id}`}>
       {item.title && <h2>{item.title}</h2>}

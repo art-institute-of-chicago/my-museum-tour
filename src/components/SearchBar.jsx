@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import useFetchItems from "../hooks/useFetchItems";
+import { SearchContext } from "../contexts/SearchContext";
 
-function SearchBar(props) {
+function SearchBar() {
   const {
     searchQuery,
     setSearchQuery,
     setSearchResultItems,
     setSearchError,
     setSearchFetching,
-    setIiifBaseUrl,
-  } = props;
+  } = useContext(SearchContext);
   const [inputValue, setInputValue] = useState("");
   const { data, error, fetching } = useFetchItems(searchQuery);
 
@@ -22,8 +22,7 @@ function SearchBar(props) {
     // "data" is contingent on handleSubmit being called
     if (!data) return;
     setSearchResultItems(data.data);
-    setIiifBaseUrl(data.config.iiif_url);
-  }, [data, setSearchResultItems, setIiifBaseUrl]);
+  }, [data, setSearchResultItems]);
 
   useEffect(() => {
     setSearchError(error);

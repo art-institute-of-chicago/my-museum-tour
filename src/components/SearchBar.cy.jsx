@@ -1,17 +1,16 @@
 import React from "react";
 import SearchBar from "./SearchBar";
+import { AppProvider } from "../contexts/AppContext";
+import { SearchProvider } from "../contexts/SearchContext";
 
 describe("<SearchBar />", () => {
   it("Renders", () => {
     cy.mount(
-      <SearchBar
-        searchQuery={""}
-        setSearchQuery={() => {}}
-        setSearchResultItems={() => {}}
-        setSearchError={() => {}}
-        setSearchFetching={() => {}}
-        setIiifBaseUrl={() => {}}
-      />,
+      <AppProvider>
+        <SearchProvider>
+          <SearchBar />
+        </SearchProvider>
+      </AppProvider>,
     );
     cy.get("#aic-ct-search").should("have.attr", "role", "search");
     cy.get("#aic-ct-search__input")
