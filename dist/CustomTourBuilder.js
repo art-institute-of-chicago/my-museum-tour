@@ -1,125 +1,188 @@
-import t, { useState as c, useEffect as g } from "react";
-const b = (s) => {
-  const [e, l] = c(null), [r, n] = c(!1), [i, o] = c(null);
-  return g(() => {
-    const a = new URL("https://api.artic.edu/api/v1/artworks/search");
-    a.searchParams.set("query[bool][must][][term][is_on_view]", "true"), a.searchParams.set(
+import r, { useState as o, useEffect as p, createContext as b, useContext as g } from "react";
+import e from "prop-types";
+const R = (a) => {
+  const [n, c] = o(null), [t, i] = o(!1), [u, m] = o(null);
+  return p(() => {
+    const s = new URL("https://api.artic.edu/api/v1/artworks/search");
+    s.searchParams.set("query[bool][must][][term][is_on_view]", "true"), s.searchParams.set(
       "query[bool][must][][exists][field]",
       "description"
-    ), a.searchParams.set(
+    ), s.searchParams.set(
       "query[bool][should][][exists][field]",
       "description"
-    ), a.searchParams.set(
+    ), s.searchParams.set(
       "query[bool][should][][exists][field]",
       "subject_id"
-    ), a.searchParams.set("query[bool][should][][exists][field]", "style_id"), a.searchParams.set("query[bool][should][][term][is_boosted]", "true"), a.searchParams.set("query[bool][minimum_should_match]", "1"), a.searchParams.set("fields", "true"), a.searchParams.set("limit", "10"), a.searchParams.set("q", s);
-    const h = new AbortController(), u = h.signal;
-    if (s === "") {
-      l(null), n(!1), o(null);
+    ), s.searchParams.set("query[bool][should][][exists][field]", "style_id"), s.searchParams.set("query[bool][should][][term][is_boosted]", "true"), s.searchParams.set("query[bool][minimum_should_match]", "1"), s.searchParams.set("fields", "true"), s.searchParams.set("limit", "10"), s.searchParams.set("q", a);
+    const h = new AbortController(), d = h.signal;
+    if (a === "") {
+      c(null), i(!1), m(null);
       return;
     }
-    async function d() {
+    async function f() {
       try {
-        const E = await (await fetch(a, { signal: u })).json();
-        l(E), n(!1);
-      } catch (f) {
-        if (f.name === "AbortError")
+        const _ = await (await fetch(s, { signal: d })).json();
+        c(_), i(!1);
+      } catch (l) {
+        if (l.name === "AbortError")
           return;
-        o(f.message), n(!1);
+        m("Error fetching results"), i(!1);
       }
     }
-    return n(!0), d(), () => {
+    return i(!0), f(), () => {
       h.abort();
     };
-  }, [s]), { data: e, error: i, fetching: r };
-};
-function p(s) {
+  }, [a]), { data: n, error: u, fetching: t };
+}, y = b();
+function S(a) {
   const {
-    searchQuery: e,
-    setSearchQuery: l,
-    setSearchResultItems: r,
-    setSearchError: n,
-    setSearchFetching: i,
-    setIiifBaseUrl: o
-  } = s, [a, h] = c(""), { data: u, error: d, fetching: f } = b(e), E = (m) => {
-    l(a), m.preventDefault();
+    children: n,
+    searchResultItems: c,
+    searchQuery: t,
+    searchFetching: i,
+    searchError: u
+  } = a, [m, s] = o(
+    c || null
+  ), [h, d] = o(t || ""), [f, l] = o(
+    i || !1
+  ), [_, q] = o(u || !1);
+  return /* @__PURE__ */ r.createElement(
+    y.Provider,
+    {
+      value: {
+        searchResultItems: m,
+        setSearchResultItems: s,
+        searchQuery: h,
+        setSearchQuery: d,
+        searchFetching: f,
+        setSearchFetching: l,
+        searchError: _,
+        setSearchError: q
+      }
+    },
+    n
+  );
+}
+S.propTypes = {
+  children: e.node.isRequired,
+  searchResultItems: e.array,
+  searchQuery: e.string,
+  searchFetching: e.bool,
+  searchError: e.oneOfType([e.string, e.bool])
+};
+y.Provider.propTypes = {
+  value: e.shape({
+    searchResultItems: e.array,
+    setSearchResultItems: e.func,
+    searchQuery: e.string,
+    setSearchQuery: e.func,
+    searchFetching: e.bool,
+    setSearchFetching: e.func,
+    searchError: e.oneOfType([e.string, e.bool]),
+    setSearchError: e.func
+  }),
+  children: e.node.isRequired
+};
+function F() {
+  const {
+    searchQuery: a,
+    setSearchQuery: n,
+    setSearchResultItems: c,
+    setSearchError: t,
+    setSearchFetching: i
+  } = g(y), [u, m] = o(""), { data: s, error: h, fetching: d } = R(a), f = (l) => {
+    n(u), l.preventDefault();
   };
-  return g(() => {
-    u && (r(u.data), o(u.config.iiif_url));
-  }, [u, r, o]), g(() => {
-    n(d);
-  }, [d, n]), g(() => {
-    i(f);
-  }, [f, i]), /* @__PURE__ */ t.createElement(
+  return p(() => {
+    s && c(s.data);
+  }, [s, c]), p(() => {
+    t(h);
+  }, [h, t]), p(() => {
+    i(d);
+  }, [d, i]), /* @__PURE__ */ r.createElement(
     "form",
     {
+      id: "aic-ct-search",
       role: "search",
       "aria-label": "Objects for your tour",
-      onSubmit: E
+      onSubmit: f
     },
-    /* @__PURE__ */ t.createElement(
+    /* @__PURE__ */ r.createElement("label", { htmlFor: "aic-ct-search__input", className: "sr-only" }, "Search the collection"),
+    /* @__PURE__ */ r.createElement(
       "input",
       {
+        id: "aic-ct-search__input",
         type: "search",
         placeholder: "Search",
-        onChange: (m) => {
-          m.target.value && m.target.setCustomValidity(""), h(m.target.value);
+        onChange: (l) => {
+          l.target.value && l.target.setCustomValidity(""), m(l.target.value);
         },
-        onInvalid: (m) => {
-          m.target.setCustomValidity("You must enter a search term");
+        onInvalid: (l) => {
+          l.target.setCustomValidity("You must enter a search term");
         },
         required: !0
       }
     ),
-    /* @__PURE__ */ t.createElement("button", { type: "submit" }, "Search")
+    /* @__PURE__ */ r.createElement("button", { id: "aic-ct-search__button", type: "submit" }, "Search")
   );
 }
-function y(s, e, l = "", r = "", n = "full", i = !0) {
-  return `${s}/${e}/${n}/${i && "!"}${l},${r}/0/default.jpg`;
+function x(a, n, c = "", t = "", i = "full", u = !0) {
+  return `${a}/${n}/${i}/${u && "!"}${c},${t}/0/default.jpg`;
 }
-function S(s) {
-  const { item: e, iiifBaseUrl: l } = s;
-  return /* @__PURE__ */ t.createElement("li", null, e.title && /* @__PURE__ */ t.createElement("h2", null, e.title), e.image_id && /* @__PURE__ */ t.createElement(
+const E = b();
+function v({ children: a }) {
+  return /* @__PURE__ */ r.createElement(
+    E.Provider,
+    {
+      value: {
+        iiifBaseUrl: "https://artic.edu/iiif/2"
+      }
+    },
+    a
+  );
+}
+v.propTypes = {
+  children: e.node.isRequired
+};
+E.Provider.propTypes = {
+  value: e.shape({
+    iiifBaseUrl: e.string
+  })
+};
+function P(a) {
+  const { iiifBaseUrl: n } = g(E), { id: c, item: t } = a;
+  return /* @__PURE__ */ r.createElement("li", { id: `aic-ct-search__item-${c}` }, t.title && /* @__PURE__ */ r.createElement("h2", null, t.title), t.image_id && /* @__PURE__ */ r.createElement(
     "img",
     {
-      src: y(l, e.image_id, "240", "240"),
-      alt: e.thumbnail.alt_text
+      src: x(n, t.image_id, "240", "240"),
+      alt: t.thumbnail.alt_text
     }
-  ), e.artist_title && /* @__PURE__ */ t.createElement("p", null, e.artist_title), e.description && /* @__PURE__ */ t.createElement("div", { dangerouslySetInnerHTML: { __html: e.description } }));
+  ), t.artist_title && /* @__PURE__ */ r.createElement("p", null, t.artist_title), t.description && /* @__PURE__ */ r.createElement("div", { dangerouslySetInnerHTML: { __html: t.description } }));
 }
-function _(s) {
-  const { searchError: e, searchFetching: l, searchResultItems: r, iiifBaseUrl: n } = s;
-  return l ? /* @__PURE__ */ t.createElement("div", null, "Loading...") : e ? /* @__PURE__ */ t.createElement("div", null, e) : (r == null ? void 0 : r.length) === 0 ? /* @__PURE__ */ t.createElement("div", null, "No results found") : (r == null ? void 0 : r.length) > 0 ? /* @__PURE__ */ t.createElement("ul", null, r.map((i) => /* @__PURE__ */ t.createElement(
-    S,
+P.propTypes = {
+  id: e.string.isRequired,
+  item: e.shape({
+    title: e.string.isRequired,
+    image_id: e.string,
+    thumbnail: e.shape({
+      alt_text: e.string
+    }),
+    artist_title: e.string,
+    description: e.string
+  })
+};
+function C() {
+  const { iiifBaseUrl: a } = g(E), { searchError: n, searchFetching: c, searchResultItems: t } = g(y);
+  return c ? /* @__PURE__ */ r.createElement("div", { id: "aic-ct-search__loading" }, "Loading...") : n ? /* @__PURE__ */ r.createElement("div", { id: "aic-ct-search__error" }, n) : (t == null ? void 0 : t.length) === 0 ? /* @__PURE__ */ r.createElement("div", { id: "aic-ct-search__no-results" }, "Sorry, we couldn’t find any results matching your criteria") : (t == null ? void 0 : t.length) > 0 ? /* @__PURE__ */ r.createElement("ul", { id: "aic-ct-search__results" }, t.map((i) => /* @__PURE__ */ r.createElement(
+    P,
     {
       key: i.id,
       item: i,
-      iiifBaseUrl: n
+      iiifBaseUrl: a
     }
   ))) : null;
 }
-const P = () => {
-  const [s, e] = c(null), [l, r] = c(""), [n, i] = c(!1), [o, a] = c(null), [h, u] = c("");
-  return /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement(
-    p,
-    {
-      searchQuery: l,
-      setSearchQuery: r,
-      setSearchFetching: i,
-      setSearchError: a,
-      setSearchResultItems: e,
-      setIiifBaseUrl: u
-    }
-  ), /* @__PURE__ */ t.createElement(
-    _,
-    {
-      searchError: o,
-      searchFetching: n,
-      searchResultItems: s,
-      iiifBaseUrl: h
-    }
-  ));
-};
+const Q = () => /* @__PURE__ */ r.createElement(v, null, /* @__PURE__ */ r.createElement(S, null, /* @__PURE__ */ r.createElement(F, null), /* @__PURE__ */ r.createElement(C, null)));
 export {
-  P as default
+  Q as default
 };
