@@ -42,6 +42,9 @@ function SearchBar() {
       aria-label="Objects for your tour"
       onSubmit={handleSubmit}
     >
+      <label htmlFor="aic-ct-search__input" className="sr-only">
+        Search the collection
+      </label>
       <input
         id="aic-ct-search__input"
         type="search"

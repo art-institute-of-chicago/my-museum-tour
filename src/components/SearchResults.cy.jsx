@@ -35,6 +35,24 @@ describe("<SearchResults />", () => {
     cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
   });
 
+  it("Renders no results message", () => {
+    cy.mount(
+      <AppProvider>
+        <SearchProvider
+          searchError={false}
+          searchResultItems={[]}
+          searchFetching={false}
+        >
+          <SearchResults />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-search__no-results").should(
+      "have.text",
+      "Sorry, we couldn’t find any results matching your criteria",
+    );
+  });
+
   it("Renders a result", () => {
     cy.mount(
       <AppProvider>

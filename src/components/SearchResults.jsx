@@ -3,6 +3,9 @@ import SearchResultItem from "./SearchResultItem";
 import { AppContext } from "../contexts/AppContext";
 import { SearchContext } from "../contexts/SearchContext";
 
+/**
+ * SearchResults
+ */
 function SearchResults() {
   const { iiifBaseUrl } = useContext(AppContext);
   const { searchError, searchFetching, searchResultItems } =
@@ -20,7 +23,11 @@ function SearchResults() {
 
   // Render only a no results message if there are no results
   if (searchResultItems?.length === 0) {
-    return <div id="aic-ct-search__no-results">No results found</div>;
+    return (
+      <div id="aic-ct-search__no-results">
+        Sorry, we couldn’t find any results matching your criteria
+      </div>
+    );
   }
 
   // Render the results if there are results
