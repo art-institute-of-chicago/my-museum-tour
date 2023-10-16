@@ -12,7 +12,7 @@ export default defineConfig({
     },
     rollupOptions: {
       // We don't want to bundle React with our code, so we mark it as external
-      external: ["react", "react-dom", "react/jsx-runtime"],
+      external: ["react", "react-dom", "react/jsx-runtime", "prop-types"],
       output: {
         entryFileNames: `[name].js`,
         chunkFileNames: `[name].js`,
@@ -21,6 +21,7 @@ export default defineConfig({
           react: "react",
           "react-dom": "ReactDOM",
           "react/jsx-runtime": "react/jsx-runtime",
+          "prop-types": "PropTypes",
         },
       },
     },
