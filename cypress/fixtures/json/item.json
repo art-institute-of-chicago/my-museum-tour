@@ -1,0 +1,10 @@
+{
+  "id": "1",
+  "title": "Test title",
+  "image_id": "test_image_id",
+  "artist_title": "Test artist title",
+  "description": "Test description",
+  "thumbnail": {
+    "alt_text": "Test image alt text"
+  }
+}

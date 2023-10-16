@@ -1,20 +1,17 @@
 import React from "react";
-import { useState } from "react";
+import SearchBar from "./components/SearchBar";
+import SearchResults from "./components/SearchResults";
+import { SearchProvider } from "./contexts/SearchContext";
+import { AppProvider } from "./contexts/AppContext";
 
-const CustomTourBuilder = (props) => {
-  const { initMessage } = props;
-  const [message, setMessage] = useState(initMessage);
+const CustomTourBuilder = () => {
   return (
-    <>
-      <h1 className="f-headline" style={{ marginBottom: "20px" }}>
-        {message}
-      </h1>
-      <input
-        type="text"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-      />
-    </>
+    <AppProvider>
+      <SearchProvider>
+        <SearchBar />
+        <SearchResults />
+      </SearchProvider>
+    </AppProvider>
   );
 };
 
