@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from "react";
 import useFetchItems from "../hooks/useFetchItems";
 import { SearchContext } from "../contexts/SearchContext";
 
+/**
+ * SearchBar
+ */
 function SearchBar() {
   const {
     searchQuery,

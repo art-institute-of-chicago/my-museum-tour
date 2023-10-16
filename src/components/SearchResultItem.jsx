@@ -2,6 +2,9 @@ import React, { useContext } from "react";
 import { iiifUrl } from "../utils";
 import { AppContext } from "../contexts/AppContext";
 
+/**
+ * SearchResultItem
+ */
 function SearchResultItem(props) {
   const { iiifBaseUrl } = useContext(AppContext);
   const { id, item } = props;
@@ -15,8 +18,7 @@ function SearchResultItem(props) {
         />
       )}
       {item.artist_title && <p>{item.artist_title}</p>}
-      {/* TODO: Is this "short description"? I feel like it isn't */}
-      {/* Predicated on the notion we trust the markup in the API... */}
+      {/* TODO: Update this to "short description"? When we have that field */}
       {item.description && (
         <div dangerouslySetInnerHTML={{ __html: item.description }}></div>
       )}

@@ -2,6 +2,9 @@ import React, { createContext } from "react";
 
 export const AppContext = createContext();
 
+/**
+ * AppProvider
+ */
 export function AppProvider({ children }) {
   return (
     <AppContext.Provider
