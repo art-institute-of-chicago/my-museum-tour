@@ -97,10 +97,6 @@ A full list of thse scripts is available in [`package.json`](package.json), or b
   </tbody>
 </table>
 
-> [!NOTE]<br>
-> `npm run cypress:gui` and `npm run cypress` will also do the same as the above _without_ starting the dev server, if you already have it running.
-
-
 ### Linting the code
 
 <table width="100%">
