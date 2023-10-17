@@ -15,7 +15,9 @@ export function AppProvider(props) {
   // use the id as the key and makes the value easier to access
   const [tourItems, dispatch] = useReducer(
     tourItemsReducer,
-    new Map(tourItemsValue ? [...tourItemsValue] : []),
+    new Map(
+      tourItemsValue ? tourItemsValue.map((item) => [item.id, item]) : [],
+    ),
   );
 
   return (
