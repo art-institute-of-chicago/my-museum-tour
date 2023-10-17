@@ -1,19 +1,8 @@
 import React, { createContext, useState, useReducer } from "react";
 import PropTypes from "prop-types";
+import tourItemsReducer from "../reducers/tourItemsReducer";
 
 export const AppContext = createContext();
-
-const tourItemsReducer = (state, action) => {
-  switch (action.type) {
-    case "ADD_ITEM":
-      // Insertion structure is [id(key), payload(value)]
-      return new Map([...state, [action.payload.id, action.payload]]);
-    case "REMOVE_ITEM":
-      return new Map([...state].filter(([key]) => key !== action.payload));
-    default:
-      return state;
-  }
-};
 
 /**
  * AppProvider
