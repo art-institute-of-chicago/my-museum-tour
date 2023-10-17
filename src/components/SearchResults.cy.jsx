@@ -76,7 +76,9 @@ describe("<SearchResults />", () => {
       "GET",
       "https://artic.edu/iiif/2/test_image_id/full/!240,240/0/default.jpg",
       {
-        fixture: "../../cypress/fixtures/images/image_1.jpg",
+        fixture: `../../cypress/fixtures/images/image_${
+          Math.floor(Math.random() * 10) + 1
+        }.jpg`,
       },
     );
     cy.mount(
