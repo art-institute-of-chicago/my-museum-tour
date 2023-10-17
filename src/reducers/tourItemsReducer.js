@@ -1,3 +1,9 @@
+/**
+ * Tour Items Reducer
+ * @param {React.ReducerState} state
+ * @param {React.ReducerAction} action
+ * @returns {React.ReducerState}
+ */
 const tourItemsReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
