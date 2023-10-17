@@ -7,12 +7,16 @@ export const AppContext = createContext();
 /**
  * AppProvider
  */
-export function AppProvider({ children }) {
+export function AppProvider(props) {
+  const { children, tourItems: tourItemsValue } = props;
   const [tourTitle, setTourTitle] = useState("");
   const [tourDescription, setTourDescription] = useState("");
   // Although we could use an Array using a Map allows us to
   // use the id as the key and makes the value easier to access
-  const [tourItems, dispatch] = useReducer(tourItemsReducer, new Map());
+  const [tourItems, dispatch] = useReducer(
+    tourItemsReducer,
+    new Map(tourItemsValue ? [...tourItemsValue] : []),
+  );
 
   return (
     <AppContext.Provider
@@ -33,6 +37,7 @@ export function AppProvider({ children }) {
 
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  tourItems: PropTypes.instanceOf(Map),
 };
 
 AppContext.Provider.propTypes = {
