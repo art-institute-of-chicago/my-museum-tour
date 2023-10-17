@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
 import SearchResultItem from "./SearchResultItem";
-import { AppContext } from "../contexts/AppContext";
 import { SearchContext } from "../contexts/SearchContext";
 
 /**
  * SearchResults
  */
 function SearchResults() {
-  const { iiifBaseUrl } = useContext(AppContext);
   const { searchError, searchFetching, searchResultItems } =
     useContext(SearchContext);
 
@@ -35,11 +33,7 @@ function SearchResults() {
     return (
       <ul id="aic-ct-search__results">
         {searchResultItems.map((item) => (
-          <SearchResultItem
-            key={item.id}
-            item={item}
-            iiifBaseUrl={iiifBaseUrl}
-          />
+          <SearchResultItem key={item.id} item={item} />
         ))}
       </ul>
     );
