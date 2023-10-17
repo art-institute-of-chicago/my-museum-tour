@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { iiifUrl } from "../utils";
 import { AppContext } from "../contexts/AppContext";
 import PropTypes from "prop-types";
@@ -7,10 +7,25 @@ import PropTypes from "prop-types";
  * SearchResultItem
  */
 function SearchResultItem(props) {
-  const { iiifBaseUrl } = useContext(AppContext);
-  const { id, item } = props;
+  const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
+  const { item } = props;
+  const [inTour, setInTour] = useState(tourItems.get(item.id));
+
+  const handleClick = () => {
+    // Remove the item if it existed before
+    tourItemsDispatch({
+      type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
+      payload: item.id,
+    });
+  };
+
+  // Whenever the tourItems map changes, update the inTour state for this item
+  useEffect(() => {
+    setInTour(tourItems.get(item.id));
+  }, [tourItems, item.id]);
+
   return (
-    <li id={`aic-ct-search__item-${id}`}>
+    <li id={`aic-ct-search__item-${item.id}`}>
       {item.title && <h2>{item.title}</h2>}
       {item.image_id && (
         <img
@@ -23,13 +38,26 @@ function SearchResultItem(props) {
       {item.description && (
         <div dangerouslySetInnerHTML={{ __html: item.description }}></div>
       )}
+
+      {/*
+        This may need more extensive checking for accessibility
+        It's been modelled on the Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+      */}
+      <button
+        type="button"
+        onClick={handleClick}
+        aria-pressed={inTour ? "true" : "false"}
+        aria-label="Add to tour"
+      >
+        {inTour ? "Remove from tour" : "Add to tour"}
+      </button>
     </li>
   );
 }
 
 SearchResultItem.propTypes = {
-  id: PropTypes.string.isRequired,
   item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     image_id: PropTypes.string,
     thumbnail: PropTypes.shape({
