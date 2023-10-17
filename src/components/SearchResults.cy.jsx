@@ -20,6 +20,24 @@ describe("<SearchResults />", () => {
     cy.get("#aic-ct-search__results").should("not.exist");
   });
 
+  it("Renders error message", () => {
+    cy.mount(
+      <AppProvider>
+        <SearchProvider
+          searchError={"Error loading results"}
+          searchResultItems={null}
+          searchFetching={false}
+        >
+          <SearchResults />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-search__error").should(
+      "have.text",
+      "Error loading results",
+    );
+  });
+
   it("Renders loading message", () => {
     cy.mount(
       <AppProvider>
@@ -67,23 +85,5 @@ describe("<SearchResults />", () => {
     );
     cy.get("#aic-ct-search__results").should("exist");
     cy.get("#aic-ct-search__results li").should("have.length", 1);
-  });
-
-  it("Renders error message", () => {
-    cy.mount(
-      <AppProvider>
-        <SearchProvider
-          searchError={"Error loading results"}
-          searchResultItems={null}
-          searchFetching={false}
-        >
-          <SearchResults />
-        </SearchProvider>
-      </AppProvider>,
-    );
-    cy.get("#aic-ct-search__error").should(
-      "have.text",
-      "Error loading results",
-    );
   });
 });
