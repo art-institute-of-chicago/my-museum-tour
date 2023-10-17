@@ -8,35 +8,35 @@ import PropTypes from "prop-types";
  */
 function SearchResultItem(props) {
   const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
-  const { item } = props;
-  const [inTour, setInTour] = useState(tourItems.get(item.id));
+  const { itemData } = props;
+  const [inTour, setInTour] = useState(tourItems.get(itemData.id));
 
   const handleClick = () => {
     // Remove the item if it existed before
     tourItemsDispatch({
       type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
-      payload: item.id,
+      payload: inTour ? itemData.id : itemData,
     });
   };
 
   // Whenever the tourItems map changes, update the inTour state for this item
   useEffect(() => {
-    setInTour(tourItems.get(item.id));
-  }, [tourItems, item.id]);
+    setInTour(tourItems.get(itemData.id));
+  }, [tourItems, itemData.id]);
 
   return (
-    <li id={`aic-ct-search__item-${item.id}`}>
-      {item.title && <h2>{item.title}</h2>}
-      {item.image_id && (
+    <li id={`aic-ct-search__item-${itemData.id}`}>
+      {itemData.title && <h2>{itemData.title}</h2>}
+      {itemData.image_id && (
         <img
-          src={iiifUrl(iiifBaseUrl, item.image_id, "240", "240")}
-          alt={item.thumbnail.alt_text}
+          src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
+          alt={itemData.thumbnail.alt_text}
         />
       )}
-      {item.artist_title && <p>{item.artist_title}</p>}
+      {itemData.artist_title && <p>{itemData.artist_title}</p>}
       {/* TODO: Update this to "short description"? When we have that field */}
-      {item.description && (
-        <div dangerouslySetInnerHTML={{ __html: item.description }}></div>
+      {itemData.description && (
+        <div dangerouslySetInnerHTML={{ __html: itemData.description }}></div>
       )}
 
       {/*
@@ -56,7 +56,7 @@ function SearchResultItem(props) {
 }
 
 SearchResultItem.propTypes = {
-  item: PropTypes.shape({
+  itemData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
     image_id: PropTypes.string,

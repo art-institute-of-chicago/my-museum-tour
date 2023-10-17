@@ -32,8 +32,8 @@ function SearchResults() {
   if (searchResultItems?.length > 0) {
     return (
       <ul id="aic-ct-search__results">
-        {searchResultItems.map((item) => (
-          <SearchResultItem key={item.id} item={item} />
+        {searchResultItems.map((itemData) => (
+          <SearchResultItem key={itemData.id} itemData={itemData} />
         ))}
       </ul>
     );
