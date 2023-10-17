@@ -14,7 +14,7 @@ describe("<SearchBar />", () => {
     );
     cy.mount(
       <AppProvider>
-        <SearchResultItem key={item.id} id={item.id} item={item} />
+        <SearchResultItem key={item.id} itemData={item} />
       </AppProvider>,
     );
     cy.get("#aic-ct-search__item-1 img")
