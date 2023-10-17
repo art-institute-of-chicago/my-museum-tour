@@ -15,7 +15,7 @@ function TourItems() {
     <>
       {tourItems.size > 0 && (
         <>
-          <h2>Your tour</h2>
+          <h2 id="aic-ct-tour__heading">Your tour</h2>
           <ul id="aic-ct-tour__results">
             {/* JSX cannot directly render a Map and it must be converted to an Array */}
             {Array.from(tourItems).map(([id, itemData]) => (
