@@ -69,7 +69,7 @@ function TourMetadata() {
             })
           }
           rows="5"
-          defaultValue={tourDescription}
+          value={tourDescription}
           maxLength={maxLength}
         />
       </div>

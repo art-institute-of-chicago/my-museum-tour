@@ -218,12 +218,12 @@ function Q() {
         e: l
       }),
       rows: "5",
-      defaultValue: c,
+      value: c,
       maxLength: a
     }
   )));
 }
-const D = () => /* @__PURE__ */ e.createElement(R, null, /* @__PURE__ */ e.createElement(Q, null), /* @__PURE__ */ e.createElement(T, null, /* @__PURE__ */ e.createElement(q, null), /* @__PURE__ */ e.createElement(I, null)));
+const V = () => /* @__PURE__ */ e.createElement(R, null, /* @__PURE__ */ e.createElement(Q, null), /* @__PURE__ */ e.createElement(T, null, /* @__PURE__ */ e.createElement(q, null), /* @__PURE__ */ e.createElement(I, null)));
 export {
-  D as default
+  V as default
 };
