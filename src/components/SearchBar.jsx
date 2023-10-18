@@ -45,6 +45,7 @@ function SearchBar() {
       <label htmlFor="aic-ct-search__input" className="sr-only">
         Search the collection
       </label>
+      <br />
       <input
         id="aic-ct-search__input"
         type="search"

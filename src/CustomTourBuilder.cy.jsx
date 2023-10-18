@@ -13,6 +13,28 @@ describe("<CustomTourBuilder />", () => {
       </AppProvider>,
     );
     cy.get("#aic-ct-search").should("exist");
+    cy.get("#aic-ct-metadata__title").should("exist");
+    cy.get("#aic-ct-metadata__description").should("exist");
+  });
+
+  it("Can add a title and description for the tour", () => {
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <CustomTourBuilder />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-metadata__title").type("A tour title");
+    cy.get("#aic-ct-metadata__description").type("A tour description");
+    cy.get("label[for='aic-ct-metadata__title']").should(
+      "have.text",
+      "Tour Title (243 characters remaining)",
+    );
+    cy.get("label[for='aic-ct-metadata__description']").should(
+      "have.text",
+      "Tour Description (237 characters remaining)",
+    );
   });
 
   it("Can perform a search and show results", () => {
