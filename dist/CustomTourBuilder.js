@@ -1,8 +1,8 @@
-import e, { useState as d, useEffect as g, createContext as I, useContext as f, useReducer as P, useRef as b } from "react";
+import e, { useState as d, useEffect as E, createContext as I, useContext as f, useReducer as P, useRef as b } from "react";
 import t from "prop-types";
 const q = (s) => {
   const [r, n] = d(null), [c, a] = d(!1), [l, u] = d(null);
-  return g(() => {
+  return E(() => {
     const i = new URL("https://api.artic.edu/api/v1/artworks/search");
     i.searchParams.set("query[bool][must][][term][is_on_view]", "true"), i.searchParams.set(
       "query[bool][must][][exists][field]",
@@ -93,11 +93,11 @@ function x() {
   } = f(_), [l, u] = d(""), { data: i, error: o, fetching: m } = q(s), p = (h) => {
     r(l), h.preventDefault();
   };
-  return g(() => {
+  return E(() => {
     i && n(i.data);
-  }, [i, n]), g(() => {
+  }, [i, n]), E(() => {
     c(o);
-  }, [o, c]), g(() => {
+  }, [o, c]), E(() => {
     a(m);
   }, [m, a]), /* @__PURE__ */ e.createElement(
     "form",
@@ -142,7 +142,7 @@ const M = (s, r) => {
     default:
       return s;
   }
-}, E = I();
+}, g = I();
 function S(s) {
   const { children: r, tourItems: n } = s, [c, a] = d(""), [l, u] = d(""), [i, o] = P(
     M,
@@ -151,7 +151,7 @@ function S(s) {
     )
   );
   return /* @__PURE__ */ e.createElement(
-    E.Provider,
+    g.Provider,
     {
       value: {
         iiifBaseUrl: "https://artic.edu/iiif/2",
@@ -170,21 +170,25 @@ S.propTypes = {
   children: t.node.isRequired,
   tourItems: t.instanceOf(Map)
 };
-E.Provider.propTypes = {
+g.Provider.propTypes = {
   value: t.shape({
     iiifBaseUrl: t.string,
     tourItems: t.instanceOf(Map),
-    tourItemsDispatch: t.func
+    tourItemsDispatch: t.func,
+    tourTitle: t.string,
+    setTourTitle: t.func,
+    tourDescription: t.string,
+    setTourDescription: t.func
   })
 };
 function D(s) {
-  const { iiifBaseUrl: r, tourItems: n, tourItemsDispatch: c } = f(E), { itemData: a } = s, [l, u] = d(n.get(a.id)), i = () => {
+  const { iiifBaseUrl: r, tourItems: n, tourItemsDispatch: c } = f(g), { itemData: a } = s, [l, u] = d(n.get(a.id)), i = () => {
     c({
       type: l ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: l ? a.id : a
     });
   };
-  return g(() => {
+  return E(() => {
     u(n.get(a.id));
   }, [n, a.id]), /* @__PURE__ */ e.createElement("li", { id: `aic-ct-search__item-${a.id}` }, a.title && /* @__PURE__ */ e.createElement("h2", null, a.title), a.image_id && /* @__PURE__ */ e.createElement(
     "img",
@@ -220,7 +224,7 @@ function w() {
   return r ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__loading" }, "Loading...") : s ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__error" }, s) : (n == null ? void 0 : n.length) === 0 ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__no-results" }, "Sorry, we couldn’t find any results matching your criteria") : (n == null ? void 0 : n.length) > 0 ? /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-search__results" }, n.map((c) => /* @__PURE__ */ e.createElement(D, { key: c.id, itemData: c }))) : null;
 }
 function V() {
-  const { tourTitle: s, setTourTitle: r, tourDescription: n, setTourDescription: c } = f(E), a = 255, l = b(null), u = b(null), i = ({ setter: o, countRef: m, e: p }) => {
+  const { tourTitle: s, setTourTitle: r, tourDescription: n, setTourDescription: c } = f(g), a = 255, l = b(null), u = b(null), i = ({ setter: o, countRef: m, e: p }) => {
     m.current.ariaBusy = !0, o(p.target.value), m.current.ariaBusy = !1;
   };
   return /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", null, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__title" }, "Tour Title", " ", /* @__PURE__ */ e.createElement("span", { ref: l, "aria-live": "polite" }, "(", T(s, a), /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
@@ -252,7 +256,7 @@ function V() {
   )));
 }
 function C(s) {
-  const { itemData: r } = s, { iiifBaseUrl: n } = f(E);
+  const { itemData: r } = s, { iiifBaseUrl: n } = f(g);
   return /* @__PURE__ */ e.createElement("li", { id: `aic-ct-tour__item-${r.id}` }, r.title && /* @__PURE__ */ e.createElement("h2", null, r.title), r.image_id && /* @__PURE__ */ e.createElement(
     "img",
     {
@@ -274,7 +278,7 @@ C.propTypes = {
   })
 };
 function A() {
-  const { tourItems: s } = f(E);
+  const { tourItems: s } = f(g);
   return window.tourItems = s, /* @__PURE__ */ e.createElement(e.Fragment, null, s.size > 0 && /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("h2", { id: "aic-ct-tour__heading" }, "Your tour"), /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-tour__results" }, Array.from(s).map(([r, n]) => /* @__PURE__ */ e.createElement(C, { key: r, itemData: n })))));
 }
 const $ = () => /* @__PURE__ */ e.createElement(S, null, /* @__PURE__ */ e.createElement(V, null), /* @__PURE__ */ e.createElement(v, null, /* @__PURE__ */ e.createElement(x, null), /* @__PURE__ */ e.createElement(w, null)), /* @__PURE__ */ e.createElement(A, null));
