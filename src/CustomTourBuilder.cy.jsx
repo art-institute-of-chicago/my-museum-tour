@@ -37,28 +37,6 @@ describe("<CustomTourBuilder />", () => {
     );
   });
 
-  it("Can perform a search and show results", () => {
-    // Use intercept to ping the search api and use the search.json fixture
-    // but wait while we check the loading message
-    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
-      fixture: "json/search.json",
-      delayMs: 80,
-    });
-
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
-    cy.get("#aic-ct-search__input").type("test");
-    cy.get("#aic-ct-search__button").click();
-    cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
-    cy.get("#aic-ct-search__results").should("exist");
-    cy.get("#aic-ct-search__results li").should("have.length", 10);
-  });
-
   it("Display an error message if there was a problem with the request", () => {
     cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
       statusCode: 500,
@@ -77,5 +55,82 @@ describe("<CustomTourBuilder />", () => {
       "have.text",
       "Error fetching results",
     );
+  });
+
+  it("Can perform a search and show results", () => {
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+
+    // Use intercept to ping the search api and use the search.json fixture
+    // but wait while we check the loading message
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+      delayMs: 80,
+    }).as("search");
+
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <CustomTourBuilder />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
+    cy.get("#aic-ct-search__results").should("exist");
+    cy.get("#aic-ct-search__results li").should("have.length", 10);
+  });
+
+  it("Can add and remove items from the tour", () => {
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+
+    // Use intercept to ping the search api and use the search.json fixture
+    // but wait while we check the loading message
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+    }).as("search");
+
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <CustomTourBuilder />
+        </SearchProvider>
+      </AppProvider>,
+    );
+
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(4) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-tour__item-59426").should("exist");
+    cy.get("#aic-ct-tour__item-243872").should("exist");
+    cy.get("#aic-ct-tour__item-75644").should("exist");
+    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(4) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-tour__item-59426").should("not.exist");
+    cy.get("#aic-ct-tour__item-243872").should("not.exist");
+    cy.get("#aic-ct-tour__item-75644").should("not.exist");
   });
 });

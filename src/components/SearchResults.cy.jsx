@@ -20,6 +20,24 @@ describe("<SearchResults />", () => {
     cy.get("#aic-ct-search__results").should("not.exist");
   });
 
+  it("Renders error message", () => {
+    cy.mount(
+      <AppProvider>
+        <SearchProvider
+          searchError={"Error loading results"}
+          searchResultItems={null}
+          searchFetching={false}
+        >
+          <SearchResults />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-search__error").should(
+      "have.text",
+      "Error loading results",
+    );
+  });
+
   it("Renders loading message", () => {
     cy.mount(
       <AppProvider>
@@ -54,6 +72,15 @@ describe("<SearchResults />", () => {
   });
 
   it("Renders a result", () => {
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/test_image_id/full/!240,240/0/default.jpg",
+      {
+        fixture: `../../cypress/fixtures/images/image_${
+          Math.floor(Math.random() * 10) + 1
+        }.jpg`,
+      },
+    );
     cy.mount(
       <AppProvider>
         <SearchProvider
@@ -67,23 +94,5 @@ describe("<SearchResults />", () => {
     );
     cy.get("#aic-ct-search__results").should("exist");
     cy.get("#aic-ct-search__results li").should("have.length", 1);
-  });
-
-  it("Renders error message", () => {
-    cy.mount(
-      <AppProvider>
-        <SearchProvider
-          searchError={"Error loading results"}
-          searchResultItems={null}
-          searchFetching={false}
-        >
-          <SearchResults />
-        </SearchProvider>
-      </AppProvider>,
-    );
-    cy.get("#aic-ct-search__error").should(
-      "have.text",
-      "Error loading results",
-    );
   });
 });
