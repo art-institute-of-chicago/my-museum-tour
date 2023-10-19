@@ -10,6 +10,8 @@ function Navigation() {
       {navPages.map((page, index) => (
         <button
           key={page.id}
+          id={`aic-ct-nav-button-${page.id}`}
+          aria-controls={`aic-ct-nav-page-${page.id}`}
           type="button"
           onClick={() => setActiveNavPage(index)}
         >
