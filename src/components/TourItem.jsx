@@ -8,7 +8,15 @@ import PropTypes from "prop-types";
  */
 function TourItem(props) {
   const { itemData } = props;
-  const { iiifBaseUrl } = useContext(AppContext);
+  const { iiifBaseUrl, tourItemsDispatch } = useContext(AppContext);
+
+  const handleClick = (id) => {
+    // Remove the item from the tour
+    tourItemsDispatch({
+      type: "REMOVE_ITEM",
+      payload: id,
+    });
+  };
 
   return (
     <li id={`aic-ct-tour__item-${itemData.id}`}>
@@ -24,6 +32,14 @@ function TourItem(props) {
       {itemData.description && (
         <div dangerouslySetInnerHTML={{ __html: itemData.description }}></div>
       )}
+      <button
+        type="button"
+        onClick={() => {
+          handleClick(itemData.id);
+        }}
+      >
+        Remove from tour
+      </button>
     </li>
   );
 }
