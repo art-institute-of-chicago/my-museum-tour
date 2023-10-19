@@ -11,6 +11,8 @@ export function AppProvider(props) {
   const { children, tourItems: tourItemsValue } = props;
   const [tourTitle, setTourTitle] = useState("");
   const [tourDescription, setTourDescription] = useState("");
+  const [navPages, setNavPages] = useState([]);
+  const [activeNavPage, setActiveNavPage] = useState(0);
   // Although we could use an Array using a Map allows us to
   // use the id as the key and makes the value easier to access
   const [tourItems, tourItemsDispatch] = useReducer(
@@ -30,6 +32,10 @@ export function AppProvider(props) {
         setTourDescription,
         tourItems,
         tourItemsDispatch,
+        navPages,
+        setNavPages,
+        activeNavPage,
+        setActiveNavPage,
       }}
     >
       {children}
