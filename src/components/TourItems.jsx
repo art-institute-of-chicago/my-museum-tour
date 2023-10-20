@@ -8,18 +8,16 @@ import { AppContext } from "../contexts/AppContext";
 function TourItems() {
   const { tourItems } = useContext(AppContext);
 
-  window.tourItems = tourItems;
-
   // Render the results if there are results
   return (
     <>
-      {tourItems.size > 0 && (
+      {tourItems.length > 0 && (
         <>
           <h2 id="aic-ct-tour__heading">Your tour</h2>
           <ul id="aic-ct-tour__results">
             {/* JSX cannot directly render a Map and it must be converted to an Array */}
-            {Array.from(tourItems).map(([id, itemData]) => (
-              <TourItem key={id} itemData={itemData} />
+            {tourItems.map((itemData) => (
+              <TourItem key={itemData.id} itemData={itemData} />
             ))}
           </ul>
         </>

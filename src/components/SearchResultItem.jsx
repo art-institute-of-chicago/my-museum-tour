@@ -9,7 +9,7 @@ import PropTypes from "prop-types";
 function SearchResultItem(props) {
   const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
   const { itemData } = props;
-  const [inTour, setInTour] = useState(tourItems.get(itemData.id));
+  const [inTour, setInTour] = useState(false);
 
   const handleClick = () => {
     // Remove the item if it existed before
@@ -21,7 +21,8 @@ function SearchResultItem(props) {
 
   // Whenever the tourItems map changes, update the inTour state for this item
   useEffect(() => {
-    setInTour(tourItems.get(itemData.id));
+    // loop tourItems array to see if this item is in the tour
+    setInTour(tourItems.find((item) => item.id === itemData.id));
   }, [tourItems, itemData.id]);
 
   return (
