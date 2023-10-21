@@ -3,7 +3,7 @@ import { AppContext } from "../contexts/AppContext";
 import PropTypes from "prop-types";
 
 function NavPages({ children }) {
-  const { activeNavPage, setNavPages } = useContext(AppContext);
+  const { setNavPages } = useContext(AppContext);
 
   useEffect(() => {
     setNavPages(
@@ -16,12 +16,7 @@ function NavPages({ children }) {
     );
   }, [children, setNavPages]);
 
-  return (
-    <div>
-      <h1>NavPages</h1>
-      {children[activeNavPage]}
-    </div>
-  );
+  return <div id="aic-ct__nav-pages">{children}</div>;
 }
 
 NavPages.propTypes = {
