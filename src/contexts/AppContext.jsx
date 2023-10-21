@@ -53,5 +53,9 @@ AppContext.Provider.propTypes = {
     setTourTitle: PropTypes.func,
     tourDescription: PropTypes.string,
     setTourDescription: PropTypes.func,
+    navPages: PropTypes.instanceOf(Array),
+    setNavPages: PropTypes.func,
+    activeNavPage: PropTypes.number,
+    setActiveNavPage: PropTypes.func,
   }),
 };
