@@ -13,19 +13,19 @@ const CustomTourBuilder = () => {
   return (
     <AppProvider>
       <Navigation />
-      <SearchProvider>
-        <NavPages>
-          <NavPage id={0} title="Search">
+      <NavPages>
+        <NavPage id={0} title="Search">
+          <SearchProvider>
             <SearchBar />
             <SearchResults />
-          </NavPage>
+          </SearchProvider>
+        </NavPage>
 
-          <NavPage id={1} title="Your tour">
-            <TourMetadata />
-            <TourItems />
-          </NavPage>
-        </NavPages>
-      </SearchProvider>
+        <NavPage id={1} title="Your tour">
+          <TourMetadata />
+          <TourItems />
+        </NavPage>
+      </NavPages>
     </AppProvider>
   );
 };
