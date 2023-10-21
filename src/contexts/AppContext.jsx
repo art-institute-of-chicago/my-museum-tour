@@ -8,10 +8,14 @@ export const AppContext = createContext();
  * AppProvider
  */
 export function AppProvider(props) {
-  const { children, tourItems: tourItemsValue } = props;
+  const {
+    children,
+    tourItems: tourItemsValue,
+    navPages: navPagesValue,
+  } = props;
   const [tourTitle, setTourTitle] = useState("");
   const [tourDescription, setTourDescription] = useState("");
-  const [navPages, setNavPages] = useState([]);
+  const [navPages, setNavPages] = useState(navPagesValue || []);
   const [activeNavPage, setActiveNavPage] = useState(0);
   const [tourItems, tourItemsDispatch] = useReducer(
     tourItemsReducer,
@@ -42,6 +46,7 @@ export function AppProvider(props) {
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,
   tourItems: PropTypes.instanceOf(Array),
+  navPages: PropTypes.instanceOf(Array),
 };
 
 AppContext.Provider.propTypes = {
