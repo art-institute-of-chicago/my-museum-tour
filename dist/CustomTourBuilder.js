@@ -367,7 +367,7 @@ F.propTypes = {
   setRemoveButtons: t.func,
   setShouldAssignFocus: t.func
 };
-function Q() {
+function k() {
   const { tourItems: i, navSearchButtonRef: r } = p(g), [n, s] = h({
     flag: !1,
     id: null
@@ -383,9 +383,9 @@ function Q() {
       shouldAssignFocus: n,
       setShouldAssignFocus: s
     }
-  )))) : /* @__PURE__ */ e.createElement("div", { id: "aic-ct-tour__no-items" }, "You haven’t added any items to your tour yet"));
+  )))) : /* @__PURE__ */ e.createElement("div", { id: "aic-ct-tour__no-items" }, "You haven’t added any artworks to your tour yet"));
 }
-const U = () => /* @__PURE__ */ e.createElement(S, null, /* @__PURE__ */ e.createElement(V, null), /* @__PURE__ */ e.createElement(C, null, /* @__PURE__ */ e.createElement(R, { id: 0, title: "Search" }, /* @__PURE__ */ e.createElement(q, null, /* @__PURE__ */ e.createElement(O, null), /* @__PURE__ */ e.createElement($, null))), /* @__PURE__ */ e.createElement(R, { id: 1, title: "Your tour" }, /* @__PURE__ */ e.createElement(M, null), /* @__PURE__ */ e.createElement(Q, null))));
+const U = () => /* @__PURE__ */ e.createElement(S, null, /* @__PURE__ */ e.createElement(V, null), /* @__PURE__ */ e.createElement(C, null, /* @__PURE__ */ e.createElement(R, { id: 0, title: "Search" }, /* @__PURE__ */ e.createElement(q, null, /* @__PURE__ */ e.createElement(O, null), /* @__PURE__ */ e.createElement($, null))), /* @__PURE__ */ e.createElement(R, { id: 1, title: "Your tour" }, /* @__PURE__ */ e.createElement(M, null), /* @__PURE__ */ e.createElement(k, null))));
 export {
   U as default
 };

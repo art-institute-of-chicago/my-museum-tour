@@ -52,7 +52,7 @@ function TourItems() {
         </>
       ) : (
         <div id="aic-ct-tour__no-items">
-          You haven’t added any items to your tour yet
+          You haven’t added any artworks to your tour yet
         </div>
       )}
     </>

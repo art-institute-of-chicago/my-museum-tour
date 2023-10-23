@@ -92,7 +92,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__results li").should("have.length", 10);
   });
 
-  it("Can add and remove items from the tour", () => {
+  it("Can add and remove artworks from the tour", () => {
     let imageInterceptCount = 0;
     cy.intercept(
       "GET",
