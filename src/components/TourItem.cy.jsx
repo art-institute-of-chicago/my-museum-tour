@@ -16,7 +16,12 @@ describe("<TourItem />", () => {
     );
     cy.mount(
       <AppProvider>
-        <TourItem key={item.id} itemData={item} />
+        <TourItem
+          key={item.id}
+          itemData={item}
+          setRemoveButtons={() => {}}
+          setShouldAssignFocus={() => {}}
+        />
       </AppProvider>,
     );
     cy.get("#aic-ct-tour__item-1").should("exist");
