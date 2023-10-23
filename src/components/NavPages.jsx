@@ -7,16 +7,18 @@ function NavPages({ children }) {
 
   useEffect(() => {
     setNavPages(
-      children.map((child, index) => {
-        return {
-          id: index,
-          title: child.props.title,
-        };
-      }),
+      children
+        ? children.map((child, index) => {
+            return {
+              id: index,
+              title: child.props.title,
+            };
+          })
+        : [],
     );
   }, [children, setNavPages]);
 
-  return <div id="aic-ct__nav-pages">{children}</div>;
+  return <div id="aic-ct-nav-pages">{children}</div>;
 }
 
 NavPages.propTypes = {
