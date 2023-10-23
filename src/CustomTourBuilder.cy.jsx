@@ -119,22 +119,41 @@ describe("<CustomTourBuilder />", () => {
       </AppProvider>,
     );
 
+    // Adding and removing from search page
+    cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
-    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
-    cy.get("#aic-ct-search__results li:nth-child(4) button").click();
-    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-search__item-75644 button").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-tour__item-59426").should("be.visible");
     cy.get("#aic-ct-tour__item-243872").should("be.visible");
     cy.get("#aic-ct-tour__item-75644").should("be.visible");
     cy.get("#aic-ct-nav-button-0").click();
-    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
-    cy.get("#aic-ct-search__results li:nth-child(4) button").click();
-    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-search__item-75644 button").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-tour__item-59426").should("not.exist");
     cy.get("#aic-ct-tour__item-243872").should("not.exist");
     cy.get("#aic-ct-tour__item-75644").should("not.exist");
+
+    // Adding on search page and removing on tour page
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-tour__item-59426").should("be.visible");
+    cy.get("#aic-ct-tour__item-243872").should("be.visible");
+    cy.get("#aic-ct-tour__item-75644").should("be.visible");
+    cy.get("#aic-ct-tour__item-59426 button").click();
+    cy.get("#aic-ct-tour__item-59426").should("not.exist");
+    cy.get("#aic-ct-tour__item-243872 button").should("have.focus").click();
+    cy.get("#aic-ct-tour__item-243872").should("not.exist");
+    cy.get("#aic-ct-tour__item-75644 button").should("have.focus").click();
+    cy.get("#aic-ct-tour__item-75644").should("not.exist");
+    cy.get("#aic-ct-nav-button-0").should("have.focus");
   });
 });
