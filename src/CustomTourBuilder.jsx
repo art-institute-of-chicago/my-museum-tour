@@ -1,4 +1,7 @@
 import React from "react";
+import Navigation from "./components/Navigation";
+import NavPages from "./components/NavPages";
+import NavPage from "./components/NavPage";
 import SearchBar from "./components/SearchBar";
 import SearchResults from "./components/SearchResults";
 import TourMetadata from "./components/TourMetadata";
@@ -9,12 +12,20 @@ import { AppProvider } from "./contexts/AppContext";
 const CustomTourBuilder = () => {
   return (
     <AppProvider>
-      <TourMetadata />
-      <SearchProvider>
-        <SearchBar />
-        <SearchResults />
-      </SearchProvider>
-      <TourItems />
+      <Navigation />
+      <NavPages>
+        <NavPage id={0} title="Search">
+          <SearchProvider>
+            <SearchBar />
+            <SearchResults />
+          </SearchProvider>
+        </NavPage>
+
+        <NavPage id={1} title="Your tour">
+          <TourMetadata />
+          <TourItems />
+        </NavPage>
+      </NavPages>
     </AppProvider>
   );
 };

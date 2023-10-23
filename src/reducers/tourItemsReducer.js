@@ -8,9 +8,11 @@ const tourItemsReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
       // Insertion structure is [id(key), payload(value)]
-      return new Map([...state, [action.payload.id, action.payload]]);
+      // Payload for add is the entire item JSON
+      return [...state, action.payload];
     case "REMOVE_ITEM":
-      return new Map([...state].filter(([key]) => key !== action.payload));
+      // Payload for remove is the id, so filter out non-matching ids
+      return [...state].filter(({ id }) => id !== action.payload);
     default:
       return state;
   }
