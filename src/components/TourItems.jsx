@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TourItem from "./TourItem";
 import { AppContext } from "../contexts/AppContext";
 
@@ -6,21 +6,20 @@ import { AppContext } from "../contexts/AppContext";
  * SearchResults
  */
 function TourItems() {
-  const { tourItems, setActiveNavPage } = useContext(AppContext);
+  const { tourItems, navSearchButtonRef } = useContext(AppContext);
   const [shouldAssignFocus, setShouldAssignFocus] = useState({
     flag: false,
     id: null,
   });
   const [removeButtons, setRemoveButtons] = useState([]);
-  const noResultButtonRef = useRef(null);
 
   // When tourItems change check if this item was removed
   // Focus will always need to be reassigned in some way in that instance
   useEffect(() => {
     if (shouldAssignFocus.flag) {
-      if (noResultButtonRef?.current) {
+      if (!tourItems.length && navSearchButtonRef?.current) {
         // When there's no items in the tour, focus on the "no results" button
-        noResultButtonRef.current.focus();
+        navSearchButtonRef.current.focus();
       } else {
         // Otherwise focus on the element passed out by the removed item
         removeButtons
@@ -30,7 +29,7 @@ function TourItems() {
 
       setShouldAssignFocus(false);
     }
-  }, [tourItems, shouldAssignFocus, removeButtons]);
+  }, [tourItems, shouldAssignFocus, removeButtons, navSearchButtonRef]);
 
   // Render the results if there are results
   return (
@@ -54,16 +53,6 @@ function TourItems() {
       ) : (
         <div id="aic-ct-tour__no-items">
           You haven’t added any items to your tour yet
-          <button
-            ref={noResultButtonRef}
-            id="aic-ct-tour__no-items-search-button"
-            type="button"
-            onClick={() => {
-              setActiveNavPage(0);
-            }}
-          >
-            Search
-          </button>
         </div>
       )}
     </>

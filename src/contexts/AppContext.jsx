@@ -1,4 +1,4 @@
-import React, { createContext, useState, useReducer } from "react";
+import React, { createContext, useState, useReducer, useRef } from "react";
 import PropTypes from "prop-types";
 import tourItemsReducer from "../reducers/tourItemsReducer";
 
@@ -21,6 +21,7 @@ export function AppProvider(props) {
     tourItemsReducer,
     tourItemsValue || [],
   );
+  const navSearchButtonRef = useRef(null);
 
   return (
     <AppContext.Provider
@@ -36,6 +37,7 @@ export function AppProvider(props) {
         setNavPages,
         activeNavPage,
         setActiveNavPage,
+        navSearchButtonRef,
       }}
     >
       {children}
