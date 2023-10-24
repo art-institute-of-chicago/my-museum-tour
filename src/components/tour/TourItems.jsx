@@ -39,11 +39,12 @@ function TourItems() {
           <h2 id="aic-ct-tour__heading">Your tour</h2>
           <ul id="aic-ct-tour__results">
             {/* JSX cannot directly render a Map and it must be converted to an Array */}
-            {tourItems.map((itemData) => (
+            {tourItems.map((itemData, index) => (
               <TourItem
                 key={itemData.id}
                 setRemoveButtons={setRemoveButtons}
                 itemData={itemData}
+                itemIndex={index}
                 shouldAssignFocus={shouldAssignFocus}
                 setShouldAssignFocus={setShouldAssignFocus}
               />

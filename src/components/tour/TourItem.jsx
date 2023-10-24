@@ -7,7 +7,7 @@ import PropTypes from "prop-types";
  * TourItem
  */
 function TourItem(props) {
-  const { itemData, setShouldAssignFocus, setRemoveButtons } = props;
+  const { itemData, itemIndex, setShouldAssignFocus, setRemoveButtons } = props;
   const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
   const buttonRef = useRef(null);
 
@@ -102,6 +102,7 @@ TourItem.propTypes = {
     artist_title: PropTypes.string,
     description: PropTypes.string,
   }),
+  itemIndex: PropTypes.number.isRequired,
   setRemoveButtons: PropTypes.func,
   setShouldAssignFocus: PropTypes.func,
 };

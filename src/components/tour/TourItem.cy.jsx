@@ -19,6 +19,7 @@ describe("<TourItem />", () => {
         <TourItem
           key={item.id}
           itemData={item}
+          itemIndex={0}
           setRemoveButtons={() => {}}
           setShouldAssignFocus={() => {}}
         />
