@@ -156,4 +156,53 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-tour__item-75644").should("not.exist");
     cy.get("#aic-ct-nav-button-0").should("have.focus");
   });
+
+  it("Wipes notes when an item is removed and added again", () => {
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+
+    // Use intercept to ping the search api and use the search.json fixture
+    // but wait while we check the loading message
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+    }).as("search");
+
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <CustomTourBuilder />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-note-59426").should("be.empty").type("Test note");
+    cy.get("#aic-ct-note-243872").should("be.empty").type("Test note");
+    cy.get("#aic-ct-note-75644").should("be.empty").type("Test note");
+    cy.get("#aic-ct-tour__item-59426 button").click();
+    cy.get("#aic-ct-tour__item-243872 button").click();
+    cy.get("#aic-ct-tour__item-75644 button").click();
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-note-59426").should("be.empty");
+    cy.get("#aic-ct-note-243872").should("be.empty");
+    cy.get("#aic-ct-note-75644").should("be.empty");
+  });
 });
