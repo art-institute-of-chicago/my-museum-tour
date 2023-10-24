@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
-import { AppContext } from "../contexts/AppContext";
-import { charactersRemaining } from "../utils";
+import { AppContext } from "../../contexts/AppContext";
+import { charactersRemaining } from "../../utils";
 
 /**
  * TourMetadata

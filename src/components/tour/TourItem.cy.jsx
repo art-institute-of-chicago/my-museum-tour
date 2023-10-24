@@ -1,7 +1,7 @@
 import React from "react";
 import TourItem from "./TourItem";
-import { AppProvider } from "../contexts/AppContext";
-import item from "../../cypress/fixtures/json/item.json";
+import { AppProvider } from "../../contexts/AppContext";
+import item from "../../../cypress/fixtures/json/item.json";
 
 describe("<TourItem />", () => {
   it("Renders", () => {

@@ -1,8 +1,8 @@
 import React from "react";
 import SearchResults from "./SearchResults";
-import item from "../../cypress/fixtures/json/item.json";
-import { AppProvider } from "../contexts/AppContext";
-import { SearchProvider } from "../contexts/SearchContext";
+import item from "../../../cypress/fixtures/json/item.json";
+import { AppProvider } from "../../contexts/AppContext";
+import { SearchProvider } from "../../contexts/SearchContext";
 
 describe("<SearchResults />", () => {
   it("Renders initially empty", () => {

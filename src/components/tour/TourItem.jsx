@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useRef } from "react";
-import { iiifUrl } from "../utils";
-import { AppContext } from "../contexts/AppContext";
+import { iiifUrl } from "../../utils";
+import { AppContext } from "../../contexts/AppContext";
 import PropTypes from "prop-types";
 
 /**

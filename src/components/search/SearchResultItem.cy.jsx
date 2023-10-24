@@ -1,7 +1,7 @@
 import React from "react";
 import SearchResultItem from "./SearchResultItem";
-import item from "../../cypress/fixtures/json/item.json";
-import { AppProvider } from "../contexts/AppContext";
+import item from "../../../cypress/fixtures/json/item.json";
+import { AppProvider } from "../../contexts/AppContext";
 
 describe("<SearchResultItem />", () => {
   it("Renders", () => {

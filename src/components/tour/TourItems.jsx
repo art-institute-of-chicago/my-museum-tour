@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import TourItem from "./TourItem";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext } from "../../contexts/AppContext";
 
 /**
  * SearchResults

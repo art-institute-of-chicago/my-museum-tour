@@ -1,7 +1,7 @@
 import React from "react";
 import SearchBar from "./SearchBar";
-import { AppProvider } from "../contexts/AppContext";
-import { SearchProvider } from "../contexts/SearchContext";
+import { AppProvider } from "../../contexts/AppContext";
+import { SearchProvider } from "../../contexts/SearchContext";
 
 describe("<SearchBar />", () => {
   it("Renders", () => {

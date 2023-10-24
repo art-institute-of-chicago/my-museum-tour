@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { SearchContext } from "../contexts/SearchContext";
+import { SearchContext } from "../../contexts/SearchContext";
 
 /**
  * SearchBar

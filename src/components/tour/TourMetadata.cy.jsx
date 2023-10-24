@@ -1,6 +1,6 @@
 import React from "react";
 import TourMetadata from "./TourMetadata";
-import { AppProvider } from "../contexts/AppContext";
+import { AppProvider } from "../../contexts/AppContext";
 
 describe("<TourMetadata />", () => {
   it("Renders", () => {

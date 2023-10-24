@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "./Navigation";
-import { AppProvider } from "../contexts/AppContext";
+import { AppProvider } from "../../contexts/AppContext";
 
 describe("<Navigation />", () => {
   it("Renders", () => {
