@@ -18,7 +18,7 @@ import { useState, useRef } from "react";
  */
 
 function useCappedInput(initialValue, maxLength) {
-  const [value, setValue] = useState(initialValue);
+  const [value, setValue] = useState(initialValue || "");
   const countRef = useRef(null);
 
   const handleChange = (e) => {

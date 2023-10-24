@@ -6,5 +6,6 @@
   "description": "Test description",
   "thumbnail": {
     "alt_text": "Test image alt text"
-  }
+  },
+  "note": ""
 }

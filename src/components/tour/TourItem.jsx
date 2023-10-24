@@ -12,7 +12,7 @@ function TourItem(props) {
   const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
   const buttonRef = useRef(null);
 
-  const cappedNote = useCappedInput(tourItems[itemIndex].note, 255);
+  const cappedNote = useCappedInput(tourItems[itemIndex]?.note, 255);
 
   // payload needs to be memoized so that it doesn't change on every render
   // This avoids an infinite loop when paired with the UPDATE_NOTE action
@@ -108,7 +108,7 @@ function TourItem(props) {
       </label>
       <br />
       <textarea
-        id="aic-ct-metadata__description"
+        id={`aic-ct-note-${itemData.id}`}
         onChange={cappedNote.onChange}
         rows="5"
         value={cappedNote.value}
