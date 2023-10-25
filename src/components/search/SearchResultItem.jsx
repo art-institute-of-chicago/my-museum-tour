@@ -44,14 +44,29 @@ function SearchResultItem(props) {
         This may need more extensive checking for accessibility
         It's been modelled on the Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
       */}
-      <button
-        type="button"
-        onClick={handleClick}
-        aria-pressed={inTour ? "true" : "false"}
-        aria-label="Add to tour"
-      >
-        {inTour ? "Remove from tour" : "Add to tour"}
-      </button>
+      {/* If the item isn't in the tour and the limit isn't reached: show add */}
+      {!inTour && tourItems.length < 6 && (
+        <button
+          type="button"
+          onClick={handleClick}
+          aria-pressed="false"
+          aria-label="Add to tour"
+        >
+          Add to tour
+        </button>
+      )}
+      {/* If the item is in the tour: show remove */}
+      {inTour && (
+        <button
+          type="button"
+          onClick={handleClick}
+          aria-pressed="true"
+          aria-label="Remove from tour"
+        >
+          Remove from tour
+        </button>
+      )}
+      {/* Otherwise don't show a button */}
     </li>
   );
 }
