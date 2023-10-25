@@ -11,6 +11,7 @@ function Submission() {
     tourDescription,
     validityIssues,
     setValidityIssues,
+    limits,
   } = useContext(AppContext);
 
   // Update validityIssues when tourTitle and tourItems change
@@ -19,33 +20,33 @@ function Submission() {
     if (!tourTitle.length) {
       newValidityIssues.push("A title is required");
     }
-    if (!tourItems.length) {
+    if (tourItems.length < limits.items.min) {
       newValidityIssues.push("At least one item is required");
     }
 
     // These errors will only happen if the user has manipulated the DOM/State
     tourItems.forEach((item) => {
-      if (item.note.length > 255) {
+      if (item.note.length > limits.note) {
         newValidityIssues.push("Notes must not exceed the character limit");
       }
     });
 
-    if (tourTitle.length > 255) {
+    if (tourTitle.length > limits.title) {
       newValidityIssues.push("Tour title must not exceed the character limit");
     }
 
-    if (tourDescription.length > 255) {
+    if (tourDescription.length > limits.description) {
       newValidityIssues.push(
         "Tour description must not exceed the character limit",
       );
     }
 
-    if (tourItems.length > 6) {
+    if (tourItems.length > limits.items.max) {
       newValidityIssues.push("Tours must not contain more than 6 items");
     }
 
     setValidityIssues(newValidityIssues);
-  }, [tourTitle, tourDescription.length, tourItems, setValidityIssues]);
+  }, [tourTitle, tourDescription, tourItems, setValidityIssues, limits]);
 
   return (
     <>

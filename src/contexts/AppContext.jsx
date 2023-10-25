@@ -1,4 +1,10 @@
-import React, { createContext, useState, useReducer, useRef } from "react";
+import React, {
+  createContext,
+  useState,
+  useReducer,
+  useRef,
+  useMemo,
+} from "react";
 import PropTypes from "prop-types";
 import tourItemsReducer from "../reducers/tourItemsReducer";
 
@@ -23,11 +29,28 @@ export function AppProvider(props) {
   );
   const navSearchButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
+  const iiifBaseUrl = "https://artic.edu/iiif/2";
+
+  // Something to do with this being a reference type
+  // Causes an infinite loop if it's not memoized
+  const limits = useMemo(
+    () => ({
+      note: 255,
+      title: 255,
+      description: 255,
+      items: {
+        min: 1,
+        max: 6,
+      },
+    }),
+    [],
+  );
 
   return (
     <AppContext.Provider
       value={{
-        iiifBaseUrl: "https://artic.edu/iiif/2",
+        iiifBaseUrl,
+        limits,
         tourTitle,
         setTourTitle,
         tourDescription,
@@ -57,6 +80,15 @@ AppProvider.propTypes = {
 AppContext.Provider.propTypes = {
   value: PropTypes.shape({
     iiifBaseUrl: PropTypes.string,
+    limits: PropTypes.shape({
+      note: PropTypes.number,
+      title: PropTypes.number,
+      description: PropTypes.number,
+      items: PropTypes.shape({
+        min: PropTypes.number,
+        max: PropTypes.number,
+      }),
+    }),
     tourItems: PropTypes.instanceOf(Array),
     tourItemsDispatch: PropTypes.func,
     tourTitle: PropTypes.string,
