@@ -40,6 +40,7 @@ function TourMetadata() {
           value={cappedTitle.value}
           id="aic-ct-metadata__title"
           maxLength={cappedTitle.maxLength}
+          required
         />
       </div>
 
