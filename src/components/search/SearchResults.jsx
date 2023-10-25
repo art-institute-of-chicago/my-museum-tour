@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import SearchResultItem from "./SearchResultItem";
-import { SearchContext } from "../contexts/SearchContext";
+import { SearchContext } from "../../contexts/SearchContext";
 
 /**
  * SearchResults

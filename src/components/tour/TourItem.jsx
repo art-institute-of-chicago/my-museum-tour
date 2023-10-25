@@ -1,15 +1,28 @@
-import React, { useContext, useEffect, useRef } from "react";
-import { iiifUrl } from "../utils";
-import { AppContext } from "../contexts/AppContext";
+import React, { useContext, useEffect, useRef, useMemo } from "react";
+import { iiifUrl } from "../../utils";
+import { AppContext } from "../../contexts/AppContext";
+import useCappedInput from "../../hooks/useCappedInput";
 import PropTypes from "prop-types";
 
 /**
  * TourItem
  */
 function TourItem(props) {
-  const { itemData, setShouldAssignFocus, setRemoveButtons } = props;
+  const { itemData, itemIndex, setShouldAssignFocus, setRemoveButtons } = props;
   const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
   const buttonRef = useRef(null);
+
+  const cappedNote = useCappedInput(tourItems[itemIndex]?.note, 255);
+
+  // payload needs to be memoized so that it doesn't change on every render
+  // This avoids an infinite loop when paired with the UPDATE_NOTE action
+  const memoizedNotePayload = useMemo(
+    () => ({
+      id: itemData.id,
+      note: cappedNote.value,
+    }),
+    [itemData.id, cappedNote.value],
+  );
 
   const handleClick = () => {
     // Remove the item from the tour
@@ -18,6 +31,14 @@ function TourItem(props) {
       payload: itemData.id,
     });
   };
+
+  // Update a note on an item when it changes
+  useEffect(() => {
+    tourItemsDispatch({
+      type: "UPDATE_NOTE",
+      payload: memoizedNotePayload,
+    });
+  }, [memoizedNotePayload, tourItemsDispatch]);
 
   // When tourItems change check if this item was removed
   useEffect(() => {
@@ -78,6 +99,22 @@ function TourItem(props) {
       {itemData.description && (
         <div dangerouslySetInnerHTML={{ __html: itemData.description }}></div>
       )}
+      <label htmlFor={`aic-ct-note-${itemData.id}`}>
+        Personal note{" "}
+        <span ref={cappedNote.countRef} aria-live="polite">
+          ({cappedNote.charsRemaining}
+          <span className="sr-only"> characters remaining</span>)
+        </span>
+      </label>
+      <br />
+      <textarea
+        id={`aic-ct-note-${itemData.id}`}
+        onChange={cappedNote.onChange}
+        rows="5"
+        value={cappedNote.value}
+        maxLength={cappedNote.maxLength}
+      />
+      <br />
       <button
         ref={buttonRef}
         type="button"
@@ -102,6 +139,7 @@ TourItem.propTypes = {
     artist_title: PropTypes.string,
     description: PropTypes.string,
   }),
+  itemIndex: PropTypes.number.isRequired,
   setRemoveButtons: PropTypes.func,
   setShouldAssignFocus: PropTypes.func,
 };

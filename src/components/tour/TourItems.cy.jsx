@@ -1,7 +1,7 @@
 import React from "react";
 import TourItems from "./TourItems";
-import { AppProvider } from "../contexts/AppContext";
-import tourItems from "../../cypress/fixtures/json/tourItems.json";
+import { AppProvider } from "../../contexts/AppContext";
+import tourItems from "../../../cypress/fixtures/json/tourItems.json";
 
 describe("<TourItems />", () => {
   it("Doesn't render markup without items", () => {

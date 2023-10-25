@@ -1,6 +1,6 @@
 import React from "react";
 import NavPage from "./NavPage";
-import { AppProvider } from "../contexts/AppContext";
+import { AppProvider } from "../../contexts/AppContext";
 
 describe("<NavPage />", () => {
   it("Renders", () => {

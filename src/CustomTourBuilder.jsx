@@ -1,11 +1,11 @@
 import React from "react";
-import Navigation from "./components/Navigation";
-import NavPages from "./components/NavPages";
-import NavPage from "./components/NavPage";
-import SearchBar from "./components/SearchBar";
-import SearchResults from "./components/SearchResults";
-import TourMetadata from "./components/TourMetadata";
-import TourItems from "./components/TourItems";
+import Navigation from "./components/navigation/Navigation";
+import NavPages from "./components/navigation/NavPages";
+import NavPage from "./components/navigation/NavPage";
+import SearchBar from "./components/search/SearchBar";
+import SearchResults from "./components/search/SearchResults";
+import TourItems from "./components/tour/TourItems";
+import TourMetadata from "./components/tour/TourMetadata";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
 

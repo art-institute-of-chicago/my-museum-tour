@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { AppContext } from "../contexts/AppContext";
+import { AppContext } from "../../contexts/AppContext";
 import PropTypes from "prop-types";
 
 function NavPages({ children }) {
