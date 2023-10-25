@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useReducer,
-  useRef,
-  useEffect,
-} from "react";
+import React, { createContext, useState, useReducer, useRef } from "react";
 import PropTypes from "prop-types";
 import tourItemsReducer from "../reducers/tourItemsReducer";
 
@@ -30,25 +24,6 @@ export function AppProvider(props) {
   const navSearchButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
 
-  // Update validityIssues when tourTitle and tourItems change
-  useEffect(() => {
-    const newValidityIssues = [];
-    if (!tourTitle) {
-      newValidityIssues.push({
-        page: "Tour Metadata",
-        target: "Tour Title",
-        issue: "A title is required",
-      });
-    }
-    if (!tourItems.length) {
-      newValidityIssues.push({
-        page: "Tour Items",
-        target: "Tour Items",
-        issue: "At least one item is required",
-      });
-    }
-    setValidityIssues(newValidityIssues);
-  }, [tourTitle, tourItems.length]);
   return (
     <AppContext.Provider
       value={{
@@ -95,13 +70,7 @@ AppContext.Provider.propTypes = {
     navSearchButtonRef: PropTypes.shape({
       current: PropTypes.instanceOf(Element),
     }),
-    validityIssues: PropTypes.arrayOf(
-      PropTypes.shape({
-        page: PropTypes.string,
-        label: PropTypes.string,
-        issue: PropTypes.string,
-      }),
-    ),
+    validityIssues: PropTypes.arrayOf(PropTypes.string),
     setValidityIssues: PropTypes.func,
   }),
 };
