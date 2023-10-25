@@ -6,6 +6,7 @@ import SearchBar from "./components/search/SearchBar";
 import SearchResults from "./components/search/SearchResults";
 import TourItems from "./components/tour/TourItems";
 import TourMetadata from "./components/tour/TourMetadata";
+import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
 
@@ -24,6 +25,10 @@ const CustomTourBuilder = () => {
         <NavPage id={1} title="Your tour">
           <TourMetadata />
           <TourItems />
+        </NavPage>
+
+        <NavPage id={2} title="Submission">
+          <Submission />
         </NavPage>
       </NavPages>
     </AppProvider>
