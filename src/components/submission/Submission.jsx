@@ -25,10 +25,13 @@ function Submission() {
     }
 
     // These errors will only happen if the user has manipulated the DOM/State
-    tourItems.forEach((item) => {
+    // Group note errors together rather than showing an error for each note
+    tourItems.some((item) => {
       if (item.note.length > limits.note) {
         newValidityIssues.push("Notes must not exceed the character limit");
+        return true; // effectively "break;"
       }
+      return false;
     });
 
     if (tourTitle.length > limits.title) {
