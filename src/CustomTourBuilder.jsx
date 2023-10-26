@@ -9,10 +9,15 @@ import TourMetadata from "./components/tour/TourMetadata";
 import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
+import PropTypes from "prop-types";
 
-const CustomTourBuilder = () => {
+const CustomTourBuilder = (props) => {
+  // Mainly used for testing, but could be used for hydrating the app
+  const { tourTitle, tourDescription, tourItems } = props;
+  const AppProviderProps = { tourTitle, tourDescription, tourItems };
+
   return (
-    <AppProvider>
+    <AppProvider {...AppProviderProps}>
       <Navigation />
       <NavPages>
         <NavPage id={0} title="Search">
@@ -33,6 +38,12 @@ const CustomTourBuilder = () => {
       </NavPages>
     </AppProvider>
   );
+};
+
+CustomTourBuilder.propTypes = {
+  tourTitle: PropTypes.string,
+  tourDescription: PropTypes.string,
+  tourItems: PropTypes.array,
 };
 
 export default CustomTourBuilder;

@@ -5,26 +5,14 @@ import { SearchProvider } from "./contexts/SearchContext";
 
 describe("<CustomTourBuilder />", () => {
   it("Renders", () => {
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search").should("exist");
     cy.get("#aic-ct-metadata__title").should("exist");
     cy.get("#aic-ct-metadata__description").should("exist");
   });
 
   it("Can add a title and description for the tour", () => {
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("A tour title");
     cy.get("#aic-ct-metadata__description").type("A tour description");
@@ -43,13 +31,7 @@ describe("<CustomTourBuilder />", () => {
       statusCode: 500,
     }).as("500");
 
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__error").should(
@@ -78,13 +60,7 @@ describe("<CustomTourBuilder />", () => {
       delayMs: 80,
     }).as("search");
 
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
@@ -111,13 +87,7 @@ describe("<CustomTourBuilder />", () => {
       fixture: "json/search.json",
     }).as("search");
 
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
 
     // Adding and removing from search page
     cy.get("#aic-ct-nav-button-0").click();
@@ -176,13 +146,7 @@ describe("<CustomTourBuilder />", () => {
       fixture: "json/search.json",
     }).as("search");
 
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
