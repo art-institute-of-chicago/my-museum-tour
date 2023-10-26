@@ -69,7 +69,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__results li").should("have.length", 10);
   });
 
-  it("Can add and remove artworks from the tour", () => {
+  it("Can add and remove up to 6 artworks to the tour", () => {
     let imageInterceptCount = 0;
     cy.intercept(
       "GET",
@@ -126,6 +126,32 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-tour__item-75644 button").should("have.focus").click();
     cy.get("#aic-ct-tour__item-75644").should("not.exist");
     cy.get("#aic-ct-nav-button-0").should("have.focus");
+
+    // Should not allow more than 6 items
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(2) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(3) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(4) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(5) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(6) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(7) button").should(
+      "not.exist",
+    );
+    cy.get("#aic-ct-search__results li:nth-child(8) button").should(
+      "not.exist",
+    );
+    cy.get("#aic-ct-search__results li:nth-child(9) button").should(
+      "not.exist",
+    );
+    cy.get("#aic-ct-search__results li:nth-child(10) button").should(
+      "not.exist",
+    );
+    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-search__results li:nth-child(7) button").should("exist");
+    cy.get("#aic-ct-search__results li:nth-child(8) button").should("exist");
+    cy.get("#aic-ct-search__results li:nth-child(9) button").should("exist");
+    cy.get("#aic-ct-search__results li:nth-child(10) button").should("exist");
   });
 
   it("Wipes notes when an item is removed and added again", () => {
