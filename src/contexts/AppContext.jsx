@@ -16,11 +16,15 @@ export const AppContext = createContext();
 export function AppProvider(props) {
   const {
     children,
+    tourTitle: tourTitleValue,
+    tourDescription: tourDescriptionValue,
     tourItems: tourItemsValue,
     navPages: navPagesValue,
   } = props;
-  const [tourTitle, setTourTitle] = useState("");
-  const [tourDescription, setTourDescription] = useState("");
+  const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
+  const [tourDescription, setTourDescription] = useState(
+    tourDescriptionValue || "",
+  );
   const [navPages, setNavPages] = useState(navPagesValue || []);
   const [activeNavPage, setActiveNavPage] = useState(0);
   const [tourItems, tourItemsDispatch] = useReducer(
@@ -73,6 +77,8 @@ export function AppProvider(props) {
 
 AppProvider.propTypes = {
   children: PropTypes.node.isRequired,
+  tourTitle: PropTypes.string,
+  tourDescription: PropTypes.string,
   tourItems: PropTypes.instanceOf(Array),
   navPages: PropTypes.instanceOf(Array),
 };
