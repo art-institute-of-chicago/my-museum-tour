@@ -466,9 +466,9 @@ function H() {
   } = p(g);
   return y(() => {
     const s = [];
-    i.length || s.push("A title is required"), r.length < c.items.min && s.push("At least one item is required"), r.some((u) => u.note.length > c.note ? (s.push("Notes must not exceed the character limit"), !0) : !1), i.length > c.title && s.push("Tour title must not exceed the character limit"), n.length > c.description && s.push(
+    i.length || s.push("A title is required"), i.length > c.title && s.push("Tour title must not exceed the character limit"), n.length > c.description && s.push(
       "Tour description must not exceed the character limit"
-    ), r.length > c.items.max && s.push("Tours must not contain more than 6 artworks"), a(s);
+    ), r.length < c.items.min && s.push("At least one item is required"), r.length > c.items.max && s.push("Tours must not contain more than 6 artworks"), r.some((u) => u.note.length > c.note ? (s.push("Notes must not exceed the character limit"), !0) : !1), a(s);
   }, [i, n, r, a, c]), /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("h2", null, "Submit your tour"), l.length ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("p", null, "Fix these issue before submitting your tour:"), l.length && /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-validation-errors" }, l.map((s, u) => /* @__PURE__ */ e.createElement("li", { key: u }, s)))) : /* @__PURE__ */ e.createElement("div", { id: "aic-ct-validation-success" }, /* @__PURE__ */ e.createElement("p", null, "Are you sure you want to submit your tour? You won't be able to make any more changes after this stage")));
 }
 const z = (i) => {

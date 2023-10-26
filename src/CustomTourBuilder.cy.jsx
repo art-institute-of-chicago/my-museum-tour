@@ -1,7 +1,5 @@
 import React from "react";
 import CustomTourBuilder from "./CustomTourBuilder";
-import { AppProvider } from "./contexts/AppContext";
-import { SearchProvider } from "./contexts/SearchContext";
 import searchJson from "../cypress/fixtures/json/search.json";
 
 describe("<CustomTourBuilder />", () => {
@@ -198,13 +196,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Displays validation errors on the submission screen", () => {
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
   });
@@ -267,13 +259,7 @@ describe("<CustomTourBuilder />", () => {
       delayMs: 80,
     }).as("search");
 
-    cy.mount(
-      <AppProvider>
-        <SearchProvider>
-          <CustomTourBuilder />
-        </SearchProvider>
-      </AppProvider>,
-    );
+    cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
     cy.get("#aic-ct-nav-button-0").click();

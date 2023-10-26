@@ -20,19 +20,6 @@ function Submission() {
     if (!tourTitle.length) {
       newValidityIssues.push("A title is required");
     }
-    if (tourItems.length < limits.items.min) {
-      newValidityIssues.push("At least one item is required");
-    }
-
-    // These errors will only happen if the user has manipulated the DOM/State
-    // Group note errors together rather than showing an error for each note
-    tourItems.some((item) => {
-      if (item.note.length > limits.note) {
-        newValidityIssues.push("Notes must not exceed the character limit");
-        return true; // effectively "break;"
-      }
-      return false;
-    });
 
     if (tourTitle.length > limits.title) {
       newValidityIssues.push("Tour title must not exceed the character limit");
@@ -44,9 +31,23 @@ function Submission() {
       );
     }
 
+    if (tourItems.length < limits.items.min) {
+      newValidityIssues.push("At least one item is required");
+    }
+
     if (tourItems.length > limits.items.max) {
       newValidityIssues.push("Tours must not contain more than 6 artworks");
     }
+
+    // These errors will only happen if the user has manipulated the DOM/State
+    // Group note errors together rather than showing an error for each note
+    tourItems.some((item) => {
+      if (item.note.length > limits.note) {
+        newValidityIssues.push("Notes must not exceed the character limit");
+        return true; // effectively "break;"
+      }
+      return false;
+    });
 
     setValidityIssues(newValidityIssues);
   }, [tourTitle, tourDescription, tourItems, setValidityIssues, limits]);
