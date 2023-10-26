@@ -55,7 +55,7 @@ function Submission() {
         <>
           <p>Fix these issue before submitting your tour:</p>
           {validityIssues.length && (
-            <ul>
+            <ul id="aic-ct-validation-errors">
               {validityIssues.map((issue, index) => (
                 <li key={index}>{issue}</li>
               ))}

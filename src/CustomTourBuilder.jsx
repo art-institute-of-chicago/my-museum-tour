@@ -27,7 +27,7 @@ const CustomTourBuilder = () => {
           <TourItems />
         </NavPage>
 
-        <NavPage id={2} title="Submission">
+        <NavPage id={2} title="Save your tour">
           <Submission />
         </NavPage>
       </NavPages>
