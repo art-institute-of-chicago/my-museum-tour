@@ -20,6 +20,7 @@ describe("<Navigation />", () => {
         navPages={[
           { id: 0, title: "Search" },
           { id: 1, title: "Your tour" },
+          { id: 1, title: "Save your tour" },
         ]}
       >
         <Navigation />

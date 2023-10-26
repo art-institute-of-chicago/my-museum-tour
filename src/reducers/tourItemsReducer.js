@@ -7,7 +7,6 @@
 const tourItemsReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      // Insertion structure is [id(key), payload(value)]
       // Payload for add is the entire item JSON
       return [...state, { ...action.payload, note: "" }];
     case "UPDATE_NOTE":

@@ -1,208 +1,242 @@
-import e, { createContext as S, useState as m, useReducer as F, useRef as I, useContext as f, useEffect as _, useMemo as V } from "react";
-import r from "prop-types";
-const O = (i, t) => {
-  switch (t.type) {
+import e, { createContext as x, useState as d, useReducer as k, useRef as S, useMemo as D, useContext as p, useEffect as y } from "react";
+import t from "prop-types";
+const M = (i, r) => {
+  switch (r.type) {
     case "ADD_ITEM":
-      return [...i, { ...t.payload, note: "" }];
+      return [...i, { ...r.payload, note: "" }];
     case "UPDATE_NOTE":
-      return i.map((n) => n.id === t.payload.id ? { ...n, note: t.payload.note } : n);
+      return i.map((n) => n.id === r.payload.id ? { ...n, note: r.payload.note } : n);
     case "REMOVE_ITEM":
-      return i.filter(({ id: n }) => n !== t.payload);
+      return i.filter(({ id: n }) => n !== r.payload);
     default:
       return i;
   }
-}, g = S();
+}, g = x();
 function C(i) {
   const {
-    children: t,
-    tourItems: n,
-    navPages: s
-  } = i, [a, c] = m(""), [l, d] = m(""), [h, o] = m(s || []), [u, E] = m(0), [v, p] = F(
-    O,
-    n || []
-  ), y = I(null);
+    children: r,
+    tourTitle: n,
+    tourDescription: l,
+    tourItems: a,
+    navPages: c
+  } = i, [s, u] = d(n || ""), [f, m] = d(
+    l || ""
+  ), [o, E] = d(c || []), [b, v] = d(0), [h, _] = k(
+    M,
+    a || []
+  ), T = S(null), [O, w] = d([]), B = "https://artic.edu/iiif/2", $ = D(
+    () => ({
+      note: 255,
+      title: 255,
+      description: 255,
+      items: {
+        min: 1,
+        max: 6
+      }
+    }),
+    []
+  );
   return /* @__PURE__ */ e.createElement(
     g.Provider,
     {
       value: {
-        iiifBaseUrl: "https://artic.edu/iiif/2",
-        tourTitle: a,
-        setTourTitle: c,
-        tourDescription: l,
-        setTourDescription: d,
-        tourItems: v,
-        tourItemsDispatch: p,
-        navPages: h,
-        setNavPages: o,
-        activeNavPage: u,
-        setActiveNavPage: E,
-        navSearchButtonRef: y
+        iiifBaseUrl: B,
+        limits: $,
+        tourTitle: s,
+        setTourTitle: u,
+        tourDescription: f,
+        setTourDescription: m,
+        tourItems: h,
+        tourItemsDispatch: _,
+        navPages: o,
+        setNavPages: E,
+        activeNavPage: b,
+        setActiveNavPage: v,
+        navSearchButtonRef: T,
+        validityIssues: O,
+        setValidityIssues: w
       }
     },
-    t
+    r
   );
 }
 C.propTypes = {
-  children: r.node.isRequired,
-  tourItems: r.instanceOf(Array),
-  navPages: r.instanceOf(Array)
+  children: t.node.isRequired,
+  tourTitle: t.string,
+  tourDescription: t.string,
+  tourItems: t.instanceOf(Array),
+  navPages: t.instanceOf(Array)
 };
 g.Provider.propTypes = {
-  value: r.shape({
-    iiifBaseUrl: r.string,
-    tourItems: r.instanceOf(Array),
-    tourItemsDispatch: r.func,
-    tourTitle: r.string,
-    setTourTitle: r.func,
-    tourDescription: r.string,
-    setTourDescription: r.func,
-    navPages: r.instanceOf(Array),
-    setNavPages: r.func,
-    activeNavPage: r.number,
-    setActiveNavPage: r.func
+  value: t.shape({
+    iiifBaseUrl: t.string,
+    limits: t.shape({
+      note: t.number,
+      title: t.number,
+      description: t.number,
+      items: t.shape({
+        min: t.number,
+        max: t.number
+      })
+    }),
+    tourItems: t.instanceOf(Array),
+    tourItemsDispatch: t.func,
+    tourTitle: t.string,
+    setTourTitle: t.func,
+    tourDescription: t.string,
+    setTourDescription: t.func,
+    navPages: t.instanceOf(Array),
+    setNavPages: t.func,
+    activeNavPage: t.number,
+    setActiveNavPage: t.func,
+    navSearchButtonRef: t.shape({
+      current: t.instanceOf(Element)
+    }),
+    validityIssues: t.arrayOf(t.string),
+    setValidityIssues: t.func
   })
 };
-function $() {
-  const { navPages: i, activeNavPage: t, setActiveNavPage: n, navSearchButtonRef: s } = f(g);
+function L() {
+  const { navPages: i, activeNavPage: r, setActiveNavPage: n, navSearchButtonRef: l } = p(g);
   return /* @__PURE__ */ e.createElement("nav", { id: "aic-ct-navigation", "aria-label": "Custom tour navigation" }, i.map((a, c) => /* @__PURE__ */ e.createElement(
     "button",
     {
-      ref: a.id === 0 ? s : null,
+      ref: a.id === 0 ? l : null,
       key: a.id,
       id: `aic-ct-nav-button-${a.id}`,
       "aria-controls": `aic-ct-nav-page-${a.id}`,
-      "aria-pressed": a.id === t,
+      "aria-pressed": a.id === r,
       type: "button",
       onClick: () => n(c)
     },
     a.title
   )));
 }
-function x({ children: i }) {
-  const { setNavPages: t } = f(g);
-  return _(() => {
-    t(
-      i ? i.map((n, s) => ({
-        id: s,
+function A({ children: i }) {
+  const { setNavPages: r } = p(g);
+  return y(() => {
+    r(
+      i ? i.map((n, l) => ({
+        id: l,
         title: n.props.title
       })) : []
     );
-  }, [i, t]), /* @__PURE__ */ e.createElement("div", { id: "aic-ct-nav-pages" }, i);
+  }, [i, r]), /* @__PURE__ */ e.createElement("div", { id: "aic-ct-nav-pages" }, i);
 }
-x.propTypes = {
-  children: r.node.isRequired
+A.propTypes = {
+  children: t.node.isRequired
 };
-function R(i) {
-  const { id: t, children: n } = i, { activeNavPage: s } = f(g);
+function I(i) {
+  const { id: r, children: n } = i, { activeNavPage: l } = p(g);
   return /* @__PURE__ */ e.createElement(
     "div",
     {
       tabIndex: "0",
-      id: `aic-ct-nav-page-${t}`,
-      "aria-labelledby": `aic-ct-nav-button-${t}`,
-      "aria-hidden": s !== t,
-      style: s !== t ? { display: "none" } : {}
+      id: `aic-ct-nav-page-${r}`,
+      "aria-labelledby": `aic-ct-nav-button-${r}`,
+      "aria-hidden": l !== r,
+      style: l !== r ? { display: "none" } : {}
     },
     n
   );
 }
-R.propTypes = {
-  id: r.number.isRequired,
-  title: r.string.isRequired,
-  children: r.oneOfType([
-    r.arrayOf(r.element),
-    r.object
+I.propTypes = {
+  id: t.number.isRequired,
+  title: t.string.isRequired,
+  children: t.oneOfType([
+    t.arrayOf(t.element),
+    t.object
   ]).isRequired
 };
-const T = S();
-function D(i) {
+const R = x();
+function q(i) {
   const {
-    children: t,
+    children: r,
     searchResultItems: n,
-    searchQuery: s,
+    searchQuery: l,
     searchFetching: a,
     searchError: c
-  } = i, [l, d] = m(
+  } = i, [s, u] = d(
     n || null
-  ), [h, o] = m(s || ""), [u, E] = m(
+  ), [f, m] = d(l || ""), [o, E] = d(
     a || !1
-  ), [v, p] = m(c || !1);
+  ), [b, v] = d(c || !1);
   return /* @__PURE__ */ e.createElement(
-    T.Provider,
+    R.Provider,
     {
       value: {
-        searchResultItems: l,
-        setSearchResultItems: d,
-        searchQuery: h,
-        setSearchQuery: o,
-        searchFetching: u,
+        searchResultItems: s,
+        setSearchResultItems: u,
+        searchQuery: f,
+        setSearchQuery: m,
+        searchFetching: o,
         setSearchFetching: E,
-        searchError: v,
-        setSearchError: p
+        searchError: b,
+        setSearchError: v
       }
     },
-    t
+    r
   );
 }
-D.propTypes = {
-  children: r.node.isRequired,
-  searchResultItems: r.array,
-  searchQuery: r.string,
-  searchFetching: r.bool,
-  searchError: r.oneOfType([r.string, r.bool])
+q.propTypes = {
+  children: t.node.isRequired,
+  searchResultItems: t.array,
+  searchQuery: t.string,
+  searchFetching: t.bool,
+  searchError: t.oneOfType([t.string, t.bool])
 };
-T.Provider.propTypes = {
-  value: r.shape({
-    searchResultItems: r.array,
-    setSearchResultItems: r.func,
-    searchQuery: r.string,
-    setSearchQuery: r.func,
-    searchFetching: r.bool,
-    setSearchFetching: r.func,
-    searchError: r.oneOfType([r.string, r.bool]),
-    setSearchError: r.func
+R.Provider.propTypes = {
+  value: t.shape({
+    searchResultItems: t.array,
+    setSearchResultItems: t.func,
+    searchQuery: t.string,
+    setSearchQuery: t.func,
+    searchFetching: t.bool,
+    setSearchFetching: t.func,
+    searchError: t.oneOfType([t.string, t.bool]),
+    setSearchError: t.func
   }),
-  children: r.node.isRequired
+  children: t.node.isRequired
 };
-function B() {
+function Q() {
   const {
     searchQuery: i,
-    setSearchQuery: t,
+    setSearchQuery: r,
     setSearchResultItems: n,
-    setSearchError: s,
+    setSearchError: l,
     setSearchFetching: a
-  } = f(T), [c, l] = m(i), d = (o) => {
-    const u = new URL("https://api.artic.edu/api/v1/artworks/search");
-    u.searchParams.set("query[bool][must][][term][is_on_view]", "true"), u.searchParams.set(
+  } = p(R), [c, s] = d(i), u = (m) => {
+    const o = new URL("https://api.artic.edu/api/v1/artworks/search");
+    o.searchParams.set("query[bool][must][][term][is_on_view]", "true"), o.searchParams.set(
       "query[bool][must][][exists][field]",
       "description"
-    ), u.searchParams.set(
+    ), o.searchParams.set(
       "query[bool][should][][exists][field]",
       "description"
-    ), u.searchParams.set(
+    ), o.searchParams.set(
       "query[bool][should][][exists][field]",
       "subject_id"
-    ), u.searchParams.set("query[bool][should][][exists][field]", "style_id"), u.searchParams.set("query[bool][should][][term][is_boosted]", "true"), u.searchParams.set("query[bool][minimum_should_match]", "1"), u.searchParams.set("fields", "true"), u.searchParams.set("limit", "10"), u.searchParams.set("q", o);
-    const E = new AbortController(), v = E.signal;
-    if (o === "") {
-      n(null), a(!1), s(null);
+    ), o.searchParams.set("query[bool][should][][exists][field]", "style_id"), o.searchParams.set("query[bool][should][][term][is_boosted]", "true"), o.searchParams.set("query[bool][minimum_should_match]", "1"), o.searchParams.set("fields", "true"), o.searchParams.set("limit", "10"), o.searchParams.set("q", m);
+    const E = new AbortController(), b = E.signal;
+    if (m === "") {
+      n(null), a(!1), l(null);
       return;
     }
-    async function p() {
+    async function v() {
       try {
-        const b = await (await fetch(u, { signal: v })).json();
-        n(b.data), a(!1);
-      } catch (y) {
-        if (y.name === "AbortError")
+        const _ = await (await fetch(o, { signal: b })).json();
+        n(_.data), a(!1);
+      } catch (h) {
+        if (h.name === "AbortError")
           return;
-        s("Error fetching results"), a(!1);
+        l("Error fetching results"), a(!1);
       }
     }
-    return a(!0), p(), () => {
+    return a(!0), v(), () => {
       E.abort();
     };
-  }, h = (o) => {
-    t(c), d(c), o.preventDefault();
+  }, f = (m) => {
+    r(c), u(c), m.preventDefault();
   };
   return /* @__PURE__ */ e.createElement(
     "form",
@@ -210,7 +244,7 @@ function B() {
       id: "aic-ct-search",
       role: "search",
       "aria-label": "Objects for your tour",
-      onSubmit: h
+      onSubmit: f
     },
     /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-search__input", className: "sr-only" }, "Search the collection"),
     /* @__PURE__ */ e.createElement("br", null),
@@ -221,11 +255,11 @@ function B() {
         type: "search",
         placeholder: "Search",
         value: c,
-        onChange: (o) => {
-          o.target.value && o.target.setCustomValidity(""), l(o.target.value);
+        onChange: (m) => {
+          m.target.value && m.target.setCustomValidity(""), s(m.target.value);
         },
-        onInvalid: (o) => {
-          o.target.setCustomValidity("You must enter a search term");
+        onInvalid: (m) => {
+          m.target.setCustomValidity("You must enter a search term");
         },
         required: !0
       }
@@ -233,110 +267,110 @@ function B() {
     /* @__PURE__ */ e.createElement("button", { id: "aic-ct-search__button", type: "submit" }, "Search")
   );
 }
-function q(i, t, n = "", s = "", a = "full", c = !0) {
-  return `${i}/${t}/${a}/${c && "!"}${n},${s}/0/default.jpg`;
+function F(i, r, n = "", l = "", a = "full", c = !0) {
+  return `${i}/${r}/${a}/${c && "!"}${n},${l}/0/default.jpg`;
 }
-function A(i) {
-  const { iiifBaseUrl: t, tourItems: n, tourItemsDispatch: s } = f(g), { itemData: a } = i, [c, l] = m(!1), d = () => {
-    s({
+function N(i) {
+  const { iiifBaseUrl: r, tourItems: n, tourItemsDispatch: l } = p(g), { itemData: a } = i, [c, s] = d(!1), u = () => {
+    l({
       type: c ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: c ? a.id : a
     });
   };
-  return _(() => {
-    l(n.find((h) => h.id === a.id));
+  return y(() => {
+    s(n.find((f) => f.id === a.id));
   }, [n, a.id]), /* @__PURE__ */ e.createElement("li", { id: `aic-ct-search__item-${a.id}` }, a.title && /* @__PURE__ */ e.createElement("h2", null, a.title), a.image_id && /* @__PURE__ */ e.createElement(
     "img",
     {
-      src: q(t, a.image_id, "240", "240"),
+      src: F(r, a.image_id, "240", "240"),
       alt: a.thumbnail.alt_text
     }
-  ), a.artist_title && /* @__PURE__ */ e.createElement("p", null, a.artist_title), a.description && /* @__PURE__ */ e.createElement("div", { dangerouslySetInnerHTML: { __html: a.description } }), /* @__PURE__ */ e.createElement(
+  ), a.artist_title && /* @__PURE__ */ e.createElement("p", null, a.artist_title), a.description && /* @__PURE__ */ e.createElement("div", { dangerouslySetInnerHTML: { __html: a.description } }), (n.length < 6 || c) && /* @__PURE__ */ e.createElement(
     "button",
     {
       type: "button",
-      onClick: d,
+      onClick: u,
       "aria-pressed": c ? "true" : "false",
-      "aria-label": "Add to tour"
+      "aria-label": c ? "Remove from tour" : "Add to tour"
     },
     c ? "Remove from tour" : "Add to tour"
   ));
 }
-A.propTypes = {
-  itemData: r.shape({
-    id: r.number.isRequired,
-    title: r.string.isRequired,
-    image_id: r.string,
-    thumbnail: r.shape({
-      alt_text: r.string
+N.propTypes = {
+  itemData: t.shape({
+    id: t.number.isRequired,
+    title: t.string.isRequired,
+    image_id: t.string,
+    thumbnail: t.shape({
+      alt_text: t.string
     }),
-    artist_title: r.string,
-    description: r.string
+    artist_title: t.string,
+    description: t.string
   })
 };
-function M() {
-  const { searchError: i, searchFetching: t, searchResultItems: n } = f(T);
-  return t ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__loading" }, "Loading...") : i ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__error" }, i) : (n == null ? void 0 : n.length) === 0 ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__no-results" }, "Sorry, we couldn’t find any results matching your criteria") : (n == null ? void 0 : n.length) > 0 ? /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-search__results" }, n.map((s) => /* @__PURE__ */ e.createElement(A, { key: s.id, itemData: s }))) : null;
+function U() {
+  const { searchError: i, searchFetching: r, searchResultItems: n } = p(R);
+  return r ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__loading" }, "Loading...") : i ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__error" }, i) : (n == null ? void 0 : n.length) === 0 ? /* @__PURE__ */ e.createElement("div", { id: "aic-ct-search__no-results" }, "Sorry, we couldn’t find any results matching your criteria") : (n == null ? void 0 : n.length) > 0 ? /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-search__results" }, n.map((l) => /* @__PURE__ */ e.createElement(N, { key: l.id, itemData: l }))) : null;
 }
-function P(i, t) {
-  const [n, s] = m(i || ""), a = I(null);
+function P(i, r) {
+  const [n, l] = d(i || ""), a = S(null);
   return {
     value: n,
-    onChange: (l) => {
-      const { value: d } = l.target;
-      a.current.ariaBusy = !0, s(d), a.current.ariaBusy = !1;
+    onChange: (s) => {
+      const { value: u } = s.target;
+      a.current.ariaBusy = !0, l(u), a.current.ariaBusy = !1;
     },
     countRef: a,
-    charsRemaining: t - n.length,
-    maxLength: t
+    charsRemaining: r - n.length,
+    maxLength: r
   };
 }
-function N(i) {
+function V(i) {
   var v;
-  const { itemData: t, itemIndex: n, setShouldAssignFocus: s, setRemoveButtons: a } = i, { iiifBaseUrl: c, tourItems: l, tourItemsDispatch: d } = f(g), h = I(null), o = P((v = l[n]) == null ? void 0 : v.note, 255), u = V(
+  const { itemData: r, itemIndex: n, setShouldAssignFocus: l, setRemoveButtons: a } = i, { iiifBaseUrl: c, tourItems: s, tourItemsDispatch: u, limits: f } = p(g), m = S(null), o = P((v = s[n]) == null ? void 0 : v.note, f.note), E = D(
     () => ({
-      id: t.id,
+      id: r.id,
       note: o.value
     }),
-    [t.id, o.value]
-  ), E = () => {
-    d({
+    [r.id, o.value]
+  ), b = () => {
+    u({
       type: "REMOVE_ITEM",
-      payload: t.id
+      payload: r.id
     });
   };
-  return _(() => {
-    d({
+  return y(() => {
+    u({
       type: "UPDATE_NOTE",
-      payload: u
+      payload: E
     });
-  }, [u, d]), _(() => {
-    const p = h.current;
+  }, [E, u]), y(() => {
+    const h = m.current;
     return () => {
-      document.activeElement === p && (l.length > 1 ? l.find((y, b) => {
-        y.id === t.id && s({
+      document.activeElement === h && (s.length > 1 ? s.find((_, T) => {
+        _.id === r.id && l({
           flag: !0,
-          id: l[b !== l.length - 1 ? b + 1 : b - 1].id
+          id: s[T !== s.length - 1 ? T + 1 : T - 1].id
         });
-      }) : s({
+      }) : l({
         flag: !0,
         id: null
       }));
     };
-  }, [l, t.id, s]), _(() => (a((p) => [...p, { id: t.id, ref: h }]), () => {
+  }, [s, r.id, l]), y(() => (a((h) => [...h, { id: r.id, ref: m }]), () => {
     a(
-      (p) => p.filter((y) => y.id !== t.id)
+      (h) => h.filter((_) => _.id !== r.id)
     );
-  }), [a, l, t.id]), /* @__PURE__ */ e.createElement("li", { id: `aic-ct-tour__item-${t.id}` }, t.title && /* @__PURE__ */ e.createElement("h2", null, t.title), t.image_id && /* @__PURE__ */ e.createElement(
+  }), [a, s, r.id]), /* @__PURE__ */ e.createElement("li", { id: `aic-ct-tour__item-${r.id}` }, r.title && /* @__PURE__ */ e.createElement("h2", null, r.title), r.image_id && /* @__PURE__ */ e.createElement(
     "img",
     {
-      src: q(c, t.image_id, "240", "240"),
-      alt: t.thumbnail.alt_text
+      src: F(c, r.image_id, "240", "240"),
+      alt: r.thumbnail.alt_text
     }
-  ), t.artist_title && /* @__PURE__ */ e.createElement("p", null, t.artist_title), t.description && /* @__PURE__ */ e.createElement("div", { dangerouslySetInnerHTML: { __html: t.description } }), /* @__PURE__ */ e.createElement("label", { htmlFor: `aic-ct-note-${t.id}` }, "Personal note", " ", /* @__PURE__ */ e.createElement("span", { ref: o.countRef, "aria-live": "polite" }, "(", o.charsRemaining, /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
+  ), r.artist_title && /* @__PURE__ */ e.createElement("p", null, r.artist_title), r.description && /* @__PURE__ */ e.createElement("div", { dangerouslySetInnerHTML: { __html: r.description } }), /* @__PURE__ */ e.createElement("label", { htmlFor: `aic-ct-note-${r.id}` }, "Personal note", " ", /* @__PURE__ */ e.createElement("span", { ref: o.countRef, "aria-live": "polite" }, "(", o.charsRemaining, /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
     "textarea",
     {
-      id: `aic-ct-note-${t.id}`,
+      id: `aic-ct-note-${r.id}`,
       onChange: o.onChange,
       rows: "5",
       value: o.value,
@@ -345,76 +379,107 @@ function N(i) {
   ), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
     "button",
     {
-      ref: h,
+      ref: m,
       type: "button",
       onClick: () => {
-        E(t.id);
+        b(r.id);
       }
     },
     "Remove from tour"
   ));
 }
-N.propTypes = {
-  itemData: r.shape({
-    id: r.number.isRequired,
-    title: r.string.isRequired,
-    image_id: r.string,
-    thumbnail: r.shape({
-      alt_text: r.string
+V.propTypes = {
+  itemData: t.shape({
+    id: t.number.isRequired,
+    title: t.string.isRequired,
+    image_id: t.string,
+    thumbnail: t.shape({
+      alt_text: t.string
     }),
-    artist_title: r.string,
-    description: r.string
+    artist_title: t.string,
+    description: t.string
   }),
-  itemIndex: r.number.isRequired,
-  setRemoveButtons: r.func,
-  setShouldAssignFocus: r.func
+  itemIndex: t.number.isRequired,
+  setRemoveButtons: t.func,
+  setShouldAssignFocus: t.func
 };
-function w() {
-  const { tourItems: i, navSearchButtonRef: t } = f(g), [n, s] = m({
+function j() {
+  const { tourItems: i, navSearchButtonRef: r } = p(g), [n, l] = d({
     flag: !1,
     id: null
-  }), [a, c] = m([]);
-  return _(() => {
-    n.flag && (!i.length && (t != null && t.current) ? t.current.focus() : a.find((l) => l.id === n.id).ref.current.focus(), s(!1));
-  }, [i, n, a, t]), /* @__PURE__ */ e.createElement(e.Fragment, null, i.length > 0 ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("h2", { id: "aic-ct-tour__heading" }, "Your tour"), /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-tour__results" }, i.map((l, d) => /* @__PURE__ */ e.createElement(
-    N,
+  }), [a, c] = d([]);
+  return y(() => {
+    n.flag && (!i.length && (r != null && r.current) ? r.current.focus() : a.find((s) => s.id === n.id).ref.current.focus(), l(!1));
+  }, [i, n, a, r]), /* @__PURE__ */ e.createElement(e.Fragment, null, i.length > 0 ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("h2", { id: "aic-ct-tour__heading" }, "Your tour"), /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-tour__results" }, i.map((s, u) => /* @__PURE__ */ e.createElement(
+    V,
     {
-      key: l.id,
+      key: s.id,
       setRemoveButtons: c,
-      itemData: l,
-      itemIndex: d,
+      itemData: s,
+      itemIndex: u,
       shouldAssignFocus: n,
-      setShouldAssignFocus: s
+      setShouldAssignFocus: l
     }
   )))) : /* @__PURE__ */ e.createElement("div", { id: "aic-ct-tour__no-items" }, "You haven’t added any artworks to your tour yet"));
 }
-function k() {
-  const { tourTitle: i, setTourTitle: t, tourDescription: n, setTourDescription: s } = f(g), a = P(i, 255), c = P(n, 255);
-  return _(() => {
-    t(a.value);
-  }, [a, t]), _(() => {
-    s(c.value);
-  }, [c, s]), /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", null, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__title" }, "Tour Title", " ", /* @__PURE__ */ e.createElement("span", { ref: a.countRef, "aria-live": "polite" }, "(", a.charsRemaining, /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
+function Y() {
+  const {
+    tourTitle: i,
+    setTourTitle: r,
+    tourDescription: n,
+    setTourDescription: l,
+    limits: a
+  } = p(g), c = P(i, a.title), s = P(n, a.description);
+  return y(() => {
+    r(c.value);
+  }, [c, r]), y(() => {
+    l(s.value);
+  }, [s, l]), /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", null, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__title" }, "Tour Title", " ", /* @__PURE__ */ e.createElement("span", { ref: c.countRef, "aria-live": "polite" }, "(", c.charsRemaining, /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
     "input",
     {
       type: "text",
-      onChange: a.onChange,
-      value: a.value,
+      onChange: c.onChange,
+      value: c.value,
       id: "aic-ct-metadata__title",
-      maxLength: a.maxLength
+      maxLength: c.maxLength,
+      required: !0
     }
-  )), /* @__PURE__ */ e.createElement("div", null, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__description" }, "Tour Description", " ", /* @__PURE__ */ e.createElement("span", { ref: c.countRef, "aria-live": "polite" }, "(", c.charsRemaining, /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
+  )), /* @__PURE__ */ e.createElement("div", null, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__description" }, "Tour Description", " ", /* @__PURE__ */ e.createElement("span", { ref: s.countRef, "aria-live": "polite" }, "(", s.charsRemaining, /* @__PURE__ */ e.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ e.createElement("br", null), /* @__PURE__ */ e.createElement(
     "textarea",
     {
       id: "aic-ct-metadata__description",
-      onChange: c.onChange,
+      onChange: s.onChange,
       rows: "5",
-      value: c.value,
-      maxLength: c.maxLength
+      value: s.value,
+      maxLength: s.maxLength
     }
   )));
 }
-const U = () => /* @__PURE__ */ e.createElement(C, null, /* @__PURE__ */ e.createElement($, null), /* @__PURE__ */ e.createElement(x, null, /* @__PURE__ */ e.createElement(R, { id: 0, title: "Search" }, /* @__PURE__ */ e.createElement(D, null, /* @__PURE__ */ e.createElement(B, null), /* @__PURE__ */ e.createElement(M, null))), /* @__PURE__ */ e.createElement(R, { id: 1, title: "Your tour" }, /* @__PURE__ */ e.createElement(k, null), /* @__PURE__ */ e.createElement(w, null))));
+function H() {
+  const {
+    tourTitle: i,
+    tourItems: r,
+    tourDescription: n,
+    validityIssues: l,
+    setValidityIssues: a,
+    limits: c
+  } = p(g);
+  return y(() => {
+    const s = [];
+    i.length || s.push("A title is required"), i.length > c.title && s.push("Tour title must not exceed the character limit"), n.length > c.description && s.push(
+      "Tour description must not exceed the character limit"
+    ), r.length < c.items.min && s.push("At least one item is required"), r.length > c.items.max && s.push("Tours must not contain more than 6 artworks"), r.some((u) => u.note.length > c.note ? (s.push("Notes must not exceed the character limit"), !0) : !1), a(s);
+  }, [i, n, r, a, c]), /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("h2", null, "Submit your tour"), l.length ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("p", null, "Fix these issue before submitting your tour:"), l.length && /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-validation-errors" }, l.map((s, u) => /* @__PURE__ */ e.createElement("li", { key: u }, s)))) : /* @__PURE__ */ e.createElement("div", { id: "aic-ct-validation-success" }, /* @__PURE__ */ e.createElement("p", null, "Are you sure you want to submit your tour? You won't be able to make any more changes after this stage")));
+}
+const z = (i) => {
+  const { tourTitle: r, tourDescription: n, tourItems: l } = i, a = { tourTitle: r, tourDescription: n, tourItems: l };
+  return /* @__PURE__ */ e.createElement(C, { ...a }, /* @__PURE__ */ e.createElement(L, null), /* @__PURE__ */ e.createElement(A, null, /* @__PURE__ */ e.createElement(I, { id: 0, title: "Search" }, /* @__PURE__ */ e.createElement(q, null, /* @__PURE__ */ e.createElement(Q, null), /* @__PURE__ */ e.createElement(U, null))), /* @__PURE__ */ e.createElement(I, { id: 1, title: "Your tour" }, /* @__PURE__ */ e.createElement(Y, null), /* @__PURE__ */ e.createElement(j, null)), /* @__PURE__ */ e.createElement(I, { id: 2, title: "Save your tour" }, /* @__PURE__ */ e.createElement(H, null))));
+};
+z.propTypes = {
+  tourTitle: t.string,
+  tourDescription: t.string,
+  tourItems: t.array
+};
 export {
-  U as default
+  z as default
 };

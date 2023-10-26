@@ -8,11 +8,16 @@ import useCappedInput from "../../hooks/useCappedInput";
  */
 
 function TourMetadata() {
-  const { tourTitle, setTourTitle, tourDescription, setTourDescription } =
-    useContext(AppContext);
+  const {
+    tourTitle,
+    setTourTitle,
+    tourDescription,
+    setTourDescription,
+    limits,
+  } = useContext(AppContext);
   // You may wish to make this smaller for debugger
-  const cappedTitle = useCappedInput(tourTitle, 255);
-  const cappedDescription = useCappedInput(tourDescription, 255);
+  const cappedTitle = useCappedInput(tourTitle, limits.title);
+  const cappedDescription = useCappedInput(tourDescription, limits.description);
 
   // Update tourTitle and tourDescription when cappedTitle and cappedDescription change
   useEffect(() => {
@@ -40,6 +45,7 @@ function TourMetadata() {
           value={cappedTitle.value}
           id="aic-ct-metadata__title"
           maxLength={cappedTitle.maxLength}
+          required
         />
       </div>
 

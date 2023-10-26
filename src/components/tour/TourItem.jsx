@@ -9,10 +9,11 @@ import PropTypes from "prop-types";
  */
 function TourItem(props) {
   const { itemData, itemIndex, setShouldAssignFocus, setRemoveButtons } = props;
-  const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
+  const { iiifBaseUrl, tourItems, tourItemsDispatch, limits } =
+    useContext(AppContext);
   const buttonRef = useRef(null);
 
-  const cappedNote = useCappedInput(tourItems[itemIndex]?.note, 255);
+  const cappedNote = useCappedInput(tourItems[itemIndex]?.note, limits.note);
 
   // payload needs to be memoized so that it doesn't change on every render
   // This avoids an infinite loop when paired with the UPDATE_NOTE action
