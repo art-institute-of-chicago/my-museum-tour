@@ -2,6 +2,7 @@ import React from "react";
 import CustomTourBuilder from "./CustomTourBuilder";
 import { AppProvider } from "./contexts/AppContext";
 import { SearchProvider } from "./contexts/SearchContext";
+import searchJson from "../cypress/fixtures/json/search.json";
 
 describe("<CustomTourBuilder />", () => {
   it("Renders", () => {
@@ -26,7 +27,7 @@ describe("<CustomTourBuilder />", () => {
     );
   });
 
-  it("Display an error message if there was a problem with the request", () => {
+  it("Display an error message if there was a problem with the search request", () => {
     cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
       statusCode: 500,
     }).as("500");
@@ -168,5 +169,97 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-note-59426").should("be.empty");
     cy.get("#aic-ct-note-243872").should("be.empty");
     cy.get("#aic-ct-note-75644").should("be.empty");
+  });
+
+  it("Displays validation errors on the submission screen", () => {
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <CustomTourBuilder />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
+  });
+
+  it("Protects against edge cases where limits are (forcefully) exceeded", () => {
+    const tooLongString =
+      "Nullam aliquet fringilla dolor, vitae malesuada massa rutrum eget. Quisque sed nibh augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque tristique finibus sapien, condimentum condimentum magna biam.";
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+    const tooManyTourItems = searchJson.data.map((item) => ({
+      ...item,
+      note: tooLongString,
+    }));
+    cy.mount(
+      <CustomTourBuilder
+        tourTitle={tooLongString}
+        tourDescription={tooLongString}
+        tourItems={tooManyTourItems}
+      />,
+    );
+
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 4);
+    cy.get("#aic-ct-validation-errors")
+      .contains("Notes must not exceed the character limit")
+      .parent()
+      .contains("Tour title must not exceed the character limit")
+      .parent()
+      .contains("Tour description must not exceed the character limit")
+      .parent()
+      .contains("Tours must not contain more than 6 artworks");
+  });
+
+  it("Allows a submission if all requirements are met", () => {
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+
+    // Use intercept to ping the search api and use the search.json fixture
+    // but wait while we check the loading message
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+      delayMs: 80,
+    }).as("search");
+
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <CustomTourBuilder />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 1);
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-metadata__title").type("A tour title");
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-validation-errors").should("not.exist");
+    cy.get("#aic-ct-validation-success").should("exist");
   });
 });

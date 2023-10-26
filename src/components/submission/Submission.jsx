@@ -45,7 +45,7 @@ function Submission() {
     }
 
     if (tourItems.length > limits.items.max) {
-      newValidityIssues.push("Tours must not contain more than 6 items");
+      newValidityIssues.push("Tours must not contain more than 6 artworks");
     }
 
     setValidityIssues(newValidityIssues);
@@ -66,10 +66,12 @@ function Submission() {
           )}
         </>
       ) : (
-        <p>
-          Are you sure you want to submit your tour? You won't be able to make
-          any more changes after this stage
-        </p>
+        <div id="aic-ct-validation-success">
+          <p>
+            Are you sure you want to submit your tour? You won&apos;t be able to
+            make any more changes after this stage
+          </p>
+        </div>
       )}
     </>
   );
