@@ -285,24 +285,15 @@ function N(i) {
       src: F(r, a.image_id, "240", "240"),
       alt: a.thumbnail.alt_text
     }
-  ), a.artist_title && /* @__PURE__ */ e.createElement("p", null, a.artist_title), a.description && /* @__PURE__ */ e.createElement("div", { dangerouslySetInnerHTML: { __html: a.description } }), !c && n.length < 6 && /* @__PURE__ */ e.createElement(
+  ), a.artist_title && /* @__PURE__ */ e.createElement("p", null, a.artist_title), a.description && /* @__PURE__ */ e.createElement("div", { dangerouslySetInnerHTML: { __html: a.description } }), (n.length < 6 || c) && /* @__PURE__ */ e.createElement(
     "button",
     {
       type: "button",
       onClick: u,
-      "aria-pressed": "false",
-      "aria-label": "Add to tour"
+      "aria-pressed": c ? "true" : "false",
+      "aria-label": c ? "Remove from tour" : "Add to tour"
     },
-    "Add to tour"
-  ), c && /* @__PURE__ */ e.createElement(
-    "button",
-    {
-      type: "button",
-      onClick: u,
-      "aria-pressed": "true",
-      "aria-label": "Remove from tour"
-    },
-    "Remove from tour"
+    c ? "Remove from tour" : "Add to tour"
   ));
 }
 N.propTypes = {
