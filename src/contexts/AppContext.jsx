@@ -34,6 +34,7 @@ export function AppProvider(props) {
   const navSearchButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
   const iiifBaseUrl = "https://artic.edu/iiif/2";
+  const [isSaving, setIsSaving] = useState(false);
 
   // Something to do with this being a reference type
   // Causes an infinite loop if it's not memoized
@@ -68,6 +69,8 @@ export function AppProvider(props) {
         navSearchButtonRef,
         validityIssues,
         setValidityIssues,
+        isSaving,
+        setIsSaving,
       }}
     >
       {children}
@@ -110,5 +113,7 @@ AppContext.Provider.propTypes = {
     }),
     validityIssues: PropTypes.arrayOf(PropTypes.string),
     setValidityIssues: PropTypes.func,
+    isSaving: PropTypes.bool,
+    setIsSaving: PropTypes.func,
   }),
 };

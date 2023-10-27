@@ -12,7 +12,17 @@ function Submission() {
     validityIssues,
     setValidityIssues,
     limits,
+    isSaving,
+    setIsSaving,
   } = useContext(AppContext);
+
+  const handleSave = () => {
+    setIsSaving(true);
+    setTimeout(() => {
+      console.log("Tour saved");
+      setIsSaving(false);
+    }, 1000);
+  };
 
   // Update validityIssues when tourTitle and tourItems change
   useEffect(() => {
@@ -71,6 +81,9 @@ function Submission() {
           <p>
             Are you sure you want to submit your tour? You won&apos;t be able to
             make any more changes after this stage
+            <button type="button" onClick={handleSave} disabled={isSaving}>
+              Save my tour
+            </button>
           </p>
         </div>
       )}
