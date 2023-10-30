@@ -48,9 +48,17 @@ function Submission() {
             "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
           );
         }
-        setSaveResponse(await res.json());
+        const { message } = await res.json();
+
+        setSaveResponse({
+          type: "success",
+          message,
+        });
       } catch (error) {
-        console.log("outer error:", error.message);
+        setSaveResponse({
+          type: "error",
+          message: error.message,
+        });
       }
       setIsSaving(false);
     }, 1000);
@@ -119,13 +127,36 @@ function Submission() {
                   Are you sure you want to submit your tour? You won&apos;t be
                   able to make any more changes after this stage
                 </p>
-                <button type="button" onClick={handleSave} disabled={isSaving}>
+                <button
+                  id="aic-ct-save-button"
+                  type="button"
+                  onClick={handleSave}
+                  disabled={isSaving}
+                >
                   Save my tour
                 </button>
               </>
             )}
 
-            {saveResponse && <p>{saveResponse.message}</p>}
+            {saveResponse &&
+              ((saveResponse.type === "success" && (
+                <div id="aic-ct-save-success">
+                  <p>{saveResponse.message}</p>
+                </div>
+              )) ||
+                (saveResponse.type === "error" && (
+                  <div id="aic-ct-save-error">
+                    <p>{saveResponse.message}</p>
+                    <button
+                      id="aic-ct-save-button"
+                      type="button"
+                      onClick={handleSave}
+                      disabled={isSaving}
+                    >
+                      Save my tour
+                    </button>
+                  </div>
+                )))}
           </div>
         </div>
       )}
