@@ -239,7 +239,7 @@ describe("<CustomTourBuilder />", () => {
       .contains("Tours must not contain more than 6 artworks");
   });
 
-  it("Allows a submission if all requirements are met", () => {
+  it("Shows a submit button if all requirements are met", () => {
     let imageInterceptCount = 0;
     cy.intercept(
       "GET",
@@ -273,5 +273,45 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-errors").should("not.exist");
     cy.get("#aic-ct-validation-success").should("exist");
+  });
+
+  it("Correctly handles an error while saving", () => {
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+
+    // Use intercept to ping the search api and use the search.json fixture
+    // but wait while we check the loading message
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+      delayMs: 80,
+    }).as("search");
+
+    cy.intercept("POST", "/api/v1/custom-tours", {
+      fixture: "json/saveMissingTitle.json",
+      statusCode: 422,
+      delayMs: 80,
+    }).as("save");
+
+    cy.mount(<CustomTourBuilder />);
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-metadata__title").type("Test title");
+    cy.get("#aic-ct-metadata__description").type("Test description");
+    cy.get("#aic-ct-note-59426").type("Test note");
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-save-button").click();
+    cy.get("#aic-ct-save-error").should("exist");
   });
 });
