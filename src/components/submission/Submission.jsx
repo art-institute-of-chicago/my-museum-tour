@@ -33,9 +33,8 @@ function Submission() {
             title: tourTitle,
             description: tourDescription,
             artworks: tourItems.map((item) => ({
-              id: item.id,
-              title: item.title,
               objectNote: item.note,
+              ...item,
             })),
           }),
         });
