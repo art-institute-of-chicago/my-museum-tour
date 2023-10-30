@@ -78,13 +78,19 @@ function Submission() {
         </>
       ) : (
         <div id="aic-ct-validation-success">
-          <p>
-            Are you sure you want to submit your tour? You won&apos;t be able to
-            make any more changes after this stage
-            <button type="button" onClick={handleSave} disabled={isSaving}>
-              Save my tour
-            </button>
-          </p>
+          <div tabIndex="-1" aria-live="polite">
+            {isSaving ? (
+              <p>Saving...</p>
+            ) : (
+              <p>
+                Are you sure you want to submit your tour? You won&apos;t be
+                able to make any more changes after this stage
+              </p>
+            )}
+          </div>
+          <button type="button" onClick={handleSave} disabled={isSaving}>
+            Save my tour
+          </button>
         </div>
       )}
     </>
