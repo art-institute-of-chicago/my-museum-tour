@@ -1,0 +1,9 @@
+{
+  "message": "Custom tour created successfully!",
+  "custom_tour": {
+    "tour_json": "{\"title\":\"test title\",\"description\":\"Test description\",\"artworks\":[{\"id\":60812,\"title\":\"Merahi metua no Tehamana (Tehamana Has Many Parents or The Ancestors of Tehamana)\",\"objectNote\":\"Test note\"}]}",
+    "updated_at": "2023-10-30T18:53:18.000000Z",
+    "created_at": "2023-10-30T18:53:18.000000Z",
+    "id": 42
+  }
+}
