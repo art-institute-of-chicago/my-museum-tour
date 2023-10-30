@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
 
 /**
@@ -16,11 +16,43 @@ function Submission() {
     isSaving,
     setIsSaving,
   } = useContext(AppContext);
+  const [saveResponse, setSaveResponse] = useState(null);
 
   const handleSave = () => {
     setIsSaving(true);
-    setTimeout(() => {
-      console.log("Tour saved");
+    setTimeout(async () => {
+      try {
+        // Post to the API
+        const res = await fetch(`${apiSaveEndpoint}`, {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: tourTitle,
+            description: tourDescription,
+            artworks: tourItems.map((item) => ({
+              id: item.id,
+              title: item.title,
+              objectNote: item.note,
+            })),
+          }),
+        });
+        // Circumstances where the response might be "not ok":
+        // - Some kind of network error (e.g. no internet connection)
+        // - Some kind of backend error (e.g. HTTP 500)
+        // - User has manipulated the DOM/State (HTTP 422)
+        // - Some of the items had missing data (shouldn't be possible) (HTTP 422)
+        if (!res.ok) {
+          throw new Error(
+            "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
+          );
+        }
+        setSaveResponse(await res.json());
+      } catch (error) {
+        console.log("outer error:", error.message);
+      }
       setIsSaving(false);
     }, 1000);
   };
@@ -80,18 +112,22 @@ function Submission() {
       ) : (
         <div id="aic-ct-validation-success">
           <div tabIndex="-1" aria-live="polite">
-            {isSaving ? (
-              <p>Saving...</p>
-            ) : (
-              <p>
-                Are you sure you want to submit your tour? You won&apos;t be
-                able to make any more changes after this stage
-              </p>
+            {isSaving && <p>Saving...</p>}
+
+            {!isSaving && !saveResponse && (
+              <>
+                <p>
+                  Are you sure you want to submit your tour? You won&apos;t be
+                  able to make any more changes after this stage
+                </p>
+                <button type="button" onClick={handleSave} disabled={isSaving}>
+                  Save my tour
+                </button>
+              </>
             )}
+
+            {saveResponse && <p>{saveResponse.message}</p>}
           </div>
-          <button type="button" onClick={handleSave} disabled={isSaving}>
-            Save my tour
-          </button>
         </div>
       )}
     </>
