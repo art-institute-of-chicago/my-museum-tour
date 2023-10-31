@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
+import { createSearchURL } from "../../utils";
 
 /**
  * SearchBar
@@ -15,32 +16,8 @@ function SearchBar() {
   const [inputValue, setInputValue] = useState(searchQuery);
 
   const fetchItems = (keywords) => {
-    // Build the API request URL
-    // I've broken this up to make it easer to reason about and manipulate
-    const apiUrl = new URL("https://api.artic.edu/api/v1/artworks/search");
-    apiUrl.searchParams.set("query[bool][must][][term][is_on_view]", "true");
-    apiUrl.searchParams.set(
-      "query[bool][must][][exists][field]",
-      "description",
-    );
-    apiUrl.searchParams.set(
-      "query[bool][should][][exists][field]",
-      "description",
-    );
-    apiUrl.searchParams.set(
-      "query[bool][should][][exists][field]",
-      "subject_id",
-    );
-    apiUrl.searchParams.set("query[bool][should][][exists][field]", "style_id");
-    apiUrl.searchParams.set("query[bool][should][][term][is_boosted]", "true");
-    apiUrl.searchParams.set("query[bool][minimum_should_match]", "1");
-    // "true" will return all fields for debugging
-    apiUrl.searchParams.set(
-      "fields",
-      "artist_title,description,id,image_id,thumbnail,title",
-    );
-    apiUrl.searchParams.set("limit", "10");
-    apiUrl.searchParams.set("q", keywords);
+    // Generate request URL
+    const apiUrl = createSearchURL({ keywords });
 
     // Provide an AbortController to cancel the fetch request if the keywords change
     const abortController = new AbortController();
@@ -69,6 +46,7 @@ function SearchBar() {
         setSearchFetching(false);
       }
     }
+
     setSearchFetching(true);
     getData();
 
