@@ -52,9 +52,15 @@ export function createSearchURL(queryParams) {
   if (queryParams.keywords) {
     url.searchParams.set("q", queryParams.keywords);
   }
-  if (queryParams.themes) {
+  if (queryParams.subjectIds) {
     url.searchParams.set(
       "query[bool][must][][terms][subject_ids][]",
+      queryParams.themes,
+    );
+  }
+  if (queryParams.categoryIds) {
+    url.searchParams.set(
+      "query[bool][must][][term][category_ids][value]",
       queryParams.themes,
     );
   }

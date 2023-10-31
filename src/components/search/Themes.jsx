@@ -28,12 +28,12 @@ function Themes() {
     },
     {
       label: "Chicago artists",
-      subjectId: "TM-8663",
+      categoryId: "PC-154",
       thumbnailId: "f7f9615d-2c2b-6b23-47b2-cd6cdc846504",
     },
     {
       label: "Essentials",
-      subjectId: "TM-8663",
+      categoryId: "PC-831",
       thumbnailId: "25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e",
     },
   ];
@@ -42,7 +42,7 @@ function Themes() {
     <div>
       {themes.map((theme) => (
         <ThemeToggle
-          key={theme.subject_id}
+          key={theme.label}
           label={theme.label}
           subjectId={theme.subjectId}
           thumbnailId={theme.thumbnailId}
