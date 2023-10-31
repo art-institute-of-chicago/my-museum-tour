@@ -7,13 +7,13 @@ import { createSearchURL } from "../../utils";
  */
 function SearchBar() {
   const {
-    searchQuery,
+    inputValue,
+    setInputValue,
     setSearchQuery,
     setSearchResultItems,
     setSearchError,
     setSearchFetching,
   } = useContext(SearchContext);
-  const [inputValue, setInputValue] = useState(searchQuery);
 
   const fetchItems = (keywords) => {
     // Generate request URL
