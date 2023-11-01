@@ -41,7 +41,7 @@ function Themes() {
   ];
 
   return (
-    <div>
+    <div id="aic-ct-themes">
       {themes.map((theme, index) => (
         <ThemeToggle
           key={theme.label}
