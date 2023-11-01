@@ -1,18 +1,17 @@
 import React from "react";
-import Themes from "./Themes";
+import ThemeToggle from "./ThemeToggle";
 import { AppProvider } from "../../contexts/AppContext";
 import { SearchProvider } from "../../contexts/SearchContext";
 
-describe("<ThemeToggle />", () => {
+describe("<Themes />", () => {
   it("Renders", () => {
     cy.mount(
       <AppProvider>
         <SearchProvider>
-          <Themes />
+          <ThemeToggle id="0" label="Test theme" categoryIds={["TM-8657"]} />
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-themes").should("exist");
-    cy.get("#aic-ct-themes button").should("have.length", 6);
+    cy.get("#aic-ct-theme-toggle-0").should("exist");
   });
 });
