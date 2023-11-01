@@ -22,6 +22,7 @@ export function SearchProvider(props) {
     searchFetchingValue || false,
   );
   const [searchError, setSearchError] = useState(searchErrorValue || false);
+  const [activeTheme, setActiveTheme] = useState(null);
 
   return (
     <SearchContext.Provider
@@ -34,6 +35,8 @@ export function SearchProvider(props) {
         setSearchFetching,
         searchError,
         setSearchError,
+        activeTheme,
+        setActiveTheme,
       }}
     >
       {children}
@@ -59,6 +62,8 @@ SearchContext.Provider.propTypes = {
     setSearchFetching: PropTypes.func,
     searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
     setSearchError: PropTypes.func,
+    activeTheme: PropTypes.string,
+    setActiveTheme: PropTypes.func,
   }),
   children: PropTypes.node.isRequired,
 };
