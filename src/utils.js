@@ -24,7 +24,8 @@ export function iiifUrl(
 /**
  * @typedef {Object} QueryParams
  * @property {string} keywords - Search keywords
- * @property {string[]} - Themes
+ * @property {string[]} subjectIds - Array of subject ids
+ * @property {string[]} categoryIds - Array of category ids
  */
 
 /**
@@ -55,13 +56,13 @@ export function createSearchUrl(queryParams) {
   if (queryParams.subjectIds) {
     url.searchParams.set(
       "query[bool][must][][terms][subject_ids][]",
-      queryParams.themes,
+      queryParams.subjectIds,
     );
   }
   if (queryParams.categoryIds) {
     url.searchParams.set(
       "query[bool][must][][term][category_ids][value]",
-      queryParams.themes,
+      queryParams.categoryIds,
     );
   }
   return url;
