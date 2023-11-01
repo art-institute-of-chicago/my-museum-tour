@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { createSearchUrl } from "../../utils";
@@ -14,26 +14,18 @@ function SearchBar() {
     setSearchFetching,
     setSearchError,
   } = useContext(SearchContext);
-  const { data, fetching, error, fetchData } = useFetch();
+
+  const { fetchData } = useFetch({
+    dataSubSelector: "data",
+    dataSetter: setSearchResultItems,
+    fetchingSetter: setSearchFetching,
+    errorSetter: setSearchError,
+  });
 
   const handleSubmit = (event) => {
     fetchData(createSearchUrl({ keywords: searchQuery }));
     event.preventDefault();
   };
-
-  useEffect(() => {
-    // "data" is contingent on handleSubmit being called
-    if (!data) return;
-    setSearchResultItems(data.data);
-  }, [data, setSearchResultItems]);
-
-  useEffect(() => {
-    setSearchError(error);
-  }, [error, setSearchError]);
-
-  useEffect(() => {
-    setSearchFetching(fetching);
-  }, [fetching, setSearchFetching]);
 
   return (
     <form

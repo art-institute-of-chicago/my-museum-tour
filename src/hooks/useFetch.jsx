@@ -1,15 +1,26 @@
 import { useEffect, useState } from "react";
 
 /**
+ * @typedef {object} useFetchOptions
+ * @property {string} dataSubSelector - The key to use when setting the data state
+ * @property {function} dataSetter - Function to call when setting the data state
+ * @property {function} fetchingSetter - Function to call when setting the fetching state
+ * @property {function} errorSetter - Function to call when setting the error state
+ */
+
+/**
  * useFetch
  * Custom hook for fetching data from the API
+ * @param {useFetchOptions} options
  * @returns {object} { data, fetching, error, fetchData, resetState }
  */
-const useFetch = () => {
+const useFetch = (options) => {
   const [data, setData] = useState(null);
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(null);
   const [abortController, setAbortController] = useState(null);
+  const { dataSubSelector, dataSetter, fetchingSetter, errorSetter } =
+    options || {};
 
   // Reset the state to the initial values
   const resetState = () => {
@@ -39,7 +50,7 @@ const useFetch = () => {
     try {
       const res = await fetch(url, { signal: newAbortController.signal });
       const data = await res.json();
-      setData(data);
+      setData(dataSubSelector ? data[dataSubSelector] : data);
       setError(null);
       setFetching(false);
     } catch (error) {
@@ -66,6 +77,21 @@ const useFetch = () => {
       }
     };
   }, [abortController]);
+
+  useEffect(() => {
+    if (!dataSetter) return;
+    dataSetter(data);
+  }, [data, dataSetter]);
+
+  useEffect(() => {
+    if (!errorSetter) return;
+    errorSetter(error);
+  }, [error, errorSetter]);
+
+  useEffect(() => {
+    if (!fetchingSetter) return;
+    fetchingSetter(fetching);
+  }, [fetching, fetchingSetter]);
 
   return { data, fetching, error, fetchData, resetState };
 };
