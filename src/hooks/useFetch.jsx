@@ -40,6 +40,7 @@ const useFetch = () => {
       const res = await fetch(url, { signal: newAbortController.signal });
       const data = await res.json();
       setData(data);
+      setError(null);
       setFetching(false);
     } catch (error) {
       // Explicity ignore AbortError's as they aren't really errors as far as we're concerned
