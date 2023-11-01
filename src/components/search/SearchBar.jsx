@@ -13,6 +13,7 @@ function SearchBar() {
     setSearchResultItems,
     setSearchFetching,
     setSearchError,
+    setActiveTheme,
   } = useContext(SearchContext);
 
   const { fetchData } = useFetch({
@@ -24,6 +25,8 @@ function SearchBar() {
 
   const handleSubmit = (event) => {
     fetchData(createSearchUrl({ keywords: searchQuery }));
+    // Deselect any active theme
+    setActiveTheme(null);
     event.preventDefault();
   };
 
