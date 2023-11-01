@@ -14,6 +14,8 @@ function ThemeToggle(props) {
     setSearchFetching,
     setSearchError,
     setSearchQuery,
+    activeTheme,
+    setActiveTheme,
   } = useContext(SearchContext);
   const { fetchData } = useFetch({
     dataSubSelector: "data",
@@ -23,15 +25,30 @@ function ThemeToggle(props) {
   });
 
   const handleClick = () => {
-    fetchData(createSearchUrl({ subjectIds, categoryIds }));
-    // Empty the search field
-    setSearchQuery("");
+    if (activeTheme === label) {
+      // Deselect the theme
+      setActiveTheme(null);
+    } else {
+      fetchData(createSearchUrl({ subjectIds, categoryIds }));
+      // Clicking while active removes the theme
+      setActiveTheme(label);
+      // Empty the search field
+      setSearchQuery("");
+    }
   };
 
   return (
-    <button id={`aic-ct-theme-toggle-${id}`} onClick={handleClick}>
-      {label}
-    </button>
+    <>
+      {(activeTheme === null || activeTheme === label) && (
+        <button
+          id={`aic-ct-theme-toggle-${id}`}
+          onClick={handleClick}
+          aria-pressed={activeTheme === label ? "true" : "false"}
+        >
+          {label}
+        </button>
+      )}
+    </>
   );
 }
 
