@@ -1,66 +1,39 @@
-import React, { useState, useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
-import { createSearchURL } from "../../utils";
+import useFetch from "../../hooks/useFetch";
+import { createSearchUrl } from "../../utils";
 
 /**
  * SearchBar
  */
 function SearchBar() {
   const {
-    inputValue,
-    setInputValue,
+    searchQuery,
     setSearchQuery,
     setSearchResultItems,
-    setSearchError,
     setSearchFetching,
+    setSearchError,
   } = useContext(SearchContext);
-
-  const fetchItems = (keywords) => {
-    // Generate request URL
-    const apiUrl = createSearchURL({ keywords });
-
-    // Provide an AbortController to cancel the fetch request if the keywords change
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
-    // Empty keywords should not trigger a fetch or return results
-    // Note: HTML validation should mean this never fires
-    if (keywords === "") {
-      setSearchResultItems(null);
-      setSearchFetching(false);
-      setSearchError(null);
-      return;
-    }
-
-    async function getData() {
-      try {
-        const res = await fetch(apiUrl, { signal });
-        const data = await res.json();
-        setSearchResultItems(data.data);
-        setSearchFetching(false);
-      } catch (error) {
-        // Explicity ignore AbortError's as they aren't really errors as far as we're concerned
-        if (error.name === "AbortError") return;
-
-        setSearchError("Error fetching results");
-        setSearchFetching(false);
-      }
-    }
-
-    setSearchFetching(true);
-    getData();
-
-    // Cancel the fetch request if the keywords change
-    return () => {
-      abortController.abort();
-    };
-  };
+  const { data, fetching, error, fetchData } = useFetch();
 
   const handleSubmit = (event) => {
-    setSearchQuery(inputValue);
-    fetchItems(inputValue);
+    fetchData(createSearchUrl({ keywords: searchQuery }));
     event.preventDefault();
   };
+
+  useEffect(() => {
+    // "data" is contingent on handleSubmit being called
+    if (!data) return;
+    setSearchResultItems(data.data);
+  }, [data, setSearchResultItems]);
+
+  useEffect(() => {
+    setSearchError(error);
+  }, [error, setSearchError]);
+
+  useEffect(() => {
+    setSearchFetching(fetching);
+  }, [fetching, setSearchFetching]);
 
   return (
     <form
@@ -77,10 +50,10 @@ function SearchBar() {
         id="aic-ct-search__input"
         type="search"
         placeholder="Search"
-        value={inputValue}
+        value={searchQuery}
         onChange={(e) => {
           if (e.target.value) e.target.setCustomValidity("");
-          setInputValue(e.target.value);
+          setSearchQuery(e.target.value);
         }}
         onInvalid={(e) => {
           e.target.setCustomValidity("You must enter a search term");

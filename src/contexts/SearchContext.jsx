@@ -18,7 +18,6 @@ export function SearchProvider(props) {
     searchResultItemsValue || null,
   );
   const [searchQuery, setSearchQuery] = useState(searchQueryValue || "");
-  const [inputValue, setInputValue] = useState(searchQueryValue || "");
   const [searchFetching, setSearchFetching] = useState(
     searchFetchingValue || false,
   );
@@ -27,8 +26,6 @@ export function SearchProvider(props) {
   return (
     <SearchContext.Provider
       value={{
-        inputValue,
-        setInputValue,
         searchResultItems,
         setSearchResultItems,
         searchQuery,
@@ -54,8 +51,6 @@ SearchProvider.propTypes = {
 
 SearchContext.Provider.propTypes = {
   value: PropTypes.shape({
-    inputValue: PropTypes.string,
-    setInputValue: PropTypes.func,
     searchResultItems: PropTypes.array,
     setSearchResultItems: PropTypes.func,
     searchQuery: PropTypes.string,

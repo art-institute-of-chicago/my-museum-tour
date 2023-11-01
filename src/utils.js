@@ -33,7 +33,7 @@ export function iiifUrl(
  * @param {QueryParams} queryParams - QueryParams object with keywords and/or themes
  * @returns {URL} - URL object for API query
  */
-export function createSearchURL(queryParams) {
+export function createSearchUrl(queryParams) {
   // Build the query string
   // I've broken this up to make it easer to reason about and manipulate
   const url = new URL("https://api.artic.edu/api/v1/artworks/search");
