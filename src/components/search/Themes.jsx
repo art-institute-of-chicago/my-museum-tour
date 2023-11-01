@@ -5,6 +5,8 @@ import ThemeToggle from "./ThemeToggle";
  * Themes
  */
 function Themes() {
+  // TODO: There's interest in having this in some way configurable
+  // Best way to achieve this is TBD
   const themes = [
     {
       label: "Landscapes",
@@ -40,9 +42,10 @@ function Themes() {
 
   return (
     <div>
-      {themes.map((theme) => (
+      {themes.map((theme, index) => (
         <ThemeToggle
           key={theme.label}
+          id={index}
           label={theme.label}
           subjectIds={theme.subjectIds}
           categoryIds={theme.categoryIds}
