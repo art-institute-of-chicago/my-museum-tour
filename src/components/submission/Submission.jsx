@@ -18,50 +18,48 @@ function Submission() {
   } = useContext(AppContext);
   const [saveResponse, setSaveResponse] = useState(null);
 
-  const handleSave = () => {
+  const handleSave = async () => {
     setIsSaving(true);
-    setTimeout(async () => {
-      try {
-        // Post to the API
-        const res = await fetch(`${apiSaveEndpoint}`, {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title: tourTitle,
-            description: tourDescription,
-            artworks: tourItems.map((item) => ({
-              objectNote: item.note,
-              ...item,
-            })),
-          }),
-        });
-        // Circumstances where the response might be "not ok":
-        // - Some kind of network error (e.g. no internet connection)
-        // - Some kind of backend error (e.g. HTTP 500)
-        // - User has manipulated the DOM/State (HTTP 422)
-        // - Some of the items had missing data (shouldn't be possible) (HTTP 422)
-        if (!res.ok) {
-          throw new Error(
-            "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
-          );
-        }
-        const { message } = await res.json();
-
-        setSaveResponse({
-          type: "success",
-          message,
-        });
-      } catch (error) {
-        setSaveResponse({
-          type: "error",
-          message: error.message,
-        });
+    try {
+      // Post to the API
+      const res = await fetch(`${apiSaveEndpoint}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: tourTitle,
+          description: tourDescription,
+          artworks: tourItems.map((item) => ({
+            objectNote: item.note,
+            ...item,
+          })),
+        }),
+      });
+      // Circumstances where the response might be "not ok":
+      // - Some kind of network error (e.g. no internet connection)
+      // - Some kind of backend error (e.g. HTTP 500)
+      // - User has manipulated the DOM/State (HTTP 422)
+      // - Some of the items had missing data (shouldn't be possible) (HTTP 422)
+      if (!res.ok) {
+        throw new Error(
+          "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
+        );
       }
-      setIsSaving(false);
-    }, 1000);
+      const { message } = await res.json();
+
+      setSaveResponse({
+        type: "success",
+        message,
+      });
+    } catch (error) {
+      setSaveResponse({
+        type: "error",
+        message: error.message,
+      });
+    }
+    setIsSaving(false);
   };
 
   // Update validityIssues when tourTitle and tourItems change
