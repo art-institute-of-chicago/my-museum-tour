@@ -31,9 +31,10 @@ function Submission() {
         body: JSON.stringify({
           title: tourTitle,
           description: tourDescription,
-          artworks: tourItems.map((item) => ({
-            objectNote: item.note,
-            ...item,
+          // Pass in note as objectNote and destructure the rest as rest
+          artworks: tourItems.map(({ note: objectNote, ...rest }) => ({
+            objectNote,
+            ...rest,
           })),
         }),
       });
