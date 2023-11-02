@@ -13,8 +13,13 @@ import PropTypes from "prop-types";
 
 const CustomTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
-  const { tourTitle, tourDescription, tourItems } = props;
-  const AppProviderProps = { tourTitle, tourDescription, tourItems };
+  const { apiSaveEndpoint, tourTitle, tourDescription, tourItems } = props;
+  const AppProviderProps = {
+    apiSaveEndpoint,
+    tourTitle,
+    tourDescription,
+    tourItems,
+  };
 
   return (
     <AppProvider {...AppProviderProps}>
@@ -41,6 +46,7 @@ const CustomTourBuilder = (props) => {
 };
 
 CustomTourBuilder.propTypes = {
+  apiSaveEndpoint: PropTypes.string,
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,

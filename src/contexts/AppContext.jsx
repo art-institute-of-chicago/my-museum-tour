@@ -20,6 +20,7 @@ export function AppProvider(props) {
     tourDescription: tourDescriptionValue,
     tourItems: tourItemsValue,
     navPages: navPagesValue,
+    apiSaveEndpoint: apiSaveEndpointValue,
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
   const [tourDescription, setTourDescription] = useState(
@@ -34,6 +35,8 @@ export function AppProvider(props) {
   const navSearchButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
   const iiifBaseUrl = "https://artic.edu/iiif/2";
+  const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
+  const [isSaving, setIsSaving] = useState(false);
 
   // Something to do with this being a reference type
   // Causes an infinite loop if it's not memoized
@@ -53,6 +56,7 @@ export function AppProvider(props) {
   return (
     <AppContext.Provider
       value={{
+        apiSaveEndpoint,
         iiifBaseUrl,
         limits,
         tourTitle,
@@ -68,6 +72,8 @@ export function AppProvider(props) {
         navSearchButtonRef,
         validityIssues,
         setValidityIssues,
+        isSaving,
+        setIsSaving,
       }}
     >
       {children}
@@ -76,6 +82,7 @@ export function AppProvider(props) {
 }
 
 AppProvider.propTypes = {
+  apiSaveEndpoint: PropTypes.string,
   children: PropTypes.node.isRequired,
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
@@ -85,6 +92,7 @@ AppProvider.propTypes = {
 
 AppContext.Provider.propTypes = {
   value: PropTypes.shape({
+    apiSaveEndpoint: PropTypes.string,
     iiifBaseUrl: PropTypes.string,
     limits: PropTypes.shape({
       note: PropTypes.number,
@@ -110,5 +118,7 @@ AppContext.Provider.propTypes = {
     }),
     validityIssues: PropTypes.arrayOf(PropTypes.string),
     setValidityIssues: PropTypes.func,
+    isSaving: PropTypes.bool,
+    setIsSaving: PropTypes.func,
   }),
 };

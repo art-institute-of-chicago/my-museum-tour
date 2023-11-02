@@ -2,8 +2,13 @@ import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 
 function Navigation() {
-  const { navPages, activeNavPage, setActiveNavPage, navSearchButtonRef } =
-    useContext(AppContext);
+  const {
+    navPages,
+    activeNavPage,
+    setActiveNavPage,
+    navSearchButtonRef,
+    isSaving,
+  } = useContext(AppContext);
 
   return (
     <nav id="aic-ct-navigation" aria-label="Custom tour navigation">
@@ -18,6 +23,7 @@ function Navigation() {
           aria-pressed={page.id === activeNavPage}
           type="button"
           onClick={() => setActiveNavPage(index)}
+          disabled={isSaving}
         >
           {page.title}
         </button>

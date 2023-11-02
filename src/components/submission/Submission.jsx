@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
 
 /**
@@ -6,13 +6,62 @@ import { AppContext } from "../../contexts/AppContext";
  */
 function Submission() {
   const {
+    apiSaveEndpoint,
     tourTitle,
     tourItems,
     tourDescription,
     validityIssues,
     setValidityIssues,
     limits,
+    isSaving,
+    setIsSaving,
   } = useContext(AppContext);
+  const [saveResponse, setSaveResponse] = useState(null);
+
+  const handleSave = async () => {
+    setIsSaving(true);
+    try {
+      // Post to the API
+      const res = await fetch(`${apiSaveEndpoint}`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title: tourTitle,
+          description: tourDescription,
+          // Pass in note as objectNote and destructure the rest as rest
+          artworks: tourItems.map(({ note: objectNote, ...rest }) => ({
+            objectNote,
+            ...rest,
+          })),
+        }),
+      });
+      // Circumstances where the response might be "not ok":
+      // - Some kind of network error (e.g. no internet connection)
+      // - Some kind of backend error (e.g. HTTP 500)
+      // - User has manipulated the DOM/State (HTTP 422)
+      // - Some of the items had missing data (shouldn't be possible) (HTTP 422)
+      if (!res.ok) {
+        throw new Error(
+          "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
+        );
+      }
+      const { message } = await res.json();
+
+      setSaveResponse({
+        type: "success",
+        message,
+      });
+    } catch (error) {
+      setSaveResponse({
+        type: "error",
+        message: error.message,
+      });
+    }
+    setIsSaving(false);
+  };
 
   // Update validityIssues when tourTitle and tourItems change
   useEffect(() => {
@@ -68,10 +117,46 @@ function Submission() {
         </>
       ) : (
         <div id="aic-ct-validation-success">
-          <p>
-            Are you sure you want to submit your tour? You won&apos;t be able to
-            make any more changes after this stage
-          </p>
+          <div tabIndex="-1" aria-live="polite">
+            {isSaving && <p>Saving...</p>}
+
+            {!isSaving && !saveResponse && (
+              <>
+                <p>
+                  Are you sure you want to submit your tour? You won&apos;t be
+                  able to make any more changes after this stage
+                </p>
+                <button
+                  id="aic-ct-save-button"
+                  type="button"
+                  onClick={handleSave}
+                  disabled={isSaving}
+                >
+                  Save my tour
+                </button>
+              </>
+            )}
+
+            {saveResponse &&
+              ((saveResponse.type === "success" && (
+                <div id="aic-ct-save-success">
+                  <p>{saveResponse.message}</p>
+                </div>
+              )) ||
+                (saveResponse.type === "error" && (
+                  <div id="aic-ct-save-error">
+                    <p>{saveResponse.message}</p>
+                    <button
+                      id="aic-ct-save-button"
+                      type="button"
+                      onClick={handleSave}
+                      disabled={isSaving}
+                    >
+                      Save my tour
+                    </button>
+                  </div>
+                )))}
+          </div>
         </div>
       )}
     </>

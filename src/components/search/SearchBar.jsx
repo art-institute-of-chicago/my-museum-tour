@@ -34,7 +34,11 @@ function SearchBar() {
     apiUrl.searchParams.set("query[bool][should][][exists][field]", "style_id");
     apiUrl.searchParams.set("query[bool][should][][term][is_boosted]", "true");
     apiUrl.searchParams.set("query[bool][minimum_should_match]", "1");
-    apiUrl.searchParams.set("fields", "true");
+    // "true" will return all fields for debugging
+    apiUrl.searchParams.set(
+      "fields",
+      "artist_title,description,id,image_id,thumbnail,title",
+    );
     apiUrl.searchParams.set("limit", "10");
     apiUrl.searchParams.set("q", keywords);
 
