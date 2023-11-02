@@ -1,4 +1,4 @@
-import t, { createContext as x, useState as h, useReducer as H, useRef as A, useMemo as D, useContext as E, useEffect as y } from "react";
+import t, { createContext as x, useState as p, useReducer as H, useRef as A, useMemo as D, useContext as E, useEffect as y } from "react";
 import r from "prop-types";
 const z = (n, e) => {
   switch (e.type) {
@@ -11,7 +11,7 @@ const z = (n, e) => {
     default:
       return n;
   }
-}, I = x();
+}, S = x();
 function F(n) {
   const {
     children: e,
@@ -20,12 +20,12 @@ function F(n) {
     tourItems: i,
     navPages: s,
     apiSaveEndpoint: c
-  } = n, [u, d] = h(a || ""), [p, m] = h(
+  } = n, [u, d] = p(a || ""), [m, h] = p(
     l || ""
-  ), [f, o] = h(s || []), [g, v] = h(0), [b, S] = H(
+  ), [f, o] = p(s || []), [g, b] = p(0), [v, I] = H(
     z,
     i || []
-  ), _ = A(null), [R, $] = h([]), B = "https://artic.edu/iiif/2", L = c || "/api/v1/custom-tours", [Q, U] = h(!1), Y = D(
+  ), _ = A(null), [R, $] = p([]), B = "https://artic.edu/iiif/2", L = c || "/api/v1/custom-tours", [Q, U] = p(!1), Y = D(
     () => ({
       note: 255,
       title: 255,
@@ -38,7 +38,7 @@ function F(n) {
     []
   );
   return /* @__PURE__ */ t.createElement(
-    I.Provider,
+    S.Provider,
     {
       value: {
         apiSaveEndpoint: L,
@@ -46,14 +46,14 @@ function F(n) {
         limits: Y,
         tourTitle: u,
         setTourTitle: d,
-        tourDescription: p,
-        setTourDescription: m,
-        tourItems: b,
-        tourItemsDispatch: S,
+        tourDescription: m,
+        setTourDescription: h,
+        tourItems: v,
+        tourItemsDispatch: I,
         navPages: f,
         setNavPages: o,
         activeNavPage: g,
-        setActiveNavPage: v,
+        setActiveNavPage: b,
         navSearchButtonRef: _,
         validityIssues: R,
         setValidityIssues: $,
@@ -72,7 +72,7 @@ F.propTypes = {
   tourItems: r.instanceOf(Array),
   navPages: r.instanceOf(Array)
 };
-I.Provider.propTypes = {
+S.Provider.propTypes = {
   value: r.shape({
     apiSaveEndpoint: r.string,
     iiifBaseUrl: r.string,
@@ -111,7 +111,7 @@ function J() {
     setActiveNavPage: a,
     navSearchButtonRef: l,
     isSaving: i
-  } = E(I);
+  } = E(S);
   return /* @__PURE__ */ t.createElement("nav", { id: "aic-ct-navigation", "aria-label": "Custom tour navigation" }, n.map((s, c) => /* @__PURE__ */ t.createElement(
     "button",
     {
@@ -128,7 +128,7 @@ function J() {
   )));
 }
 function w({ children: n }) {
-  const { setNavPages: e } = E(I);
+  const { setNavPages: e } = E(S);
   return y(() => {
     e(
       n ? n.map((a, l) => ({
@@ -142,7 +142,7 @@ w.propTypes = {
   children: r.node.isRequired
 };
 function P(n) {
-  const { id: e, children: a } = n, { activeNavPage: l } = E(I);
+  const { id: e, children: a } = n, { activeNavPage: l } = E(S);
   return /* @__PURE__ */ t.createElement(
     "div",
     {
@@ -171,11 +171,11 @@ function k(n) {
     searchQuery: l,
     searchFetching: i,
     searchError: s
-  } = n, [c, u] = h(
+  } = n, [c, u] = p(
     a || null
-  ), [d, p] = h(l || ""), [m, f] = h(
+  ), [d, m] = p(l || ""), [h, f] = p(
     i || !1
-  ), [o, g] = h(s || !1), [v, b] = h(null);
+  ), [o, g] = p(s || !1), [b, v] = p(null);
   return /* @__PURE__ */ t.createElement(
     T.Provider,
     {
@@ -183,13 +183,13 @@ function k(n) {
         searchResultItems: c,
         setSearchResultItems: u,
         searchQuery: d,
-        setSearchQuery: p,
-        searchFetching: m,
+        setSearchQuery: m,
+        searchFetching: h,
         setSearchFetching: f,
         searchError: o,
         setSearchError: g,
-        activeTheme: v,
-        setActiveTheme: b
+        activeTheme: b,
+        setActiveTheme: v
       }
     },
     e
@@ -218,15 +218,15 @@ T.Provider.propTypes = {
   children: r.node.isRequired
 };
 const q = (n) => {
-  const [e, a] = h(null), [l, i] = h(!1), [s, c] = h(null), [u, d] = h(null), { dataSubSelector: p, dataSetter: m, fetchingSetter: f, errorSetter: o } = n || {}, g = () => {
+  const [e, a] = p(null), [l, i] = p(!1), [s, c] = p(null), [u, d] = p(null), { dataSubSelector: m, dataSetter: h, fetchingSetter: f, errorSetter: o } = n || {}, g = () => {
     a(null), i(!1), c(null), d(null);
-  }, v = async (b) => {
+  }, b = async (v) => {
     i(!0);
-    const S = new AbortController();
-    d(S);
+    const I = new AbortController();
+    d(I);
     try {
-      const R = await (await fetch(b, { signal: S.signal })).json();
-      a(p ? R[p] : R), c(null), i(!1);
+      const R = await (await fetch(v, { signal: I.signal })).json();
+      a(m ? R[m] : R), c(null), i(!1);
     } catch (_) {
       if (_.name === "AbortError") {
         g();
@@ -236,17 +236,17 @@ const q = (n) => {
     }
   };
   return y(() => {
-    const b = u;
+    const v = u;
     return () => {
-      b && b.abort();
+      v && v.abort();
     };
   }, [u]), y(() => {
-    m && m(e);
-  }, [e, m]), y(() => {
+    h && h(e);
+  }, [e, h]), y(() => {
     o && o(s);
   }, [s, o]), y(() => {
     f && f(l);
-  }, [l, f]), { data: e, fetching: l, error: s, fetchData: v, resetState: g };
+  }, [l, f]), { data: e, fetching: l, error: s, fetchData: b, resetState: g };
 };
 function N(n, e, a = "", l = "", i = "full", s = !0) {
   return `${n}/${e}/${i}/${s && "!"}${a},${l}/0/default.jpg`;
@@ -310,26 +310,26 @@ function G() {
   );
 }
 function V(n) {
-  const { id: e, label: a, subjectIds: l, thumbnailId: i, categoryIds: s } = n, {
-    setSearchResultItems: c,
-    setSearchFetching: u,
-    setSearchError: d,
-    setSearchQuery: p,
+  const { id: e, label: a, subjectIds: l, categoryIds: i } = n, {
+    setSearchResultItems: s,
+    setSearchFetching: c,
+    setSearchError: u,
+    setSearchQuery: d,
     activeTheme: m,
-    setActiveTheme: f
-  } = E(T), { fetchData: o, resetState: g } = q({
+    setActiveTheme: h
+  } = E(T), { fetchData: f, resetState: o } = q({
     dataSubSelector: "data",
-    dataSetter: c,
-    fetchingSetter: u,
-    errorSetter: d
-  }), v = () => {
-    m === a ? (f(null), g()) : (o(O({ subjectIds: l, categoryIds: s })), f(a), p(""));
+    dataSetter: s,
+    fetchingSetter: c,
+    errorSetter: u
+  }), g = () => {
+    m === a ? (h(null), o()) : (f(O({ subjectIds: l, categoryIds: i })), h(a), d(""));
   };
   return /* @__PURE__ */ t.createElement(t.Fragment, null, (m === null || m === a) && /* @__PURE__ */ t.createElement(
     "button",
     {
       id: `aic-ct-theme-toggle-${e}`,
-      onClick: v,
+      onClick: g,
       "aria-pressed": m === a ? "true" : "false"
     },
     a
@@ -388,7 +388,7 @@ function K() {
   )));
 }
 function j(n) {
-  const { iiifBaseUrl: e, tourItems: a, tourItemsDispatch: l } = E(I), { itemData: i } = n, [s, c] = h(!1), u = () => {
+  const { iiifBaseUrl: e, tourItems: a, tourItemsDispatch: l } = E(S), { itemData: i } = n, [s, c] = p(!1), u = () => {
     l({
       type: s ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: s ? i.id : i
@@ -430,7 +430,7 @@ function W() {
   return e ? /* @__PURE__ */ t.createElement("div", { id: "aic-ct-search__loading" }, "Loading...") : n ? /* @__PURE__ */ t.createElement("div", { id: "aic-ct-search__error" }, n) : (a == null ? void 0 : a.length) === 0 ? /* @__PURE__ */ t.createElement("div", { id: "aic-ct-search__no-results" }, "Sorry, we couldn’t find any results matching your criteria") : (a == null ? void 0 : a.length) > 0 ? /* @__PURE__ */ t.createElement("ul", { id: "aic-ct-search__results" }, a.map((l) => /* @__PURE__ */ t.createElement(j, { key: l.id, itemData: l }))) : null;
 }
 function C(n, e) {
-  const [a, l] = h(n || ""), i = A(null);
+  const [a, l] = p(n || ""), i = A(null);
   return {
     value: a,
     onChange: (c) => {
@@ -444,12 +444,12 @@ function C(n, e) {
 }
 function M(n) {
   var g;
-  const { itemData: e, itemIndex: a, setShouldAssignFocus: l, setRemoveButtons: i } = n, { iiifBaseUrl: s, tourItems: c, tourItemsDispatch: u, limits: d } = E(I), p = A(null), m = C((g = c[a]) == null ? void 0 : g.note, d.note), f = D(
+  const { itemData: e, itemIndex: a, setShouldAssignFocus: l, setRemoveButtons: i } = n, { iiifBaseUrl: s, tourItems: c, tourItemsDispatch: u, limits: d } = E(S), m = A(null), h = C((g = c[a]) == null ? void 0 : g.note, d.note), f = D(
     () => ({
       id: e.id,
-      note: m.value
+      note: h.value
     }),
-    [e.id, m.value]
+    [e.id, h.value]
   ), o = () => {
     u({
       type: "REMOVE_ITEM",
@@ -462,21 +462,21 @@ function M(n) {
       payload: f
     });
   }, [f, u]), y(() => {
-    const v = p.current;
+    const b = m.current;
     return () => {
-      document.activeElement === v && (c.length > 1 ? c.find((b, S) => {
-        b.id === e.id && l({
+      document.activeElement === b && (c.length > 1 ? c.find((v, I) => {
+        v.id === e.id && l({
           flag: !0,
-          id: c[S !== c.length - 1 ? S + 1 : S - 1].id
+          id: c[I !== c.length - 1 ? I + 1 : I - 1].id
         });
       }) : l({
         flag: !0,
         id: null
       }));
     };
-  }, [c, e.id, l]), y(() => (i((v) => [...v, { id: e.id, ref: p }]), () => {
+  }, [c, e.id, l]), y(() => (i((b) => [...b, { id: e.id, ref: m }]), () => {
     i(
-      (v) => v.filter((b) => b.id !== e.id)
+      (b) => b.filter((v) => v.id !== e.id)
     );
   }), [i, c, e.id]), /* @__PURE__ */ t.createElement("li", { id: `aic-ct-tour__item-${e.id}` }, e.title && /* @__PURE__ */ t.createElement("h2", null, e.title), e.image_id && /* @__PURE__ */ t.createElement(
     "img",
@@ -484,19 +484,19 @@ function M(n) {
       src: N(s, e.image_id, "240", "240"),
       alt: e.thumbnail.alt_text
     }
-  ), e.artist_title && /* @__PURE__ */ t.createElement("p", null, e.artist_title), e.description && /* @__PURE__ */ t.createElement("div", { dangerouslySetInnerHTML: { __html: e.description } }), /* @__PURE__ */ t.createElement("label", { htmlFor: `aic-ct-note-${e.id}` }, "Personal note", " ", /* @__PURE__ */ t.createElement("span", { ref: m.countRef, "aria-live": "polite" }, "(", m.charsRemaining, /* @__PURE__ */ t.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ t.createElement("br", null), /* @__PURE__ */ t.createElement(
+  ), e.artist_title && /* @__PURE__ */ t.createElement("p", null, e.artist_title), e.description && /* @__PURE__ */ t.createElement("div", { dangerouslySetInnerHTML: { __html: e.description } }), /* @__PURE__ */ t.createElement("label", { htmlFor: `aic-ct-note-${e.id}` }, "Personal note", " ", /* @__PURE__ */ t.createElement("span", { ref: h.countRef, "aria-live": "polite" }, "(", h.charsRemaining, /* @__PURE__ */ t.createElement("span", { className: "sr-only" }, " characters remaining"), ")")), /* @__PURE__ */ t.createElement("br", null), /* @__PURE__ */ t.createElement(
     "textarea",
     {
       id: `aic-ct-note-${e.id}`,
-      onChange: m.onChange,
+      onChange: h.onChange,
       rows: "5",
-      value: m.value,
-      maxLength: m.maxLength
+      value: h.value,
+      maxLength: h.maxLength
     }
   ), /* @__PURE__ */ t.createElement("br", null), /* @__PURE__ */ t.createElement(
     "button",
     {
-      ref: p,
+      ref: m,
       type: "button",
       onClick: () => {
         o(e.id);
@@ -521,10 +521,10 @@ M.propTypes = {
   setShouldAssignFocus: r.func
 };
 function X() {
-  const { tourItems: n, navSearchButtonRef: e } = E(I), [a, l] = h({
+  const { tourItems: n, navSearchButtonRef: e } = E(S), [a, l] = p({
     flag: !1,
     id: null
-  }), [i, s] = h([]);
+  }), [i, s] = p([]);
   return y(() => {
     a.flag && (!n.length && (e != null && e.current) ? e.current.focus() : i.find((c) => c.id === a.id).ref.current.focus(), l(!1));
   }, [n, a, i, e]), /* @__PURE__ */ t.createElement(t.Fragment, null, n.length > 0 ? /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("h2", { id: "aic-ct-tour__heading" }, "Your tour"), /* @__PURE__ */ t.createElement("ul", { id: "aic-ct-tour__results" }, n.map((c, u) => /* @__PURE__ */ t.createElement(
@@ -546,7 +546,7 @@ function Z() {
     tourDescription: a,
     setTourDescription: l,
     limits: i
-  } = E(I), s = C(n, i.title), c = C(a, i.description);
+  } = E(S), s = C(n, i.title), c = C(a, i.description);
   return y(() => {
     e(s.value);
   }, [s, e]), y(() => {
@@ -583,7 +583,7 @@ function ee() {
     limits: c,
     isSaving: u,
     setIsSaving: d
-  } = E(I), [p, m] = h(null), f = async () => {
+  } = E(S), [m, h] = p(null), f = async () => {
     d(!0);
     try {
       const o = await fetch(`${n}`, {
@@ -596,9 +596,9 @@ function ee() {
           title: e,
           description: l,
           // Pass in note as objectNote and destructure the rest as rest
-          artworks: a.map(({ note: v, ...b }) => ({
-            objectNote: v,
-            ...b
+          artworks: a.map(({ note: b, ...v }) => ({
+            objectNote: b,
+            ...v
           }))
         })
       });
@@ -607,12 +607,12 @@ function ee() {
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know."
         );
       const { message: g } = await o.json();
-      m({
+      h({
         type: "success",
         message: g
       });
     } catch (o) {
-      m({
+      h({
         type: "error",
         message: o.message
       });
@@ -624,7 +624,7 @@ function ee() {
     e.length || o.push("A title is required"), e.length > c.title && o.push("Tour title must not exceed the character limit"), l.length > c.description && o.push(
       "Tour description must not exceed the character limit"
     ), a.length < c.items.min && o.push("At least one item is required"), a.length > c.items.max && o.push("Tours must not contain more than 6 artworks"), a.some((g) => g.note.length > c.note ? (o.push("Notes must not exceed the character limit"), !0) : !1), s(o);
-  }, [e, l, a, s, c]), /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("h2", null, "Submit your tour"), i.length ? /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("p", null, "Fix these issue before submitting your tour:"), i.length && /* @__PURE__ */ t.createElement("ul", { id: "aic-ct-validation-errors" }, i.map((o, g) => /* @__PURE__ */ t.createElement("li", { key: g }, o)))) : /* @__PURE__ */ t.createElement("div", { id: "aic-ct-validation-success" }, /* @__PURE__ */ t.createElement("div", { tabIndex: "-1", "aria-live": "polite" }, u && /* @__PURE__ */ t.createElement("p", null, "Saving..."), !u && !p && /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("p", null, "Are you sure you want to submit your tour? You won't be able to make any more changes after this stage"), /* @__PURE__ */ t.createElement(
+  }, [e, l, a, s, c]), /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("h2", null, "Submit your tour"), i.length ? /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("p", null, "Fix these issue before submitting your tour:"), i.length && /* @__PURE__ */ t.createElement("ul", { id: "aic-ct-validation-errors" }, i.map((o, g) => /* @__PURE__ */ t.createElement("li", { key: g }, o)))) : /* @__PURE__ */ t.createElement("div", { id: "aic-ct-validation-success" }, /* @__PURE__ */ t.createElement("div", { tabIndex: "-1", "aria-live": "polite" }, u && /* @__PURE__ */ t.createElement("p", null, "Saving..."), !u && !m && /* @__PURE__ */ t.createElement(t.Fragment, null, /* @__PURE__ */ t.createElement("p", null, "Are you sure you want to submit your tour? You won't be able to make any more changes after this stage"), /* @__PURE__ */ t.createElement(
     "button",
     {
       id: "aic-ct-save-button",
@@ -633,7 +633,7 @@ function ee() {
       disabled: u
     },
     "Save my tour"
-  )), p && (p.type === "success" && /* @__PURE__ */ t.createElement("div", { id: "aic-ct-save-success" }, /* @__PURE__ */ t.createElement("p", null, p.message)) || p.type === "error" && /* @__PURE__ */ t.createElement("div", { id: "aic-ct-save-error" }, /* @__PURE__ */ t.createElement("p", null, p.message), /* @__PURE__ */ t.createElement(
+  )), m && (m.type === "success" && /* @__PURE__ */ t.createElement("div", { id: "aic-ct-save-success" }, /* @__PURE__ */ t.createElement("p", null, m.message)) || m.type === "error" && /* @__PURE__ */ t.createElement("div", { id: "aic-ct-save-error" }, /* @__PURE__ */ t.createElement("p", null, m.message), /* @__PURE__ */ t.createElement(
     "button",
     {
       id: "aic-ct-save-button",

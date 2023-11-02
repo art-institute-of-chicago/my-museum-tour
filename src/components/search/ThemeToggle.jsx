@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
  * ThemeToggle
  */
 function ThemeToggle(props) {
-  const { id, label, subjectIds, thumbnailId, categoryIds } = props;
+  const { id, label, subjectIds, categoryIds } = props;
   const {
     setSearchResultItems,
     setSearchFetching,
