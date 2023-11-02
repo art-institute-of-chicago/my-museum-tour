@@ -3,6 +3,7 @@ import Navigation from "./components/navigation/Navigation";
 import NavPages from "./components/navigation/NavPages";
 import NavPage from "./components/navigation/NavPage";
 import SearchBar from "./components/search/SearchBar";
+import Themes from "./components/search/Themes";
 import SearchResults from "./components/search/SearchResults";
 import TourItems from "./components/tour/TourItems";
 import TourMetadata from "./components/tour/TourMetadata";
@@ -28,6 +29,7 @@ const CustomTourBuilder = (props) => {
         <NavPage id={0} title="Search">
           <SearchProvider>
             <SearchBar />
+            <Themes />
             <SearchResults />
           </SearchProvider>
         </NavPage>

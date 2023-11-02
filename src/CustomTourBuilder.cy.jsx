@@ -39,7 +39,7 @@ describe("<CustomTourBuilder />", () => {
     );
   });
 
-  it("Can perform a search and show results", () => {
+  it("Can perform a keyword search and show results", () => {
     let imageInterceptCount = 0;
     cy.intercept(
       "GET",
@@ -65,6 +65,35 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
     cy.get("#aic-ct-search__results").should("exist");
     cy.get("#aic-ct-search__results li").should("have.length", 10);
+  });
+
+  it("Can perform a search on a theme and show results", () => {
+    let imageInterceptCount = 0;
+    cy.intercept(
+      "GET",
+      "https://artic.edu/iiif/2/*/full/!240,240/0/default.jpg",
+      (req) => {
+        imageInterceptCount += 1;
+        req.reply({
+          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+        });
+      },
+    ).as("images");
+
+    // Use intercept to ping the search api and use the search.json fixture
+    // but wait while we check the loading message
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+      delayMs: 80,
+    }).as("search");
+
+    cy.mount(<CustomTourBuilder />);
+    cy.get("#aic-ct-theme-toggle-0").click();
+    cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
+    cy.get("#aic-ct-search__results").should("exist");
+    cy.get("#aic-ct-search__results li").should("have.length", 10);
+    cy.get("#aic-ct-theme-toggle-0").click();
+    cy.get("#aic-ct-search__results").should("not.exist");
   });
 
   it("Can add and remove up to 6 artworks to the tour", () => {

@@ -1,5 +1,7 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
+import useFetch from "../../hooks/useFetch";
+import { createSearchUrl } from "../../utils";
 
 /**
  * SearchBar
@@ -9,78 +11,22 @@ function SearchBar() {
     searchQuery,
     setSearchQuery,
     setSearchResultItems,
-    setSearchError,
     setSearchFetching,
+    setSearchError,
+    setActiveTheme,
   } = useContext(SearchContext);
-  const [inputValue, setInputValue] = useState(searchQuery);
 
-  const fetchItems = (keywords) => {
-    // Build the API request URL
-    // I've broken this up to make it easer to reason about and manipulate
-    const apiUrl = new URL("https://api.artic.edu/api/v1/artworks/search");
-    apiUrl.searchParams.set("query[bool][must][][term][is_on_view]", "true");
-    apiUrl.searchParams.set(
-      "query[bool][must][][exists][field]",
-      "description",
-    );
-    apiUrl.searchParams.set(
-      "query[bool][should][][exists][field]",
-      "description",
-    );
-    apiUrl.searchParams.set(
-      "query[bool][should][][exists][field]",
-      "subject_id",
-    );
-    apiUrl.searchParams.set("query[bool][should][][exists][field]", "style_id");
-    apiUrl.searchParams.set("query[bool][should][][term][is_boosted]", "true");
-    apiUrl.searchParams.set("query[bool][minimum_should_match]", "1");
-    // "true" will return all fields for debugging
-    apiUrl.searchParams.set(
-      "fields",
-      "artist_title,description,id,image_id,thumbnail,title",
-    );
-    apiUrl.searchParams.set("limit", "10");
-    apiUrl.searchParams.set("q", keywords);
-
-    // Provide an AbortController to cancel the fetch request if the keywords change
-    const abortController = new AbortController();
-    const signal = abortController.signal;
-
-    // Empty keywords should not trigger a fetch or return results
-    // Note: HTML validation should mean this never fires
-    if (keywords === "") {
-      setSearchResultItems(null);
-      setSearchFetching(false);
-      setSearchError(null);
-      return;
-    }
-
-    async function getData() {
-      try {
-        const res = await fetch(apiUrl, { signal });
-        const data = await res.json();
-        setSearchResultItems(data.data);
-        setSearchFetching(false);
-      } catch (error) {
-        // Explicity ignore AbortError's as they aren't really errors as far as we're concerned
-        if (error.name === "AbortError") return;
-
-        setSearchError("Error fetching results");
-        setSearchFetching(false);
-      }
-    }
-    setSearchFetching(true);
-    getData();
-
-    // Cancel the fetch request if the keywords change
-    return () => {
-      abortController.abort();
-    };
-  };
+  const { fetchData } = useFetch({
+    dataSubSelector: "data",
+    dataSetter: setSearchResultItems,
+    fetchingSetter: setSearchFetching,
+    errorSetter: setSearchError,
+  });
 
   const handleSubmit = (event) => {
-    setSearchQuery(inputValue);
-    fetchItems(inputValue);
+    fetchData(createSearchUrl({ keywords: searchQuery }));
+    // Deselect any active theme
+    setActiveTheme(null);
     event.preventDefault();
   };
 
@@ -99,10 +45,10 @@ function SearchBar() {
         id="aic-ct-search__input"
         type="search"
         placeholder="Search"
-        value={inputValue}
+        value={searchQuery}
         onChange={(e) => {
           if (e.target.value) e.target.setCustomValidity("");
-          setInputValue(e.target.value);
+          setSearchQuery(e.target.value);
         }}
         onInvalid={(e) => {
           e.target.setCustomValidity("You must enter a search term");
