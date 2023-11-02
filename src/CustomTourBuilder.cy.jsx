@@ -92,6 +92,8 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
     cy.get("#aic-ct-search__results").should("exist");
     cy.get("#aic-ct-search__results li").should("have.length", 10);
+    cy.get("#aic-ct-theme-toggle-0").click();
+    cy.get("#aic-ct-search__results").should("not.exist");
   });
 
   it("Can add and remove up to 6 artworks to the tour", () => {
