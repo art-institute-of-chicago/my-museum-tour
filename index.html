@@ -3,11 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!--
+      Symlink this dist CSS yourself for local development with:
+      ln -s /path/to/artic.edu/dist/css/app.css /path/to/custom-tours-builder/dist/css/app.css
+      ln -s /path/to/artic.edu/dist/css/app.css.map /path/to/custom-tours-builder/dist/css/app.css.map
+    -->
+    <link rel="stylesheet" href="/dist/css/app.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom Tour Builder</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="a17">
+      <main id="content">
+        <div id="root"></div>
+      </main>
+    </div>
     <script type="module">
       import React from "react";
       import ReactDOM from "react-dom";
