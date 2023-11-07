@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useRef } from "react";
 import PropTypes from "prop-types";
 
 export const SearchContext = createContext();
@@ -24,6 +24,7 @@ export function SearchProvider(props) {
   const [searchError, setSearchError] = useState(searchErrorValue || false);
   const [activeTheme, setActiveTheme] = useState(null);
   const [searchPreviewId, setSearchPreviewId] = useState(null);
+  const searchPreviewRef = useRef();
 
   return (
     <SearchContext.Provider
@@ -40,6 +41,7 @@ export function SearchProvider(props) {
         setActiveTheme,
         searchPreviewId,
         setSearchPreviewId,
+        searchPreviewRef,
       }}
     >
       {children}
@@ -69,6 +71,7 @@ SearchContext.Provider.propTypes = {
     setActiveTheme: PropTypes.func,
     searchPreviewId: PropTypes.number,
     setSearchPreviewId: PropTypes.func,
+    searchPreviewRef: PropTypes.object,
   }),
   children: PropTypes.node.isRequired,
 };

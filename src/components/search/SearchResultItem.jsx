@@ -8,12 +8,13 @@ import PropTypes from "prop-types";
  * SearchResultItem
  */
 function SearchResultItem(props) {
-  const { setSearchPreviewId } = useContext(SearchContext);
+  const { setSearchPreviewId, searchPreviewRef } = useContext(SearchContext);
   const { iiifBaseUrl } = useContext(AppContext);
   const { itemData } = props;
 
   const handleClick = () => {
     setSearchPreviewId(itemData.id);
+    searchPreviewRef.current.showModal();
   };
 
   return (

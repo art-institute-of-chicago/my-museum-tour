@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import SearchResultItem from "./SearchResultItem";
+import SearchPreview from "./SearchPreview";
 import { SearchContext } from "../../contexts/SearchContext";
-
 /**
  * SearchResults
  */
 function SearchResults() {
-  const { searchError, searchFetching, searchResultItems } =
+  const { searchError, searchFetching, searchResultItems, searchPreviewRef } =
     useContext(SearchContext);
 
   // Render only the loading message while fetching
@@ -31,11 +31,16 @@ function SearchResults() {
   // Render the results if there are results
   if (searchResultItems?.length > 0) {
     return (
-      <ul id="aic-ct-search__results">
-        {searchResultItems.map((itemData) => (
-          <SearchResultItem key={itemData.id} itemData={itemData} />
-        ))}
-      </ul>
+      <>
+        <ul id="aic-ct-search__results">
+          {searchResultItems.map((itemData) => (
+            <SearchResultItem key={itemData.id} itemData={itemData} />
+          ))}
+        </ul>
+        <dialog ref={searchPreviewRef} id="aic-ct-search-preview">
+          <SearchPreview />
+        </dialog>
+      </>
     );
   }
 

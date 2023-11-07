@@ -7,7 +7,6 @@ import Themes from "./components/search/Themes";
 import SearchResults from "./components/search/SearchResults";
 import TourItems from "./components/tour/TourItems";
 import TourMetadata from "./components/tour/TourMetadata";
-import SearchPreview from "./components/search/SearchPreview";
 import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
@@ -33,9 +32,6 @@ const CustomTourBuilder = (props) => {
               <SearchBar />
               <Themes />
               <SearchResults />
-              <dialog id="aic-ct-search-preview">
-                <SearchPreview />
-              </dialog>
             </SearchProvider>
           </NavPage>
 
