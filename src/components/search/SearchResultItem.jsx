@@ -1,5 +1,6 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { iiifUrl } from "../../utils";
+import { SearchContext } from "../../contexts/SearchContext";
 import { AppContext } from "../../contexts/AppContext";
 import PropTypes from "prop-types";
 
@@ -7,54 +8,27 @@ import PropTypes from "prop-types";
  * SearchResultItem
  */
 function SearchResultItem(props) {
-  const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
+  const { setSearchPreviewId } = useContext(SearchContext);
+  const { iiifBaseUrl } = useContext(AppContext);
   const { itemData } = props;
-  const [inTour, setInTour] = useState(false);
 
   const handleClick = () => {
-    // Remove the item if it existed before
-    tourItemsDispatch({
-      type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
-      payload: inTour ? itemData.id : itemData,
-    });
+    setSearchPreviewId(itemData.id);
   };
 
-  // Whenever the tourItems map changes, update the inTour state for this item
-  useEffect(() => {
-    // loop tourItems array to see if this item is in the tour
-    setInTour(tourItems.find((item) => item.id === itemData.id));
-  }, [tourItems, itemData.id]);
-
   return (
-    <li id={`aic-ct-search__item-${itemData.id}`}>
+    <li id={`aic-ct-search__item-${itemData.id}`} className="aic-ct-result">
       {itemData.title && <h2>{itemData.title}</h2>}
       {itemData.image_id && (
-        <img
-          src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
-          alt={itemData.thumbnail.alt_text}
-        />
-      )}
-      {itemData.artist_title && <p>{itemData.artist_title}</p>}
-      {/* TODO: Update this to "short description"? When we have that field */}
-      {itemData.description && (
-        <div dangerouslySetInnerHTML={{ __html: itemData.description }}></div>
-      )}
-
-      {/*
-        This may need more extensive checking for accessibility
-        It's been modelled on the Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
-      */}
-      {/* If the item isn't in the tour and the limit isn't reached: show add */}
-      {/* Otherwise don't show a button */}
-      {/* Needs to be done in a way that doesn't remove this button and lose focus */}
-      {(tourItems.length < 6 || inTour) && (
         <button
+          className="btn btn--transparent f-buttons btn--ct-search__image aic-ct-result__button"
           type="button"
           onClick={handleClick}
-          aria-pressed={inTour ? "true" : "false"}
-          aria-label={inTour ? "Remove from tour" : "Add to tour"}
         >
-          {inTour ? "Remove from tour" : "Add to tour"}
+          <img
+            src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
+            alt={itemData.thumbnail.alt_text}
+          />
         </button>
       )}
     </li>

@@ -67,7 +67,7 @@ SearchContext.Provider.propTypes = {
     setSearchError: PropTypes.func,
     activeTheme: PropTypes.string,
     setActiveTheme: PropTypes.func,
-    searchPreviewId: PropTypes.string,
+    searchPreviewId: PropTypes.number,
     setSearchPreviewId: PropTypes.func,
   }),
   children: PropTypes.node.isRequired,
