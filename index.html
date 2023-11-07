@@ -7,8 +7,17 @@
       Symlink this dist CSS yourself for local development with:
       ln -s /path/to/artic.edu/dist/css/app.css /path/to/custom-tours-builder/dist/css/app.css
       ln -s /path/to/artic.edu/dist/css/app.css.map /path/to/custom-tours-builder/dist/css/app.css.map
+
+      for app, setup and print
     -->
     <link rel="stylesheet" href="/dist/css/app.css" />
+    <link rel="stylesheet" href="/dist/css/setup.css" />
+    <link rel="stylesheet" media="print" href="/dist/css/print.css" />
+    <style>
+      body {
+        overflow: initial;
+      }
+    </style>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom Tour Builder</title>
   </head>
