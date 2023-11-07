@@ -7,6 +7,7 @@ import Themes from "./components/search/Themes";
 import SearchResults from "./components/search/SearchResults";
 import TourItems from "./components/tour/TourItems";
 import TourMetadata from "./components/tour/TourMetadata";
+import SearchPreview from "./components/search/SearchPreview";
 import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
@@ -23,27 +24,32 @@ const CustomTourBuilder = (props) => {
   };
 
   return (
-    <AppProvider {...AppProviderProps}>
-      <Navigation />
-      <NavPages>
-        <NavPage id={0} title="Search">
-          <SearchProvider>
-            <SearchBar />
-            <Themes />
-            <SearchResults />
-          </SearchProvider>
-        </NavPage>
+    <div className="custom-tours">
+      <AppProvider {...AppProviderProps}>
+        <Navigation />
+        <NavPages>
+          <NavPage id={0} title="Search">
+            <SearchProvider>
+              <SearchBar />
+              <Themes />
+              <SearchResults />
+              <dialog id="aic-ct-search-preview">
+                <SearchPreview />
+              </dialog>
+            </SearchProvider>
+          </NavPage>
 
-        <NavPage id={1} title="Your tour">
-          <TourMetadata />
-          <TourItems />
-        </NavPage>
+          <NavPage id={1} title="Your tour">
+            <TourMetadata />
+            <TourItems />
+          </NavPage>
 
-        <NavPage id={2} title="Save your tour">
-          <Submission />
-        </NavPage>
-      </NavPages>
-    </AppProvider>
+          <NavPage id={2} title="Save your tour">
+            <Submission />
+          </NavPage>
+        </NavPages>
+      </AppProvider>
+    </div>
   );
 };
 
