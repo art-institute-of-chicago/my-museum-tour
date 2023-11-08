@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useCallback } from "react";
 import SearchResultItem from "./SearchResultItem";
 import SearchPreview from "./SearchPreview";
 import { SearchContext } from "../../contexts/SearchContext";
@@ -13,6 +13,24 @@ function SearchResults() {
     searchPreviewRef,
     setSearchPreviewId,
   } = useContext(SearchContext);
+
+  // Store a reference to the event listener callback to remove it later
+  const handleClose = useCallback(() => {
+    setSearchPreviewId(null);
+    document.documentElement.classList.remove("s-body-locked");
+  }, [setSearchPreviewId]);
+
+  useEffect(() => {
+    const ref = searchPreviewRef.current;
+    if (ref) {
+      ref.addEventListener("close", handleClose);
+    }
+    return () => {
+      if (ref) {
+        ref.removeEventListener("close", handleClose);
+      }
+    };
+  }, [searchPreviewRef, handleClose]);
 
   // Render only the loading message while fetching
   if (searchFetching) {
@@ -45,9 +63,7 @@ function SearchResults() {
         <dialog
           ref={searchPreviewRef}
           id="aic-ct-search-preview"
-          onClose={() => {
-            setSearchPreviewId(null);
-          }}
+          onClose={handleClose}
         >
           <SearchPreview />
         </dialog>

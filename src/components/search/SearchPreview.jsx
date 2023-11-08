@@ -66,20 +66,24 @@ function SearchPreview() {
 
           <picture className="aic-ct-preview__image">
             <source
-              srcSet={iiifUrl(iiifBaseUrl, itemData.image_id, 480, 480)}
+              srcSet={iiifUrl(iiifBaseUrl, itemData.image_id, 680, 680)}
               type="image/jpeg"
             />
             <img
-              src={iiifUrl(iiifBaseUrl, itemData.image_id, 480, 480)}
+              src={iiifUrl(iiifBaseUrl, itemData.image_id, 680, 680)}
               alt={itemData.thumbnail.alt_text || ""}
             />
           </picture>
 
           <div className="aic-ct-preview__padded">
             <div className="aic-ct-preview__details">
-              <h3 className="f-headline-editorial">{itemData.title}</h3>
+              <h3 className="aic-ct-preview__title f-headline-editorial">
+                {itemData.title}
+              </h3>
               {itemData.artist_title && (
-                <p className="f-subheading-1">{itemData.artist_title}</p>
+                <p className="aic-ct-preview__artist f-subheading-1">
+                  {itemData.artist_title}
+                </p>
               )}
             </div>
 
@@ -102,30 +106,43 @@ function SearchPreview() {
                   {inTour ? "Remove from your tour" : "Add to your tour"}
                 </button>
               )}
+              <a
+                className="f-link"
+                target="_blank"
+                rel="noopener noreferrer"
+                href={`https://www.artic.edu/artworks/${itemData.id}`}
+              >
+                View full artwork page&nbsp;
+                <svg aria-hidden="true" className="icon--new-window">
+                  <use xlinkHref="#icon--new-window"></use>
+                </svg>
+              </a>
             </div>
 
             {/* TODO: Update this to "short description"? When we have that field */}
             {itemData.description && (
               <div className="aic-ct-preview__description">
-                <h3 className="f-module-title-2">Artwork description</h3>
+                <h3 className="aic-ct-preview__description-title f-module-title-2">
+                  Artwork description
+                </h3>
                 <div
                   className="f-body"
                   dangerouslySetInnerHTML={{ __html: itemData.description }}
                 ></div>
               </div>
             )}
-          </div>
 
-          <button
-            className="btn btn--transparent btn--w-icon f-buttons aic-ct-preview__close-trans"
-            type="button"
-            onClick={handleClose}
-          >
-            <svg className="icon--close--24" aria-hidden="true">
-              <use xlinkHref="#icon--close--24"></use>
-            </svg>
-            Close and back to results
-          </button>
+            <button
+              className="btn btn--transparent btn--w-icon f-buttons aic-ct-preview__close-trans"
+              type="button"
+              onClick={handleClose}
+            >
+              <svg className="icon--close--24" aria-hidden="true">
+                <use xlinkHref="#icon--close--24"></use>
+              </svg>
+              Close and back to results
+            </button>
+          </div>
         </>
       ) : (
         <div className="aic-ct-preview__padded">

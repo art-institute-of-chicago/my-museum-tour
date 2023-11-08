@@ -15,6 +15,7 @@ function SearchResultItem(props) {
   const handleClick = () => {
     setSearchPreviewId(itemData.id);
     searchPreviewRef.current.showModal();
+    document.documentElement.classList.add("s-body-locked");
   };
 
   return (
