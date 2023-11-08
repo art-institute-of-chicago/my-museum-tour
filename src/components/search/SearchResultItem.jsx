@@ -19,7 +19,6 @@ function SearchResultItem(props) {
 
   return (
     <li id={`aic-ct-search__item-${itemData.id}`} className="aic-ct-result">
-      {itemData.title && <h2>{itemData.title}</h2>}
       {itemData.image_id && (
         <button
           className="btn btn--transparent f-buttons btn--ct-search__image aic-ct-result__button"
@@ -32,6 +31,8 @@ function SearchResultItem(props) {
           />
         </button>
       )}
+      {itemData.title && <h2>{itemData.title}</h2>}
+      {itemData.artist_title && <p>{itemData.artist_title}</p>}
     </li>
   );
 }

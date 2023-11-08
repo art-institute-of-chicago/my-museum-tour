@@ -6,8 +6,13 @@ import { SearchContext } from "../../contexts/SearchContext";
  * SearchResults
  */
 function SearchResults() {
-  const { searchError, searchFetching, searchResultItems, searchPreviewRef } =
-    useContext(SearchContext);
+  const {
+    searchError,
+    searchFetching,
+    searchResultItems,
+    searchPreviewRef,
+    setSearchPreviewId,
+  } = useContext(SearchContext);
 
   // Render only the loading message while fetching
   if (searchFetching) {
@@ -37,7 +42,13 @@ function SearchResults() {
             <SearchResultItem key={itemData.id} itemData={itemData} />
           ))}
         </ul>
-        <dialog ref={searchPreviewRef} id="aic-ct-search-preview">
+        <dialog
+          ref={searchPreviewRef}
+          id="aic-ct-search-preview"
+          onClose={() => {
+            setSearchPreviewId(null);
+          }}
+        >
           <SearchPreview />
         </dialog>
       </>
