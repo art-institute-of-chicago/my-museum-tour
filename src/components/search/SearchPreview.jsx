@@ -79,6 +79,14 @@ function SearchPreview() {
             <div className="aic-ct-preview__details">
               <h3 className="aic-ct-preview__title f-headline-editorial">
                 {itemData.title}
+                {itemData.date_display && (
+                  <>
+                    ,{" "}
+                    <span className="aic-ct-preview__date f-list-4">
+                      {itemData.date_display}
+                    </span>
+                  </>
+                )}
               </h3>
               {itemData.artist_title && (
                 <p className="aic-ct-preview__artist f-subheading-1">
