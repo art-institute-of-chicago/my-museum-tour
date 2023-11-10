@@ -14,12 +14,21 @@ import PropTypes from "prop-types";
 
 const CustomTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
-  const { apiSaveEndpoint, tourTitle, tourDescription, tourItems } = props;
+  const {
+    apiSaveEndpoint,
+    tourTitle,
+    tourDescription,
+    tourItems,
+    searchPreviewId,
+  } = props;
   const AppProviderProps = {
     apiSaveEndpoint,
     tourTitle,
     tourDescription,
     tourItems,
+  };
+  const SearchProviderProps = {
+    searchPreviewId,
   };
 
   return (
@@ -28,7 +37,7 @@ const CustomTourBuilder = (props) => {
         <Navigation />
         <NavPages>
           <NavPage id={0} title="Search">
-            <SearchProvider>
+            <SearchProvider {...SearchProviderProps}>
               <SearchBar />
               <Themes />
               <SearchResults />
@@ -54,6 +63,7 @@ CustomTourBuilder.propTypes = {
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,
+  searchPreviewId: PropTypes.number,
 };
 
 export default CustomTourBuilder;

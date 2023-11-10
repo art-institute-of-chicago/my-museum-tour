@@ -29,12 +29,12 @@ function SearchPreview() {
       type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: inTour ? itemData.id : itemData,
     });
-    searchPreviewRef.current.close();
+    searchPreviewRef?.current?.close();
   };
 
   const handleClose = () => {
     // Close the modal
-    searchPreviewRef.current.close();
+    searchPreviewRef?.current?.close();
   };
 
   // Whenever the tourItems map changes, update the inTour state for this item
