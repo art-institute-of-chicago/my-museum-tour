@@ -9,13 +9,19 @@ import PropTypes from "prop-types";
  */
 function SearchResultItem(props) {
   const { setSearchPreviewId, searchPreviewRef } = useContext(SearchContext);
-  const { iiifBaseUrl } = useContext(AppContext);
+  const { iiifBaseUrl, setScrollY } = useContext(AppContext);
   const { itemData } = props;
 
   const handleClick = () => {
+    const _scrollY = document.documentElement.scrollTop;
     setSearchPreviewId(itemData.id);
+    setScrollY(_scrollY);
     searchPreviewRef.current.showModal();
     document.documentElement.classList.add("s-body-locked");
+    setTimeout(() => {
+      console.log(_scrollY);
+      document.body.scrollTop = _scrollY;
+    }, 0);
   };
 
   return (

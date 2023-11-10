@@ -37,6 +37,7 @@ export function AppProvider(props) {
   const iiifBaseUrl = "https://artic.edu/iiif/2";
   const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
   const [isSaving, setIsSaving] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
 
   // Something to do with this being a reference type
   // Causes an infinite loop if it's not memoized
@@ -74,6 +75,8 @@ export function AppProvider(props) {
         setValidityIssues,
         isSaving,
         setIsSaving,
+        scrollY,
+        setScrollY,
       }}
     >
       {children}
@@ -120,5 +123,7 @@ AppContext.Provider.propTypes = {
     setValidityIssues: PropTypes.func,
     isSaving: PropTypes.bool,
     setIsSaving: PropTypes.func,
+    scrollY: PropTypes.number,
+    setScrollY: PropTypes.func,
   }),
 };

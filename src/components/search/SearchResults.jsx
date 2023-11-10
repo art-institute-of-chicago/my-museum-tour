@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useCallback } from "react";
 import SearchResultItem from "./SearchResultItem";
 import SearchPreview from "./SearchPreview";
+import { AppContext } from "../../contexts/AppContext";
 import { SearchContext } from "../../contexts/SearchContext";
 /**
  * SearchResults
@@ -13,12 +14,14 @@ function SearchResults() {
     searchPreviewRef,
     setSearchPreviewId,
   } = useContext(SearchContext);
+  const { scrollY } = useContext(AppContext);
 
   // Store a reference to the event listener callback to remove it later
   const handleClose = useCallback(() => {
     setSearchPreviewId(null);
+    document.documentElement.scrollTop = scrollY;
     document.documentElement.classList.remove("s-body-locked");
-  }, [setSearchPreviewId]);
+  }, [setSearchPreviewId, scrollY]);
 
   useEffect(() => {
     const ref = searchPreviewRef.current;
