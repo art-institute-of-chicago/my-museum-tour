@@ -122,16 +122,22 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-tour__item-59426").should("be.visible");
     cy.get("#aic-ct-tour__item-243872").should("be.visible");
     cy.get("#aic-ct-tour__item-75644").should("be.visible");
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-tour__item-59426").should("not.exist");
     cy.get("#aic-ct-tour__item-243872").should("not.exist");
@@ -140,8 +146,11 @@ describe("<CustomTourBuilder />", () => {
     // Adding on search page and removing on tour page
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-tour__item-59426").should("be.visible");
     cy.get("#aic-ct-tour__item-243872").should("be.visible");
@@ -157,28 +166,51 @@ describe("<CustomTourBuilder />", () => {
     // Should not allow more than 6 items
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-search__results li:nth-child(2) button").click();
+    cy.get("#aic-ct-preview__action-button-208078").click();
     cy.get("#aic-ct-search__results li:nth-child(3) button").click();
+    cy.get("#aic-ct-preview__action-button-185905").click();
     cy.get("#aic-ct-search__results li:nth-child(4) button").click();
+    cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__results li:nth-child(5) button").click();
+    cy.get("#aic-ct-preview__action-button-229877").click();
     cy.get("#aic-ct-search__results li:nth-child(6) button").click();
-    cy.get("#aic-ct-search__results li:nth-child(7) button").should(
-      "not.exist",
-    );
-    cy.get("#aic-ct-search__results li:nth-child(8) button").should(
-      "not.exist",
-    );
-    cy.get("#aic-ct-search__results li:nth-child(9) button").should(
-      "not.exist",
-    );
-    cy.get("#aic-ct-search__results li:nth-child(10) button").should(
-      "not.exist",
-    );
+    cy.get("#aic-ct-preview__action-button-151370").click();
+    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-preview__action-button-75644").should("not.exist");
+    cy.get("#aic-ct-preview__close").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(8) button").click();
+    cy.get("#aic-ct-preview__action-button-181811").should("not.exist");
+    cy.get("#aic-ct-preview__close").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(9) button").click();
+    cy.get("#aic-ct-preview__action-button-188527").should("not.exist");
+    cy.get("#aic-ct-preview__close").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(10) button").click();
+    cy.get("#aic-ct-preview__action-button-104930").should("not.exist");
+    cy.get("#aic-ct-preview__close").click();
+
     cy.get("#aic-ct-search__results li:nth-child(1) button").click();
-    cy.get("#aic-ct-search__results li:nth-child(7) button").should("exist");
-    cy.get("#aic-ct-search__results li:nth-child(8) button").should("exist");
-    cy.get("#aic-ct-search__results li:nth-child(9) button").should("exist");
-    cy.get("#aic-ct-search__results li:nth-child(10) button").should("exist");
+    cy.get("#aic-ct-preview__action-button-59426").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-preview__action-button-75644").should("exist");
+    cy.get("#aic-ct-preview__close").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(8) button").click();
+    cy.get("#aic-ct-preview__action-button-181811").should("exist");
+    cy.get("#aic-ct-preview__close").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(9) button").click();
+    cy.get("#aic-ct-preview__action-button-188527").should("exist");
+    cy.get("#aic-ct-preview__close").click();
+
+    cy.get("#aic-ct-search__results li:nth-child(10) button").click();
+    cy.get("#aic-ct-preview__action-button-104930").should("exist");
+    cy.get("#aic-ct-preview__close").click();
   });
 
   it("Wipes notes when an item is removed and added again", () => {
@@ -205,8 +237,11 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-note-59426").should("be.empty").type("Test note");
     cy.get("#aic-ct-note-243872").should("be.empty").type("Test note");
@@ -216,8 +251,11 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-tour__item-75644 button").click();
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-search__item-243872 button").click();
+    cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
+    cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-note-59426").should("be.empty");
     cy.get("#aic-ct-note-243872").should("be.empty");
@@ -295,6 +333,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-errors").children().should("have.length", 1);
     cy.get("#aic-ct-nav-button-1").click();
@@ -335,6 +374,8 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
+
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("Test title");
     cy.get("#aic-ct-metadata__description").type("Test description");
@@ -375,6 +416,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("Test title");
     cy.get("#aic-ct-metadata__description").type("Test description");

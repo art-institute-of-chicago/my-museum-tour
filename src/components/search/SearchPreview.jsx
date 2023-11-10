@@ -52,6 +52,7 @@ function SearchPreview() {
         <>
           <div className="aic-ct-preview__header aic-ct-preview__padded">
             <button
+              id="aic-ct-preview__close"
               className="btn btn--icon btn--transparent aic-ct-preview__close"
               type="button"
               aria-label="Close"
@@ -103,6 +104,7 @@ function SearchPreview() {
               {/* Needs to be done in a way that doesn't remove this button and lose focus */}
               {(tourItems.length < 6 || inTour) && (
                 <button
+                  id={`aic-ct-preview__action-button-${itemData.id}`}
                   className="btn f-buttons aic-ct-preview__action-button"
                   type="button"
                   onClick={handleAddRemove}
