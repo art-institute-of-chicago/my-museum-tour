@@ -64,16 +64,14 @@ function SearchPreview() {
             <h2 className="f-module-title-2">Artwork details</h2>
           </div>
 
-          <picture className="aic-ct-preview__image">
-            <source
-              srcSet={iiifUrl(iiifBaseUrl, itemData.image_id, 680, 680)}
-              type="image/jpeg"
-            />
+          <div className="aic-ct-preview__image">
             <img
               src={iiifUrl(iiifBaseUrl, itemData.image_id, 680, 680)}
+              width={itemData.thumbnail.width}
+              height={itemData.thumbnail.height}
               alt={itemData.thumbnail.alt_text || ""}
             />
-          </picture>
+          </div>
 
           <div className="aic-ct-preview__padded">
             <div className="aic-ct-preview__details">
