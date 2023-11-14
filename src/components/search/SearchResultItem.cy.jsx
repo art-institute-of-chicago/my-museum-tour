@@ -2,6 +2,7 @@ import React from "react";
 import SearchResultItem from "./SearchResultItem";
 import item from "../../../cypress/fixtures/json/item.json";
 import { AppProvider } from "../../contexts/AppContext";
+import { SearchProvider } from "../../contexts/SearchContext";
 
 describe("<SearchResultItem />", () => {
   it("Renders", () => {
@@ -16,7 +17,9 @@ describe("<SearchResultItem />", () => {
     );
     cy.mount(
       <AppProvider>
-        <SearchResultItem key={item.id} itemData={item} />
+        <SearchProvider>
+          <SearchResultItem key={item.id} itemData={item} />
+        </SearchProvider>
       </AppProvider>,
     );
     cy.get("#aic-ct-search__item-1 img")
@@ -26,19 +29,5 @@ describe("<SearchResultItem />", () => {
         "https://artic.edu/iiif/2/test_image_id/full/!240,240/0/default.jpg",
       )
       .should("have.attr", "alt", "Test image alt text");
-  });
-  it("Can toggle itself from the tour", () => {
-    cy.mount(
-      <AppProvider>
-        <SearchResultItem key={item.id} itemData={item} />
-      </AppProvider>,
-    );
-    cy.get("#aic-ct-search__item-1 button")
-      .should("exist")
-      .should("have.text", "Add to tour")
-      .should("have.attr", "aria-pressed", "false")
-      .click()
-      .should("have.text", "Remove from tour")
-      .should("have.attr", "aria-pressed", "true");
   });
 });

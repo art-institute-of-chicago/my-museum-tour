@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useRef } from "react";
 import PropTypes from "prop-types";
 
 export const SearchContext = createContext();
@@ -13,6 +13,7 @@ export function SearchProvider(props) {
     searchQuery: searchQueryValue,
     searchFetching: searchFetchingValue,
     searchError: searchErrorValue,
+    searchPreviewId: searchPreviewIdValue,
   } = props;
   const [searchResultItems, setSearchResultItems] = useState(
     searchResultItemsValue || null,
@@ -23,6 +24,10 @@ export function SearchProvider(props) {
   );
   const [searchError, setSearchError] = useState(searchErrorValue || false);
   const [activeTheme, setActiveTheme] = useState(null);
+  const [searchPreviewId, setSearchPreviewId] = useState(
+    searchPreviewIdValue || null,
+  );
+  const searchPreviewRef = useRef();
 
   return (
     <SearchContext.Provider
@@ -37,6 +42,9 @@ export function SearchProvider(props) {
         setSearchError,
         activeTheme,
         setActiveTheme,
+        searchPreviewId,
+        setSearchPreviewId,
+        searchPreviewRef,
       }}
     >
       {children}
@@ -50,6 +58,7 @@ SearchProvider.propTypes = {
   searchQuery: PropTypes.string,
   searchFetching: PropTypes.bool,
   searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+  searchPreviewId: PropTypes.number,
 };
 
 SearchContext.Provider.propTypes = {
@@ -64,6 +73,9 @@ SearchContext.Provider.propTypes = {
     setSearchError: PropTypes.func,
     activeTheme: PropTypes.string,
     setActiveTheme: PropTypes.func,
+    searchPreviewId: PropTypes.number,
+    setSearchPreviewId: PropTypes.func,
+    searchPreviewRef: PropTypes.object,
   }),
   children: PropTypes.node.isRequired,
 };

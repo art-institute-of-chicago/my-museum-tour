@@ -23,27 +23,29 @@ const CustomTourBuilder = (props) => {
   };
 
   return (
-    <AppProvider {...AppProviderProps}>
-      <Navigation />
-      <NavPages>
-        <NavPage id={0} title="Search">
-          <SearchProvider>
-            <SearchBar />
-            <Themes />
-            <SearchResults />
-          </SearchProvider>
-        </NavPage>
+    <div className="custom-tours">
+      <AppProvider {...AppProviderProps}>
+        <Navigation />
+        <NavPages>
+          <NavPage id={0} title="Search">
+            <SearchProvider>
+              <SearchBar />
+              <Themes />
+              <SearchResults />
+            </SearchProvider>
+          </NavPage>
 
-        <NavPage id={1} title="Your tour">
-          <TourMetadata />
-          <TourItems />
-        </NavPage>
+          <NavPage id={1} title="Your tour">
+            <TourMetadata />
+            <TourItems />
+          </NavPage>
 
-        <NavPage id={2} title="Save your tour">
-          <Submission />
-        </NavPage>
-      </NavPages>
-    </AppProvider>
+          <NavPage id={2} title="Save your tour">
+            <Submission />
+          </NavPage>
+        </NavPages>
+      </AppProvider>
+    </div>
   );
 };
 
@@ -52,6 +54,7 @@ CustomTourBuilder.propTypes = {
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,
+  searchPreviewId: PropTypes.number,
 };
 
 export default CustomTourBuilder;
