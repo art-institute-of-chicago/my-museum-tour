@@ -15,11 +15,12 @@ function SearchResultItem(props) {
   const handleClick = () => {
     const _scrollY = document.documentElement.scrollTop;
     setSearchPreviewId(itemData.id);
+    // Counteract the scroll lock on the body resetting the scroll position
     setScrollY(_scrollY);
     searchPreviewRef.current.showModal();
     document.documentElement.classList.add("s-body-locked");
+    // Reset the scroll position after the modal has opened
     setTimeout(() => {
-      console.log(_scrollY);
       document.body.scrollTop = _scrollY;
     }, 0);
   };
