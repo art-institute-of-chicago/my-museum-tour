@@ -24,7 +24,7 @@ describe("<SearchPreview />", () => {
     );
     cy.get("#aic-ct-preview__content").should("exist");
   });
-  it("Renders", () => {
+  it("Can add and remove itself from a tour", () => {
     cy.intercept(
       "GET",
       "https://artic.edu/iiif/2/*/full/*/0/default.jpg",
