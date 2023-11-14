@@ -12,22 +12,24 @@ function SearchPreview() {
     useContext(SearchContext);
   const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
   const [inTour, setInTour] = useState(false);
-  const [itemData, setItemData] = useState(null);
+  const [previewData, setPreviewData] = useState(null);
 
   const containerClassNames = classNames({
     "aic-ct-preview__content": true,
-    "aic-ct-preview--loading": !itemData,
+    "aic-ct-preview--loading": !previewData,
   });
 
   useEffect(() => {
-    setItemData(searchResultItems.find((item) => item.id === searchPreviewId));
+    setPreviewData(
+      searchResultItems.find((item) => item.id === searchPreviewId),
+    );
   }, [searchPreviewId, searchResultItems]);
 
   const handleAddRemove = () => {
     // Remove the item if it existed before
     tourItemsDispatch({
       type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
-      payload: inTour ? itemData.id : itemData,
+      payload: inTour ? previewData.id : previewData,
     });
     searchPreviewRef?.current?.close();
   };
@@ -39,16 +41,16 @@ function SearchPreview() {
 
   // Whenever the tourItems map changes, update the inTour state for this item
   useEffect(() => {
-    if (!itemData) {
+    if (!previewData) {
       return;
     }
     // loop tourItems array to see if this item is in the tour
-    setInTour(tourItems.find((item) => item.id === itemData.id));
-  }, [tourItems, itemData]);
+    setInTour(tourItems.find((item) => item.id === previewData.id));
+  }, [tourItems, previewData]);
 
   return (
     <div className={containerClassNames} id="aic-ct-preview__content">
-      {itemData ? (
+      {previewData ? (
         <>
           <div className="aic-ct-preview__header aic-ct-preview__padded">
             <button
@@ -67,29 +69,29 @@ function SearchPreview() {
 
           <div className="aic-ct-preview__image">
             <img
-              src={iiifUrl(iiifBaseUrl, itemData.image_id, 680, 680)}
-              width={itemData.thumbnail.width}
-              height={itemData.thumbnail.height}
-              alt={itemData.thumbnail.alt_text || ""}
+              src={iiifUrl(iiifBaseUrl, previewData.image_id, 680, 680)}
+              width={previewData.thumbnail.width}
+              height={previewData.thumbnail.height}
+              alt={previewData.thumbnail.alt_text || ""}
             />
           </div>
 
           <div className="aic-ct-preview__padded">
             <div className="aic-ct-preview__details">
               <h3 className="aic-ct-preview__title f-headline-editorial">
-                {itemData.title}
-                {itemData.date_display && (
+                {previewData.title}
+                {previewData.date_display && (
                   <>
                     ,{" "}
                     <span className="aic-ct-preview__date f-list-4">
-                      {itemData.date_display}
+                      {previewData.date_display}
                     </span>
                   </>
                 )}
               </h3>
-              {itemData.artist_title && (
+              {previewData.artist_title && (
                 <p className="aic-ct-preview__artist f-subheading-1">
-                  {itemData.artist_title}
+                  {previewData.artist_title}
                 </p>
               )}
             </div>
@@ -104,7 +106,7 @@ function SearchPreview() {
               {/* Needs to be done in a way that doesn't remove this button and lose focus */}
               {(tourItems.length < 6 || inTour) && (
                 <button
-                  id={`aic-ct-preview__action-button-${itemData.id}`}
+                  id={`aic-ct-preview__action-button-${previewData.id}`}
                   className="btn f-buttons aic-ct-preview__action-button"
                   type="button"
                   onClick={handleAddRemove}
@@ -118,7 +120,7 @@ function SearchPreview() {
                 className="f-link"
                 target="_blank"
                 rel="noopener noreferrer"
-                href={`https://www.artic.edu/artworks/${itemData.id}`}
+                href={`https://www.artic.edu/artworks/${previewData.id}`}
               >
                 View full artwork page&nbsp;
                 <svg aria-hidden="true" className="icon--new-window">
@@ -128,14 +130,14 @@ function SearchPreview() {
             </div>
 
             {/* TODO: Update this to "short description"? When we have that field */}
-            {itemData.description && (
+            {previewData.description && (
               <div className="aic-ct-preview__description">
                 <h3 className="aic-ct-preview__description-title f-module-title-2">
                   Artwork description
                 </h3>
                 <div
                   className="f-body"
-                  dangerouslySetInnerHTML={{ __html: itemData.description }}
+                  dangerouslySetInnerHTML={{ __html: previewData.description }}
                 ></div>
               </div>
             )}
