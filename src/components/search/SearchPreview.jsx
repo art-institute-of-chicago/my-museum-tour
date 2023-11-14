@@ -39,7 +39,7 @@ function SearchPreview() {
     searchPreviewRef?.current?.close();
   };
 
-  // Whenever the tourItems map changes, update the inTour state for this item
+  // Check if this item is in the tour whenever the tour items change
   useEffect(() => {
     if (!previewData) {
       return;
