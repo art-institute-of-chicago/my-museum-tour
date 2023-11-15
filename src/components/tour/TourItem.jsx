@@ -13,14 +13,17 @@ function TourItem(props) {
     useContext(AppContext);
   const buttonRef = useRef(null);
 
-  const cappedNote = useCappedInput(tourItems[itemIndex]?.note, limits.note);
+  const cappedNote = useCappedInput(
+    tourItems[itemIndex]?.objectNote,
+    limits.objectNote,
+  );
 
   // payload needs to be memoized so that it doesn't change on every render
   // This avoids an infinite loop when paired with the UPDATE_NOTE action
   const memoizedNotePayload = useMemo(
     () => ({
       id: itemData.id,
-      note: cappedNote.value,
+      objectNote: cappedNote.value,
     }),
     [itemData.id, cappedNote.value],
   );

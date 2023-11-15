@@ -8,6 +8,10 @@ function Submission() {
   const {
     apiSaveEndpoint,
     tourTitle,
+    creatorName,
+    creatorEmail,
+    recipientName,
+    marketingOptIn,
     validCreatorEmail,
     tourItems,
     tourDescription,
@@ -30,13 +34,17 @@ function Submission() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          title: tourTitle,
-          description: tourDescription,
-          // Pass in note as objectNote and destructure the rest as rest
-          artworks: tourItems.map(({ note: objectNote, ...rest }) => ({
-            objectNote,
-            ...rest,
-          })),
+          creatorEmail,
+          marketingOptIn,
+          tourJson: {
+            title: tourTitle,
+            creatorName,
+            recipientName,
+            description: tourDescription,
+            // "artworks" is essentially everything from the GET response with added "objectNote"
+            // The API expects these fields named in this way
+            artworks: tourItems,
+          },
         }),
       });
       // Circumstances where the response might be "not ok":
@@ -94,9 +102,9 @@ function Submission() {
     }
 
     // These errors will only happen if the user has manipulated the DOM/State
-    // Group note errors together rather than showing an error for each note
+    // Group note errors together rather than showing an error for each objectNote
     tourItems.some((item) => {
-      if (item.note.length > limits.note) {
+      if (item.objectNote.length > limits.objectNote) {
         newValidityIssues.push("Notes must not exceed the character limit");
         return true; // effectively "break;"
       }

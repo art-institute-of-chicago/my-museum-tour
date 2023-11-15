@@ -54,7 +54,7 @@ export function AppProvider(props) {
   // Causes an infinite loop if it's not memoized
   const limits = useMemo(
     () => ({
-      note: 255,
+      objectNote: 255,
       title: 255,
       creatorName: 140,
       recipientName: 140,
