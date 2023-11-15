@@ -34,7 +34,7 @@ describe("<TourMetadata />", () => {
     cy.get("#aic-ct-metadata__title").type(titleText, { delay: 0 });
 
     cy.get("#aic-ct-metadata__creator-name").type("Jon", { delay: 0 });
-    cy.get("#aic-ct-metadata__creator-email").type("jonw@cogapp.com");
+    cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
     cy.get("#aic-ct-metadata__recipient-name").type("Luke");
 
     // This is 40 characters including spaces and punctuation

@@ -104,7 +104,7 @@ function Submission() {
     // These errors will only happen if the user has manipulated the DOM/State
     // Group note errors together rather than showing an error for each objectNote
     tourItems.some((item) => {
-      if (item.objectNote.length > limits.objectNote) {
+      if (item.objectNote?.length > limits.objectNote) {
         newValidityIssues.push("Notes must not exceed the character limit");
         return true; // effectively "break;"
       }

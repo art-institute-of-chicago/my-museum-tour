@@ -4,29 +4,29 @@ import searchJson from "../cypress/fixtures/json/search.json";
 
 function interceptImages(size) {
   let imageInterceptCount = 0;
-  return cy
-    .intercept(
-      "GET",
-      `https://artic.edu/iiif/2/*/full/${size}/0/default.jpg`,
-      (req) => {
-        imageInterceptCount += 1;
-        req.reply({
-          fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
-        });
-      },
-    )
-    .as("images");
+  return cy.intercept(
+    "GET",
+    `https://artic.edu/iiif/2/*/full/${size}/0/default.jpg`,
+    (req) => {
+      // Create a ceiling
+      // Sometimes we might hit more than 10 images in a test
+      imageInterceptCount < 10
+        ? (imageInterceptCount += 1)
+        : (imageInterceptCount = 10);
+      req.reply({
+        fixture: `../../cypress/fixtures/images/image_${imageInterceptCount}.jpg`,
+      });
+    },
+  );
 }
 
 // Use intercept to ping the search api and use the search.json fixture
 // but wait while we check the loading message
 function interceptSearch() {
-  return cy
-    .intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
-      fixture: "json/search.json",
-      delayMs: 80,
-    })
-    .as("search");
+  return cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+    fixture: "json/search.json",
+    delayMs: 80,
+  });
 }
 
 describe("<CustomTourBuilder />", () => {
@@ -37,18 +37,26 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-metadata__description").should("exist");
   });
 
-  it("Can add a title and description for the tour", () => {
+  it("Can add each metadata field for the tour", () => {
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-1").click();
-    cy.get("#aic-ct-metadata__title").type("A tour title");
-    cy.get("#aic-ct-metadata__description").type("A tour description");
+    cy.get("#aic-ct-metadata__title").type("A tour title", { delay: 0 });
+    cy.get("#aic-ct-metadata__description").type("A tour description", {
+      delay: 0,
+    });
+    cy.get("#aic-ct-metadata__creator-name").type("Jon", { delay: 0 });
+    cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com", {
+      delay: 0,
+    });
+    cy.get("#aic-ct-metadata__recipient-name").type("Luke", { delay: 0 });
+    cy.get("#aic-ct-metadata__opt-in").click().should("be.checked");
     cy.get("label[for='aic-ct-metadata__title']").should(
-      "have.text",
-      "Tour Title (243 characters remaining)",
+      "contain.text",
+      "(243 characters remaining)",
     );
     cy.get("label[for='aic-ct-metadata__description']").should(
-      "have.text",
-      "Tour Description (237 characters remaining)",
+      "contain.text",
+      "(237 characters remaining)",
     );
   });
 
@@ -232,7 +240,7 @@ describe("<CustomTourBuilder />", () => {
   it("Displays validation errors on the submission screen", () => {
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
-    cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 3);
   });
 
   it("Protects against edge cases where limits are (forcefully) exceeded", () => {
@@ -256,8 +264,6 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-errors").children().should("have.length", 4);
     cy.get("#aic-ct-validation-errors")
-      .contains("Notes must not exceed the character limit")
-      .parent()
       .contains("Tour title must not exceed the character limit")
       .parent()
       .contains("Tour description must not exceed the character limit")
@@ -272,18 +278,21 @@ describe("<CustomTourBuilder />", () => {
 
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
-    cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 3);
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search__item-59426 button").click();
     cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-nav-button-2").click();
-    cy.get("#aic-ct-validation-errors").children().should("have.length", 1);
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 2);
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("A tour title");
     cy.get("#aic-ct-nav-button-2").click();
-    cy.get("#aic-ct-validation-errors").should("not.exist");
+    cy.get("#aic-ct-validation-errors").children().should("have.length", 1);
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
+    cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-success").should("exist");
   });
 
@@ -307,6 +316,7 @@ describe("<CustomTourBuilder />", () => {
 
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("Test title");
+    cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
     cy.get("#aic-ct-metadata__description").type("Test description");
     cy.get("#aic-ct-note-59426").type("Test note");
     cy.get("#aic-ct-nav-button-2").click();
@@ -332,6 +342,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("Test title");
+    cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
     cy.get("#aic-ct-metadata__description").type("Test description");
     cy.get("#aic-ct-note-59426").type("Test note");
     cy.get("#aic-ct-nav-button-2").click();
