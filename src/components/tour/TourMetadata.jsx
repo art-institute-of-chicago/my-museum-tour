@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import useCappedInput from "../../hooks/useCappedInput";
 
@@ -23,41 +23,33 @@ function TourMetadata() {
     setTourDescription,
     limits,
   } = useContext(AppContext);
-  // You may wish to make this smaller for debugger
-  const cappedTitle = useCappedInput(tourTitle, limits.title);
-  const cappedCreatorName = useCappedInput(creatorName, limits.creatorName);
-  const cappedRecipientName = useCappedInput(
-    recipientName,
-    limits.recipientName,
-  );
-  const cappedDescription = useCappedInput(tourDescription, limits.description);
 
-  // Update values in context when capped input changes
-  useEffect(() => {
-    setTourTitle(cappedTitle.value);
-  }, [cappedTitle, setTourTitle]);
-
-  useEffect(() => {
-    setCreatorName(cappedCreatorName.value);
-  }, [cappedCreatorName, setCreatorName]);
-
-  useEffect(() => {
-    setRecipientName(cappedRecipientName.value);
-  }, [cappedRecipientName, setRecipientName]);
-
-  useEffect(() => {
-    setTourDescription(cappedDescription.value);
-  }, [cappedDescription, setTourDescription]);
+  const cappedTitle = useCappedInput({
+    initialValue: tourTitle,
+    maxLength: limits.title,
+    valueSetter: setTourTitle,
+  });
+  const cappedCreatorName = useCappedInput({
+    initialValue: creatorName,
+    maxLength: limits.creatorName,
+    valueSetter: setCreatorName,
+  });
+  const cappedRecipientName = useCappedInput({
+    initialValue: recipientName,
+    maxLength: limits.recipientName,
+    valueSetter: setRecipientName,
+  });
+  const cappedDescription = useCappedInput({
+    initialValue: tourDescription,
+    maxLength: limits.description,
+    valueSetter: setTourDescription,
+  });
 
   return (
     <>
       <div>
         <label htmlFor="aic-ct-metadata__title">
-          Tour Title{" "}
-          <span ref={cappedTitle.countRef} aria-live="polite">
-            ({cappedTitle.charsRemaining}
-            <span className="sr-only"> characters remaining</span>)
-          </span>
+          Tour Title {cappedTitle.counterEl}
         </label>
         <br />
         <input
@@ -73,11 +65,7 @@ function TourMetadata() {
 
       <div>
         <label htmlFor="aic-ct-metadata__creator-name">
-          Your name <em>(optional)</em>{" "}
-          <span ref={cappedCreatorName.countRef} aria-live="polite">
-            ({cappedCreatorName.charsRemaining}
-            <span className="sr-only"> characters remaining</span>)
-          </span>
+          Your name <em>(optional)</em> {cappedCreatorName.counterEl}
         </label>
         <br />
         <input
@@ -107,10 +95,7 @@ function TourMetadata() {
       <div>
         <label htmlFor="aic-ct-metadata__recipient-name">
           Who is this tour for? <em>(optional)</em>{" "}
-          <span ref={cappedRecipientName.countRef} aria-live="polite">
-            ({cappedRecipientName.charsRemaining}
-            <span className="sr-only"> characters remaining</span>)
-          </span>
+          {cappedRecipientName.counterEl}
         </label>
         <br />
         <input
@@ -124,11 +109,7 @@ function TourMetadata() {
 
       <div>
         <label htmlFor="aic-ct-metadata__description">
-          Tour Description <em>(optional)</em>{" "}
-          <span ref={cappedDescription.countRef} aria-live="polite">
-            ({cappedDescription.charsRemaining}
-            <span className="sr-only"> characters remaining</span>)
-          </span>
+          Tour Description <em>(optional)</em> {cappedDescription.counterEl}
         </label>
         <br />
         <textarea
