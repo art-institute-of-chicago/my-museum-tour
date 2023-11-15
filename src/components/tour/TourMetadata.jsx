@@ -13,6 +13,7 @@ function TourMetadata() {
     setTourTitle,
     creatorEmail,
     setCreatorEmail,
+    setValidCreatorEmail,
     creatorName,
     setCreatorName,
     recipientName,
@@ -85,6 +86,7 @@ function TourMetadata() {
           value={creatorEmail.value}
           onChange={(e) => {
             setCreatorEmail(e.target.value);
+            setValidCreatorEmail(e.target.validity.valid);
           }}
           id="aic-ct-metadata__creator-email"
           aria-required="true"

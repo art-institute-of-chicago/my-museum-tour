@@ -8,6 +8,7 @@ function Submission() {
   const {
     apiSaveEndpoint,
     tourTitle,
+    validCreatorEmail,
     tourItems,
     tourDescription,
     validityIssues,
@@ -74,6 +75,10 @@ function Submission() {
       newValidityIssues.push("Tour title must not exceed the character limit");
     }
 
+    if (!validCreatorEmail) {
+      newValidityIssues.push("A valid email address is required");
+    }
+
     if (tourDescription.length > limits.description) {
       newValidityIssues.push(
         "Tour description must not exceed the character limit",
@@ -99,7 +104,14 @@ function Submission() {
     });
 
     setValidityIssues(newValidityIssues);
-  }, [tourTitle, tourDescription, tourItems, setValidityIssues, limits]);
+  }, [
+    tourTitle,
+    tourDescription,
+    tourItems,
+    setValidityIssues,
+    limits,
+    validCreatorEmail,
+  ]);
 
   return (
     <>

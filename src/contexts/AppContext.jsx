@@ -28,6 +28,7 @@ export function AppProvider(props) {
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
   const [creatorEmail, setCreatorEmail] = useState(creatorEmailValue || "");
+  const [validCreatorEmail, setValidCreatorEmail] = useState(false);
   const [creatorName, setCreatorName] = useState(creatorNameValue || "");
   const [recipientName, setRecipientName] = useState(recipientNameValue || "");
   const [marketingOptIn, setMarketingOptIn] = useState(
@@ -76,6 +77,8 @@ export function AppProvider(props) {
         setTourTitle,
         creatorEmail,
         setCreatorEmail,
+        validCreatorEmail,
+        setValidCreatorEmail,
         creatorName,
         setCreatorName,
         recipientName,
@@ -138,6 +141,8 @@ AppContext.Provider.propTypes = {
     setTourTitle: PropTypes.func,
     creatorEmail: PropTypes.string,
     setCreatorEmail: PropTypes.func,
+    validCreatorEmail: PropTypes.bool,
+    setValidCreatorEmail: PropTypes.func,
     creatorName: PropTypes.string,
     setCreatorName: PropTypes.func,
     recipientName: PropTypes.string,
