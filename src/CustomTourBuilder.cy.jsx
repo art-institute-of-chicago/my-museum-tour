@@ -342,11 +342,29 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-preview__action-button-59426").click();
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("Test title");
+    cy.get("#aic-ct-metadata__creator-name").type("Jon");
     cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
+    cy.get("#aic-ct-metadata__recipient-name").type("Luke");
     cy.get("#aic-ct-metadata__description").type("Test description");
+    cy.get("#aic-ct-metadata__opt-in").click();
     cy.get("#aic-ct-note-59426").type("Test note");
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-save-button").click();
+    // Test the request body goes out as we expect
+    cy.wait("@save")
+      .its("request.body")
+      .should("deep.equal", {
+        creatorEmail: "jonw@coghack.com",
+        marketingOptIn: true,
+        tourJson: {
+          creatorName: "Jon",
+          description: "Test description",
+          recipientName: "Luke",
+          title: "Test title",
+          artworks: [{ ...searchJson.data[0], objectNote: "Test note" }],
+        },
+      });
+
     cy.get("#aic-ct-save-success").should("exist");
   });
 });

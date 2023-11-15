@@ -1,9 +1,11 @@
 {
   "message": "Custom tour created successfully!",
   "custom_tour": {
-    "tour_json": "{\"title\":\"test title\",\"description\":\"Test description\",\"artworks\":[{\"id\":60812,\"title\":\"Merahi metua no Tehamana (Tehamana Has Many Parents or The Ancestors of Tehamana)\",\"objectNote\":\"Test note\"}]}",
-    "updated_at": "2023-10-30T18:53:18.000000Z",
-    "created_at": "2023-10-30T18:53:18.000000Z",
-    "id": 42
+    "creator_email": "test@test.com",
+    "marketing_opt_in": true,
+    "tour_json": "{\"title\":\"test\",\"description\":null,\"creatorName\":null,\"recipientName\":null,\"artworks\":[{\"title\":\"A Sunday on La Grande Jatte \\u2014 1884\",\"id\":27992,\"image_id\":\"2d484387-2509-5e8e-2c43-22f9981972eb\",\"description\":\"In his best-known and largest painting, Georges Seurat depicted people from different social classes strolling and relaxing in a park just west of Paris on La Grande Jatte, an island in the Seine River. Although he took his subject from modern life, Seurat sought to evoke the sense of timelessness associated with ancient art, especially Egyptian and Greek sculpture. He once wrote, \\u201cI want to make modern people, in their essential traits, move about as they do on those friezes, and place them on canvases organized by harmonies of color.\\u201d\\nSeurat painted A Sunday on La Grande Jatte\\u20141884 using pointillism, a highly systematic and scientific technique based on the hypothesis that closely positioned points of pure color mix together in the viewer\\u2019s eye. He began work on the canvas in 1884 (and included this date in the title) with a layer of small, horizontal brushstrokes in complementary colors. He next added a series of dots that coalesce into solid and luminous forms when seen from a distance. Sometime before 1889 Seurat added a border of blue, orange, and red dots that provide a visual transition between the painting\\u2019s interior and the specially designed white frame, which has been re-created at the Art Institute.\",\"artist_title\":\"Georges Seurat\",\"thumbnail\":{\"lqip\":\"data:image\\/gif;base64,R0lGODlhCAAFAPUAAE1WUFVTU1NWUFZYVllbVlpaW1tcWF1cXVxiWl1jWl9mX2NmVWVnXF9eZlxdaGZkYmpmZWRtYGZuY2htZGpsanBsZXVwZXB5Znp+ZXJwaYSAaYiBaYqIbIeAdI2DcYqFcI+FcoiCd5iRcouJgIyKhoyNi4mMjo2RkAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAIAAUAAAYlwBLmMmEkCAHTaRTqfB4QEmgj8mgaGY6lsohIHAXKwQBQIAaCIAA7\",\"width\":9310,\"height\":6237,\"alt_text\":\"Large painting of people in a crowded park, brushstrokes are dots.\"},\"objectNote\":null}]}",
+    "updated_at": "2023-11-15T17:56:51.000000Z",
+    "created_at": "2023-11-15T17:56:51.000000Z",
+    "id": 23
   }
 }
