@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navigation from "./components/navigation/Navigation";
 import NavPages from "./components/navigation/NavPages";
 import NavPage from "./components/navigation/NavPage";
@@ -23,13 +23,24 @@ const CustomTourBuilder = (props) => {
     tourItems,
   };
 
+  // Ask a user before they leave the page
+  useEffect(() => {
+    window.addEventListener("beforeunload", (e) => {
+      e.preventDefault();
+      e.returnValue = "";
+    });
+  }, []);
+
   return (
     <div className="custom-tours">
       <AppProvider {...AppProviderProps}>
         <Header />
-        <Navigation />
         <NavPages>
-          <NavPage id={0} title="Search">
+          <NavPage
+            id={0}
+            title="Browse"
+            tagline="for artworks to add to your tour"
+          >
             <SearchProvider>
               <SearchBar />
               <Themes />
@@ -37,15 +48,20 @@ const CustomTourBuilder = (props) => {
             </SearchProvider>
           </NavPage>
 
-          <NavPage id={1} title="Your tour">
+          <NavPage
+            id={1}
+            title="Personalize"
+            tagline="your tour by adding notes to artworks"
+          >
             <TourMetadata />
             <TourItems />
           </NavPage>
 
-          <NavPage id={2} title="Save your tour">
+          <NavPage id={2} title="Complete" tagline="and share with friends">
             <Submission />
           </NavPage>
         </NavPages>
+        <Navigation />
       </AppProvider>
     </div>
   );
