@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import classNames from "classnames";
 
 function Navigation() {
   const {
@@ -9,6 +10,14 @@ function Navigation() {
     navSearchButtonRef,
     isSaving,
   } = useContext(AppContext);
+
+  // Control breadcrumb button classes
+  const buttonClasses = (id) => {
+    return classNames("aic-ct-nav__button", {
+      "aic-ct-nav__button--active": activeNavPage === id,
+      "aic-ct-nav__button--done": activeNavPage > id,
+    });
+  };
 
   return (
     <footer aria-label="Custom tour builder footer">
@@ -25,6 +34,7 @@ function Navigation() {
             type="button"
             onClick={() => setActiveNavPage(index)}
             disabled={isSaving}
+            className={buttonClasses(page.id)}
           >
             <span className="aic-ct-nav__button-wrapper"></span>
             <span className="aic-ct-nav__number">{page.id + 1}</span>{" "}
