@@ -14,12 +14,19 @@ function Header() {
   };
 
   return (
-    <header className="aic-ct-header" aria-label="Custom tours builder">
-      <div className="aic-ct__item-count" aria-live="polite">
-        <span className="pill-box">{items}</span> artworks added{" "}
-        <em>(of max 6)</em>
+    <header
+      id="aic-ct-header"
+      className="aic-ct-header"
+      aria-label="Custom tour builder"
+    >
+      <div className="aic-ct__item-info" aria-live="polite">
+        <span id="aic-ct-item-count" className="aic-ct__item-count">
+          {items}
+        </span>{" "}
+        artworks added <em>(of max 6)</em>
       </div>
       <button
+        id="aic-ct-header__button"
         className="aic-ct-header__button"
         type="button"
         onClick={handleClick}
