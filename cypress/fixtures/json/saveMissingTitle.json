@@ -1,3 +1,3 @@
 {
-  "title": ["The title field is required."]
+  "tour_json.title": ["The tourJson.title field is required."]
 }

@@ -17,12 +17,23 @@ export function AppProvider(props) {
   const {
     children,
     tourTitle: tourTitleValue,
+    creatorEmail: creatorEmailValue,
+    creatorName: creatorNameValue,
+    recipientName: recipientNameValue,
     tourDescription: tourDescriptionValue,
+    marketingOptIn: marketingOptInValue,
     tourItems: tourItemsValue,
     navPages: navPagesValue,
     apiSaveEndpoint: apiSaveEndpointValue,
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
+  const [creatorEmail, setCreatorEmail] = useState(creatorEmailValue || "");
+  const [validCreatorEmail, setValidCreatorEmail] = useState(false);
+  const [creatorName, setCreatorName] = useState(creatorNameValue || "");
+  const [recipientName, setRecipientName] = useState(recipientNameValue || "");
+  const [marketingOptIn, setMarketingOptIn] = useState(
+    marketingOptInValue || false,
+  );
   const [tourDescription, setTourDescription] = useState(
     tourDescriptionValue || "",
   );
@@ -43,8 +54,10 @@ export function AppProvider(props) {
   // Causes an infinite loop if it's not memoized
   const limits = useMemo(
     () => ({
-      note: 255,
+      objectNote: 255,
       title: 255,
+      creatorName: 140,
+      recipientName: 140,
       description: 255,
       items: {
         min: 1,
@@ -62,8 +75,18 @@ export function AppProvider(props) {
         limits,
         tourTitle,
         setTourTitle,
+        creatorEmail,
+        setCreatorEmail,
+        validCreatorEmail,
+        setValidCreatorEmail,
+        creatorName,
+        setCreatorName,
+        recipientName,
+        setRecipientName,
         tourDescription,
         setTourDescription,
+        marketingOptIn,
+        setMarketingOptIn,
         tourItems,
         tourItemsDispatch,
         navPages,
@@ -88,6 +111,10 @@ AppProvider.propTypes = {
   apiSaveEndpoint: PropTypes.string,
   children: PropTypes.node.isRequired,
   tourTitle: PropTypes.string,
+  creatorEmail: PropTypes.string,
+  creatorName: PropTypes.string,
+  recipientName: PropTypes.string,
+  marketingOptIn: PropTypes.bool,
   tourDescription: PropTypes.string,
   tourItems: PropTypes.instanceOf(Array),
   navPages: PropTypes.instanceOf(Array),
@@ -100,6 +127,8 @@ AppContext.Provider.propTypes = {
     limits: PropTypes.shape({
       note: PropTypes.number,
       title: PropTypes.number,
+      creatorName: PropTypes.number,
+      recipientName: PropTypes.number,
       description: PropTypes.number,
       items: PropTypes.shape({
         min: PropTypes.number,
@@ -110,8 +139,18 @@ AppContext.Provider.propTypes = {
     tourItemsDispatch: PropTypes.func,
     tourTitle: PropTypes.string,
     setTourTitle: PropTypes.func,
+    creatorEmail: PropTypes.string,
+    setCreatorEmail: PropTypes.func,
+    validCreatorEmail: PropTypes.bool,
+    setValidCreatorEmail: PropTypes.func,
+    creatorName: PropTypes.string,
+    setCreatorName: PropTypes.func,
+    recipientName: PropTypes.string,
+    setRecipientName: PropTypes.func,
     tourDescription: PropTypes.string,
     setTourDescription: PropTypes.func,
+    marketingOptIn: PropTypes.bool,
+    setMarketingOptIn: PropTypes.func,
     navPages: PropTypes.instanceOf(Array),
     setNavPages: PropTypes.func,
     activeNavPage: PropTypes.number,

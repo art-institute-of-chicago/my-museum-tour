@@ -8,13 +8,13 @@ const tourItemsReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
       // Payload for add is the entire item JSON
-      return [...state, { ...action.payload, note: "" }];
+      return [...state, { ...action.payload, objectNote: "" }];
     case "UPDATE_NOTE":
-      // Return a new array with the item with the updated note
-      // Payload for edit is object with id and note
+      // Return a new array with the item with the updated objectNote
+      // Payload for edit is object with id and objectNote
       return state.map((item) => {
         if (item.id === action.payload.id) {
-          return { ...item, note: action.payload.note };
+          return { ...item, objectNote: action.payload.objectNote };
         }
         return item;
       });
