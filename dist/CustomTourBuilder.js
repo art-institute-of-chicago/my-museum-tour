@@ -303,7 +303,7 @@ function D(n) {
   const a = new URL("https://api.artic.edu/api/v1/artworks/search");
   return a.searchParams.set("query[bool][must][][term][is_on_view]", "true"), a.searchParams.set("query[bool][must][][exists][field]", "description"), a.searchParams.set("query[bool][should][][exists][field]", "description"), a.searchParams.set("query[bool][should][][exists][field]", "subject_id"), a.searchParams.set("query[bool][should][][exists][field]", "style_id"), a.searchParams.set("query[bool][should][][term][is_boosted]", "true"), a.searchParams.set("query[bool][minimum_should_match]", "1"), a.searchParams.set(
     "fields",
-    "artist_title,description,id,image_id,thumbnail,title,date_display"
+    "artist_title,description,id,image_id,thumbnail,title,date_display,gallery_title"
   ), a.searchParams.set("limit", "10"), n.keywords && a.searchParams.set("q", n.keywords), n.subjectIds && a.searchParams.set(
     "query[bool][must][][terms][subject_ids][]",
     n.subjectIds
