@@ -11,6 +11,7 @@ import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
 import PropTypes from "prop-types";
+import Header from "./components/navigation/Header";
 
 const CustomTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
@@ -25,6 +26,7 @@ const CustomTourBuilder = (props) => {
   return (
     <div className="custom-tours">
       <AppProvider {...AppProviderProps}>
+        <Header />
         <Navigation />
         <NavPages>
           <NavPage id={0} title="Search">
