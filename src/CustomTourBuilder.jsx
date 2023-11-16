@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import Navigation from "./components/navigation/Navigation";
+import Footer from "./components/navigation/Footer";
 import NavPages from "./components/navigation/NavPages";
 import NavPage from "./components/navigation/NavPage";
 import SearchBar from "./components/search/SearchBar";
@@ -61,7 +61,7 @@ const CustomTourBuilder = (props) => {
             <Submission />
           </NavPage>
         </NavPages>
-        <Navigation />
+        <Footer />
       </AppProvider>
     </div>
   );

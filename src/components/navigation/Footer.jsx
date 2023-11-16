@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import classNames from "classnames";
 
-function Navigation() {
+function Footer() {
   const {
     navPages,
     activeNavPage,
@@ -57,4 +57,4 @@ function Navigation() {
   );
 }
 
-export default Navigation;
+export default Footer;
