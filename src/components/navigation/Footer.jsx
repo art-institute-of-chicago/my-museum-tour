@@ -13,15 +13,19 @@ function Footer() {
 
   // Control breadcrumb button classes
   const buttonClasses = (id) => {
-    return classNames("aic-ct-nav__button", {
+    return classNames("aic-ct-nav__button btn f-buttons btn--transparent", {
       "aic-ct-nav__button--active": activeNavPage === id,
       "aic-ct-nav__button--done": activeNavPage > id,
     });
   };
 
   return (
-    <footer aria-label="Custom tour builder footer">
-      <nav id="aic-ct-navigation" aria-label="Custom tour builder navigation">
+    <footer className="aic-ct-footer" aria-label="Custom tour builder footer">
+      <nav
+        id="aic-ct-navigation"
+        className="aic-ct-nav"
+        aria-label="Custom tour builder navigation"
+      >
         {navPages.map((page, index) => (
           <button
             // Use id instead of title as it's probably more resilient
@@ -36,10 +40,11 @@ function Footer() {
             disabled={isSaving}
             className={buttonClasses(page.id)}
           >
-            <span className="aic-ct-nav__button-wrapper"></span>
-            <span className="aic-ct-nav__number">{page.id + 1}</span>{" "}
-            <span className="aic-ct-nav__title">{page.title}</span>{" "}
-            <span className="aic-ct-nav__tagline">{page.tagline}</span>
+            <span className="aic-ct-nav__button-wrapper">
+              <span className="aic-ct-nav__number">{page.id + 1}</span>{" "}
+              <span className="aic-ct-nav__title">{page.title}</span>{" "}
+              <span className="aic-ct-nav__tagline">{page.tagline}</span>
+            </span>
           </button>
         ))}
       </nav>
