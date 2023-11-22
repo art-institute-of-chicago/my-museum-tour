@@ -116,10 +116,11 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
     cy.get("#aic-ct-preview__action-button-75644").click();
-    cy.get("#aic-ct-nav-button-1").click();
-    cy.get("#aic-ct-tour__item-59426").should("be.visible");
-    cy.get("#aic-ct-tour__item-243872").should("be.visible");
-    cy.get("#aic-ct-tour__item-75644").should("be.visible");
+    cy.get("#aic-ct-item-count").should("have.text", "3");
+    cy.get("#aic-ct-header__button").should("have.text", "Preview").click();
+    cy.get("#aic-ct-tour__item-59426").should("exist");
+    cy.get("#aic-ct-tour__item-243872").should("exist");
+    cy.get("#aic-ct-tour__item-75644").should("exist");
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__item-59426 button").click();
     cy.get("#aic-ct-preview__action-button-59426").click();
@@ -127,6 +128,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
     cy.get("#aic-ct-preview__action-button-75644").click();
+    cy.get("#aic-ct-item-count").should("have.text", "0");
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-tour__item-59426").should("not.exist");
     cy.get("#aic-ct-tour__item-243872").should("not.exist");
@@ -140,10 +142,11 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-preview__action-button-243872").click();
     cy.get("#aic-ct-search__item-75644 button").click();
     cy.get("#aic-ct-preview__action-button-75644").click();
-    cy.get("#aic-ct-nav-button-1").click();
-    cy.get("#aic-ct-tour__item-59426").should("be.visible");
-    cy.get("#aic-ct-tour__item-243872").should("be.visible");
-    cy.get("#aic-ct-tour__item-75644").should("be.visible");
+    cy.get("#aic-ct-item-count").should("have.text", "3");
+    cy.get("#aic-ct-header__button").should("have.text", "Preview").click();
+    cy.get("#aic-ct-tour__item-59426").should("exist");
+    cy.get("#aic-ct-tour__item-243872").should("exist");
+    cy.get("#aic-ct-tour__item-75644").should("exist");
     cy.get("#aic-ct-tour__item-59426 button").click();
     cy.get("#aic-ct-tour__item-59426").should("not.exist");
     cy.get("#aic-ct-tour__item-243872 button").should("have.focus").click();
@@ -169,6 +172,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search__results li:nth-child(7) button").click();
     cy.get("#aic-ct-preview__action-button-75644").should("not.exist");
     cy.get("#aic-ct-preview__close").click();
+    cy.get("#aic-ct-item-count").should("have.text", "6");
 
     cy.get("#aic-ct-search__results li:nth-child(8) button").click();
     cy.get("#aic-ct-preview__action-button-181811").should("not.exist");

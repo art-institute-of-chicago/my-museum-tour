@@ -12,6 +12,7 @@ function NavPages({ children }) {
             return {
               id: index,
               title: child.props.title,
+              tagline: child.props.tagline,
             };
           })
         : [],
