@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import { iiifUrl } from "../../utils";
 import { SearchContext } from "../../contexts/SearchContext";
 import { AppContext } from "../../contexts/AppContext";
+import classNames from "classnames";
 import PropTypes from "prop-types";
 
 /**
@@ -9,8 +10,11 @@ import PropTypes from "prop-types";
  */
 function SearchResultItem(props) {
   const { setSearchPreviewId, searchPreviewRef } = useContext(SearchContext);
-  const { iiifBaseUrl, setScrollY } = useContext(AppContext);
+  const { iiifBaseUrl, setScrollY, tourItems } = useContext(AppContext);
   const { itemData } = props;
+
+  const itemRef = useRef(null);
+  const prevClassNamesRef = useRef();
 
   const handleClick = () => {
     const _scrollY = document.documentElement.scrollTop;
@@ -25,10 +29,31 @@ function SearchResultItem(props) {
     }, 0);
   };
 
+  const itemClasses = classNames(
+    "aic-ct-result o-pinboard__item m-listing m-listing--variable-height",
+    {
+      "aic-ct-result--selected": tourItems.some(
+        (item) => item.id === itemData.id,
+      ),
+    },
+  );
+
+  useEffect(() => {
+    // Check if "s-positioned" was present in the previous class names
+    // If so, add it to the current class names
+    if (prevClassNamesRef?.current?.includes("s-positioned")) {
+      itemRef.current.classList.add("s-positioned");
+    }
+
+    // Save the current class names as the previous class names for the next render
+    prevClassNamesRef.current = itemRef.current.className;
+  });
+
   return (
     <li
+      ref={itemRef}
       id={`aic-ct-search__item-${itemData.id}`}
-      className="aic-ct-result o-pinboard__item m-listing m-listing--variable-height"
+      className={itemClasses}
     >
       {itemData.image_id && (
         <button
