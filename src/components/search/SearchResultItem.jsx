@@ -26,21 +26,41 @@ function SearchResultItem(props) {
   };
 
   return (
-    <li id={`aic-ct-search__item-${itemData.id}`} className="aic-ct-result">
+    <li
+      id={`aic-ct-search__item-${itemData.id}`}
+      className="aic-ct-result o-pinboard__item m-listing m-listing--variable-height"
+    >
       {itemData.image_id && (
         <button
-          className="btn btn--transparent f-buttons btn--ct-search__image aic-ct-result__button"
+          className=" aic-ct-result__button"
           type="button"
           onClick={handleClick}
         >
-          <img
-            src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
-            alt={itemData.thumbnail.alt_text}
-          />
+          <span className="m-listing__link">
+            <span className="m-listing__img m-listing__img--no-bg">
+              <img
+                src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
+                alt={itemData.thumbnail.alt_text}
+                height={itemData.thumbnail.height}
+                width={itemData.thumbnail.width}
+              />
+            </span>
+            <span className="m-listing__meta">
+              {itemData.title && (
+                <span className="title f-list-7">{itemData.title}</span>
+              )}
+              {itemData.artist_title && (
+                <>
+                  <br />
+                  <span className="subtitle f-tertiary">
+                    {itemData.artist_title}
+                  </span>
+                </>
+              )}
+            </span>
+          </span>
         </button>
       )}
-      {itemData.title && <h2>{itemData.title}</h2>}
-      {itemData.artist_title && <p>{itemData.artist_title}</p>}
     </li>
   );
 }
@@ -52,6 +72,8 @@ SearchResultItem.propTypes = {
     image_id: PropTypes.string,
     thumbnail: PropTypes.shape({
       alt_text: PropTypes.string,
+      width: PropTypes.number,
+      height: PropTypes.number,
     }),
     artist_title: PropTypes.string,
     description: PropTypes.string,

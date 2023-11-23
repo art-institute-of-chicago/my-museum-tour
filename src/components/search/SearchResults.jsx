@@ -35,6 +35,15 @@ function SearchResults() {
     };
   }, [searchPreviewRef, handleClose]);
 
+  // This does dispatch multiple times, but it doesn't seem to cause any issues
+  // Might consider debouncing this
+  useEffect(() => {
+    const evt = new Event("page:updated", { bubbles: true });
+    setTimeout(() => {
+      document.dispatchEvent(evt);
+    }, 0);
+  }, [searchResultItems]);
+
   // Render only the loading message while fetching
   if (searchFetching) {
     return <div id="aic-ct-search__loading">Loading...</div>;
@@ -58,7 +67,13 @@ function SearchResults() {
   if (searchResultItems?.length > 0) {
     return (
       <>
-        <ul id="aic-ct-search__results">
+        <ul
+          id="aic-ct-search__results"
+          className="o-pinboard o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--3-col@medium o-pinboard--4-col@large o-pinboard--4-col@xlarge"
+          data-pinboard-option-layout="o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--2-col@medium o-pinboard--3-col@large o-pinboard--3-col@xlarge"
+          data-pinboard-maintain-order="false"
+          data-behavior="pinboard"
+        >
           {searchResultItems.map((itemData) => (
             <SearchResultItem key={itemData.id} itemData={itemData} />
           ))}
