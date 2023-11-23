@@ -54,25 +54,27 @@ function ThemeToggle(props) {
   return (
     <>
       {(activeTheme === null || activeTheme === label) && (
-        <button
-          className={buttonClasses}
-          id={`aic-ct-theme-toggle-${id}`}
-          onClick={handleClick}
-          aria-pressed={activeTheme === label ? "true" : "false"}
-        >
-          <span className="aic-ct-theme-toggle__wrapper">
-            <img
-              src={iiifUrl(iiifBaseUrl, thumbnailId, "40", "40", "square")}
-              alt=""
-            />
-            {label}
-            {activeTheme === label && (
-              <svg className="icon--close">
-                <use xlinkHref="#icon--close"></use>
-              </svg>
-            )}
-          </span>
-        </button>
+        <li>
+          <button
+            className={buttonClasses}
+            id={`aic-ct-theme-toggle-${id}`}
+            onClick={handleClick}
+            aria-pressed={activeTheme === label ? "true" : "false"}
+          >
+            <span className="aic-ct-theme-toggle__wrapper">
+              <img
+                src={iiifUrl(iiifBaseUrl, thumbnailId, "40", "40", "square")}
+                alt=""
+              />
+              {label}
+              {activeTheme === label && (
+                <svg className="icon--close">
+                  <use xlinkHref="#icon--close"></use>
+                </svg>
+              )}
+            </span>
+          </button>
+        </li>
       )}
     </>
   );

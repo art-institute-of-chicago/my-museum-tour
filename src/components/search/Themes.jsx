@@ -41,7 +41,7 @@ function Themes() {
   ];
 
   return (
-    <div id="aic-ct-themes">
+    <ul id="aic-ct-themes" className="aic-ct-themes">
       {themes.map((theme, index) => (
         <ThemeToggle
           key={theme.label}
@@ -52,7 +52,7 @@ function Themes() {
           thumbnailId={theme.thumbnailId}
         />
       ))}
-    </div>
+    </ul>
   );
 }
 
