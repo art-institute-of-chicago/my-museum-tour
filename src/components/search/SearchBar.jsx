@@ -84,6 +84,7 @@ function SearchBar() {
           onClick={() => {
             setSearchQuery("");
             setSearchResultItems(null);
+            setActiveTheme(null);
             searchButtonRef.current.focus();
           }}
         >
