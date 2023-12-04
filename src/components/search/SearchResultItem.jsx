@@ -59,7 +59,9 @@ function SearchResultItem(props) {
           className="aic-ct-result__button"
           type="button"
           onClick={handleClick}
-          aria-selected={isSelected}
+          aria-description={
+            isSelected ? "This object is in your tour" : undefined
+          }
         >
           <span className="m-listing__link">
             <span className="m-listing__img m-listing__img--no-bg">
@@ -72,12 +74,15 @@ function SearchResultItem(props) {
               )}
               <img
                 src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
-                alt={itemData.thumbnail.alt_text}
+                alt=""
                 height={itemData.thumbnail.height}
                 width={itemData.thumbnail.width}
               />
             </span>
-            <span className="m-listing__meta">
+            <span
+              id={`aic-ct-result__meta-${itemData.id}`}
+              className="m-listing__meta"
+            >
               {itemData.title && (
                 <span className="title f-list-7">{itemData.title}</span>
               )}
