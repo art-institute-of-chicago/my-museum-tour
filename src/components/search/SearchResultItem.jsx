@@ -12,6 +12,7 @@ function SearchResultItem(props) {
   const { setSearchPreviewId, searchPreviewRef } = useContext(SearchContext);
   const { iiifBaseUrl, setScrollY, tourItems } = useContext(AppContext);
   const { itemData } = props;
+  const isSelected = tourItems.some((item) => item.id === itemData.id);
 
   const itemRef = useRef(null);
   const prevClassNamesRef = useRef();
@@ -32,9 +33,7 @@ function SearchResultItem(props) {
   const itemClasses = classNames(
     "aic-ct-result o-pinboard__item m-listing m-listing--variable-height",
     {
-      "aic-ct-result--selected": tourItems.some(
-        (item) => item.id === itemData.id,
-      ),
+      "aic-ct-result--selected": isSelected,
     },
   );
 
@@ -57,12 +56,20 @@ function SearchResultItem(props) {
     >
       {itemData.image_id && (
         <button
-          className=" aic-ct-result__button"
+          className="aic-ct-result__button"
           type="button"
           onClick={handleClick}
+          aria-selected={isSelected}
         >
           <span className="m-listing__link">
             <span className="m-listing__img m-listing__img--no-bg">
+              {isSelected && (
+                <span className="aic-ct-selected-marker">
+                  <svg aria-hidden="true" className="icon--check">
+                    <use xlinkHref="#icon--check" />
+                  </svg>
+                </span>
+              )}
               <img
                 src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
                 alt={itemData.thumbnail.alt_text}
