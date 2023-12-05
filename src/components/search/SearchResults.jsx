@@ -84,7 +84,10 @@ function SearchResults() {
         <>
           <header className="aic-ct-section-header f-body">
             <h2 className="f-module-title-2">Choose artworks</h2>
-            <span className="aic-ct-item-count aic-ct-item-count--body">
+            <span
+              id="aic-ct-search-result-count"
+              className="aic-ct-item-count aic-ct-item-count--body"
+            >
               {searchResultItems.length}
             </span>
           </header>
