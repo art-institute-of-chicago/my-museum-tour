@@ -5,7 +5,8 @@
   "artist_title": "Test artist title",
   "description": "Test description",
   "thumbnail": {
-    "alt_text": "Test image alt text"
+    "alt_text": "Test image alt text",
+    "lqip": "data:image/gif;base64,R0lGODlhBwAFAPUAAI1+Vot+XJiIY5mLZ5eKa5eMaZuMaJ6PbpiQcaCTc6KScqKTc6GUdaSVd6OXe62kjLCnjK+mkLCmkLKplrawnr2znbyzobq0or+2ob22oru0p7y1pLy1pb21pby2qcTAtMbBt8fDu8rGuQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAHAAUAAAYhwE/EsulMQhSBorEgaC6HBILh8GQAg4IhwBFBKhLMAxQEADs="
   },
   "objectNote": ""
 }

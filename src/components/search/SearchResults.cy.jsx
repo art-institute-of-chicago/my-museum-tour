@@ -17,7 +17,7 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search__results").should("not.exist");
+    cy.get("#aic-ct-search-results__items").should("not.exist");
   });
 
   it("Renders error message", () => {
@@ -32,7 +32,7 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search__error").should(
+    cy.get("#aic-ct-search-results__error").should(
       "have.text",
       "Error loading results",
     );
@@ -50,7 +50,7 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
+    cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
   });
 
   it("Renders no results message", () => {
@@ -65,22 +65,13 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search__no-results").should(
+    cy.get("#aic-ct-search-results__no-results").should(
       "have.text",
       "Sorry, we couldn’t find any results matching your criteria",
     );
   });
 
   it("Renders a result", () => {
-    cy.intercept(
-      "GET",
-      "https://artic.edu/iiif/2/test_image_id/full/!240,240/0/default.jpg",
-      {
-        fixture: `../../cypress/fixtures/images/image_${
-          Math.floor(Math.random() * 10) + 1
-        }.jpg`,
-      },
-    );
     cy.mount(
       <AppProvider>
         <SearchProvider
@@ -92,7 +83,7 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search__results").should("exist");
-    cy.get("#aic-ct-search__results li").should("have.length", 1);
+    cy.get("#aic-ct-search-results__items").should("exist");
+    cy.get("#aic-ct-search-results__items li").should("have.length", 1);
   });
 });

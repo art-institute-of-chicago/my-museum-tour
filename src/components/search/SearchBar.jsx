@@ -67,6 +67,7 @@ function SearchBar() {
         />
 
         <button
+          id="aic-ct-search__button"
           className="m-search-bar__submit"
           type="submit"
           aria-label="Search"

@@ -68,7 +68,7 @@ describe("<CustomTourBuilder />", () => {
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
-    cy.get("#aic-ct-search__error").should(
+    cy.get("#aic-ct-search-results__error").should(
       "have.text",
       "Error fetching results",
     );
@@ -81,27 +81,26 @@ describe("<CustomTourBuilder />", () => {
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
-    cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
-    cy.get("#aic-ct-search__results").should("exist");
-    cy.get("#aic-ct-search__results li").should("have.length", 10);
+    cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
+    cy.get("#aic-ct-search-results__items").should("exist");
+    cy.get("#aic-ct-search-results__items li").should("have.length", 10);
   });
 
   it("Can perform a search on a theme and show results", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptSearch().as("search");
+    interceptImages("*").as("images");
+    interceptSearch.as("search");
 
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-theme-toggle-0").click();
-    cy.get("#aic-ct-search__loading").should("have.text", "Loading...");
-    cy.get("#aic-ct-search__results").should("exist");
-    cy.get("#aic-ct-search__results li").should("have.length", 10);
+    cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
+    cy.get("#aic-ct-search-results__items").should("exist");
+    cy.get("#aic-ct-search-results__items li").should("have.length", 10);
     cy.get("#aic-ct-theme-toggle-0").click();
-    cy.get("#aic-ct-search__results").should("not.exist");
+    cy.get("#aic-ct-search-results__items").should("not.exist");
   });
 
   it("Can add and remove up to 6 artworks to the tour", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptImages("!680,680").as("images");
+    interceptImages("*").as("images");
     interceptSearch().as("search");
 
     cy.mount(<CustomTourBuilder />);
@@ -157,58 +156,57 @@ describe("<CustomTourBuilder />", () => {
 
     // Should not allow more than 6 items
     cy.get("#aic-ct-nav-button-0").click();
-    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(1) button").click();
     cy.get("#aic-ct-preview__action-button-59426").click();
-    cy.get("#aic-ct-search__results li:nth-child(2) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(2) button").click();
     cy.get("#aic-ct-preview__action-button-208078").click();
-    cy.get("#aic-ct-search__results li:nth-child(3) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(3) button").click();
     cy.get("#aic-ct-preview__action-button-185905").click();
-    cy.get("#aic-ct-search__results li:nth-child(4) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(4) button").click();
     cy.get("#aic-ct-preview__action-button-243872").click();
-    cy.get("#aic-ct-search__results li:nth-child(5) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(5) button").click();
     cy.get("#aic-ct-preview__action-button-229877").click();
-    cy.get("#aic-ct-search__results li:nth-child(6) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(6) button").click();
     cy.get("#aic-ct-preview__action-button-151370").click();
-    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(7) button").click();
     cy.get("#aic-ct-preview__action-button-75644").should("not.exist");
     cy.get("#aic-ct-preview__close").click();
     cy.get("#aic-ct-item-count").should("have.text", "6");
 
-    cy.get("#aic-ct-search__results li:nth-child(8) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(8) button").click();
     cy.get("#aic-ct-preview__action-button-181811").should("not.exist");
     cy.get("#aic-ct-preview__close").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(9) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(9) button").click();
     cy.get("#aic-ct-preview__action-button-188527").should("not.exist");
     cy.get("#aic-ct-preview__close").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(10) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(10) button").click();
     cy.get("#aic-ct-preview__action-button-104930").should("not.exist");
     cy.get("#aic-ct-preview__close").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(1) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(1) button").click();
     cy.get("#aic-ct-preview__action-button-59426").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(7) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(7) button").click();
     cy.get("#aic-ct-preview__action-button-75644").should("exist");
     cy.get("#aic-ct-preview__close").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(8) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(8) button").click();
     cy.get("#aic-ct-preview__action-button-181811").should("exist");
     cy.get("#aic-ct-preview__close").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(9) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(9) button").click();
     cy.get("#aic-ct-preview__action-button-188527").should("exist");
     cy.get("#aic-ct-preview__close").click();
 
-    cy.get("#aic-ct-search__results li:nth-child(10) button").click();
+    cy.get("#aic-ct-search-results__items li:nth-child(10) button").click();
     cy.get("#aic-ct-preview__action-button-104930").should("exist");
     cy.get("#aic-ct-preview__close").click();
   });
 
   it("Wipes notes when an item is removed and added again", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptImages("!680,680").as("images");
+    interceptImages("*").as("images");
     interceptSearch().as("search");
 
     cy.mount(<CustomTourBuilder />);
@@ -248,8 +246,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Protects against edge cases where limits are (forcefully) exceeded", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptImages("!680,680").as("images");
+    interceptImages("*").as("images");
 
     const tooLongString =
       "Nullam aliquet fringilla dolor, vitae malesuada massa rutrum eget. Quisque sed nibh augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque tristique finibus sapien, condimentum condimentum magna biam.";
@@ -276,8 +273,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Shows a submit button if all requirements are met", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptImages("!680,680").as("images");
+    interceptImages("*").as("images");
     interceptSearch().as("search");
 
     cy.mount(<CustomTourBuilder />);
@@ -301,8 +297,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Correctly handles an error while saving", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptImages("!680,680").as("images");
+    interceptImages("*").as("images");
     interceptSearch().as("search");
 
     cy.intercept("POST", "/api/v1/custom-tours", {
@@ -329,8 +324,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can save and show a success message", () => {
-    interceptImages("!240,240").as("thumbnails");
-    interceptImages("!680,680").as("images");
+    interceptImages("*").as("images");
     interceptSearch().as("search");
     cy.intercept("POST", "/api/v1/custom-tours", {
       fixture: "json/saveSuccess.json",
