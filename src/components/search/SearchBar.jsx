@@ -33,7 +33,7 @@ function SearchBar() {
 
   const searchButtonRef = useRef(null);
 
-  const formClasses = classNames("m-search-bar", {
+  const formClasses = classNames("m-search-bar aic-ct-search", {
     "s-autocomplete-active": searchQuery,
   });
 

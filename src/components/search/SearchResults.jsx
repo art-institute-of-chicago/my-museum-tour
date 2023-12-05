@@ -67,11 +67,13 @@ function SearchResults() {
   if (searchResultItems?.length > 0) {
     return (
       <>
-        <header className="aic-ct-section-header">
+        <header className="aic-ct-section-header f-body">
           <h2 className="f-module-title-2">Choose artworks</h2>
-          <span className="aic-ct-item-count">{searchResultItems.length}</span>
+          <span className="aic-ct-item-count aic-ct-item-count--body">
+            {searchResultItems.length}
+          </span>
         </header>
-        <p className="f-body">
+        <p className="aic-ct-pre-result-text f-body">
           Browse these artworks currently on view and available for your tour.
         </p>
         <ul
