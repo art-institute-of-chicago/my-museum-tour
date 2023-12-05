@@ -53,16 +53,30 @@ function SearchResults() {
     <div className="aic-ct-search-results">
       {searchFetching && (
         // Render only the loading message while fetching
-        <div id="aic-ct-search-results__loading">Loading...</div>
+        <div
+          id="aic-ct-search-results__loading"
+          className="aic-ct-search-results__message aic-ct-loader f-body"
+        >
+          <p>Loading...</p>
+          <div className="loader"></div>
+        </div>
       )}
       {searchError && (
         // Render only the error message if there is an error
-        <div id="aic-ct-search-results__error">{searchError}</div>
+        <div
+          id="aic-ct-search-results__error"
+          className="aic-ct-search-results__message f-body"
+        >
+          <p>{searchError}</p>
+        </div>
       )}
       {searchResultItems?.length === 0 && !searchFetching && !searchError && (
         // Render only a no results message if there are no results
-        <div id="aic-ct-search-results__no-results">
-          Sorry, we couldn’t find any results matching your criteria
+        <div
+          id="aic-ct-search-results__no-results"
+          className="aic-ct-search-results__message f-body"
+        >
+          <p>Sorry, we couldn’t find any results matching your criteria</p>
         </div>
       )}
       {searchResultItems?.length > 0 && !searchFetching && !searchError && (
