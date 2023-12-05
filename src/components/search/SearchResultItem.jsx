@@ -77,6 +77,45 @@ function SearchResultItem(props) {
                 alt=""
                 height={itemData.thumbnail.height}
                 width={itemData.thumbnail.width}
+                data-iiif-id={`${iiifBaseUrl}/${itemData.image_id}`}
+                data-pin-media={iiifUrl(
+                  iiifBaseUrl,
+                  itemData.image_id,
+                  "600",
+                  undefined,
+                  undefined,
+                  false,
+                )}
+                sizes="(min-width: 1640px) 336px, (min-width: 1200px) 20.31vw, (min-width: 900px) 28.13vw, (min-width: 600px) 43.75vw,  43.75vw"
+                srcSet={`${iiifUrl(
+                  iiifBaseUrl,
+                  itemData.image_id,
+                  "200",
+                  undefined,
+                  undefined,
+                  false,
+                )} 200w, ${iiifUrl(
+                  iiifBaseUrl,
+                  itemData.image_id,
+                  "400",
+                  undefined,
+                  undefined,
+                  false,
+                )} 400w, ${iiifUrl(
+                  iiifBaseUrl,
+                  itemData.image_id,
+                  "843",
+                  undefined,
+                  undefined,
+                  false,
+                )} 843w, ${iiifUrl(
+                  iiifBaseUrl,
+                  itemData.image_id,
+                  "1686",
+                  undefined,
+                  undefined,
+                  false,
+                )} 1686w`}
               />
             </span>
             <span
