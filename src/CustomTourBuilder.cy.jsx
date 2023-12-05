@@ -2,11 +2,11 @@ import React from "react";
 import CustomTourBuilder from "./CustomTourBuilder";
 import searchJson from "../cypress/fixtures/json/search.json";
 
-function interceptImages(size) {
+function interceptImages() {
   let imageInterceptCount = 0;
   return cy.intercept(
     "GET",
-    `https://artic.edu/iiif/2/*/full/${size}/0/default.jpg`,
+    `https://artic.edu/iiif/2/*/*/*/0/default.jpg`,
     (req) => {
       // Create a ceiling
       // Sometimes we might hit more than 10 images in a test
@@ -30,6 +30,10 @@ function interceptSearch() {
 }
 
 describe("<CustomTourBuilder />", () => {
+  beforeEach(() => {
+    interceptImages().as("images");
+    interceptSearch().as("search");
+  });
   it("Renders", () => {
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search").should("exist");
@@ -75,9 +79,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can perform a keyword search and show results", () => {
-    interceptImages("*").as("images");
-    interceptSearch().as("search");
-
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
@@ -88,9 +89,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can perform a search on a theme and show results", () => {
-    interceptImages("*").as("images");
-    interceptSearch.as("search");
-
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-theme-toggle-0").click();
     cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
@@ -102,9 +100,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can add and remove up to 6 artworks to the tour", () => {
-    interceptImages("*").as("images");
-    interceptSearch().as("search");
-
     cy.mount(<CustomTourBuilder />);
 
     // Adding and removing from search page
@@ -208,9 +203,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Wipes notes when an item is removed and added again", () => {
-    interceptImages("*").as("images");
-    interceptSearch().as("search");
-
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
@@ -248,7 +240,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Protects against edge cases where limits are (forcefully) exceeded", () => {
-    interceptImages("*").as("images");
+    interceptImages().as("images");
 
     const tooLongString =
       "Nullam aliquet fringilla dolor, vitae malesuada massa rutrum eget. Quisque sed nibh augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque tristique finibus sapien, condimentum condimentum magna biam.";
@@ -275,9 +267,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Shows a submit button if all requirements are met", () => {
-    interceptImages("*").as("images");
-    interceptSearch().as("search");
-
     cy.mount(<CustomTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation-errors").children().should("have.length", 3);
@@ -299,9 +288,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Correctly handles an error while saving", () => {
-    interceptImages("*").as("images");
-    interceptSearch().as("search");
-
     cy.intercept("POST", "/api/v1/custom-tours", {
       fixture: "json/saveMissingTitle.json",
       statusCode: 422,
@@ -326,8 +312,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can save and show a success message", () => {
-    interceptImages("*").as("images");
-    interceptSearch().as("search");
     cy.intercept("POST", "/api/v1/custom-tours", {
       fixture: "json/saveSuccess.json",
       statusCode: 201,
