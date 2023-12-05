@@ -73,7 +73,7 @@ function SearchResultItem(props) {
                 </span>
               )}
               <img
-                src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
+                src={itemData.thumbnail.lqip}
                 alt=""
                 height={itemData.thumbnail.height}
                 width={itemData.thumbnail.width}
@@ -87,7 +87,7 @@ function SearchResultItem(props) {
                   false,
                 )}
                 sizes="(min-width: 1640px) 336px, (min-width: 1200px) 20.31vw, (min-width: 900px) 28.13vw, (min-width: 600px) 43.75vw,  43.75vw"
-                srcSet={`${iiifUrl(
+                data-srcSet={`${iiifUrl(
                   iiifBaseUrl,
                   itemData.image_id,
                   "200",
@@ -150,6 +150,7 @@ SearchResultItem.propTypes = {
       alt_text: PropTypes.string,
       width: PropTypes.number,
       height: PropTypes.number,
+      lqip: PropTypes.string,
     }),
     artist_title: PropTypes.string,
     description: PropTypes.string,
