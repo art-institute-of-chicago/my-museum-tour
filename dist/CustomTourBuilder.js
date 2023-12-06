@@ -482,7 +482,7 @@ function $(i) {
         src: S(r, l, "40", "40", "square"),
         alt: ""
       }
-    ), n, d === n && /* @__PURE__ */ e.createElement("svg", { className: "icon--close" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close" })))
+    ), n, d === n && /* @__PURE__ */ e.createElement("svg", { "aria-hidden": "true", className: "icon--close" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close" })))
   )));
 }
 $.propTypes = {

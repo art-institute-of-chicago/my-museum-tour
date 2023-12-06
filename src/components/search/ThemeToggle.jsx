@@ -68,7 +68,7 @@ function ThemeToggle(props) {
               />
               {label}
               {activeTheme === label && (
-                <svg className="icon--close">
+                <svg aria-hidden="true" className="icon--close">
                   <use xlinkHref="#icon--close"></use>
                 </svg>
               )}

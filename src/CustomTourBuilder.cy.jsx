@@ -240,8 +240,6 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Protects against edge cases where limits are (forcefully) exceeded", () => {
-    interceptImages().as("images");
-
     const tooLongString =
       "Nullam aliquet fringilla dolor, vitae malesuada massa rutrum eget. Quisque sed nibh augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque tristique finibus sapien, condimentum condimentum magna biam.";
     const tooManyTourItems = searchJson.data.map((item) => ({
