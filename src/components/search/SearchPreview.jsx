@@ -155,8 +155,9 @@ function SearchPreview() {
           </div>
         </>
       ) : (
-        <div className="aic-ct-preview__padded">
-          Loading... <span className="loader"></span>
+        <div className="aic-ct-preview__padded aic-ct-loader f-body">
+          <p>Loading...</p>
+          <div className="loader"></div>
         </div>
       )}
     </div>

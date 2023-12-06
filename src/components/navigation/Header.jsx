@@ -20,7 +20,7 @@ function Header() {
       aria-label="Custom tour builder"
     >
       <div className="aic-ct-item-info" aria-live="polite">
-        <span id="aic-ct-item-count" className="aic-ct-item-count">
+        <span id="aic-ct-item-count" className="aic-ct-item-count f-body">
           {items}
         </span>{" "}
         <span>

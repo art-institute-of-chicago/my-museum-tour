@@ -18,7 +18,9 @@ export function iiifUrl(
   size = "full",
   fit = true,
 ) {
-  return `${base}/${id}/${size}/${fit && "!"}${width},${height}/0/default.jpg`;
+  return `${base}/${id}/${size}/${
+    fit ? "!" : ""
+  }${width},${height}/0/default.jpg`;
 }
 
 /**

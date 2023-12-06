@@ -21,7 +21,7 @@ function Themes() {
     {
       label: "Mythology",
       subjectIds: ["TM-8766"],
-      thumbnailId: "ea8c5d62-6ce8-88e8-feb1-e0053cf534c5",
+      thumbnailId: "3e41420d-2bae-5863-1980-fd39a78e1ffe",
     },
     {
       label: "Animals",
@@ -41,18 +41,23 @@ function Themes() {
   ];
 
   return (
-    <div id="aic-ct-themes">
-      {themes.map((theme, index) => (
-        <ThemeToggle
-          key={theme.label}
-          id={index}
-          label={theme.label}
-          subjectIds={theme.subjectIds}
-          categoryIds={theme.categoryIds}
-          thumbnailId={theme.thumbnailId}
-        />
-      ))}
-    </div>
+    <>
+      <header className="aic-ct-section-header">
+        <h2 className="f-module-title-2">Browse by theme</h2>
+      </header>
+      <ul id="aic-ct-themes" className="aic-ct-themes">
+        {themes.map((theme, index) => (
+          <ThemeToggle
+            key={theme.label}
+            id={index}
+            label={theme.label}
+            subjectIds={theme.subjectIds}
+            categoryIds={theme.categoryIds}
+            thumbnailId={theme.thumbnailId}
+          />
+        ))}
+      </ul>
+    </>
   );
 }
 

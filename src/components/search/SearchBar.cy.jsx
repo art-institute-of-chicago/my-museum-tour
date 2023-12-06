@@ -16,8 +16,12 @@ describe("<SearchBar />", () => {
     cy.get("#aic-ct-search__button").should("have.attr", "type", "submit");
 
     cy.get("#aic-ct-search__input")
-      .should("have.attr", "type", "search")
-      .should("have.attr", "placeholder", "Search")
+      .should("have.attr", "type", "text")
+      .should(
+        "have.attr",
+        "placeholder",
+        "Search by keyword, artist, or reference",
+      )
       .should("have.attr", "required");
   });
 
