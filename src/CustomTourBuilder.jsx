@@ -12,6 +12,7 @@ import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
 import PropTypes from "prop-types";
+import { iiifUrl } from "./utils";
 
 const CustomTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
@@ -71,6 +72,45 @@ const CustomTourBuilder = (props) => {
             title="Personalize"
             tagline="your tour by adding notes to artworks"
           >
+            {heroImageId && (
+              <div className="aic-ct-hero">
+                <img
+                  src={iiifUrl(iiifBaseUrl, heroImageId, 20, 20, "full")}
+                  srcSet={`${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    480,
+                    480,
+                    "full",
+                  )} 320w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    640,
+                    640,
+                    "full",
+                  )} 480w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    960,
+                    960,
+                    "full",
+                  )} 640w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    1280,
+                    1280,
+                    "full",
+                  )} 960w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    1920,
+                    1920,
+                    "full",
+                  )} 1280w`}
+                  alt=""
+                />
+              </div>
+            )}
             <TourMetadata />
             <TourItems />
           </NavPage>
