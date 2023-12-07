@@ -3,13 +3,8 @@ import { AppContext } from "../../contexts/AppContext";
 import classNames from "classnames";
 
 function Footer() {
-  const {
-    navPages,
-    activeNavPage,
-    setActiveNavPage,
-    navSearchButtonRef,
-    isSaving,
-  } = useContext(AppContext);
+  const { navPages, activeNavPage, setActiveNavPage, isSaving } =
+    useContext(AppContext);
 
   // Control breadcrumb button classes
   const buttonClasses = (id) => {
@@ -28,9 +23,6 @@ function Footer() {
       >
         {navPages.map((page, index) => (
           <button
-            // Use id instead of title as it's probably more resilient
-            // But we're targeting the search button for the ref
-            ref={page.id === 0 ? navSearchButtonRef : null}
             key={page.id}
             id={`aic-ct-nav-button-${page.id}`}
             aria-controls={`aic-ct-nav-page-${page.id}`}

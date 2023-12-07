@@ -44,7 +44,7 @@ export function AppProvider(props) {
     tourItemsReducer,
     tourItemsValue || [],
   );
-  const navSearchButtonRef = useRef(null);
+  const headerNextButonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
   const iiifBaseUrl = iiifBaseUrlValue;
   const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
@@ -94,7 +94,7 @@ export function AppProvider(props) {
         setNavPages,
         activeNavPage,
         setActiveNavPage,
-        navSearchButtonRef,
+        headerNextButonRef,
         validityIssues,
         setValidityIssues,
         isSaving,
@@ -157,7 +157,7 @@ AppContext.Provider.propTypes = {
     setNavPages: PropTypes.func,
     activeNavPage: PropTypes.number,
     setActiveNavPage: PropTypes.func,
-    navSearchButtonRef: PropTypes.shape({
+    headerNextButonRef: PropTypes.shape({
       current: PropTypes.instanceOf(Element),
     }),
     validityIssues: PropTypes.arrayOf(PropTypes.string),
