@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import NavPages from "./components/navigation/NavPages";
 import NavPage from "./components/navigation/NavPage";
@@ -11,16 +12,26 @@ import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
 import PropTypes from "prop-types";
-import Header from "./components/navigation/Header";
 
 const CustomTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
-  const { apiSaveEndpoint, tourTitle, tourDescription, tourItems } = props;
+  const {
+    apiSaveEndpoint,
+    tourTitle,
+    tourDescription,
+    tourItems,
+    heroImageId,
+  } = props;
+
+  const iiifBaseUrl = "https://artic.edu/iiif/2";
+
   const AppProviderProps = {
     apiSaveEndpoint,
     tourTitle,
     tourDescription,
     tourItems,
+    heroImageId,
+    iiifBaseUrl,
   };
 
   // Ask a user before they leave the page
@@ -80,6 +91,7 @@ CustomTourBuilder.propTypes = {
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,
   searchPreviewId: PropTypes.number,
+  heroImageId: PropTypes.string,
 };
 
 export default CustomTourBuilder;

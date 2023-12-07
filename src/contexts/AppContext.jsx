@@ -25,6 +25,7 @@ export function AppProvider(props) {
     tourItems: tourItemsValue,
     navPages: navPagesValue,
     apiSaveEndpoint: apiSaveEndpointValue,
+    iiifBaseUrl: iiifBaseUrlValue,
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
   const [creatorEmail, setCreatorEmail] = useState(creatorEmailValue || "");
@@ -45,7 +46,7 @@ export function AppProvider(props) {
   );
   const navSearchButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
-  const iiifBaseUrl = "https://artic.edu/iiif/2";
+  const iiifBaseUrl = iiifBaseUrlValue;
   const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
   const [isSaving, setIsSaving] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -109,6 +110,7 @@ export function AppProvider(props) {
 
 AppProvider.propTypes = {
   apiSaveEndpoint: PropTypes.string,
+  iiifBaseUrl: PropTypes.string,
   children: PropTypes.node.isRequired,
   tourTitle: PropTypes.string,
   creatorEmail: PropTypes.string,
