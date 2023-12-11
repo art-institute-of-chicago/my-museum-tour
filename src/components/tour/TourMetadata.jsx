@@ -47,7 +47,7 @@ function TourMetadata() {
   });
 
   return (
-    <fieldset className="m-fieldset">
+    <fieldset className="m-fieldset aic-ct-fieldset">
       <ol className="m-fieldset__fieldset">
         <li className="m-fieldset__field o-blocks">
           <label htmlFor="aic-ct-metadata__title" className="label f-secondary">
@@ -166,12 +166,22 @@ function TourMetadata() {
                 setMarketingOptIn(e.target.checked);
               }}
             />
-            <span className="f-secondary">
+            <span className="f-body">
               <label htmlFor="aic-ct-metadata__opt-in" className="label">
                 I would like to recieve marketing emails from AIC
               </label>
             </span>
           </span>
+          <a
+            href="/terms#privacy-policy"
+            target="_blank"
+            className="external-link f-link"
+          >
+            Read our privacy policy
+            <svg aria-hidden="true" className="icon--new-window">
+              <use xlinkHref="#icon--new-window" />
+            </svg>
+          </a>
         </li>
       </ol>
     </fieldset>

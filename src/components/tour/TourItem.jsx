@@ -90,7 +90,7 @@ function TourItem(props) {
   }, [setRemoveButtons, tourItems, itemData.id]);
 
   return (
-    <li id={`aic-ct-tour__item-${itemData.id}`}>
+    <li className="aic-ct-tour-item" id={`aic-ct-tour-item-${itemData.id}`}>
       <div className="aic-ct-tour-item__lockup">
         <div className="aic-ct-tour-item__info">
           {itemData.title && (
@@ -156,7 +156,7 @@ function TourItem(props) {
         </span>
       </div>
       <button
-        className="btn btn--transparent f-secondary"
+        className="btn btn--transparent f-secondary aic-ct-tour-item__remove"
         ref={buttonRef}
         type="button"
         onClick={() => {

@@ -53,7 +53,7 @@ const CustomTourBuilder = (props) => {
             title="Browse"
             tagline="for artworks to add to your tour"
           >
-            <div className="aic-ct-intro">
+            <div className="aic-ct-intro aic-ct-intro--keyline">
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
                 Select from the list of available artworks or browse themes to
@@ -73,7 +73,7 @@ const CustomTourBuilder = (props) => {
             tagline="your tour by adding notes to artworks"
           >
             {heroImageId && (
-              <div className="aic-ct-hero aic-ct-intro--keyline">
+              <div className="aic-ct-hero">
                 <img
                   src={iiifUrl(iiifBaseUrl, heroImageId, 20, 20, "full")}
                   srcSet={`${iiifUrl(
