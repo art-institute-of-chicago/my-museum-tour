@@ -82,20 +82,22 @@ function TourItems() {
               You&apos;ve added {tourItems.length}{" "}
               {tourItems.length === 1 ? "artwork" : "artworks"} to your tour
             </p>
-            <button
-              type="button"
-              className="f-buttons btn btn--secondary"
-              onClick={handleBrowseClick}
-            >
-              Browse for more artworks
-            </button>
-            <button
-              type="button"
-              className="f-buttons btn btn--primary"
-              onClick={handleFinishClick}
-            >
-              Finish creating tour
-            </button>
+            <div className="aic-ct-tour__cta-actions">
+              <button
+                type="button"
+                className="f-buttons btn btn--secondary"
+                onClick={handleBrowseClick}
+              >
+                Browse for more artworks
+              </button>
+              <button
+                type="button"
+                className="f-buttons btn btn--primary"
+                onClick={handleFinishClick}
+              >
+                Finish creating tour
+              </button>
+            </div>
           </>
         )}
         {tourItems.length === 6 && (
@@ -105,13 +107,15 @@ function TourItems() {
               allowed. Please remove one if you would like to include more
               artwork
             </p>
-            <button
-              type="button"
-              className="f-buttons btn btn--primary"
-              onClick={handleFinishClick}
-            >
-              Finish creating tour
-            </button>
+            <div className="aic-ct-tour__cta-actions">
+              <button
+                type="button"
+                className="f-buttons btn btn--primary"
+                onClick={handleFinishClick}
+              >
+                Finish creating tour
+              </button>
+            </div>
           </>
         )}
         {tourItems.length === 0 && (
@@ -119,13 +123,15 @@ function TourItems() {
             <p className="f-body">
               You haven&apos;t added any artworks to your tour yet
             </p>
-            <button
-              type="button"
-              className="f-buttons btn btn--secondary"
-              onClick={handleBrowseClick}
-            >
-              Browse for more artworks
-            </button>
+            <div className="aic-ct-tour__cta-actions">
+              <button
+                type="button"
+                className="f-buttons btn btn--secondary"
+                onClick={handleBrowseClick}
+              >
+                Browse for more artworks
+              </button>
+            </div>
           </>
         )}
       </div>
