@@ -20,6 +20,7 @@ function Submission() {
     limits,
     isSaving,
     setIsSaving,
+    setActiveNavPage,
   } = useContext(AppContext);
   const [saveResponse, setSaveResponse] = useState(null);
 
@@ -122,64 +123,106 @@ function Submission() {
   ]);
 
   return (
-    <>
-      <h2>Submit your tour</h2>
+    <div className="aic-ct-validation">
       {validityIssues.length ? (
         <>
-          <p>Fix these issue before submitting your tour:</p>
-          {validityIssues.length && (
-            <ul id="aic-ct-validation-errors">
+          <h1 className="f-headline">Finish your tour?</h1>
+          <p className="f-body">Fix these issue before finishing your tour:</p>
+          <div className="o-blocks">
+            <ul id="aic-ct-validation__errors">
               {validityIssues.map((issue, index) => (
-                <li key={index}>{issue}</li>
+                <li className="f-body" key={index}>
+                  {issue}
+                </li>
               ))}
             </ul>
-          )}
+          </div>
+          <button
+            className="btn btn--secondary f-buttons"
+            type="button"
+            onClick={() => {
+              if (!tourItems.length) {
+                // Go back to step one is no items added
+                setActiveNavPage(0);
+              } else {
+                // Otherwise go to step two
+                setActiveNavPage(1);
+              }
+            }}
+          >
+            Go back
+          </button>
         </>
       ) : (
         <div id="aic-ct-validation-success">
           <div tabIndex="-1" aria-live="polite">
-            {isSaving && <p>Saving...</p>}
+            {isSaving && (
+              <div className="aic-ct-loader f-body">
+                <p>Saving...</p>
+                <div className="loader"></div>
+              </div>
+            )}
 
             {!isSaving && !saveResponse && (
               <>
-                <p>
-                  Are you sure you want to submit your tour? You won&apos;t be
-                  able to make any more changes after this stage
+                <h1 className="f-headline">
+                  Are you sure you want to submit your tour?
+                </h1>
+                <p className="f-body">
+                  You won&apos;t be able to edit it once this has been done.
+                  <br />
+                  <br />
+                  Your tour will be automatically emailed to you when finished.
                 </p>
                 <button
                   id="aic-ct-save-button"
+                  className="btn btn--primary f-buttons"
                   type="button"
                   onClick={handleSave}
                   disabled={isSaving}
                 >
-                  Save my tour
+                  Yes, Save my tour
+                </button>
+                <button
+                  className="btn btn--secondary f-buttons"
+                  type="button"
+                  onClick={() => {
+                    setActiveNavPage(1);
+                  }}
+                >
+                  No, go back and edit
                 </button>
               </>
             )}
 
             {saveResponse &&
               ((saveResponse.type === "success" && (
+                // TODO: redirect to the tour page
                 <div id="aic-ct-save-success">
                   <p>{saveResponse.message}</p>
                 </div>
               )) ||
                 (saveResponse.type === "error" && (
                   <div id="aic-ct-save-error">
-                    <p>{saveResponse.message}</p>
+                    <h1 className="f-headline">
+                      Looks like there was a problem
+                    </h1>
+                    <p className="f-body">{saveResponse.message}</p>
                     <button
                       id="aic-ct-save-button"
+                      className="btn btn--primary f-buttons"
                       type="button"
                       onClick={handleSave}
                       disabled={isSaving}
                     >
-                      Save my tour
+                      Try again
                     </button>
                   </div>
                 )))}
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
