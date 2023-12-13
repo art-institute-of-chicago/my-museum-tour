@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import TourItem from "./TourItem";
 import { AppContext } from "../../contexts/AppContext";
 
@@ -6,7 +6,7 @@ import { AppContext } from "../../contexts/AppContext";
  * SearchResults
  */
 function TourItems() {
-  const { tourItems, headerNextButonRef, setActiveNavPage } =
+  const { tourItems, headerNextButtonRef, setActiveNavPage } =
     useContext(AppContext);
   const [shouldAssignFocus, setShouldAssignFocus] = useState({
     flag: false,
@@ -14,22 +14,24 @@ function TourItems() {
   });
   const [removeButtons, setRemoveButtons] = useState([]);
 
+  const browseButtonRef = useRef(null);
+
   const handleBrowseClick = () => {
     setActiveNavPage(0);
-    headerNextButonRef.current.focus();
+    headerNextButtonRef.current.focus();
   };
   const handleFinishClick = () => {
     setActiveNavPage(2);
-    headerNextButonRef.current.focus();
+    headerNextButtonRef.current.focus();
   };
 
   // When tourItems change check if this item was removed
   // Focus will always need to be reassigned in some way in that instance
   useEffect(() => {
     if (shouldAssignFocus.flag) {
-      if (!tourItems.length && headerNextButonRef?.current) {
+      if (!tourItems.length && browseButtonRef?.current) {
         // When there's no items in the tour, focus on the "no results" button
-        headerNextButonRef.current.focus();
+        browseButtonRef.current.focus();
       } else {
         // Otherwise focus on the element passed out by the removed item
         removeButtons
@@ -39,7 +41,7 @@ function TourItems() {
 
       setShouldAssignFocus(false);
     }
-  }, [tourItems, shouldAssignFocus, removeButtons, headerNextButonRef]);
+  }, [tourItems, shouldAssignFocus, removeButtons, browseButtonRef]);
 
   // Render the results if there are results
   return (
@@ -86,6 +88,8 @@ function TourItems() {
             </p>
             <div className="aic-ct-tour__cta-actions">
               <button
+                ref={browseButtonRef}
+                id="aic-ct-tour__cta-browse"
                 type="button"
                 className="f-buttons btn btn--secondary"
                 onClick={handleBrowseClick}
@@ -127,6 +131,8 @@ function TourItems() {
             </p>
             <div className="aic-ct-tour__cta-actions">
               <button
+                ref={browseButtonRef}
+                id="aic-ct-tour__cta-browse"
                 type="button"
                 className="f-buttons btn btn--secondary"
                 onClick={handleBrowseClick}
