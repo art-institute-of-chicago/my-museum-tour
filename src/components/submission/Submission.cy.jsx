@@ -9,6 +9,6 @@ describe("<Submission />", () => {
         <Submission />
       </AppProvider>,
     );
-    cy.get("#aic-ct-validation-errors").children().should("have.length", 3);
+    cy.get("#aic-ct-validation__errors ul").children().should("have.length", 3);
   });
 });
