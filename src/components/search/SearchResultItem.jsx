@@ -59,8 +59,8 @@ function SearchResultItem(props) {
           className="aic-ct-result__button"
           type="button"
           onClick={handleClick}
-          aria-description={
-            isSelected ? "This object is in your tour" : undefined
+          aria-describedby={
+            isSelected ? "aic-ct-search__in-your-tour" : undefined
           }
         >
           <span className="m-listing__link">
@@ -87,7 +87,7 @@ function SearchResultItem(props) {
                   false,
                 )}
                 sizes="(min-width: 1640px) 336px, (min-width: 1200px) 20.31vw, (min-width: 900px) 28.13vw, (min-width: 600px) 43.75vw,  43.75vw"
-                data-srcSet={`${iiifUrl(
+                data-srcset={`${iiifUrl(
                   iiifBaseUrl,
                   itemData.image_id,
                   "200",
