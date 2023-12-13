@@ -25,7 +25,8 @@ export function AppProvider(props) {
     tourItems: tourItemsValue,
     navPages: navPagesValue,
     apiSaveEndpoint: apiSaveEndpointValue,
-    iiifBaseUrl: iiifBaseUrlValue,
+    iiifBaseUrl,
+    unloadHandler,
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
   const [creatorEmail, setCreatorEmail] = useState(creatorEmailValue || "");
@@ -46,7 +47,6 @@ export function AppProvider(props) {
   );
   const headerNextButonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
-  const iiifBaseUrl = iiifBaseUrlValue;
   const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
   const [isSaving, setIsSaving] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -101,6 +101,7 @@ export function AppProvider(props) {
         setIsSaving,
         scrollY,
         setScrollY,
+        unloadHandler,
       }}
     >
       {children}
@@ -120,6 +121,7 @@ AppProvider.propTypes = {
   tourDescription: PropTypes.string,
   tourItems: PropTypes.instanceOf(Array),
   navPages: PropTypes.instanceOf(Array),
+  unloadHandler: PropTypes.func,
 };
 
 AppContext.Provider.propTypes = {

@@ -21,6 +21,7 @@ function Submission() {
     isSaving,
     setIsSaving,
     setActiveNavPage,
+    unloadHandler,
   } = useContext(AppContext);
   const [saveResponse, setSaveResponse] = useState(null);
 
@@ -123,6 +124,15 @@ function Submission() {
     validCreatorEmail,
   ]);
 
+  useEffect(() => {
+    // When the user sucessfully saves their tour perform a redirect
+    console.log("saveResponse", saveResponse);
+    if (saveResponse?.id) {
+      window.removeEventListener("beforeunload", unloadHandler);
+      window.location.href = `/custom-tours/${saveResponse.id}`;
+    }
+  }, [saveResponse, unloadHandler]);
+
   return (
     <div className="aic-ct-validation">
       {validityIssues.length ? (
@@ -214,7 +224,6 @@ function Submission() {
 
           {saveResponse &&
             ((saveResponse.type === "success" && (
-              // TODO: redirect to the tour page
               <div
                 id="aic-ct-validation__success"
                 className="aic-ct-validation__content"

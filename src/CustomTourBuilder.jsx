@@ -26,6 +26,12 @@ const CustomTourBuilder = (props) => {
 
   const iiifBaseUrl = "https://artic.edu/iiif/2";
 
+  // Define handler here and pass into AppProvider for use elsewhere
+  const unloadHandler = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+
   const AppProviderProps = {
     apiSaveEndpoint,
     tourTitle,
@@ -33,14 +39,12 @@ const CustomTourBuilder = (props) => {
     tourItems,
     heroImageId,
     iiifBaseUrl,
+    unloadHandler,
   };
 
   // Ask a user before they leave the page
   useEffect(() => {
-    window.addEventListener("beforeunload", (e) => {
-      e.preventDefault();
-      e.returnValue = "";
-    });
+    window.addEventListener("beforeunload", unloadHandler);
   }, []);
 
   return (
