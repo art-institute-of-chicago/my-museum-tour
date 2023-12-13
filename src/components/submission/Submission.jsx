@@ -58,11 +58,12 @@ function Submission() {
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
         );
       }
-      const { message } = await res.json();
+      const { message, custom_tour } = await res.json();
 
       setSaveResponse({
         type: "success",
         message,
+        id: custom_tour.id,
       });
     } catch (error) {
       setSaveResponse({
@@ -125,11 +126,17 @@ function Submission() {
   return (
     <div className="aic-ct-validation">
       {validityIssues.length ? (
-        <>
+        <div
+          id="aic-ct-validation__error"
+          className="aic-ct-validation__error aic-ct-validation__content"
+        >
           <h1 className="f-headline">Finish your tour?</h1>
           <p className="f-body">Fix these issue before finishing your tour:</p>
-          <div className="o-blocks">
-            <ul id="aic-ct-validation__errors">
+          <div
+            id="aic-ct-validation__errors"
+            className="aic-ct-validation__errors aic-ct-validation__content o-blocks"
+          >
+            <ul>
               {validityIssues.map((issue, index) => (
                 <li className="f-body" key={index}>
                   {issue}
@@ -137,43 +144,52 @@ function Submission() {
               ))}
             </ul>
           </div>
-          <button
-            className="btn btn--secondary f-buttons"
-            type="button"
-            onClick={() => {
-              if (!tourItems.length) {
-                // Go back to step one is no items added
-                setActiveNavPage(0);
-              } else {
-                // Otherwise go to step two
-                setActiveNavPage(1);
-              }
-            }}
-          >
-            Go back
-          </button>
-        </>
+          <div className="aic-ct-validation__actions">
+            <button
+              className="btn btn--secondary f-buttons"
+              type="button"
+              onClick={() => {
+                if (!tourItems.length) {
+                  // Go back to step one is no items added
+                  setActiveNavPage(0);
+                } else {
+                  // Otherwise go to step two
+                  setActiveNavPage(1);
+                }
+              }}
+            >
+              Go back
+            </button>
+          </div>
+        </div>
       ) : (
-        <div id="aic-ct-validation-success">
-          <div tabIndex="-1" aria-live="polite">
-            {isSaving && (
-              <div className="aic-ct-loader f-body">
-                <p>Saving...</p>
-                <div className="loader"></div>
-              </div>
-            )}
+        <div
+          id="aic-ct-validation__saving"
+          className="aic-ct-validation__content aic-ct-validation__saving"
+          tabIndex="-1"
+          aria-live="polite"
+        >
+          {isSaving && (
+            <div className="aic-ct-loader f-body">
+              <p>Saving...</p>
+              <div className="loader"></div>
+            </div>
+          )}
 
-            {!isSaving && !saveResponse && (
-              <>
-                <h1 className="f-headline">
-                  Are you sure you want to submit your tour?
-                </h1>
-                <p className="f-body">
-                  You won&apos;t be able to edit it once this has been done.
-                  <br />
-                  <br />
-                  Your tour will be automatically emailed to you when finished.
-                </p>
+          {!isSaving && !saveResponse && (
+            <div
+              id="aic-ct-validation__save"
+              className="aic-ct-validation__save aic-ct-validation__content"
+            >
+              <h1 className="f-headline">
+                Are you sure you want to submit your tour?
+              </h1>
+              <p className="f-body">
+                You won&apos;t be able to edit it once this has been done.
+                <br />
+                Your tour will be automatically emailed to you when finished.
+              </p>
+              <div className="aic-ct-validation__actions">
                 <button
                   id="aic-ct-save-button"
                   className="btn btn--primary f-buttons"
@@ -192,22 +208,31 @@ function Submission() {
                 >
                   No, go back and edit
                 </button>
-              </>
-            )}
+              </div>
+            </div>
+          )}
 
-            {saveResponse &&
-              ((saveResponse.type === "success" && (
-                // TODO: redirect to the tour page
-                <div id="aic-ct-save-success">
-                  <p>{saveResponse.message}</p>
-                </div>
-              )) ||
-                (saveResponse.type === "error" && (
-                  <div id="aic-ct-save-error">
-                    <h1 className="f-headline">
-                      Looks like there was a problem
-                    </h1>
-                    <p className="f-body">{saveResponse.message}</p>
+          {saveResponse &&
+            ((saveResponse.type === "success" && (
+              // TODO: redirect to the tour page
+              <div
+                id="aic-ct-validation__success"
+                className="aic-ct-validation__content"
+              >
+                <h1 className="f-headline">
+                  Saved successfully!
+                  <br /> Redirecting to your tour
+                </h1>
+              </div>
+            )) ||
+              (saveResponse.type === "error" && (
+                <div
+                  id="aic-ct-save-error"
+                  className="aic-ct-validation__content"
+                >
+                  <h1 className="f-headline">Looks like there was a problem</h1>
+                  <p className="f-body">{saveResponse.message}</p>
+                  <div className="aic-ct-validation__actions">
                     <button
                       id="aic-ct-save-button"
                       className="btn btn--primary f-buttons"
@@ -218,8 +243,8 @@ function Submission() {
                       Try again
                     </button>
                   </div>
-                )))}
-          </div>
+                </div>
+              )))}
         </div>
       )}
     </div>
