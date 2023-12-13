@@ -130,7 +130,9 @@ function Submission() {
     if (saveResponse?.id) {
       window.removeEventListener("beforeunload", unloadHandler);
       // Need to use wrapper function for our tests
-      Location.assign(`/custom-tours/${saveResponse.id}`);
+      Location.assign(
+        `/custom-tours/${saveResponse.id}?tourCreationComplete=true`,
+      );
     }
   }, [saveResponse, unloadHandler]);
 
