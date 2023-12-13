@@ -11,11 +11,11 @@ describe("<TourMetadata />", () => {
     );
     cy.get("#aic-ct-metadata__title").should("exist");
     cy.get("#aic-ct-metadata__description").should("exist");
-    cy.get('label[for="aic-ct-metadata__title"]').should(
+    cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
       "(255 characters remaining)",
     );
-    cy.get('label[for="aic-ct-metadata__description"]').should(
+    cy.get("#aic-ct-metadata__description + output").should(
       "contain.text",
       "(255 characters remaining)",
     );
@@ -40,12 +40,12 @@ describe("<TourMetadata />", () => {
     // This is 40 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__description").type(descriptionText, { delay: 0 });
     // 255 - 40 = 215
-    cy.get('label[for="aic-ct-metadata__title"]').should(
+    cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
       "(215 characters remaining)",
     );
     // 255 - 40 = 215
-    cy.get('label[for="aic-ct-metadata__description"]').should(
+    cy.get("#aic-ct-metadata__description + output").should(
       "contain.text",
       "(215 characters remaining)",
     );
@@ -73,7 +73,7 @@ describe("<TourMetadata />", () => {
     // This is 255 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__title").type(titleText, { delay: 0 });
 
-    cy.get('label[for="aic-ct-metadata__title"]').should(
+    cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
       "(0 characters remaining)",
     );
@@ -92,7 +92,7 @@ describe("<TourMetadata />", () => {
     // This is 257 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__title").type(titleText, { delay: 0 });
     // 255 - 257 = -2 (0)
-    cy.get('label[for="aic-ct-metadata__title"]').should(
+    cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
       "(0 characters remaining)",
     );
