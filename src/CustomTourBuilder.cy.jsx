@@ -1,6 +1,7 @@
 import React from "react";
 import CustomTourBuilder from "./CustomTourBuilder";
 import searchJson from "../cypress/fixtures/json/search.json";
+import { Location } from "./utils";
 
 function interceptImages() {
   let imageInterceptCount = 0;
@@ -309,45 +310,47 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-save-error").should("exist");
   });
 
-  // TODO: Fix this test
-  // it("Can save and show a success message", () => {
-  //   cy.intercept("POST", "/api/v1/custom-tours", {
-  //     fixture: "json/saveSuccess.json",
-  //     statusCode: 201,
-  //     delayMs: 80,
-  //   }).as("save");
+  it("Can save and show a success message", () => {
+    cy.intercept("POST", "/api/v1/custom-tours", {
+      fixture: "json/saveSuccess.json",
+      statusCode: 201,
+      delayMs: 80,
+    }).as("save");
 
-  //   cy.mount(<CustomTourBuilder />);
-  //   cy.get("#aic-ct-nav-button-0").click();
-  //   cy.get("#aic-ct-search__input").type("test");
-  //   cy.get("#aic-ct-search__button").click();
-  //   cy.get("#aic-ct-search-item-59426 button").click();
-  //   cy.get("#aic-ct-preview__action-button-59426").click();
-  //   cy.get("#aic-ct-nav-button-1").click();
-  //   cy.get("#aic-ct-metadata__title").type("Test title");
-  //   cy.get("#aic-ct-metadata__creator-name").type("Jon");
-  //   cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
-  //   cy.get("#aic-ct-metadata__recipient-name").type("Luke");
-  //   cy.get("#aic-ct-metadata__description").type("Test description");
-  //   cy.get("#aic-ct-metadata__opt-in").click();
-  //   cy.get("#aic-ct-note-59426").type("Test note");
-  //   cy.get("#aic-ct-nav-button-2").click();
-  //   cy.get("#aic-ct-save-button").click();
-  //   // Test the request body goes out as we expect
-  //   cy.wait("@save")
-  //     .its("request.body")
-  //     .should("deep.equal", {
-  //       creatorEmail: "jonw@coghack.com",
-  //       marketingOptIn: true,
-  //       tourJson: {
-  //         creatorName: "Jon",
-  //         description: "Test description",
-  //         recipientName: "Luke",
-  //         title: "Test title",
-  //         artworks: [{ ...searchJson.data[0], objectNote: "Test note" }],
-  //       },
-  //     });
+    // Prevent redirect in this test
+    cy.stub(Location, "assign").as("assign");
 
-  //   cy.get("#aic-ct-validation__success").should("exist");
-  // });
+    cy.mount(<CustomTourBuilder />);
+    cy.get("#aic-ct-nav-button-0").click();
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("#aic-ct-search-item-59426 button").click();
+    cy.get("#aic-ct-preview__action-button-59426").click();
+    cy.get("#aic-ct-nav-button-1").click();
+    cy.get("#aic-ct-metadata__title").type("Test title");
+    cy.get("#aic-ct-metadata__creator-name").type("Jon");
+    cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
+    cy.get("#aic-ct-metadata__recipient-name").type("Luke");
+    cy.get("#aic-ct-metadata__description").type("Test description");
+    cy.get("#aic-ct-metadata__opt-in").click();
+    cy.get("#aic-ct-note-59426").type("Test note");
+    cy.get("#aic-ct-nav-button-2").click();
+    cy.get("#aic-ct-save-button").click();
+    // Test the request body goes out as we expect
+    cy.wait("@save")
+      .its("request.body")
+      .should("deep.equal", {
+        creatorEmail: "jonw@coghack.com",
+        marketingOptIn: true,
+        tourJson: {
+          creatorName: "Jon",
+          description: "Test description",
+          recipientName: "Luke",
+          title: "Test title",
+          artworks: [{ ...searchJson.data[0], objectNote: "Test note" }],
+        },
+      });
+
+    cy.get("#aic-ct-validation__success").should("exist");
+  });
 });

@@ -69,3 +69,11 @@ export function createSearchUrl(queryParams) {
   }
   return url;
 }
+
+/**
+ * Wrapper for window.location.assign
+ * Useful for stubbing during tests
+ */
+export const Location = {
+  assign: (url) => window.location.assign(url),
+};

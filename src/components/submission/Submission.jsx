@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { Location } from "../../utils";
 
 /**
  * Submission
@@ -126,10 +127,10 @@ function Submission() {
 
   useEffect(() => {
     // When the user sucessfully saves their tour perform a redirect
-    console.log("saveResponse", saveResponse);
     if (saveResponse?.id) {
       window.removeEventListener("beforeunload", unloadHandler);
-      window.location.href = `/custom-tours/${saveResponse.id}`;
+      // Need to use wrapper function for our tests
+      Location.assign(`/custom-tours/${saveResponse.id}`);
     }
   }, [saveResponse, unloadHandler]);
 
