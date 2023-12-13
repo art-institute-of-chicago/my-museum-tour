@@ -137,7 +137,10 @@ function TourItem(props) {
         ></div>
       )}
       <div className="aic-ct-tour-item__note">
-        <label id={`aic-ct-note-${itemData.id}`} className="label f-secondary">
+        <label
+          htmlFor={`aic-ct-note-${itemData.id}`}
+          className="label f-secondary"
+        >
           Your notes on this artwork&nbsp;<em>(optional)</em>
         </label>
         <span className="textarea">

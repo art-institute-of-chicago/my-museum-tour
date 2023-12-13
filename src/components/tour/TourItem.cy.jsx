@@ -7,7 +7,7 @@ describe("<TourItem />", () => {
   it("Renders", () => {
     cy.intercept(
       "GET",
-      "https://artic.edu/iiif/2/test_image_id/full/!240,240/0/default.jpg",
+      "https://artic.edu/iiif/2/test_image_id/full/!96,128/0/default.jpg",
       {
         fixture: `../../cypress/fixtures/images/image_${
           Math.floor(Math.random() * 10) + 1
@@ -15,7 +15,7 @@ describe("<TourItem />", () => {
       },
     );
     cy.mount(
-      <AppProvider>
+      <AppProvider iiifBaseUrl={"https://artic.edu/iiif/2"}>
         <TourItem
           key={item.id}
           itemData={item}
@@ -25,13 +25,13 @@ describe("<TourItem />", () => {
         />
       </AppProvider>,
     );
-    cy.get("#aic-ct-tour__item-1").should("exist");
-    cy.get("#aic-ct-tour__item-1 h2").should("have.text", "Test title");
-    cy.get("#aic-ct-tour__item-1 img")
+    cy.get("#aic-ct-tour-item-1").should("exist");
+    cy.get("#aic-ct-tour-item-1 h2").should("have.text", "Test title");
+    cy.get("#aic-ct-tour-item-1 img")
       .should(
         "have.attr",
         "src",
-        "https://artic.edu/iiif/2/test_image_id/full/!240,240/0/default.jpg",
+        "https://artic.edu/iiif/2/test_image_id/full/!96,128/0/default.jpg",
       )
       .should("have.attr", "alt", "Test image alt text");
   });
@@ -48,15 +48,9 @@ describe("<TourItem />", () => {
         />
       </AppProvider>,
     );
-    cy.get("label[for=aic-ct-note-1]").should(
-      "have.text",
-      "Personal note (255 characters remaining)",
-    );
+    cy.get("#aic-ct-note-1 + output").contains("(255 characters remaining)");
     cy.get("#aic-ct-note-1").should("exist").type("Lorem ipsum dolor sit amet");
-    cy.get("label[for=aic-ct-note-1]").should(
-      "have.text",
-      "Personal note (229 characters remaining)",
-    );
+    cy.get("#aic-ct-note-1 + output").contains("(229 characters remaining)");
   });
 
   it("Doesn't allow more than the character limit", () => {
@@ -78,10 +72,7 @@ describe("<TourItem />", () => {
     cy.get("#aic-ct-note-1").type(noteText, { delay: 0 });
 
     // 255 - 257 = -2 (0)
-    cy.get('label[for="aic-ct-note-1"]').should(
-      "have.text",
-      "Personal note (0 characters remaining)",
-    );
+    cy.get("#aic-ct-note-1 + output").contains("(0 characters remaining)");
     cy.get("#aic-ct-note-1").should("have.value", noteText.slice(0, 255));
   });
 });

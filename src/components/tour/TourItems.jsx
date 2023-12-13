@@ -47,7 +47,9 @@ function TourItems() {
       {tourItems.length > 0 && (
         <>
           <header className="aic-ct-section-header f-body">
-            <h2 className="f-module-title-2">Artworks in your tour</h2>
+            <h2 id="aic-ct-tour__heading" className="f-module-title-2">
+              Artworks in your tour
+            </h2>
           </header>
           <div className="f-body aic-ct-tour__intro">
             <p>

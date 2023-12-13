@@ -51,7 +51,7 @@ function SearchResultItem(props) {
   return (
     <li
       ref={itemRef}
-      id={`aic-ct-search__item-${itemData.id}`}
+      id={`aic-ct-search-item-${itemData.id}`}
       className={itemClasses}
     >
       {itemData.image_id && (
