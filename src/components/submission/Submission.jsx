@@ -163,7 +163,7 @@ function Submission() {
               type="button"
               onClick={() => {
                 if (!tourItems.length) {
-                  // Go back to step one is no items added
+                  // Go back to step one if no items added
                   setActiveNavPage(0);
                 } else {
                   // Otherwise go to step two
