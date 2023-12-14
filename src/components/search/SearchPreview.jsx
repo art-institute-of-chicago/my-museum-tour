@@ -64,7 +64,6 @@ function SearchPreview() {
                 <use xlinkHref="#icon--close--24"></use>
               </svg>
             </button>
-            <h2 className="f-module-title-2">Artwork details</h2>
           </div>
 
           <div className="aic-ct-preview__image">
@@ -116,17 +115,6 @@ function SearchPreview() {
                   {inTour ? "Remove from your tour" : "Add to your tour"}
                 </button>
               )}
-              <a
-                className="f-link"
-                target="_blank"
-                rel="noopener noreferrer"
-                href={`https://www.artic.edu/artworks/${previewData.id}`}
-              >
-                View full artwork page&nbsp;
-                <svg aria-hidden="true" className="icon--new-window">
-                  <use xlinkHref="#icon--new-window"></use>
-                </svg>
-              </a>
             </div>
 
             {/* TODO: Update this to "short description"? When we have that field */}
@@ -139,6 +127,17 @@ function SearchPreview() {
                   className="f-body"
                   dangerouslySetInnerHTML={{ __html: previewData.description }}
                 ></div>
+                <a
+                  className="aic-ct-preview__learn-more f-link"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={`https://www.artic.edu/artworks/${previewData.id}`}
+                >
+                  Learn more&nbsp;
+                  <svg aria-hidden="true" className="icon--new-window">
+                    <use xlinkHref="#icon--new-window"></use>
+                  </svg>
+                </a>
               </div>
             )}
 
@@ -150,7 +149,7 @@ function SearchPreview() {
               <svg className="icon--close--24" aria-hidden="true">
                 <use xlinkHref="#icon--close--24"></use>
               </svg>
-              Close and back to results
+              Close and go back to results
             </button>
           </div>
         </>

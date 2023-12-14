@@ -6,7 +6,7 @@ import { AppContext } from "../../contexts/AppContext";
  * SearchResults
  */
 function TourItems() {
-  const { tourItems, headerNextButtonRef, setActiveNavPage } =
+  const { tourItems, headerNextButtonRef, setActiveNavPage, limits } =
     useContext(AppContext);
   const [shouldAssignFocus, setShouldAssignFocus] = useState({
     flag: false,
@@ -83,8 +83,8 @@ function TourItems() {
         {tourItems.length > 0 && tourItems.length < 6 && (
           <>
             <p className="f-body">
-              You&apos;ve added {tourItems.length}{" "}
-              {tourItems.length === 1 ? "artwork" : "artworks"} to your tour
+              You&apos;ve added {tourItems.length} of the maximum{" "}
+              {limits.items.max} artworks.
             </p>
             <div className="aic-ct-tour__cta-actions">
               <button

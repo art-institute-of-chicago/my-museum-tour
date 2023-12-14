@@ -168,7 +168,8 @@ function TourMetadata() {
             />
             <span className="f-body">
               <label htmlFor="aic-ct-metadata__opt-in" className="label">
-                I would like to recieve marketing emails from AIC
+                Keep me in the loop. Please send me emails about museum
+                exhibitions and events.
               </label>
             </span>
           </span>

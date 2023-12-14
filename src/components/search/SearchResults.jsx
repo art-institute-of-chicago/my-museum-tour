@@ -77,14 +77,14 @@ function SearchResults() {
             id="aic-ct-search-results__no-results"
             className="aic-ct-search-results__message f-body"
           >
-            <p>Sorry, we couldn’t find any results matching your criteria</p>
+            <p>Sorry, we couldn’t find any artworks matching your search. </p>
           </div>
         )}
         {searchResultItems?.length > 0 && !searchFetching && !searchError && (
           // Render the results if there are results
           <>
             <header className="aic-ct-section-header f-body">
-              <h2 className="f-module-title-2">Choose artworks</h2>
+              <h2 className="f-module-title-2">Browse Artworks</h2>
               <span
                 id="aic-ct-search-result-count"
                 className="aic-ct-item-count aic-ct-item-count--body"
@@ -93,8 +93,7 @@ function SearchResults() {
               </span>
             </header>
             <p className="aic-ct-pre-result-text f-body">
-              Browse these artworks currently on view and available for your
-              tour.
+              These artworks are currently on view and available for your tour.
             </p>
             <ul
               id="aic-ct-search-results__items"

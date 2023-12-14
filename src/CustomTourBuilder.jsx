@@ -60,8 +60,9 @@ const CustomTourBuilder = (props) => {
             <div className="aic-ct-intro aic-ct-intro--keyline">
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
-                Select from the list of available artworks or browse themes to
-                help get you started. Choose up to 6 artworks for your tour.
+                Choose up to 6 artworks for your tour by searching for a
+                particular work or artist, browsing themes or selecting from the
+                list of artworks below.
               </p>
             </div>
             <SearchProvider>
