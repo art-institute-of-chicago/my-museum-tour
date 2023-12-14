@@ -52,7 +52,7 @@ function SearchPreview() {
     <div className={containerClassNames} id="aic-ct-preview__content">
       {previewData ? (
         <>
-          <div className="aic-ct-preview__header aic-ct-preview__padded">
+          <div className="aic-ct-preview__header aic-ct-preview__core">
             <button
               id="aic-ct-preview__close"
               className="btn btn--icon btn--transparent aic-ct-preview__close"
@@ -75,7 +75,7 @@ function SearchPreview() {
             />
           </div>
 
-          <div className="aic-ct-preview__padded">
+          <div className="aic-ct-preview__core">
             <div className="aic-ct-preview__details">
               <h3 className="aic-ct-preview__title f-headline-editorial">
                 {previewData.title}
@@ -154,7 +154,7 @@ function SearchPreview() {
           </div>
         </>
       ) : (
-        <div className="aic-ct-preview__padded aic-ct-loader f-body">
+        <div className="aic-ct-preview__core aic-ct-loader f-body">
           <p>Loading...</p>
           <div className="loader"></div>
         </div>
