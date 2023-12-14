@@ -57,7 +57,7 @@ const CustomTourBuilder = (props) => {
             title="Browse"
             tagline="for artworks to add to your tour"
           >
-            <div className="aic-ct-intro aic-ct-intro--keyline">
+            <div className="aic-ct-intro aic-ct-intro--keyline aic-ct__core">
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
                 Choose up to 6 artworks for your tour by searching for a
@@ -66,9 +66,11 @@ const CustomTourBuilder = (props) => {
               </p>
             </div>
             <SearchProvider>
-              <SearchBar />
-              <Themes />
-              <SearchResults />
+              <div className="aic-ct__core">
+                <SearchBar />
+                <Themes />
+                <SearchResults />
+              </div>
             </SearchProvider>
           </NavPage>
 
@@ -116,10 +118,12 @@ const CustomTourBuilder = (props) => {
                 />
               </div>
             )}
-            <div className="aic-ct-intro">
+            <div className="aic-ct-intro aic-ct__core">
               <h1 className="f-display-2">Personalize your tour</h1>
             </div>
-            <TourMetadata />
+            <div className="aic-ct__core">
+              <TourMetadata />
+            </div>
             <TourItems />
           </NavPage>
 

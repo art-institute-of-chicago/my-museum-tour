@@ -48,22 +48,24 @@ function TourItems() {
     <div className="aic-ct-tour">
       {tourItems.length > 0 && (
         <>
-          <header className="aic-ct-section-header f-body">
-            <h2 id="aic-ct-tour__heading" className="f-module-title-2">
-              Artworks in your tour
-            </h2>
-          </header>
-          <div className="f-body aic-ct-tour__intro">
-            <p>
-              To optimize your visit, we automatically arrange the order of your
-              tour based on the location of the artwork in the museum.
-            </p>
-            {tourItems.length === 6 && (
+          <div className="aic-ct__core">
+            <header className="aic-ct-section-header f-body">
+              <h2 id="aic-ct-tour__heading" className="f-module-title-2">
+                Artworks in your tour
+              </h2>
+            </header>
+            <div className="f-body aic-ct-tour__intro">
               <p>
-                You&apos;ve added 6 artworks, the maximum number allowed. Please
-                remove one if you would like to include more artwork.
+                To optimize your visit, we automatically arrange the order of
+                your tour based on the location of the artwork in the museum.
               </p>
-            )}
+              {tourItems.length === 6 && (
+                <p>
+                  You&apos;ve added 6 artworks, the maximum number allowed.
+                  Please remove one if you would like to include more artwork.
+                </p>
+              )}
+            </div>
           </div>
           <ul id="aic-ct-tour__results">
             {tourItems.map((itemData, index) => (
