@@ -3,7 +3,7 @@ import { AppContext } from "../../contexts/AppContext";
 import PropTypes from "prop-types";
 
 function NavPages({ children }) {
-  const { setNavPages } = useContext(AppContext);
+  const { activeNavPage, setNavPages } = useContext(AppContext);
 
   useEffect(() => {
     setNavPages(
@@ -18,6 +18,11 @@ function NavPages({ children }) {
         : [],
     );
   }, [children, setNavPages]);
+
+  useEffect(() => {
+    // Navigating while scrolled down should reset the scroll position
+    document.querySelector("#custom-tours-builder").scrollIntoView();
+  }, [activeNavPage]);
 
   return <div id="aic-ct-nav-pages">{children}</div>;
 }

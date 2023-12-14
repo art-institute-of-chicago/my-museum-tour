@@ -45,10 +45,12 @@ const CustomTourBuilder = (props) => {
   // Ask a user before they leave the page
   useEffect(() => {
     window.addEventListener("beforeunload", unloadHandler);
+    // Remove styles that interfere with position sticky
+    document.body.style.overflow = "unset";
   }, []);
 
   return (
-    <div className="custom-tours">
+    <div id="custom-tours-builder" className="custom-tours">
       <AppProvider {...AppProviderProps}>
         <Header />
         <NavPages>
