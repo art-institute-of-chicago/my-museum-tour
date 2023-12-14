@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import { Location } from "../../utils";
 
 /**
  * Submission
@@ -20,6 +21,8 @@ function Submission() {
     limits,
     isSaving,
     setIsSaving,
+    setActiveNavPage,
+    unloadHandler,
   } = useContext(AppContext);
   const [saveResponse, setSaveResponse] = useState(null);
 
@@ -57,11 +60,12 @@ function Submission() {
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
         );
       }
-      const { message } = await res.json();
+      const { message, custom_tour } = await res.json();
 
       setSaveResponse({
         type: "success",
         message,
+        id: custom_tour.id,
       });
     } catch (error) {
       setSaveResponse({
@@ -121,65 +125,141 @@ function Submission() {
     validCreatorEmail,
   ]);
 
+  useEffect(() => {
+    // When the user sucessfully saves their tour perform a redirect
+    if (saveResponse?.id) {
+      window.removeEventListener("beforeunload", unloadHandler);
+      // Need to use wrapper function for our tests
+      Location.assign(
+        `/custom-tours/${saveResponse.id}?tourCreationComplete=true`,
+      );
+    }
+  }, [saveResponse, unloadHandler]);
+
   return (
-    <>
-      <h2>Submit your tour</h2>
+    <div className="aic-ct-validation">
       {validityIssues.length ? (
-        <>
-          <p>Fix these issue before submitting your tour:</p>
-          {validityIssues.length && (
-            <ul id="aic-ct-validation-errors">
+        <div
+          id="aic-ct-validation__error"
+          className="aic-ct-validation__error aic-ct-validation__content"
+        >
+          <h1 className="f-headline">Finish your tour?</h1>
+          <p className="f-body">Fix these issue before finishing your tour:</p>
+          <div
+            id="aic-ct-validation__errors"
+            className="aic-ct-validation__errors aic-ct-validation__content o-blocks"
+          >
+            <ul>
               {validityIssues.map((issue, index) => (
-                <li key={index}>{issue}</li>
+                <li className="f-body" key={index}>
+                  {issue}
+                </li>
               ))}
             </ul>
-          )}
-        </>
+          </div>
+          <div className="aic-ct-validation__actions">
+            <button
+              className="btn btn--secondary f-buttons"
+              type="button"
+              onClick={() => {
+                if (!tourItems.length) {
+                  // Go back to step one if no items added
+                  setActiveNavPage(0);
+                } else {
+                  // Otherwise go to step two
+                  setActiveNavPage(1);
+                }
+              }}
+            >
+              Go back
+            </button>
+          </div>
+        </div>
       ) : (
-        <div id="aic-ct-validation-success">
-          <div tabIndex="-1" aria-live="polite">
-            {isSaving && <p>Saving...</p>}
+        <div
+          id="aic-ct-validation__saving"
+          className="aic-ct-validation__content aic-ct-validation__saving"
+          tabIndex="-1"
+          aria-live="polite"
+        >
+          {isSaving && (
+            <div className="aic-ct-loader f-body">
+              <p>Saving...</p>
+              <div className="loader"></div>
+            </div>
+          )}
 
-            {!isSaving && !saveResponse && (
-              <>
-                <p>
-                  Are you sure you want to submit your tour? You won&apos;t be
-                  able to make any more changes after this stage
-                </p>
+          {!isSaving && !saveResponse && (
+            <div
+              id="aic-ct-validation__save"
+              className="aic-ct-validation__save aic-ct-validation__content"
+            >
+              <h1 className="f-headline">
+                Are you sure you want to submit your tour?
+              </h1>
+              <p className="f-body">
+                You won&apos;t be able to edit it once this has been done.
+                <br />
+                Your tour will be automatically emailed to you when finished.
+              </p>
+              <div className="aic-ct-validation__actions">
                 <button
                   id="aic-ct-save-button"
+                  className="btn btn--primary f-buttons"
                   type="button"
                   onClick={handleSave}
                   disabled={isSaving}
                 >
-                  Save my tour
+                  Yes, Save my tour
                 </button>
-              </>
-            )}
+                <button
+                  className="btn btn--secondary f-buttons"
+                  type="button"
+                  onClick={() => {
+                    setActiveNavPage(1);
+                  }}
+                >
+                  No, go back and edit
+                </button>
+              </div>
+            </div>
+          )}
 
-            {saveResponse &&
-              ((saveResponse.type === "success" && (
-                <div id="aic-ct-save-success">
-                  <p>{saveResponse.message}</p>
-                </div>
-              )) ||
-                (saveResponse.type === "error" && (
-                  <div id="aic-ct-save-error">
-                    <p>{saveResponse.message}</p>
+          {saveResponse &&
+            ((saveResponse.type === "success" && (
+              <div
+                id="aic-ct-validation__success"
+                className="aic-ct-validation__content"
+              >
+                <h1 className="f-headline">
+                  Saved successfully!
+                  <br /> Redirecting to your tour
+                </h1>
+              </div>
+            )) ||
+              (saveResponse.type === "error" && (
+                <div
+                  id="aic-ct-save-error"
+                  className="aic-ct-validation__content"
+                >
+                  <h1 className="f-headline">Looks like there was a problem</h1>
+                  <p className="f-body">{saveResponse.message}</p>
+                  <div className="aic-ct-validation__actions">
                     <button
                       id="aic-ct-save-button"
+                      className="btn btn--primary f-buttons"
                       type="button"
                       onClick={handleSave}
                       disabled={isSaving}
                     >
-                      Save my tour
+                      Try again
                     </button>
                   </div>
-                )))}
-          </div>
+                </div>
+              )))}
         </div>
       )}
-    </>
+    </div>
   );
 }
 

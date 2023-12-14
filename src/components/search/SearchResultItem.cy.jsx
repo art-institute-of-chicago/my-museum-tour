@@ -13,7 +13,7 @@ describe("<SearchResultItem />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search__item-1 img")
+    cy.get("#aic-ct-search-item-1 img")
       .should(
         "have.attr",
         "src",

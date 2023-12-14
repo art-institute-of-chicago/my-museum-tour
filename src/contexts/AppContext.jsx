@@ -25,6 +25,8 @@ export function AppProvider(props) {
     tourItems: tourItemsValue,
     navPages: navPagesValue,
     apiSaveEndpoint: apiSaveEndpointValue,
+    iiifBaseUrl,
+    unloadHandler,
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
   const [creatorEmail, setCreatorEmail] = useState(creatorEmailValue || "");
@@ -43,9 +45,8 @@ export function AppProvider(props) {
     tourItemsReducer,
     tourItemsValue || [],
   );
-  const navSearchButtonRef = useRef(null);
+  const headerNextButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
-  const iiifBaseUrl = "https://artic.edu/iiif/2";
   const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
   const [isSaving, setIsSaving] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -93,13 +94,14 @@ export function AppProvider(props) {
         setNavPages,
         activeNavPage,
         setActiveNavPage,
-        navSearchButtonRef,
+        headerNextButtonRef,
         validityIssues,
         setValidityIssues,
         isSaving,
         setIsSaving,
         scrollY,
         setScrollY,
+        unloadHandler,
       }}
     >
       {children}
@@ -109,6 +111,7 @@ export function AppProvider(props) {
 
 AppProvider.propTypes = {
   apiSaveEndpoint: PropTypes.string,
+  iiifBaseUrl: PropTypes.string,
   children: PropTypes.node.isRequired,
   tourTitle: PropTypes.string,
   creatorEmail: PropTypes.string,
@@ -118,6 +121,7 @@ AppProvider.propTypes = {
   tourDescription: PropTypes.string,
   tourItems: PropTypes.instanceOf(Array),
   navPages: PropTypes.instanceOf(Array),
+  unloadHandler: PropTypes.func,
 };
 
 AppContext.Provider.propTypes = {
@@ -155,7 +159,7 @@ AppContext.Provider.propTypes = {
     setNavPages: PropTypes.func,
     activeNavPage: PropTypes.number,
     setActiveNavPage: PropTypes.func,
-    navSearchButtonRef: PropTypes.shape({
+    headerNextButtonRef: PropTypes.shape({
       current: PropTypes.instanceOf(Element),
     }),
     validityIssues: PropTypes.arrayOf(PropTypes.string),

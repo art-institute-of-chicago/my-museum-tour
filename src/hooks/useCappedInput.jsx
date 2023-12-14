@@ -53,10 +53,10 @@ function useCappedInput(options = {}) {
     charsRemaining,
     maxLength,
     counterEl: (
-      <span ref={countRef} aria-live="polite">
+      <output ref={countRef}>
         ({charsRemaining}
         <span className="sr-only"> characters remaining</span>)
-      </span>
+      </output>
     ),
   };
 }

@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import NavPages from "./components/navigation/NavPages";
 import NavPage from "./components/navigation/NavPage";
@@ -11,24 +12,39 @@ import Submission from "./components/submission/Submission";
 import { SearchProvider } from "./contexts/SearchContext";
 import { AppProvider } from "./contexts/AppContext";
 import PropTypes from "prop-types";
-import Header from "./components/navigation/Header";
+import { iiifUrl } from "./utils";
 
 const CustomTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
-  const { apiSaveEndpoint, tourTitle, tourDescription, tourItems } = props;
+  const {
+    apiSaveEndpoint,
+    tourTitle,
+    tourDescription,
+    tourItems,
+    heroImageId,
+  } = props;
+
+  const iiifBaseUrl = "https://artic.edu/iiif/2";
+
+  // Define handler here and pass into AppProvider for use elsewhere
+  const unloadHandler = (e) => {
+    e.preventDefault();
+    e.returnValue = "";
+  };
+
   const AppProviderProps = {
     apiSaveEndpoint,
     tourTitle,
     tourDescription,
     tourItems,
+    heroImageId,
+    iiifBaseUrl,
+    unloadHandler,
   };
 
   // Ask a user before they leave the page
   useEffect(() => {
-    window.addEventListener("beforeunload", (e) => {
-      e.preventDefault();
-      e.returnValue = "";
-    });
+    window.addEventListener("beforeunload", unloadHandler);
   }, []);
 
   return (
@@ -41,7 +57,7 @@ const CustomTourBuilder = (props) => {
             title="Browse"
             tagline="for artworks to add to your tour"
           >
-            <div className="aic-ct-intro">
+            <div className="aic-ct-intro aic-ct-intro--keyline">
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
                 Select from the list of available artworks or browse themes to
@@ -60,6 +76,48 @@ const CustomTourBuilder = (props) => {
             title="Personalize"
             tagline="your tour by adding notes to artworks"
           >
+            {heroImageId && (
+              <div className="aic-ct-hero">
+                <img
+                  src={iiifUrl(iiifBaseUrl, heroImageId, 20, 20, "full")}
+                  srcSet={`${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    480,
+                    480,
+                    "full",
+                  )} 320w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    640,
+                    640,
+                    "full",
+                  )} 480w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    960,
+                    960,
+                    "full",
+                  )} 640w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    1280,
+                    1280,
+                    "full",
+                  )} 960w, ${iiifUrl(
+                    iiifBaseUrl,
+                    heroImageId,
+                    1920,
+                    1920,
+                    "full",
+                  )} 1280w`}
+                  alt=""
+                />
+              </div>
+            )}
+            <div className="aic-ct-intro">
+              <h1 className="f-display-2">Personalize your tour</h1>
+            </div>
             <TourMetadata />
             <TourItems />
           </NavPage>
@@ -80,6 +138,7 @@ CustomTourBuilder.propTypes = {
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,
   searchPreviewId: PropTypes.number,
+  heroImageId: PropTypes.string,
 };
 
 export default CustomTourBuilder;

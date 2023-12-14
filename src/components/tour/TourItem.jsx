@@ -90,42 +90,85 @@ function TourItem(props) {
   }, [setRemoveButtons, tourItems, itemData.id]);
 
   return (
-    <li id={`aic-ct-tour__item-${itemData.id}`}>
-      {itemData.title && <h2>{itemData.title}</h2>}
-      {itemData.image_id && (
-        <img
-          src={iiifUrl(iiifBaseUrl, itemData.image_id, "240", "240")}
-          alt={itemData.thumbnail.alt_text}
-        />
-      )}
-      {itemData.artist_title && <p>{itemData.artist_title}</p>}
+    <li className="aic-ct-tour-item" id={`aic-ct-tour-item-${itemData.id}`}>
+      <div className="aic-ct-tour-item__lockup">
+        <div className="aic-ct-tour-item__info">
+          {itemData.title && (
+            <h2 className="aic-ct-tour-item__title f-deck">
+              {itemData.title}
+              {itemData.date_display && <>, {itemData.date_display}</>}
+            </h2>
+          )}
+          {itemData.artist_title && (
+            <h3 className="aic-ct-tour-item__artist f-body">
+              {itemData.artist_title}
+            </h3>
+          )}
+          {itemData.gallery_title && (
+            <p className="aic-ct-tour-item__gallery f-secondary">
+              <svg className="icon--location" aria-hidden="true">
+                <use xlinkHref="#icon--location"></use>
+              </svg>
+              {itemData.gallery_title}
+            </p>
+          )}
+        </div>
+        {itemData.image_id && (
+          <img
+            className="aic-ct-tour-item-image"
+            src={iiifUrl(
+              iiifBaseUrl,
+              itemData.image_id,
+              "96",
+              "128",
+              "full",
+              true,
+            )}
+            alt={itemData.thumbnail.alt_text}
+          />
+        )}
+      </div>
+
       {/* TODO: Update this to "short description"? When we have that field */}
       {itemData.description && (
-        <div dangerouslySetInnerHTML={{ __html: itemData.description }}></div>
+        <div
+          className="aic-ct-tour-item__description f-body "
+          dangerouslySetInnerHTML={{ __html: itemData.description }}
+        ></div>
       )}
-      <label htmlFor={`aic-ct-note-${itemData.id}`}>
-        Personal note{" "}
-        <span ref={cappedNote.countRef} aria-live="polite">
-          ({cappedNote.charsRemaining}
-          <span className="sr-only"> characters remaining</span>)
+      <div className="aic-ct-tour-item__note">
+        <label
+          htmlFor={`aic-ct-note-${itemData.id}`}
+          className="label f-secondary"
+        >
+          Your notes on this artwork&nbsp;<em>(optional)</em>
+        </label>
+        <span className="textarea">
+          <span className="input__io-container">
+            <textarea
+              className="f-secondary"
+              id={`aic-ct-note-${itemData.id}`}
+              onChange={cappedNote.onChange}
+              rows="5"
+              placeholder="e.g. I love the colors in this one."
+              value={cappedNote.value}
+              maxLength={cappedNote.maxLength}
+            />
+            {cappedNote.counterEl}
+          </span>
         </span>
-      </label>
-      <br />
-      <textarea
-        id={`aic-ct-note-${itemData.id}`}
-        onChange={cappedNote.onChange}
-        rows="5"
-        value={cappedNote.value}
-        maxLength={cappedNote.maxLength}
-      />
-      <br />
+      </div>
       <button
+        className="btn btn--transparent f-secondary aic-ct-tour-item__remove"
         ref={buttonRef}
         type="button"
         onClick={() => {
           handleClick(itemData.id);
         }}
       >
+        <svg className="icon--delete" aria-hidden="true">
+          <use xlinkHref="#icon--delete"></use>
+        </svg>
         Remove from tour
       </button>
     </li>
@@ -142,6 +185,8 @@ TourItem.propTypes = {
     }),
     artist_title: PropTypes.string,
     description: PropTypes.string,
+    date_display: PropTypes.string,
+    gallery_title: PropTypes.string,
   }),
   itemIndex: PropTypes.number.isRequired,
   setRemoveButtons: PropTypes.func,

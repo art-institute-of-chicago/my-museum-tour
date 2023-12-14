@@ -50,71 +50,78 @@ function SearchResults() {
   }
 
   return (
-    <div className="aic-ct-search-results">
-      {searchFetching && (
-        // Render only the loading message while fetching
-        <div
-          id="aic-ct-search-results__loading"
-          className="aic-ct-search-results__message aic-ct-loader f-body"
-        >
-          <p>Loading...</p>
-          <div className="loader"></div>
-        </div>
-      )}
-      {searchError && (
-        // Render only the error message if there is an error
-        <div
-          id="aic-ct-search-results__error"
-          className="aic-ct-search-results__message f-body"
-        >
-          <p>{searchError}</p>
-        </div>
-      )}
-      {searchResultItems?.length === 0 && !searchFetching && !searchError && (
-        // Render only a no results message if there are no results
-        <div
-          id="aic-ct-search-results__no-results"
-          className="aic-ct-search-results__message f-body"
-        >
-          <p>Sorry, we couldn’t find any results matching your criteria</p>
-        </div>
-      )}
-      {searchResultItems?.length > 0 && !searchFetching && !searchError && (
-        // Render the results if there are results
-        <>
-          <header className="aic-ct-section-header f-body">
-            <h2 className="f-module-title-2">Choose artworks</h2>
-            <span
-              id="aic-ct-search-result-count"
-              className="aic-ct-item-count aic-ct-item-count--body"
+    <>
+      <div className="aic-ct-search-results">
+        {searchFetching && (
+          // Render only the loading message while fetching
+          <div
+            id="aic-ct-search-results__loading"
+            className="aic-ct-search-results__message aic-ct-loader f-body"
+          >
+            <p>Loading...</p>
+            <div className="loader"></div>
+          </div>
+        )}
+        {searchError && (
+          // Render only the error message if there is an error
+          <div
+            id="aic-ct-search-results__error"
+            className="aic-ct-search-results__message f-body"
+          >
+            <p>{searchError}</p>
+          </div>
+        )}
+        {searchResultItems?.length === 0 && !searchFetching && !searchError && (
+          // Render only a no results message if there are no results
+          <div
+            id="aic-ct-search-results__no-results"
+            className="aic-ct-search-results__message f-body"
+          >
+            <p>Sorry, we couldn’t find any results matching your criteria</p>
+          </div>
+        )}
+        {searchResultItems?.length > 0 && !searchFetching && !searchError && (
+          // Render the results if there are results
+          <>
+            <header className="aic-ct-section-header f-body">
+              <h2 className="f-module-title-2">Choose artworks</h2>
+              <span
+                id="aic-ct-search-result-count"
+                className="aic-ct-item-count aic-ct-item-count--body"
+              >
+                {searchResultItems.length}
+              </span>
+            </header>
+            <p className="aic-ct-pre-result-text f-body">
+              Browse these artworks currently on view and available for your
+              tour.
+            </p>
+            <ul
+              id="aic-ct-search-results__items"
+              className="o-pinboard o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--3-col@medium o-pinboard--4-col@large o-pinboard--4-col@xlarge"
+              data-pinboard-option-layout="o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--2-col@medium o-pinboard--3-col@large o-pinboard--3-col@xlarge"
+              data-pinboard-maintain-order="false"
+              data-behavior="pinboard"
             >
-              {searchResultItems.length}
-            </span>
-          </header>
-          <p className="aic-ct-pre-result-text f-body">
-            Browse these artworks currently on view and available for your tour.
-          </p>
-          <ul
-            id="aic-ct-search-results__items"
-            className="o-pinboard o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--3-col@medium o-pinboard--4-col@large o-pinboard--4-col@xlarge"
-            data-pinboard-option-layout="o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--2-col@medium o-pinboard--3-col@large o-pinboard--3-col@xlarge"
-            data-pinboard-maintain-order="false"
-            data-behavior="pinboard"
-          >
-            {searchResultItems.map((itemData) => (
-              <SearchResultItem key={itemData.id} itemData={itemData} />
-            ))}
-          </ul>
-          <dialog
-            ref={searchPreviewRef}
-            id="aic-ct-search-preview"
-            onClose={handleClose}
-          >
-            <SearchPreview />
-          </dialog>
-        </>
-      )}
-    </div>
+              {searchResultItems.map((itemData) => (
+                <SearchResultItem key={itemData.id} itemData={itemData} />
+              ))}
+            </ul>
+            <dialog
+              ref={searchPreviewRef}
+              id="aic-ct-search-preview"
+              onClose={handleClose}
+            >
+              <SearchPreview />
+            </dialog>
+          </>
+        )}
+      </div>
+      {/* For description text when result is in tour */}
+      <p className="u-hide" id="aic-ct-search__in-your-tour">
+        This object is in your tour{" "}
+      </p>
+    </>
   );
 }
 

@@ -2,7 +2,8 @@ import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 
 function Header() {
-  const { activeNavPage, setActiveNavPage, tourItems } = useContext(AppContext);
+  const { activeNavPage, setActiveNavPage, tourItems, headerNextButtonRef } =
+    useContext(AppContext);
   const items = tourItems.length;
 
   const handleClick = () => {
@@ -28,6 +29,7 @@ function Header() {
         </span>
       </div>
       <button
+        ref={headerNextButtonRef}
         id="aic-ct-header__button"
         className="aic-ct-header__button btn btn--transparent btn--w-icon f-buttons"
         type="button"
