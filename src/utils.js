@@ -52,7 +52,7 @@ export function createSearchUrl(queryParams) {
     "artist_title,short_description,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id",
   );
   url.searchParams.set("limit", "60");
-  if (queryParams.keywords) {
+  if (typeof queryParams.keywords !== "undefined") {
     url.searchParams.set("q", queryParams.keywords);
   }
   if (queryParams.subjectIds) {
