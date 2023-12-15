@@ -80,7 +80,7 @@ function Submission() {
   useEffect(() => {
     const newValidityIssues = [];
     if (!tourTitle.length) {
-      newValidityIssues.push("A title is required");
+      newValidityIssues.push("A tour title");
     }
 
     if (tourTitle.length > limits.title) {
@@ -88,7 +88,7 @@ function Submission() {
     }
 
     if (!validCreatorEmail) {
-      newValidityIssues.push("A valid email address is required");
+      newValidityIssues.push("A valid email address");
     }
 
     if (tourDescription.length > limits.description) {
@@ -98,7 +98,7 @@ function Submission() {
     }
 
     if (tourItems.length < limits.items.min) {
-      newValidityIssues.push("At least one item is required");
+      newValidityIssues.push("At least one artwork is required for your tour");
     }
 
     if (tourItems.length > limits.items.max) {
@@ -144,7 +144,7 @@ function Submission() {
           className="aic-ct-validation__error aic-ct-validation__content"
         >
           <h1 className="f-headline">Finish your tour?</h1>
-          <p className="f-body">Fix these issue before finishing your tour:</p>
+          <p className="f-body">Your tour is missing important details:</p>
           <div
             id="aic-ct-validation__errors"
             className="aic-ct-validation__errors aic-ct-validation__content o-blocks"

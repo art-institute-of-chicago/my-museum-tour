@@ -23,9 +23,9 @@ function SearchResultItem(props) {
     // Counteract the scroll lock on the body resetting the scroll position
     setScrollY(_scrollY);
     searchPreviewRef.current.showModal();
-    document.documentElement.classList.add("s-body-locked");
     // Reset the scroll position after the modal has opened
     setTimeout(() => {
+      document.documentElement.classList.add("s-body-locked");
       document.body.scrollTop = _scrollY;
     }, 0);
   };

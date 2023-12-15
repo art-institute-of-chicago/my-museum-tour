@@ -40,16 +40,6 @@ function Footer() {
           </button>
         ))}
       </nav>
-      <a
-        href="/custom-tours"
-        className="btn btn--transparent btn--w-icon f-buttons aic-ct-nav__exit"
-        type="button"
-      >
-        <svg className="icon--close--24" aria-hidden="true">
-          <use xlinkHref="#icon--close--24"></use>
-        </svg>
-        Exit custom tour
-      </a>
     </footer>
   );
 }

@@ -26,7 +26,7 @@ describe("<Footer />", () => {
           {
             id: 1,
             title: "Personalize",
-            tagline: "your tour by adding notes to artworks",
+            tagline: "your tour by adding your own notes",
           },
           { id: 2, title: "Complete", tagline: "and share with friends" },
         ]}

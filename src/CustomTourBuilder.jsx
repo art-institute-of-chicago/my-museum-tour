@@ -45,10 +45,12 @@ const CustomTourBuilder = (props) => {
   // Ask a user before they leave the page
   useEffect(() => {
     window.addEventListener("beforeunload", unloadHandler);
+    // Remove styles that interfere with position sticky
+    document.body.style.overflow = "unset";
   }, []);
 
   return (
-    <div className="custom-tours">
+    <div id="custom-tours-builder" className="custom-tours">
       <AppProvider {...AppProviderProps}>
         <Header />
         <NavPages>
@@ -57,17 +59,20 @@ const CustomTourBuilder = (props) => {
             title="Browse"
             tagline="for artworks to add to your tour"
           >
-            <div className="aic-ct-intro aic-ct-intro--keyline">
+            <div className="aic-ct-intro aic-ct-intro--keyline aic-ct__core">
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
-                Select from the list of available artworks or browse themes to
-                help get you started. Choose up to 6 artworks for your tour.
+                Choose up to 6 artworks for your tour by searching for a
+                particular work or artist, browsing themes or selecting from the
+                list of artworks below.
               </p>
             </div>
             <SearchProvider>
-              <SearchBar />
-              <Themes />
-              <SearchResults />
+              <div className="aic-ct__core">
+                <SearchBar />
+                <Themes />
+                <SearchResults />
+              </div>
             </SearchProvider>
           </NavPage>
 
@@ -115,10 +120,12 @@ const CustomTourBuilder = (props) => {
                 />
               </div>
             )}
-            <div className="aic-ct-intro">
+            <div className="aic-ct-intro aic-ct__core">
               <h1 className="f-display-2">Personalize your tour</h1>
             </div>
-            <TourMetadata />
+            <div className="aic-ct__core">
+              <TourMetadata />
+            </div>
             <TourItems />
           </NavPage>
 

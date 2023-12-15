@@ -7,7 +7,7 @@ function interceptImages() {
   let imageInterceptCount = 0;
   return cy.intercept(
     "GET",
-    `https://artic.edu/iiif/2/*/*/*/0/default.jpg`,
+    `https://*.artic.edu/iiif/2/*/*/*/0/default.jpg`,
     (req) => {
       // Create a ceiling
       // Sometimes we might hit more than 10 images in a test
@@ -114,7 +114,9 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search-item-75644 button").click();
     cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-item-count").should("have.text", "3");
-    cy.get("#aic-ct-header__button").should("have.text", "Preview").click();
+    cy.get("#aic-ct-header__next-button")
+      .should("have.text", "Preview")
+      .click();
     cy.get("#aic-ct-tour-item-59426").should("exist");
     cy.get("#aic-ct-tour-item-243872").should("exist");
     cy.get("#aic-ct-tour-item-75644").should("exist");
@@ -140,7 +142,9 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search-item-75644 button").click();
     cy.get("#aic-ct-preview__action-button-75644").click();
     cy.get("#aic-ct-item-count").should("have.text", "3");
-    cy.get("#aic-ct-header__button").should("have.text", "Preview").click();
+    cy.get("#aic-ct-header__next-button")
+      .should("have.text", "Preview")
+      .click();
     cy.get("#aic-ct-tour-item-59426").should("exist");
     cy.get("#aic-ct-tour-item-243872").should("exist");
     cy.get("#aic-ct-tour-item-75644").should("exist");
@@ -352,5 +356,9 @@ describe("<CustomTourBuilder />", () => {
       });
 
     cy.get("#aic-ct-validation__success").should("exist");
+    cy.get("@assign").should(
+      "have.been.calledWith",
+      "/custom-tours/23?tourCreationComplete=true",
+    );
   });
 });

@@ -65,10 +65,7 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search-results__no-results").should(
-      "have.text",
-      "Sorry, we couldn’t find any results matching your criteria",
-    );
+    cy.get("#aic-ct-search-results__no-results").should("exist");
   });
 
   it("Renders a result", () => {

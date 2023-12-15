@@ -90,7 +90,10 @@ function TourItem(props) {
   }, [setRemoveButtons, tourItems, itemData.id]);
 
   return (
-    <li className="aic-ct-tour-item" id={`aic-ct-tour-item-${itemData.id}`}>
+    <li
+      className="aic-ct-tour-item aic-ct__core"
+      id={`aic-ct-tour-item-${itemData.id}`}
+    >
       <div className="aic-ct-tour-item__lockup">
         <div className="aic-ct-tour-item__info">
           {itemData.title && (

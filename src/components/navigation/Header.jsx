@@ -1,18 +1,19 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
+import classNames from "classnames";
+import { Location } from "../../utils";
 
 function Header() {
   const { activeNavPage, setActiveNavPage, tourItems, headerNextButtonRef } =
     useContext(AppContext);
   const items = tourItems.length;
 
-  const handleClick = () => {
-    if (activeNavPage === 0) {
-      setActiveNavPage(1);
-    } else {
-      setActiveNavPage(2);
-    }
-  };
+  const backButtonClasses = classNames(
+    "aic-ct-header__button aic-ct-header__button--back btn btn--transparent btn--w-icon f-buttons",
+    {
+      "aic-ct-header__button--exit": activeNavPage === 0,
+    },
+  );
 
   return (
     <header
@@ -25,15 +26,43 @@ function Header() {
           {items}
         </span>{" "}
         <span>
-          artworks added <em>(of max 6)</em>
+          artworks <em>(of max 6)</em>
         </span>
       </div>
       <button
         ref={headerNextButtonRef}
-        id="aic-ct-header__button"
-        className="aic-ct-header__button btn btn--transparent btn--w-icon f-buttons"
+        id="aic-ct-header__back-button"
+        className={backButtonClasses}
         type="button"
-        onClick={handleClick}
+        onClick={() => {
+          if (activeNavPage === 0) {
+            Location.assign("/custom-tours");
+          } else if (activeNavPage === 1) {
+            setActiveNavPage(0);
+          } else {
+            setActiveNavPage(1);
+          }
+        }}
+      >
+        <svg className="icon--arrow" aria-hidden="true">
+          <use xlinkHref="#icon--arrow"></use>
+        </svg>
+        {activeNavPage === 0 && "Exit"}
+        {activeNavPage === 1 && "Search"}
+        {activeNavPage === 2 && "Preview"}
+      </button>
+      <button
+        ref={headerNextButtonRef}
+        id="aic-ct-header__next-button"
+        className="aic-ct-header__button aic-ct-header__button--next btn btn--transparent btn--w-icon f-buttons"
+        type="button"
+        onClick={() => {
+          if (activeNavPage === 0) {
+            setActiveNavPage(1);
+          } else {
+            setActiveNavPage(2);
+          }
+        }}
       >
         {activeNavPage === 0 && "Preview"}
         {activeNavPage > 0 && "Finish"}
