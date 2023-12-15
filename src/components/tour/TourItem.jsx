@@ -132,7 +132,7 @@ function TourItem(props) {
         )}
       </div>
 
-      {/* TODO: Update this to "short description"? When we have that field */}
+      {/* Note the reducer reassigns short_description to description for this output */}
       {itemData.description && (
         <div
           className="aic-ct-tour-item__description f-body "

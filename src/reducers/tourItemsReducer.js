@@ -7,7 +7,12 @@
 const tourItemsReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      // Payload for add is the entire item JSON
+      // Payload for add is the entire item JSON from the API
+      // Reassign short_description to description
+      if (action.payload.short_description) {
+        action.payload.description = action.payload.short_description;
+      }
+      delete action.payload.short_description;
       return [...state, { ...action.payload, objectNote: "" }];
     case "UPDATE_NOTE":
       // Return a new array with the item with the updated objectNote

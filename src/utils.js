@@ -49,7 +49,7 @@ export function createSearchUrl(queryParams) {
   url.searchParams.set("query[bool][minimum_should_match]", "1");
   url.searchParams.set(
     "fields",
-    "artist_title,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id",
+    "artist_title,short_description,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id",
   );
   url.searchParams.set("limit", "60");
   if (queryParams.keywords) {
