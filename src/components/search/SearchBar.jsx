@@ -57,13 +57,8 @@ function SearchBar() {
           value={searchQuery}
           autoComplete="off"
           onChange={(e) => {
-            if (e.target.value) e.target.setCustomValidity("");
             setSearchQuery(e.target.value);
           }}
-          onInvalid={(e) => {
-            e.target.setCustomValidity("You must enter a search term");
-          }}
-          required
         />
 
         <button
