@@ -122,7 +122,7 @@ function SearchPreview() {
                 <h3 className="aic-ct-preview__description-title f-module-title-2">
                   Artwork description
                 </h3>
-                {/* It appears short_description lack wrapping html or formatting,
+                {/* It appears short_description lacks wrapping html or formatting,
                 whereas full descriptions have this */}
                 {previewData.short_description ? (
                   <p className="f-body">{previewData.short_description}</p>
