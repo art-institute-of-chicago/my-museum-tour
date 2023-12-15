@@ -7,7 +7,7 @@ function interceptImages() {
   let imageInterceptCount = 0;
   return cy.intercept(
     "GET",
-    `https://artic.edu/iiif/2/*/*/*/0/default.jpg`,
+    `https://*.artic.edu/iiif/2/*/*/*/0/default.jpg`,
     (req) => {
       // Create a ceiling
       // Sometimes we might hit more than 10 images in a test
