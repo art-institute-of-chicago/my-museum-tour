@@ -21,7 +21,7 @@ function NavPages({ children }) {
 
   useEffect(() => {
     // Navigating while scrolled down should reset the scroll position
-    document.querySelector("#custom-tours-builder").scrollIntoView();
+    document.querySelector("#custom-tours-builder")?.scrollIntoView();
   }, [activeNavPage]);
 
   return <div id="aic-ct-nav-pages">{children}</div>;
