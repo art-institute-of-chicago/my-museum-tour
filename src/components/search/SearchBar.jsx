@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { createSearchUrl } from "../../utils";
@@ -36,6 +36,16 @@ function SearchBar() {
   const formClasses = classNames("m-search-bar aic-ct-search", {
     "s-autocomplete-active": searchQuery,
   });
+
+  // Fetch the default search results on mount
+  // Aware of the eslint warning, but including fetchData in the dependency array
+  // would cause an infinite loop. This is fine for now.
+  // Possible workarounds if this causes issues later:
+  // - Some kind of refactor to useFetch
+  // - Use a ref to trigger a click on the search button
+  useEffect(() => {
+    fetchData(createSearchUrl({ keywords: "" }));
+  }, []);
 
   return (
     <form
