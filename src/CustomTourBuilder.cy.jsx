@@ -40,6 +40,9 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search").should("exist");
     cy.get("#aic-ct-metadata__title").should("exist");
     cy.get("#aic-ct-metadata__description").should("exist");
+    cy.wait("@search");
+    cy.get("#aic-ct-search-results__items").should("exist");
+    cy.get("#aic-ct-search-results__items li").should("have.length", 10);
   });
 
   it("Can add each metadata field for the tour", () => {

@@ -117,16 +117,23 @@ function SearchPreview() {
               )}
             </div>
 
-            {/* TODO: Update this to "short description"? When we have that field */}
-            {previewData.description && (
+            {(previewData.short_description || previewData.description) && (
               <div className="aic-ct-preview__description">
                 <h3 className="aic-ct-preview__description-title f-module-title-2">
                   Artwork description
                 </h3>
-                <div
-                  className="f-body"
-                  dangerouslySetInnerHTML={{ __html: previewData.description }}
-                ></div>
+                {/* It appears short_description lacks wrapping html or formatting,
+                whereas full descriptions have this */}
+                {previewData.short_description ? (
+                  <p className="f-body">{previewData.short_description}</p>
+                ) : (
+                  <div
+                    className="f-body"
+                    dangerouslySetInnerHTML={{
+                      __html: previewData.description,
+                    }}
+                  ></div>
+                )}
                 <a
                   className="aic-ct-preview__learn-more f-link"
                   target="_blank"
