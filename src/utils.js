@@ -68,11 +68,8 @@ export function createSearchUrl(queryParams) {
   // Uniform treatment for subject, category, and style ids
   // This works for now, but we may need to tune this later
   for (const [key, value] of Object.entries(queryParams)) {
-    if (key.includes("Ids")) {
-      url.searchParams.set(
-        `query[bool][must][][terms][${camelToSnakeCase(key)}][]`,
-        value,
-      );
+    if (key.includes("_ids")) {
+      url.searchParams.set(`query[bool][must][][terms][${key}][]`, value);
     }
   }
 
