@@ -9,34 +9,39 @@ function Themes() {
   // Best way to achieve this is TBD
   const themes = [
     {
-      label: "Landscapes",
-      subjectIds: ["TM-8657"],
-      thumbnailId: "2d484387-2509-5e8e-2c43-22f9981972eb",
-    },
-    {
-      label: "Fashion",
-      subjectIds: ["TM-8663"],
-      thumbnailId: "b272df73-a965-ac37-4172-be4e99483637",
-    },
-    {
-      label: "Mythology",
-      subjectIds: ["TM-8766"],
-      thumbnailId: "3e41420d-2bae-5863-1980-fd39a78e1ffe",
-    },
-    {
-      label: "Animals",
-      subjectIds: ["TM-12218"],
-      thumbnailId: "9ae64560-a416-ec19-851a-c76c5ca3c64f",
-    },
-    {
-      label: "Chicago artists",
-      categoryIds: ["PC-154"],
-      thumbnailId: "f7f9615d-2c2b-6b23-47b2-cd6cdc846504",
+      label: "Impressionism",
+      thumbnailId: "a38e2828-ec6f-ece1-a30f-70243449197b",
+      searchParams: {
+        styleIds: ["TM-7543"],
+      },
     },
     {
       label: "Essentials",
-      categoryIds: ["PC-831"],
-      thumbnailId: "25c31d8d-21a4-9ea1-1d73-6a2eca4dda7e",
+      thumbnailId: "b272df73-a965-ac37-4172-be4e99483637",
+      searchParams: {
+        themeTitle: "Essentials",
+      },
+    },
+    {
+      label: "Portraits",
+      thumbnailId: "83375479-f7a9-bac3-44a8-e705ab6e423c",
+      searchParams: {
+        subjectIds: ["TM-8658"],
+      },
+    },
+    {
+      label: "Modernism",
+      thumbnailId: "3ee54063-9d78-ee86-0103-b477d988a93f",
+      searchParams: {
+        styleIds: ["TM-5981"],
+      },
+    },
+    {
+      label: "Animals",
+      thumbnailId: "e54a695c-16df-cf45-9dd4-b517e8c32cc3",
+      searchParams: {
+        subjectIds: ["TM-12218"],
+      },
     },
   ];
 
@@ -51,9 +56,8 @@ function Themes() {
             key={theme.label}
             id={index}
             label={theme.label}
-            subjectIds={theme.subjectIds}
-            categoryIds={theme.categoryIds}
             thumbnailId={theme.thumbnailId}
+            searchParams={theme.searchParams}
           />
         ))}
       </ul>
