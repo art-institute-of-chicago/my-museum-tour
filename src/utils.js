@@ -24,6 +24,15 @@ export function iiifUrl(
 }
 
 /**
+ * Converts camel case string to snake case
+ * @param {string} str - String to convert to snake case
+ * @returns
+ */
+export function camelToSnakeCase(str) {
+  return str.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
+}
+
+/**
  * @typedef {Object} QueryParams
  * @property {string} keywords - Search keywords
  * @property {string[]} subjectIds - Array of subject ids
@@ -55,18 +64,25 @@ export function createSearchUrl(queryParams) {
   if (typeof queryParams.keywords !== "undefined") {
     url.searchParams.set("q", queryParams.keywords);
   }
-  if (queryParams.subjectIds) {
+
+  // Uniform treatment for subject, category, and style ids
+  // This works for now, but we may need to tune this later
+  for (const [key, value] of Object.entries(queryParams)) {
+    if (key.includes("Ids")) {
+      url.searchParams.set(
+        `query[bool][must][][terms][${camelToSnakeCase(key)}][]`,
+        value,
+      );
+    }
+  }
+
+  if (queryParams.themeTitle) {
     url.searchParams.set(
-      "query[bool][must][][terms][subject_ids][]",
-      queryParams.subjectIds,
+      "query[bool][must][][term][theme_titles.keyword]",
+      queryParams.themeTitle,
     );
   }
-  if (queryParams.categoryIds) {
-    url.searchParams.set(
-      "query[bool][must][][term][category_ids][value]",
-      queryParams.categoryIds,
-    );
-  }
+
   return url;
 }
 
