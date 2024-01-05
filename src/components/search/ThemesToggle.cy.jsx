@@ -24,7 +24,11 @@ describe("<Themes />", () => {
     cy.mount(
       <AppProvider>
         <SearchProvider>
-          <ThemeToggle id="0" label="Test theme" subjectIds={["TM-8657"]} />
+          <ThemeToggle
+            id="0"
+            label="Test theme"
+            searchParams={{ subject_ids: ["TM-8657"] }}
+          />
         </SearchProvider>
       </AppProvider>,
     );
@@ -46,7 +50,11 @@ describe("<Themes />", () => {
     cy.mount(
       <AppProvider>
         <SearchProvider>
-          <ThemeToggle id="0" label="Test theme" categoryIds={["PC-154"]} />
+          <ThemeToggle
+            id="0"
+            label="Test theme"
+            searchParams={{ category_ids: ["PC-154"] }}
+          />
         </SearchProvider>
       </AppProvider>,
     );
@@ -55,7 +63,7 @@ describe("<Themes />", () => {
       .its("request.url")
       .should(
         "include",
-        "query%5Bbool%5D%5Bmust%5D%5B%5D%5Bterm%5D%5Bcategory_ids%5D%5Bvalue%5D=PC-154",
+        "&query%5Bbool%5D%5Bmust%5D%5B%5D%5Bterms%5D%5Bcategory_ids%5D%5B%5D=PC-154",
       );
   });
 });

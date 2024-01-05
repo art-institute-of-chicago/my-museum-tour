@@ -13,6 +13,6 @@ describe("<ThemeToggle />", () => {
       </AppProvider>,
     );
     cy.get("#aic-ct-themes").should("exist");
-    cy.get("#aic-ct-themes button").should("have.length", 6);
+    cy.get("#aic-ct-themes button").should("have.length", 5);
   });
 });
