@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef, useEffect, useState } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { createSearchUrl } from "../../utils";
@@ -16,6 +16,8 @@ function SearchBar() {
     setSearchError,
     setActiveTheme,
   } = useContext(SearchContext);
+
+  const [initialRender, setInitialRender] = useState(true);
 
   const { fetchData } = useFetch({
     dataSubSelector: "data",
@@ -38,14 +40,14 @@ function SearchBar() {
   });
 
   // Fetch the default search results on mount
-  // Aware of the eslint warning, but including fetchData in the dependency array
-  // would cause an infinite loop. This is fine for now.
-  // Possible workarounds if this causes issues later:
-  // - Some kind of refactor to useFetch
-  // - Use a ref to trigger a click on the search button
+  // initialRender gets around the eslint warning about fetchData being a dependency.
+  // If not present it will cause an infinite loop
   useEffect(() => {
-    fetchData(createSearchUrl({ keywords: "" }));
-  }, []);
+    if (initialRender) {
+      setInitialRender(false);
+      fetchData(createSearchUrl({ keywords: "" }));
+    }
+  }, [fetchData, initialRender, setInitialRender]);
 
   return (
     <form
