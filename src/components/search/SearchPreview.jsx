@@ -10,7 +10,8 @@ import classNames from "classnames";
 function SearchPreview() {
   const { searchPreviewId, searchResultItems, searchPreviewRef } =
     useContext(SearchContext);
-  const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
+  const { iiifBaseUrl, tourItems, tourItemsDispatch, limits } =
+    useContext(AppContext);
   const [inTour, setInTour] = useState(false);
   const [previewData, setPreviewData] = useState(null);
 
@@ -103,7 +104,7 @@ function SearchPreview() {
               {/* If the item isn't in the tour and the limit isn't reached: show add */}
               {/* Otherwise don't show a button */}
               {/* Needs to be done in a way that doesn't remove this button and lose focus */}
-              {(tourItems.length < 6 || inTour) && (
+              {tourItems.length < 6 || inTour ? (
                 <button
                   id={`aic-ct-preview__action-button-${previewData.id}`}
                   className="btn f-buttons aic-ct-preview__action-button"
@@ -114,6 +115,12 @@ function SearchPreview() {
                 >
                   {inTour ? "Remove from your tour" : "Add to your tour"}
                 </button>
+              ) : (
+                <p className="f-body">
+                  You have already added {limits.items.max} artworks, the
+                  maximum number allowed. Please remove one if you would like to
+                  include this artwork.
+                </p>
               )}
             </div>
 
