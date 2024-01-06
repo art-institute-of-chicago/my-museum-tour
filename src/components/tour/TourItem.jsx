@@ -118,13 +118,13 @@ function TourItem(props) {
         </div>
         {itemData.image_id && (
           <img
-            className="aic-ct-tour-item-image"
+            className="aic-ct-tour-item__image"
             src={iiifUrl(
               iiifBaseUrl,
               itemData.image_id,
-              "96",
               "128",
-              "full",
+              "128",
+              "square",
               true,
             )}
             alt={itemData.thumbnail.alt_text}

@@ -7,7 +7,7 @@ describe("<TourItem />", () => {
   it("Renders", () => {
     cy.intercept(
       "GET",
-      "https://artic.edu/iiif/2/test_image_id/full/!96,128/0/default.jpg",
+      "https://artic.edu/iiif/2/test_image_id/square/!128,128/0/default.jpg",
       {
         fixture: `../../cypress/fixtures/images/image_${
           Math.floor(Math.random() * 10) + 1
@@ -31,7 +31,7 @@ describe("<TourItem />", () => {
       .should(
         "have.attr",
         "src",
-        "https://artic.edu/iiif/2/test_image_id/full/!96,128/0/default.jpg",
+        "https://artic.edu/iiif/2/test_image_id/square/!128,128/0/default.jpg",
       )
       .should("have.attr", "alt", "Test image alt text");
   });
