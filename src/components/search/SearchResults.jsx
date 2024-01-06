@@ -17,20 +17,36 @@ function SearchResults() {
   const { scrollY } = useContext(AppContext);
 
   // Store a reference to the event listener callback to remove it later
-  const handleClose = useCallback(() => {
-    setSearchPreviewId(null);
-    document.documentElement.scrollTop = scrollY;
-    document.documentElement.classList.remove("s-body-locked");
-  }, [setSearchPreviewId, scrollY]);
+  const handleClose = useCallback(
+    (e) => {
+      // Dual use for this function during the close event and the click event
+      if (
+        e.type === "close" ||
+        (searchPreviewRef?.current?.open &&
+          e.target === searchPreviewRef?.current)
+      ) {
+        // Close the window if open -- does nothing on close event
+        searchPreviewRef.current.close();
+        setSearchPreviewId(null);
+
+        document.documentElement.scrollTop = scrollY;
+        document.documentElement.classList.remove("s-body-locked");
+      }
+    },
+    [setSearchPreviewId, scrollY, searchPreviewRef],
+  );
 
   useEffect(() => {
     const ref = searchPreviewRef.current;
+
     if (ref) {
       ref.addEventListener("close", handleClose);
+      ref.addEventListener("click", handleClose);
     }
     return () => {
       if (ref) {
         ref.removeEventListener("close", handleClose);
+        ref.removeEventListener("click", handleClose);
       }
     };
   }, [searchPreviewRef, handleClose]);
