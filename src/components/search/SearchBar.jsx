@@ -93,6 +93,8 @@ function SearchBar() {
             setSearchQuery("");
             setSearchResultItems(null);
             setActiveTheme(null);
+            // Apply results for empty keyword search
+            fetchData(createSearchUrl({ keywords: "" }));
             searchButtonRef.current.focus();
           }}
         >
