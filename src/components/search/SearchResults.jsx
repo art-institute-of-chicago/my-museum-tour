@@ -101,12 +101,6 @@ function SearchResults() {
           <>
             <header className="aic-ct-section-header f-body">
               <h2 className="f-module-title-2">Browse Artworks</h2>
-              <span
-                id="aic-ct-search-result-count"
-                className="aic-ct-item-count aic-ct-item-count--body"
-              >
-                {searchResultItems.length}
-              </span>
             </header>
             <p className="aic-ct-pre-result-text f-body">
               These artworks are currently on view and available for your tour.

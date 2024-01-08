@@ -89,7 +89,6 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
     cy.get("#aic-ct-search-results__items").should("exist");
     cy.get("#aic-ct-search-results__items li").should("have.length", 10);
-    cy.get("#aic-ct-search-result-count").should("have.text", "10");
   });
 
   it("Can perform a search on a theme and show results", () => {
@@ -98,7 +97,6 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
     cy.get("#aic-ct-search-results__items").should("exist");
     cy.get("#aic-ct-search-results__items li").should("have.length", 10);
-    cy.get("#aic-ct-search-result-count").should("have.text", "10");
     cy.get("#aic-ct-theme-toggle-0").click();
     cy.get("#aic-ct-search-results__items").should("not.exist");
   });
