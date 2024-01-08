@@ -30,7 +30,10 @@ function SearchResults() {
         setSearchPreviewId(null);
 
         document.documentElement.scrollTop = scrollY;
-        document.documentElement.classList.remove("s-body-locked");
+        document.documentElement.classList.remove(
+          "s-body-locked",
+          "s-body-locked--ct",
+        );
       }
     },
     [setSearchPreviewId, scrollY, searchPreviewRef],
