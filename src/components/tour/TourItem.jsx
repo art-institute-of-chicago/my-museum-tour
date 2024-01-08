@@ -141,7 +141,7 @@ function TourItem(props) {
           htmlFor={`aic-ct-note-${itemData.id}`}
           className="label f-secondary"
         >
-          Your notes on this artwork&nbsp;<em>(optional)</em>
+          Add a note about why you chose this artwork&nbsp;<em>(optional)</em>
         </label>
         <span className="textarea">
           <span className="input__io-container">

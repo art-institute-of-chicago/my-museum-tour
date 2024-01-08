@@ -117,7 +117,8 @@ function TourMetadata() {
             htmlFor="aic-ct-metadata__recipient-name"
             className="label f-secondary"
           >
-            Who is this tour for?&nbsp;<em>(optional)</em>
+            If you are making this tour for someone else, add their name
+            below&nbsp;<em>(optional)</em>
           </label>
           <span className="input">
             <span className="input__io-container">
