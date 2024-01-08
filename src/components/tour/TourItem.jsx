@@ -109,9 +109,6 @@ function TourItem(props) {
           )}
           {itemData.gallery_title && (
             <p className="aic-ct-tour-item__gallery f-secondary">
-              <svg className="icon--location" aria-hidden="true">
-                <use xlinkHref="#icon--location"></use>
-              </svg>
               {itemData.gallery_title}
             </p>
           )}
