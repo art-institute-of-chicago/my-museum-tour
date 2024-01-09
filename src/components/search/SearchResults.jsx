@@ -119,9 +119,6 @@ function SearchResults() {
         {searchResultItems?.length > 0 && !searchFetching && !searchError && (
           // Render the results if there are results
           <>
-            <header className="aic-ct-section-header f-body">
-              <h2 className="f-module-title-2">Browse Artworks</h2>
-            </header>
             <p className="aic-ct-pre-result-text f-body">
               These artworks are currently on view and available for your tour.
             </p>

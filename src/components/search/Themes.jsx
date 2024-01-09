@@ -46,22 +46,17 @@ function Themes() {
   ];
 
   return (
-    <>
-      <header className="aic-ct-section-header">
-        <h2 className="f-module-title-2">Browse by theme</h2>
-      </header>
-      <ul id="aic-ct-themes" className="aic-ct-themes">
-        {themes.map((theme, index) => (
-          <ThemeToggle
-            key={theme.label}
-            id={index}
-            label={theme.label}
-            thumbnailId={theme.thumbnailId}
-            searchParams={theme.searchParams}
-          />
-        ))}
-      </ul>
-    </>
+    <ul id="aic-ct-themes" className="aic-ct-themes">
+      {themes.map((theme, index) => (
+        <ThemeToggle
+          key={theme.label}
+          id={index}
+          label={theme.label}
+          thumbnailId={theme.thumbnailId}
+          searchParams={theme.searchParams}
+        />
+      ))}
+    </ul>
   );
 }
 
