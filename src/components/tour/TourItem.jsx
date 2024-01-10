@@ -109,22 +109,19 @@ function TourItem(props) {
           )}
           {itemData.gallery_title && (
             <p className="aic-ct-tour-item__gallery f-secondary">
-              <svg className="icon--location" aria-hidden="true">
-                <use xlinkHref="#icon--location"></use>
-              </svg>
               {itemData.gallery_title}
             </p>
           )}
         </div>
         {itemData.image_id && (
           <img
-            className="aic-ct-tour-item-image"
+            className="aic-ct-tour-item__image"
             src={iiifUrl(
               iiifBaseUrl,
               itemData.image_id,
-              "96",
               "128",
-              "full",
+              "128",
+              "square",
               true,
             )}
             alt={itemData.thumbnail.alt_text}
@@ -144,7 +141,7 @@ function TourItem(props) {
           htmlFor={`aic-ct-note-${itemData.id}`}
           className="label f-secondary"
         >
-          Your notes on this artwork&nbsp;<em>(optional)</em>
+          Add a note about why you chose this artwork&nbsp;<em>(optional)</em>
         </label>
         <span className="textarea">
           <span className="input__io-container">

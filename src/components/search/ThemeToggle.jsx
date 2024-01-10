@@ -20,7 +20,7 @@ function ThemeToggle(props) {
     activeTheme,
     setActiveTheme,
   } = useContext(SearchContext);
-  const { fetchData, resetState } = useFetch({
+  const { fetchData } = useFetch({
     dataSubSelector: "data",
     dataSetter: setSearchResultItems,
     fetchingSetter: setSearchFetching,
@@ -31,8 +31,8 @@ function ThemeToggle(props) {
     if (activeTheme === label) {
       // Deselect the theme
       setActiveTheme(null);
-      // Should remove results
-      resetState();
+      // Apply results for empty keyword search
+      fetchData(createSearchUrl({ keywords: "" }));
     } else {
       fetchData(createSearchUrl(searchParams));
       // Clicking while active removes the theme

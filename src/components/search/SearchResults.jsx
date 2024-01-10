@@ -17,20 +17,46 @@ function SearchResults() {
   const { scrollY } = useContext(AppContext);
 
   // Store a reference to the event listener callback to remove it later
-  const handleClose = useCallback(() => {
-    setSearchPreviewId(null);
-    document.documentElement.scrollTop = scrollY;
-    document.documentElement.classList.remove("s-body-locked");
-  }, [setSearchPreviewId, scrollY]);
+  const handleClose = useCallback(
+    (e) => {
+      // Dual use for this function during the close event and the click event
+      if (
+        e.type === "close" ||
+        (searchPreviewRef?.current?.open &&
+          e.target === searchPreviewRef?.current)
+      ) {
+        // Close the window if open -- does nothing on close event
+        searchPreviewRef.current.close();
+        setSearchPreviewId(null);
+
+        document.documentElement.scrollTop = scrollY;
+        document.documentElement.classList.remove(
+          "s-body-locked",
+          "s-body-locked--ct",
+        );
+      }
+    },
+    [setSearchPreviewId, scrollY, searchPreviewRef],
+  );
+
+  const handlePageUpdated = useCallback(() => {
+    const evt = new Event("page:updated", { bubbles: true });
+    setTimeout(() => {
+      document.dispatchEvent(evt);
+    }, 0);
+  });
 
   useEffect(() => {
     const ref = searchPreviewRef.current;
+
     if (ref) {
       ref.addEventListener("close", handleClose);
+      ref.addEventListener("click", handleClose);
     }
     return () => {
       if (ref) {
         ref.removeEventListener("close", handleClose);
+        ref.removeEventListener("click", handleClose);
       }
     };
   }, [searchPreviewRef, handleClose]);
@@ -38,11 +64,21 @@ function SearchResults() {
   // This does dispatch multiple times, but it doesn't seem to cause any issues
   // Might consider debouncing this
   useEffect(() => {
-    const evt = new Event("page:updated", { bubbles: true });
-    setTimeout(() => {
-      document.dispatchEvent(evt);
-    }, 0);
-  }, [searchResultItems]);
+    // Relayout pinboard when results change
+    handlePageUpdated();
+  }, [searchResultItems, handlePageUpdated]);
+
+  // Safari in particular (but potentially unnoticed in other browsers)
+  // Would sometimes fire page:updated, and not be picked up by the pinboard listener
+  // Possibly some kind of race condition?
+  // Safest way to have this always fire regardless is when page finishes loading.
+  // (in addition to when search results change)
+  useEffect(() => {
+    window.addEventListener("load", handlePageUpdated);
+    return () => {
+      window.removeEventListener("load", handlePageUpdated);
+    };
+  }, [handlePageUpdated]);
 
   // Catch all for no results, error, and loading states
   if (!searchResultItems && !searchFetching && !searchError) {
@@ -83,15 +119,6 @@ function SearchResults() {
         {searchResultItems?.length > 0 && !searchFetching && !searchError && (
           // Render the results if there are results
           <>
-            <header className="aic-ct-section-header f-body">
-              <h2 className="f-module-title-2">Browse Artworks</h2>
-              <span
-                id="aic-ct-search-result-count"
-                className="aic-ct-item-count aic-ct-item-count--body"
-              >
-                {searchResultItems.length}
-              </span>
-            </header>
             <p className="aic-ct-pre-result-text f-body">
               These artworks are currently on view and available for your tour.
             </p>

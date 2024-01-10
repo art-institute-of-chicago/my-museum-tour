@@ -194,11 +194,9 @@ function Submission() {
               id="aic-ct-validation__save"
               className="aic-ct-validation__save aic-ct-validation__content"
             >
-              <h1 className="f-headline">
-                Are you sure you want to submit your tour?
-              </h1>
+              <h1 className="f-headline">Are you ready to finish your tour?</h1>
               <p className="f-body">
-                You won&apos;t be able to edit it once this has been done.
+                You won&apos;t be able to edit it once you save.
                 <br />
                 Your tour will be automatically emailed to you when finished.
               </p>
@@ -210,7 +208,7 @@ function Submission() {
                   onClick={handleSave}
                   disabled={isSaving}
                 >
-                  Yes, Save my tour
+                  Yes, save my tour
                 </button>
                 <button
                   className="btn btn--secondary f-buttons"

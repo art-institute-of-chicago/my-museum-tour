@@ -82,6 +82,5 @@ describe("<SearchResults />", () => {
     );
     cy.get("#aic-ct-search-results__items").should("exist");
     cy.get("#aic-ct-search-results__items li").should("have.length", 1);
-    cy.get("#aic-ct-search-result-count").should("have.text", "1");
   });
 });

@@ -25,7 +25,10 @@ function SearchResultItem(props) {
     searchPreviewRef.current.showModal();
     // Reset the scroll position after the modal has opened
     setTimeout(() => {
-      document.documentElement.classList.add("s-body-locked");
+      document.documentElement.classList.add(
+        "s-body-locked",
+        "s-body-locked--ct",
+      );
       document.body.scrollTop = _scrollY;
     }, 0);
   };

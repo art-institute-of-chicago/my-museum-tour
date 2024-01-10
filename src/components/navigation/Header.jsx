@@ -47,9 +47,7 @@ function Header() {
         <svg className="icon--arrow" aria-hidden="true">
           <use xlinkHref="#icon--arrow"></use>
         </svg>
-        {activeNavPage === 0 && "Exit"}
-        {activeNavPage === 1 && "Search"}
-        {activeNavPage === 2 && "Preview"}
+        Back
       </button>
       <button
         ref={headerNextButtonRef}
@@ -64,7 +62,7 @@ function Header() {
           }
         }}
       >
-        {activeNavPage === 0 && "Preview"}
+        {activeNavPage === 0 && "Next"}
         {activeNavPage > 0 && "Finish"}
         <svg className="icon--arrow" aria-hidden="true">
           <use xlinkHref="#icon--arrow"></use>

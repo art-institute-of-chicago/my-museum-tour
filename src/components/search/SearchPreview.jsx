@@ -10,7 +10,8 @@ import classNames from "classnames";
 function SearchPreview() {
   const { searchPreviewId, searchResultItems, searchPreviewRef } =
     useContext(SearchContext);
-  const { iiifBaseUrl, tourItems, tourItemsDispatch } = useContext(AppContext);
+  const { iiifBaseUrl, tourItems, tourItemsDispatch, limits } =
+    useContext(AppContext);
   const [inTour, setInTour] = useState(false);
   const [previewData, setPreviewData] = useState(null);
 
@@ -103,7 +104,7 @@ function SearchPreview() {
               {/* If the item isn't in the tour and the limit isn't reached: show add */}
               {/* Otherwise don't show a button */}
               {/* Needs to be done in a way that doesn't remove this button and lose focus */}
-              {(tourItems.length < 6 || inTour) && (
+              {tourItems.length < 6 || inTour ? (
                 <button
                   id={`aic-ct-preview__action-button-${previewData.id}`}
                   className="btn f-buttons aic-ct-preview__action-button"
@@ -114,6 +115,12 @@ function SearchPreview() {
                 >
                   {inTour ? "Remove from your tour" : "Add to your tour"}
                 </button>
+              ) : (
+                <p className="f-body">
+                  You have already added {limits.items.max} artworks, the
+                  maximum number allowed. Please remove one if you would like to
+                  include this artwork.
+                </p>
               )}
             </div>
 
@@ -122,18 +129,16 @@ function SearchPreview() {
                 <h3 className="aic-ct-preview__description-title f-module-title-2">
                   Artwork description
                 </h3>
-                {/* It appears short_description lacks wrapping html or formatting,
+                {/* N.b. It appears short_description lacks wrapping html or formatting,
                 whereas full descriptions have this */}
-                {previewData.short_description ? (
-                  <p className="f-body">{previewData.short_description}</p>
-                ) : (
-                  <div
-                    className="f-body"
-                    dangerouslySetInnerHTML={{
-                      __html: previewData.description,
-                    }}
-                  ></div>
-                )}
+                <div
+                  className="f-body"
+                  dangerouslySetInnerHTML={{
+                    __html: previewData.short_description
+                      ? previewData.short_description
+                      : previewData.description,
+                  }}
+                ></div>
                 <a
                   className="aic-ct-preview__learn-more f-link"
                   target="_blank"
