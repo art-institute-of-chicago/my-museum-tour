@@ -73,13 +73,6 @@ export function createSearchUrl(queryParams) {
     }
   }
 
-  if (queryParams.themeTitle) {
-    url.searchParams.set(
-      "query[bool][must][][term][theme_titles.keyword]",
-      queryParams.themeTitle,
-    );
-  }
-
   return url;
 }
 

@@ -19,7 +19,7 @@ function Themes() {
       label: "Essentials",
       thumbnailId: "b272df73-a965-ac37-4172-be4e99483637",
       searchParams: {
-        theme_title: "Essentials",
+        category_ids: ["PC-831"],
       },
     },
     {
