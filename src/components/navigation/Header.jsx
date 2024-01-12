@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import classNames from "classnames";
 import { Location } from "../../utils";
+import Slots from "./Slots";
 
 function Header() {
   const { activeNavPage, setActiveNavPage, tourItems, headerNextButtonRef } =
@@ -28,6 +29,7 @@ function Header() {
         <span>
           artworks <em>(of max 6)</em>
         </span>
+        <Slots />
       </div>
       <button
         ref={headerNextButtonRef}
