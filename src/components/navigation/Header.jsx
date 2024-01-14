@@ -6,6 +6,7 @@ import Slots from "./Slots";
 
 function Header() {
   const {
+    limits,
     activeNavPage,
     setActiveNavPage,
     tourItems,
@@ -27,13 +28,16 @@ function Header() {
       className="aic-ct-header f-body"
       aria-label="Custom tour builder"
     >
-      <div className="aic-ct-item-info" aria-live="polite">
-        <span id="aic-ct-item-count" className="aic-ct-item-count f-body">
-          {items}
-        </span>{" "}
-        <span>
-          artworks <em>(of max 6)</em>
-        </span>
+      <div className="aic-ct-item-info">
+        <div className="aic-ct-item-info__count" aria-live="polite">
+          <span
+            id="aic-ct-item-count"
+            className="aic-ct-item-info__count-num f-body"
+          >
+            {items}
+          </span>{" "}
+          <span>artworks of {limits.items.max} </span>
+        </div>
         <Slots />
       </div>
       <button
