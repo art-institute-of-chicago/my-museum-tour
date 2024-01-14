@@ -150,7 +150,8 @@ function SearchResults() {
         This object is in your tour{" "}
       </p>
 
-      <p className="sr-only" aria-live="polite" id="aic-ct-search__status">
+      {/* For screenreader feedback on search */}
+      <p className="sr-only" aria-live="polite">
         {searchFetching
           ? "Loading"
           : activeTheme
