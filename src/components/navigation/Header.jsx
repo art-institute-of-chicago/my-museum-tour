@@ -5,8 +5,13 @@ import { Location } from "../../utils";
 import Slots from "./Slots";
 
 function Header() {
-  const { activeNavPage, setActiveNavPage, tourItems, headerNextButtonRef } =
-    useContext(AppContext);
+  const {
+    activeNavPage,
+    setActiveNavPage,
+    tourItems,
+    headerPrevButtonRef,
+    headerNextButtonRef,
+  } = useContext(AppContext);
   const items = tourItems.length;
 
   const backButtonClasses = classNames(
@@ -32,7 +37,7 @@ function Header() {
         <Slots />
       </div>
       <button
-        ref={headerNextButtonRef}
+        ref={headerPrevButtonRef}
         id="aic-ct-header__back-button"
         className={backButtonClasses}
         type="button"

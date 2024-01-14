@@ -4,7 +4,20 @@ import classNames from "classnames";
 import { iiifUrl } from "../../utils";
 
 function Slots() {
-  const { tourItems, limits, iiifBaseUrl } = useContext(AppContext);
+  const {
+    tourItems,
+    limits,
+    iiifBaseUrl,
+    setActiveNavPage,
+    activeNavPage,
+    headerPrevButtonRef,
+  } = useContext(AppContext);
+
+  const handleClick = () => {
+    // Jump to customize page
+    headerPrevButtonRef?.current?.focus();
+    setActiveNavPage(1);
+  };
 
   return (
     <ul className="aic-ct-header__slots">
@@ -16,7 +29,11 @@ function Slots() {
           })}
           key={index}
         >
-          <button type="button" disabled={!tourItems[index]}>
+          <button
+            type="button"
+            disabled={!tourItems[index] || activeNavPage === 1}
+            onClick={handleClick}
+          >
             {tourItems[index] ? (
               <img
                 src={iiifUrl(
@@ -30,7 +47,7 @@ function Slots() {
                 height="40"
                 alt=""
                 className="aic-ct-header__slot"
-                aria-label="Customize your tour"
+                aria-label={`Artwork ${index}, edit on customize page`}
               />
             ) : (
               <span>{index}</span>
