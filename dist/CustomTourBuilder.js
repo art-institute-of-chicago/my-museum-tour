@@ -784,7 +784,7 @@ function Ne() {
     setTimeout(() => {
       document.dispatchEvent(o);
     }, 0);
-  });
+  }, []);
   return g(() => {
     const o = s.current;
     return o && (o.addEventListener("close", i), o.addEventListener("click", i)), () => {
