@@ -46,7 +46,7 @@ function SearchResults() {
     setTimeout(() => {
       document.dispatchEvent(evt);
     }, 0);
-  });
+  }, []);
 
   useEffect(() => {
     const ref = searchPreviewRef.current;
