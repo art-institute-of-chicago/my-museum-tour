@@ -15,7 +15,10 @@ function Footer() {
   };
 
   return (
-    <footer className="aic-ct-footer" aria-label="Custom tour builder footer">
+    <footer
+      className="aic-ct-footer aic-ct-full-bleed"
+      aria-label="Custom tour builder footer"
+    >
       <nav
         id="aic-ct-navigation"
         className="aic-ct-nav"

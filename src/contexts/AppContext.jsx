@@ -45,6 +45,7 @@ export function AppProvider(props) {
     tourItemsReducer,
     tourItemsValue || [],
   );
+  const headerPrevButtonRef = useRef(null);
   const headerNextButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
   const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
@@ -94,6 +95,7 @@ export function AppProvider(props) {
         setNavPages,
         activeNavPage,
         setActiveNavPage,
+        headerPrevButtonRef,
         headerNextButtonRef,
         validityIssues,
         setValidityIssues,
@@ -159,6 +161,9 @@ AppContext.Provider.propTypes = {
     setNavPages: PropTypes.func,
     activeNavPage: PropTypes.number,
     setActiveNavPage: PropTypes.func,
+    headerPrevButtonRef: PropTypes.shape({
+      current: PropTypes.instanceOf(Element),
+    }),
     headerNextButtonRef: PropTypes.shape({
       current: PropTypes.instanceOf(Element),
     }),

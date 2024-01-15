@@ -13,6 +13,8 @@ function SearchResults() {
     searchResultItems,
     searchPreviewRef,
     setSearchPreviewId,
+    activeTheme,
+    searchQuery,
   } = useContext(SearchContext);
   const { scrollY } = useContext(AppContext);
 
@@ -44,7 +46,7 @@ function SearchResults() {
     setTimeout(() => {
       document.dispatchEvent(evt);
     }, 0);
-  });
+  }, []);
 
   useEffect(() => {
     const ref = searchPreviewRef.current;
@@ -146,6 +148,17 @@ function SearchResults() {
       {/* For description text when result is in tour */}
       <p className="u-hide" id="aic-ct-search__in-your-tour">
         This object is in your tour{" "}
+      </p>
+
+      {/* For screenreader feedback on search */}
+      <p className="sr-only" aria-live="polite">
+        {searchFetching
+          ? "Loading"
+          : activeTheme
+          ? `Showing results for ${activeTheme}`
+          : searchQuery
+          ? `Showing results for ${searchQuery}`
+          : "Showing default results"}
       </p>
     </>
   );

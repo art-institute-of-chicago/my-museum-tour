@@ -51,7 +51,7 @@ function TourMetadata() {
       <ol className="m-fieldset__fieldset">
         <li className="m-fieldset__field o-blocks">
           <label htmlFor="aic-ct-metadata__title" className="label f-secondary">
-            Tour Title *
+            Tour Title <span aria-hidden="true">&nbsp;*</span>
           </label>
           <span className="input">
             <span className="input__io-container">
@@ -63,9 +63,19 @@ function TourMetadata() {
                 id="aic-ct-metadata__title"
                 maxLength={cappedTitle.maxLength}
                 aria-required="true"
+                aria-invalid={cappedTitle.value ? "false" : "true"}
+                aria-describedby={
+                  !cappedTitle.isValid ? "aic-ct-metadata__invalid-title" : null
+                }
                 required
               />
               {cappedTitle.counterEl}
+            </span>
+            <span
+              id="aic-ct-metadata__invalid-title"
+              className="error-msg f-secondary"
+            >
+              Please enter a title for your tour
             </span>
           </span>
         </li>
@@ -95,7 +105,7 @@ function TourMetadata() {
             htmlFor="aic-ct-metadata__creator-email"
             className="label f-secondary"
           >
-            Your email *
+            Your email <span aria-hidden="true">&nbsp;*</span>
           </label>
           <span className="input">
             <input
@@ -108,8 +118,20 @@ function TourMetadata() {
               }}
               id="aic-ct-metadata__creator-email"
               aria-required="true"
+              aria-invalid={creatorEmail.value ? "false" : "true"}
+              aria-describedby={
+                !creatorEmail.isValid ? "aic-ct-metadata__invalid-email" : null
+              }
               required
             />
+            {!creatorEmail.isValid && (
+              <span
+                id="aic-ct-metadata__invalid-email"
+                className="error-msg f-secondary"
+              >
+                Please enter a valid email address
+              </span>
+            )}
           </span>
         </li>
         <li className="m-fieldset__field o-blocks">
