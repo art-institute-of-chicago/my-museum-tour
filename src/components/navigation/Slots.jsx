@@ -30,6 +30,7 @@ function Slots() {
           key={index}
         >
           <button
+            className="btn btn--transparent f-buttons"
             type="button"
             disabled={!tourItems[index] || activeNavPage === 1}
             onClick={handleClick}
@@ -50,7 +51,7 @@ function Slots() {
                 aria-label={`Artwork ${index + 1}, edit on customize page`}
               />
             ) : (
-              <span>{index}</span>
+              <span>{index + 1}</span>
             )}
           </button>
         </li>

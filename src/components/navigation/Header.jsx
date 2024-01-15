@@ -28,18 +28,6 @@ function Header() {
       className="aic-ct-header f-body"
       aria-label="Custom tour builder"
     >
-      <div className="aic-ct-item-info">
-        <div className="aic-ct-item-info__count" aria-live="polite">
-          <span
-            id="aic-ct-item-count"
-            className="aic-ct-item-info__count-num f-body"
-          >
-            {items}
-          </span>{" "}
-          <span>artworks of {limits.items.max} </span>
-        </div>
-        <Slots />
-      </div>
       <button
         ref={headerPrevButtonRef}
         id="aic-ct-header__back-button"
@@ -60,6 +48,18 @@ function Header() {
         </svg>
         Back
       </button>
+      <div className="aic-ct-item-info">
+        <div className="aic-ct-item-info__count" aria-live="polite">
+          <span
+            id="aic-ct-item-count"
+            className="aic-ct-item-info__count-num f-body"
+          >
+            {items}
+          </span>{" "}
+          <span>artworks of {limits.items.max} </span>
+        </div>
+        <Slots />
+      </div>
       <button
         ref={headerNextButtonRef}
         id="aic-ct-header__next-button"
