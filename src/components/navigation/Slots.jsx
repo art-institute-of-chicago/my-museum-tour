@@ -34,6 +34,7 @@ function Slots() {
             type="button"
             disabled={!tourItems[index] || activeNavPage === 1}
             onClick={handleClick}
+            aria-label={`Artwork ${index + 1}, edit on customize page`}
           >
             {tourItems[index] ? (
               <img
@@ -48,7 +49,6 @@ function Slots() {
                 height="40"
                 alt=""
                 className="aic-ct-header__slot"
-                aria-label={`Artwork ${index + 1}, edit on customize page`}
               />
             ) : (
               <span>{index + 1}</span>
