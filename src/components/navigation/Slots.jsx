@@ -20,7 +20,7 @@ function Slots() {
   };
 
   return (
-    <ul className="aic-ct-header__slots">
+    <ul id="aic-ct-header__slots" className="aic-ct-header__slots">
       {Array.from({ length: limits.items.max }).map((_, index) => (
         <li
           className={classNames("aic-ct-header__slot", {
