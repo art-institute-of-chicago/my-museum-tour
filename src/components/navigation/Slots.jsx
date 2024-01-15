@@ -47,7 +47,7 @@ function Slots() {
                 height="40"
                 alt=""
                 className="aic-ct-header__slot"
-                aria-label={`Artwork ${index}, edit on customize page`}
+                aria-label={`Artwork ${index + 1}, edit on customize page`}
               />
             ) : (
               <span>{index}</span>

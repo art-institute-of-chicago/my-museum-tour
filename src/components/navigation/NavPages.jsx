@@ -3,7 +3,7 @@ import { AppContext } from "../../contexts/AppContext";
 import PropTypes from "prop-types";
 
 function NavPages({ children }) {
-  const { activeNavPage, setNavPages } = useContext(AppContext);
+  const { activeNavPage, navPages, setNavPages } = useContext(AppContext);
 
   useEffect(() => {
     setNavPages(
@@ -24,7 +24,15 @@ function NavPages({ children }) {
     document.querySelector("#custom-tours-builder")?.scrollIntoView();
   }, [activeNavPage]);
 
-  return <div id="aic-ct-nav-pages">{children}</div>;
+  return (
+    <div id="aic-ct-nav-pages">
+      <div className="sr-only" aria-live="polite">
+        Step {navPages[activeNavPage]?.id + 1} {navPages[activeNavPage]?.title}{" "}
+        {navPages[activeNavPage]?.tagline}
+      </div>
+      {children}
+    </div>
+  );
 }
 
 NavPages.propTypes = {
