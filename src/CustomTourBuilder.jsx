@@ -82,7 +82,7 @@ const CustomTourBuilder = (props) => {
             tagline="your tour by adding notes to artworks"
           >
             {heroImageId && (
-              <div className="aic-ct-hero">
+              <div className="aic-ct-hero aic-ct-full-bleed">
                 <img
                   src={iiifUrl(iiifBaseUrl, heroImageId, 20, 20, "full")}
                   srcSet={`${iiifUrl(

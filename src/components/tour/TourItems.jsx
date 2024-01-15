@@ -81,69 +81,71 @@ function TourItems() {
           </ul>
         </>
       )}
-      <div className="aic-ct-tour__cta">
-        {tourItems.length > 0 && tourItems.length < 6 && (
-          <>
-            <p className="f-body">
-              You&apos;ve added {tourItems.length} of the maximum{" "}
-              {limits.items.max} artworks.
-            </p>
-            <div className="aic-ct-tour__cta-actions">
-              <button
-                ref={browseButtonRef}
-                id="aic-ct-tour__cta-browse"
-                type="button"
-                className="f-buttons btn btn--secondary"
-                onClick={handleBrowseClick}
-              >
-                Browse for more artworks
-              </button>
-              <button
-                type="button"
-                className="f-buttons btn btn--primary"
-                onClick={handleFinishClick}
-              >
-                Finish creating tour
-              </button>
-            </div>
-          </>
-        )}
-        {tourItems.length === 6 && (
-          <>
-            <p className="f-body">
-              You&apos;ve added {tourItems.length} artworks, the maximum number
-              allowed. Please remove one if you would like to include more
-              artwork
-            </p>
-            <div className="aic-ct-tour__cta-actions">
-              <button
-                type="button"
-                className="f-buttons btn btn--primary"
-                onClick={handleFinishClick}
-              >
-                Finish creating tour
-              </button>
-            </div>
-          </>
-        )}
-        {tourItems.length === 0 && (
-          <>
-            <p className="f-body">
-              You haven&apos;t added any artworks to your tour yet
-            </p>
-            <div className="aic-ct-tour__cta-actions">
-              <button
-                ref={browseButtonRef}
-                id="aic-ct-tour__cta-browse"
-                type="button"
-                className="f-buttons btn btn--secondary"
-                onClick={handleBrowseClick}
-              >
-                Browse for more artworks
-              </button>
-            </div>
-          </>
-        )}
+      <div className="aic-ct-tour__cta aic-ct-full-bleed">
+        <div className="aic-ct-tour__cta-wrapper aic-ct-full-bleed__core">
+          {tourItems.length > 0 && tourItems.length < 6 && (
+            <>
+              <p className="f-body">
+                You&apos;ve added {tourItems.length} of the maximum{" "}
+                {limits.items.max} artworks.
+              </p>
+              <div className="aic-ct-tour__cta-actions">
+                <button
+                  ref={browseButtonRef}
+                  id="aic-ct-tour__cta-browse"
+                  type="button"
+                  className="f-buttons btn btn--secondary"
+                  onClick={handleBrowseClick}
+                >
+                  Browse for more artworks
+                </button>
+                <button
+                  type="button"
+                  className="f-buttons btn btn--primary"
+                  onClick={handleFinishClick}
+                >
+                  Finish creating tour
+                </button>
+              </div>
+            </>
+          )}
+          {tourItems.length === 6 && (
+            <>
+              <p className="f-body">
+                You&apos;ve added {tourItems.length} artworks, the maximum
+                number allowed. Please remove one if you would like to include
+                more artwork
+              </p>
+              <div className="aic-ct-tour__cta-actions">
+                <button
+                  type="button"
+                  className="f-buttons btn btn--primary"
+                  onClick={handleFinishClick}
+                >
+                  Finish creating tour
+                </button>
+              </div>
+            </>
+          )}
+          {tourItems.length === 0 && (
+            <>
+              <p className="f-body">
+                You haven&apos;t added any artworks to your tour yet
+              </p>
+              <div className="aic-ct-tour__cta-actions">
+                <button
+                  ref={browseButtonRef}
+                  id="aic-ct-tour__cta-browse"
+                  type="button"
+                  className="f-buttons btn btn--secondary"
+                  onClick={handleBrowseClick}
+                >
+                  Browse for more artworks
+                </button>
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
