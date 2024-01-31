@@ -10,15 +10,19 @@ describe("<TourMetadata />", () => {
       </AppProvider>,
     );
     cy.get("#aic-ct-metadata__title").should("exist");
-    cy.get("#aic-ct-metadata__description").should("exist");
     cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
       "(255 characters remaining)",
     );
+    cy.get("#aic-ct-metadata__description").should("exist");
     cy.get("#aic-ct-metadata__description + output").should(
       "contain.text",
       "(255 characters remaining)",
     );
+
+    // Check invalid messages are shown
+    cy.get("#aic-ct-metadata__invalid-title").should("exist");
+    cy.get("#aic-ct-metadata__invalid-email").should("exist");
   });
 
   it("Can update each field", () => {
@@ -32,9 +36,12 @@ describe("<TourMetadata />", () => {
     );
     // This is 40 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__title").type(titleText, { delay: 0 });
+    cy.get("#aic-ct-metadata__invalid-title").should("not.exist");
 
     cy.get("#aic-ct-metadata__creator-name").type("Jon", { delay: 0 });
     cy.get("#aic-ct-metadata__creator-email").type("jonw@coghack.com");
+    cy.get("#aic-ct-metadata__invalid-email").should("not.exist");
+
     cy.get("#aic-ct-metadata__recipient-name").type("Luke");
 
     // This is 40 characters including spaces and punctuation

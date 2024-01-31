@@ -13,6 +13,7 @@ function TourMetadata() {
     setTourTitle,
     creatorEmail,
     setCreatorEmail,
+    validCreatorEmail,
     setValidCreatorEmail,
     creatorName,
     setCreatorName,
@@ -65,18 +66,20 @@ function TourMetadata() {
                 aria-required="true"
                 aria-invalid={cappedTitle.value ? "false" : "true"}
                 aria-describedby={
-                  !cappedTitle.isValid ? "aic-ct-metadata__invalid-title" : null
+                  !cappedTitle.value ? "aic-ct-metadata__invalid-title" : null
                 }
                 required
               />
               {cappedTitle.counterEl}
             </span>
-            <span
-              id="aic-ct-metadata__invalid-title"
-              className="error-msg f-secondary"
-            >
-              Please enter a title for your tour
-            </span>
+            {!cappedTitle.value && (
+              <span
+                id="aic-ct-metadata__invalid-title"
+                className="error-msg f-secondary"
+              >
+                Please enter a title for your tour
+              </span>
+            )}
           </span>
         </li>
         <li className="m-fieldset__field o-blocks">
@@ -124,7 +127,7 @@ function TourMetadata() {
               }
               required
             />
-            {!creatorEmail.isValid && (
+            {!validCreatorEmail && (
               <span
                 id="aic-ct-metadata__invalid-email"
                 className="error-msg f-secondary"
