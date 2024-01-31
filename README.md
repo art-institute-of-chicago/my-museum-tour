@@ -12,13 +12,11 @@ This is React app drives the custom tours builder on the main [artic.edu website
 
 ## Features
 
-> [!NOTE]<br>
-> TODO:
-> What are all the bells and whistles that are significant or unique to this project?
->
-> * What's the main functionality
-> * What new thing does this project provide?
-> * What unique feature does this project include?
+- Uses the API from [artic.edu](https://artic.edu) to:
+  - Search artworks
+  - `POST` data to the `custom-tours` endpoint
+- Cypress component testing and integration testing
+  - Included as part of the Github Actions workflow
 
 ## Overview
 > [!NOTE]<br>
