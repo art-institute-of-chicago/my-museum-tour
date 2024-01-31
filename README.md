@@ -2,13 +2,10 @@
 
 # Custom Tours ![Build status badge](https://github.com/art-institute-of-chicago/custom-tours/actions/workflows/build.yml/badge.svg)
 
-> [!WARNING]<br>
-> This README is currently a work in progress.
-
 
 ## Summary of the project
 
-This is React app drives the custom tours builder on the main [artic.edu website](https://artic.edu/custom-tours). It provided an interactive client-side interface for users to create custom tours.
+This React app drives the custom tours builder on the main [artic.edu website](https://artic.edu/custom-tours). It provided an interactive client-side interface for users to create custom tours.
 
 ## Features
 
@@ -60,6 +57,11 @@ npm ci
 If you want to develop new features on this project locally, there's various commands and actions you can perform using the npm scripts as described below.
 
 A full list of thse scripts is available in [`package.json`](package.json), or by running `npm run`.
+
+
+> [!NOTE]<br>
+> The [`index.html`](./index.html) file links to CSS, JS and icons which can either be symlinked or updated to point to those files from artic.edu
+
 
 ### Compiling and previewing changes
 
