@@ -19,10 +19,15 @@ This is React app drives the custom tours builder on the main [artic.edu website
   - Included as part of the Github Actions workflow
 
 ## Overview
-> [!NOTE]<br>
-> TODO:
->
-> Describe the architecture in which this project fits, and point to any other repos that make up the full stack of software. Describe how each piece fits together.
+
+This is just a React application, it doesn't contain any styles or images of its own.
+
+It's decoupled from [artic.edu](https://github.com/art-institute-of-chicago/artic.edu), but is intended to be used to embed the app into the [artic.edu website](https://artic.edu). In theory this can be used in other contexts, however it assumes the presence of other assets that exist in order to function correctly, specifically:
+
+- CSS classnames are referenced here, but are defined in artic.edu
+- Icons are referenced here, but are defined in artic.edu
+- Behaviours (e.g. `pinboard`) are referenced here, but are defined in artic.edu
+- Events (e.g. `page:updated`) are referenced here, but are defined in artic.edu
 
 ## Requirements
 
