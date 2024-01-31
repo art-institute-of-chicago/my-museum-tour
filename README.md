@@ -29,6 +29,14 @@ It's decoupled from [artic.edu](https://github.com/art-institute-of-chicago/arti
 - Behaviours (e.g. `pinboard`) are referenced here, but are defined in artic.edu
 - Events (e.g. `page:updated`) are referenced here, but are defined in artic.edu
 
+## Configuration
+
+The `<CustomToursBuilder />` React component can take in two `props`.
+
+- `apiSaveEndpoint` (optional) - which should be the path to the `custom-tours` save endpoint. If not provided it will default to `/api/v1/custom-tours`
+- `heroImageId` (optional) - which should be a string forming part of a IIIF image identifier that will be concatenated into a IIIF URL. If not provided there will be no hero image rendered on the customization screen. 
+
+
 ## Requirements
 
 - [Node.js / npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
