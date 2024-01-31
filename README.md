@@ -6,13 +6,9 @@
 > This README is currently a work in progress.
 
 
-> [!NOTE]<br>
-> TODO:
-> Summary of the project. This is the first thing you read when you view this project.
-> This is a great place to summarize the goals or intentions of this project.
-> Generally speaking, this section is optional, but is a nice way to get a snapshot of what this project is about.
-> Also include information on the maturity of the project, like when it was launched, what its current production environment is like, and who it is maintained by.
+## Summary of the project
 
+This is React app drives the custom tours builder on the main [artic.edu website](https://artic.edu/custom-tours). It provided an interactive client-side interface for users to create custom tours.
 
 ## Features
 
