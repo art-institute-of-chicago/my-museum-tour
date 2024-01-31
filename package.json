@@ -1,0 +1,44 @@
+{
+  "name": "custom-tours",
+  "version": "0.1.0",
+  "description": "![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)",
+  "main": "dist/CustomTourBuilder.js",
+  "files": [
+    "dist/CustomTourBuilder.js"
+  ],
+  "scripts": {
+    "build": "vite build",
+    "dev": "vite",
+    "lint": "run-p lint:* prettier",
+    "lint:scripts": "eslint --fix \"src/**/*.{js,jsx}\"",
+    "prettier": "prettier -w \"src/**/*.{js,jsx}\"",
+    "test": "cypress run --component --port=3000",
+    "test:gui": "cypress open --component --port=3000"
+  },
+  "dependencies": {
+    "classnames": "^2.3.2",
+    "prop-types": "^15.8.1"
+  },
+  "peerDependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@vitejs/plugin-react": "^4.0.3",
+    "cypress": "^13.6.1",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^3.0.0",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "vite": "^4.4.5"
+  },
+  "license": "GNU Affero General Public License v3.0"
+}

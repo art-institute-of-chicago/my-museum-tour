@@ -1,0 +1,10 @@
+.DS_Store
+.vscode
+node_modules
+cypress/downloads
+cypress/screenshots
+cypress/videos
+
+# Ignore all dist files except for the CustomTourBuilder
+dist/*
+!dist/CustomTourBuilder.js

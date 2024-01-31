@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="svg-sprite-src" content="/dist/icons/icons.svg" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <!--
+      Symlink this dist CSS yourself for local development with:
+      ln -sv ~/Projects/artic.edu/public/dist/styles/ dist/styles && \
+      ln -sv ~/Projects/artic.edu/public/dist/scripts/ dist/scripts && \
+      ln -sv ~/Projects/artic.edu/public/dist/icons/ dist/icons
+    -->
+
+    <link rel="stylesheet" href="/dist/styles/setup.css" />
+    <link rel="stylesheet" media="print" href="/dist/styles/print.css" />
+    <link rel="stylesheet" href="/dist/styles/app.css" />
+    <script src="/dist/scripts/head.js"></script>
+    <script src="/dist/scripts/app.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Tour Builder</title>
+  </head>
+  <body>
+    <header></header>
+    <div id="a17">
+      <main id="content">
+        <div id="root"></div>
+      </main>
+    </div>
+    <script type="module">
+      import React from "react";
+      import ReactDOM from "react-dom";
+      import CustomToursBuilder from "./src/CustomTourBuilder.jsx";
+
+      ReactDOM.render(
+        React.createElement(
+          React.StrictMode,
+          null,
+          React.createElement(CustomToursBuilder, {
+            apiSaveEndpoint: "https://artic.edu.ddev.site/api/v1/custom-tours",
+            heroImageId: "3c27b499-af56-f0d5-93b5-a7f2f1ad5813",
+          }),
+        ),
+        document.querySelector("#root"),
+      );
+    </script>
+  </body>
+</html>
