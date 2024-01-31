@@ -73,7 +73,7 @@ A full list of thse scripts is available in [`package.json`](package.json), or b
   <tbody>
     <tr>
       <td><code>npm run dev</code></td>
-      <td>Watches files in the <a href="./src"><code>src</code></a> directory for changes and serves a preview at <a href="https://localhost:43110">https://localhost:43110</a> with hot module replacement</td>
+      <td>Watches files in the <a href="./src"><code>src</code></a> directory for changes and serves a preview at <a href="https://localhost:43110">https://localhost:43110</a> with hot module replacement. You can edit the <a href="./index.html"><code>index.html</code></a> file to update the rendering of this preview (e.g. update the props in <code>CustomToursBuilder</code>)</a></td>
     </tr>
     <tr>
       <td><code>npm run build</code></td>
