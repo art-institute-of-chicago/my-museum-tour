@@ -84,6 +84,8 @@ A full list of thse scripts is available in [`package.json`](package.json), or b
   </tbody>
 </table>
 
+> [!IMPORTANT]<br>
+> In the current setup you *must* commit the build files
 
 ### Running the tests
 
