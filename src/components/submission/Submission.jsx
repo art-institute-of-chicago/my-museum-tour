@@ -131,7 +131,7 @@ function Submission() {
       window.removeEventListener("beforeunload", unloadHandler);
       // Need to use wrapper function for our tests
       Location.assign(
-        `/custom-tours/${saveResponse.id}?tourCreationComplete=true`,
+        `/my-museum-tours/${saveResponse.id}?tourCreationComplete=true`,
       );
     }
   }, [saveResponse, unloadHandler]);
