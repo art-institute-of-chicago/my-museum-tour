@@ -1345,7 +1345,7 @@ function Ce() {
     n
   ]), g(() => {
     _ != null && _.id && (window.removeEventListener("beforeunload", E), B.assign(
-      `/custom-tours/${_.id}?tourCreationComplete=true`
+      `/my-museum-tours/${_.id}?tourCreationComplete=true`
     ));
   }, [_, E]), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-validation" }, l.length ? /* @__PURE__ */ e.createElement(
     "div",
