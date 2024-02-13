@@ -36,7 +36,7 @@ function Header() {
           type="button"
           onClick={() => {
             if (activeNavPage === 0) {
-              Location.assign("/custom-tours");
+              Location.assign("/my-museum-tours");
             } else if (activeNavPage === 1) {
               setActiveNavPage(0);
             } else {

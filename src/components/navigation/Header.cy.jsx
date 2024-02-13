@@ -45,6 +45,6 @@ describe("<Header />", () => {
     cy.stub(Location, "assign").as("assign");
 
     cy.get("#aic-ct-header__back-button").click();
-    cy.get("@assign").should("have.been.calledWith", "/custom-tours");
+    cy.get("@assign").should("have.been.calledWith", "/my-museum-tours");
   });
 });

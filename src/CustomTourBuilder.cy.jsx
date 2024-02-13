@@ -355,7 +355,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-validation__success").should("exist");
     cy.get("@assign").should(
       "have.been.calledWith",
-      "/custom-tours/23?tourCreationComplete=true",
+      "/my-museum-tours/23?tourCreationComplete=true",
     );
   });
 });

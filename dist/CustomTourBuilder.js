@@ -286,7 +286,7 @@ function Ee() {
         className: o,
         type: "button",
         onClick: () => {
-          a === 0 ? B.assign("/custom-tours") : r(a === 1 ? 0 : 1);
+          a === 0 ? B.assign("/my-museum-tours") : r(a === 1 ? 0 : 1);
         }
       },
       /* @__PURE__ */ e.createElement("svg", { className: "icon--arrow", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--arrow" })),
