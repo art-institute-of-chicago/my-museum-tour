@@ -312,7 +312,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can save and show a success message", () => {
-    cy.intercept("POST", "/api/v1/custom-tours", {
+    cy.intercept("POST", "/api/v1/my-museum-tours", {
       fixture: "json/saveSuccess.json",
       statusCode: 201,
       delayMs: 80,
