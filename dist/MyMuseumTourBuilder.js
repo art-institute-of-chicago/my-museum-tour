@@ -33,7 +33,7 @@ function V(i) {
   ), [X, Z] = b(l || []), [ee, te] = b(0), [ae, re] = pe(
     fe,
     m || []
-  ), ie = C(null), ne = C(null), [se, ce] = b([]), le = u || "/api/v1/custom-tours", [oe, me] = b(!1), [ue, de] = b(0), he = O(
+  ), ie = C(null), ne = C(null), [se, ce] = b([]), le = u || "/api/v1/my-museum-tour", [oe, me] = b(!1), [ue, de] = b(0), he = O(
     () => ({
       objectNote: 255,
       title: 255,
@@ -286,7 +286,7 @@ function Ee() {
         className: o,
         type: "button",
         onClick: () => {
-          a === 0 ? B.assign("/my-museum-tours") : r(a === 1 ? 0 : 1);
+          a === 0 ? B.assign("/my-museum-tour") : r(a === 1 ? 0 : 1);
         }
       },
       /* @__PURE__ */ e.createElement("svg", { className: "icon--arrow", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--arrow" })),
@@ -1332,7 +1332,7 @@ function Ce() {
     const v = [];
     a.length || v.push("A tour title"), a.length > h.title && v.push("Tour title must not exceed the character limit"), n || v.push("A valid email address"), m.length > h.description && v.push(
       "Tour description must not exceed the character limit"
-    ), o.length < h.items.min && v.push("At least one artwork is required for your tour"), o.length > h.items.max && v.push("Tours must not contain more than 6 artworks"), o.some((x) => {
+    ), o.length < h.items.min && v.push("At least one artwork is required for your tour"), o.length > h.items.max && v.push("Tour must not contain more than 6 artworks"), o.some((x) => {
       var R;
       return ((R = x.objectNote) == null ? void 0 : R.length) > h.objectNote ? (v.push("Notes must not exceed the character limit"), !0) : !1;
     }), u(v);
@@ -1345,7 +1345,7 @@ function Ce() {
     n
   ]), g(() => {
     _ != null && _.id && (window.removeEventListener("beforeunload", E), B.assign(
-      `/my-museum-tours/${_.id}?tourCreationComplete=true`
+      `/my-museum-tour/${_.id}?tourCreationComplete=true`
     ));
   }, [_, E]), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-validation" }, l.length ? /* @__PURE__ */ e.createElement(
     "div",
@@ -1462,7 +1462,7 @@ const xe = (i) => {
   };
   return g(() => {
     window.addEventListener("beforeunload", o), document.body.style.overflow = "unset";
-  }, []), /* @__PURE__ */ e.createElement("div", { id: "custom-tours-builder", className: "custom-tours" }, /* @__PURE__ */ e.createElement(V, { ...m }, /* @__PURE__ */ e.createElement(Ee, null), /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement(
+  }, []), /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(V, { ...m }, /* @__PURE__ */ e.createElement(Ee, null), /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement(
     L,
     {
       id: 0,

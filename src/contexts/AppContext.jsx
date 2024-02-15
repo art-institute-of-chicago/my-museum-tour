@@ -48,7 +48,7 @@ export function AppProvider(props) {
   const headerPrevButtonRef = useRef(null);
   const headerNextButtonRef = useRef(null);
   const [validityIssues, setValidityIssues] = useState([]);
-  const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/custom-tours";
+  const apiSaveEndpoint = apiSaveEndpointValue || "/api/v1/my-museum-tour";
   const [isSaving, setIsSaving] = useState(false);
   const [scrollY, setScrollY] = useState(0);
 

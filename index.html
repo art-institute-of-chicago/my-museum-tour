@@ -29,14 +29,14 @@
     <script type="module">
       import React from "react";
       import ReactDOM from "react-dom";
-      import CustomToursBuilder from "./src/CustomTourBuilder.jsx";
+      import MyMuseumTourBuilder from "./src/MyMuseumTourBuilder.jsx";
 
       ReactDOM.render(
         React.createElement(
           React.StrictMode,
           null,
-          React.createElement(CustomToursBuilder, {
-            apiSaveEndpoint: "https://artic.edu.ddev.site/api/v1/custom-tours",
+          React.createElement(MyMuseumTourBuilder, {
+            apiSaveEndpoint: "https://artic.edu.ddev.site/api/v1/my-museum-tour",
             heroImageId: "3c27b499-af56-f0d5-93b5-a7f2f1ad5813",
           }),
         ),

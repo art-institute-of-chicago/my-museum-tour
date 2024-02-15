@@ -1,10 +1,10 @@
 {
-  "name": "custom-tours",
+  "name": "my-museum-tour",
   "version": "0.1.0",
   "description": "![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)",
-  "main": "dist/CustomTourBuilder.js",
+  "main": "dist/MyMuseumTourBuilder.js",
   "files": [
-    "dist/CustomTourBuilder.js"
+    "dist/MyMuseumTourBuilder.js"
   ],
   "scripts": {
     "build": "vite build",

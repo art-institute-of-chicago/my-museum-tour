@@ -14,7 +14,7 @@ import { AppProvider } from "./contexts/AppContext";
 import PropTypes from "prop-types";
 import { iiifUrl } from "./utils";
 
-const CustomTourBuilder = (props) => {
+const MyMuseumTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
   const {
     apiSaveEndpoint,
@@ -50,7 +50,7 @@ const CustomTourBuilder = (props) => {
   }, []);
 
   return (
-    <div id="custom-tours-builder" className="custom-tours">
+    <div id="my-museum-tour-builder" className="my-museum-tour">
       <AppProvider {...AppProviderProps}>
         <Header />
         <NavPages>
@@ -139,7 +139,7 @@ const CustomTourBuilder = (props) => {
   );
 };
 
-CustomTourBuilder.propTypes = {
+MyMuseumTourBuilder.propTypes = {
   apiSaveEndpoint: PropTypes.string,
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
@@ -148,4 +148,4 @@ CustomTourBuilder.propTypes = {
   heroImageId: PropTypes.string,
 };
 
-export default CustomTourBuilder;
+export default MyMuseumTourBuilder;

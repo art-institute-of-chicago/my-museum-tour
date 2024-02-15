@@ -5,6 +5,6 @@ cypress/downloads
 cypress/screenshots
 cypress/videos
 
-# Ignore all dist files except for the CustomTourBuilder
+# Ignore all dist files except for the MyMuseumTourBuilder
 dist/*
-!dist/CustomTourBuilder.js
+!dist/MyMuseumTourBuilder.js
