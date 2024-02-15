@@ -102,7 +102,7 @@ function Submission() {
     }
 
     if (tourItems.length > limits.items.max) {
-      newValidityIssues.push("Tours must not contain more than 6 artworks");
+      newValidityIssues.push("Tour must not contain more than 6 artworks");
     }
 
     // These errors will only happen if the user has manipulated the DOM/State
@@ -131,7 +131,7 @@ function Submission() {
       window.removeEventListener("beforeunload", unloadHandler);
       // Need to use wrapper function for our tests
       Location.assign(
-        `/my-museum-tours/${saveResponse.id}?tourCreationComplete=true`,
+        `/my-museum-tour/${saveResponse.id}?tourCreationComplete=true`,
       );
     }
   }, [saveResponse, unloadHandler]);

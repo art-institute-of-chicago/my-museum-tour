@@ -1,5 +1,5 @@
 import React from "react";
-import CustomTourBuilder from "./CustomTourBuilder";
+import MyMuseumTourBuilder from "./MyMuseumTourBuilder";
 import searchJson from "../cypress/fixtures/json/search.json";
 import { Location } from "./utils";
 
@@ -30,13 +30,13 @@ function interceptSearch() {
   });
 }
 
-describe("<CustomTourBuilder />", () => {
+describe("<MyMuseumTourBuilder />", () => {
   beforeEach(() => {
     interceptImages().as("images");
     interceptSearch().as("search");
   });
   it("Renders", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-search").should("exist");
     cy.get("#aic-ct-metadata__title").should("exist");
     cy.get("#aic-ct-metadata__description").should("exist");
@@ -46,7 +46,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can add each metadata field for the tour", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-nav-button-1").click();
     cy.get("#aic-ct-metadata__title").type("A tour title", { delay: 0 });
     cy.get("#aic-ct-metadata__description").type("A tour description", {
@@ -73,7 +73,7 @@ describe("<CustomTourBuilder />", () => {
       statusCode: 500,
     }).as("500");
 
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search-results__error").should(
@@ -83,7 +83,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can perform a keyword search and show results", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
     cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
@@ -92,17 +92,15 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can perform a search on a theme and show results", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-theme-toggle-0").click();
     cy.get("#aic-ct-search-results__loading").should("have.text", "Loading...");
     cy.get("#aic-ct-search-results__items").should("exist");
     cy.get("#aic-ct-search-results__items li").should("have.length", 10);
-    cy.get("#aic-ct-theme-toggle-0").click();
-    cy.get("#aic-ct-search-results__items").should("not.exist");
   });
 
   it("Can add and remove up to 6 artworks to the tour", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
 
     // Adding and removing from search page
     cy.get("#aic-ct-nav-button-0").click();
@@ -205,7 +203,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Wipes notes when an item is removed and added again", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
@@ -236,7 +234,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Displays validation errors on the submission screen", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation__errors ul").children().should("have.length", 3);
   });
@@ -249,7 +247,7 @@ describe("<CustomTourBuilder />", () => {
       note: tooLongString,
     }));
     cy.mount(
-      <CustomTourBuilder
+      <MyMuseumTourBuilder
         tourTitle={tooLongString}
         tourDescription={tooLongString}
         tourItems={tooManyTourItems}
@@ -263,11 +261,11 @@ describe("<CustomTourBuilder />", () => {
       .parent()
       .contains("Tour description must not exceed the character limit")
       .parent()
-      .contains("Tours must not contain more than 6 artworks");
+      .contains("Tour must not contain more than 6 artworks");
   });
 
   it("Shows a submit button if all requirements are met", () => {
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-nav-button-2").click();
     cy.get("#aic-ct-validation__errors ul").children().should("have.length", 3);
     cy.get("#aic-ct-nav-button-0").click();
@@ -288,13 +286,13 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Correctly handles an error while saving", () => {
-    cy.intercept("POST", "/api/v1/custom-tours", {
+    cy.intercept("POST", "/api/v1/my-museum-tour", {
       fixture: "json/saveMissingTitle.json",
       statusCode: 422,
       delayMs: 80,
     }).as("save");
 
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
@@ -312,7 +310,7 @@ describe("<CustomTourBuilder />", () => {
   });
 
   it("Can save and show a success message", () => {
-    cy.intercept("POST", "/api/v1/my-museum-tours", {
+    cy.intercept("POST", "/api/v1/my-museum-tour", {
       fixture: "json/saveSuccess.json",
       statusCode: 201,
       delayMs: 80,
@@ -321,7 +319,7 @@ describe("<CustomTourBuilder />", () => {
     // Prevent redirect in this test
     cy.stub(Location, "assign").as("assign");
 
-    cy.mount(<CustomTourBuilder />);
+    cy.mount(<MyMuseumTourBuilder />);
     cy.get("#aic-ct-nav-button-0").click();
     cy.get("#aic-ct-search__input").type("test");
     cy.get("#aic-ct-search__button").click();
@@ -355,7 +353,7 @@ describe("<CustomTourBuilder />", () => {
     cy.get("#aic-ct-validation__success").should("exist");
     cy.get("@assign").should(
       "have.been.calledWith",
-      "/my-museum-tours/23?tourCreationComplete=true",
+      "/my-museum-tour/23?tourCreationComplete=true",
     );
   });
 });

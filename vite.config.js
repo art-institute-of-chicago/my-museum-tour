@@ -6,9 +6,9 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/CustomTourBuilder.jsx",
+      entry: "src/MyMuseumTourBuilder.jsx",
       formats: ["es"],
-      name: "CustomTourBuilder",
+      name: "MyMuseumTourBuilder",
     },
     rollupOptions: {
       // We don't want to bundle React with our code, so we mark it as external
