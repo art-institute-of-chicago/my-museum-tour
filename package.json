@@ -12,8 +12,8 @@
     "lint": "run-p lint:* prettier",
     "lint:scripts": "eslint --fix \"src/**/*.{js,jsx}\"",
     "prettier": "prettier -w \"src/**/*.{js,jsx}\"",
-    "test": "cypress run --component --port=3000",
-    "test:gui": "cypress open --component --port=3000"
+    "test": "cypress run --component --port=30001",
+    "test:gui": "cypress open --component --port=30001"
   },
   "dependencies": {
     "classnames": "^2.3.2",
