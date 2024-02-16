@@ -363,7 +363,7 @@ function j({ children: i }) {
     );
   }, [i, c]), g(() => {
     var o;
-    (o = document.querySelector("#custom-tours-builder")) == null || o.scrollIntoView();
+    (o = document.querySelector("#my-museum-tour-builder")) == null || o.scrollIntoView();
   }, [a]), /* @__PURE__ */ e.createElement("div", { id: "aic-ct-nav-pages" }, /* @__PURE__ */ e.createElement("div", { className: "sr-only", "aria-live": "polite" }, "Step ", ((d = r[a]) == null ? void 0 : d.id) + 1, " ", (s = r[a]) == null ? void 0 : s.title, " ", (n = r[a]) == null ? void 0 : n.tagline), i);
 }
 j.propTypes = {
@@ -1314,7 +1314,7 @@ function Ce() {
         throw new Error(
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know."
         );
-      const { message: x, custom_tour: R } = await v.json();
+      const { message: x, my_museum_tour: R } = await v.json();
       S({
         type: "success",
         message: x,

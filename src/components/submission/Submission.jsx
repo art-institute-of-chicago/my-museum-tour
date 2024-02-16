@@ -60,12 +60,12 @@ function Submission() {
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know.",
         );
       }
-      const { message, custom_tour } = await res.json();
+      const { message, my_museum_tour } = await res.json();
 
       setSaveResponse({
         type: "success",
         message,
-        id: custom_tour.id,
+        id: my_museum_tour.id,
       });
     } catch (error) {
       setSaveResponse({
