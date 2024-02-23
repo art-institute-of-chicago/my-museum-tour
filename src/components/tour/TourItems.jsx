@@ -56,14 +56,15 @@ function TourItems() {
             </header>
             <div className="f-body aic-ct-tour__intro">
               <p>
-              To optimize your visit, we automatically arrange the order of your
-              tour based on the location of the artwork in the museum. You&apos;ll see
-              the new order when you finish building your tour.
+                To optimize your visit, we automatically arrange the order of
+                your tour based on the location of the artwork in the museum.
+                You&apos;ll see the new order when you finish building your
+                tour.
               </p>
               {tourItems.length === 6 && (
                 <p>
-                  You&apos;ve added 6 artworks, the maximum number allowed.
-                  You may remove one if you would like to choose a different work.
+                  You&apos;ve added 6 artworks, the maximum number allowed. You
+                  may remove one if you would like to choose a different work.
                 </p>
               )}
             </div>
