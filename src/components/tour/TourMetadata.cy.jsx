@@ -12,7 +12,7 @@ describe("<TourMetadata />", () => {
     cy.get("#aic-ct-metadata__title").should("exist");
     cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
-      "(255 characters remaining)",
+      "(100 characters remaining)",
     );
     cy.get("#aic-ct-metadata__description").should("exist");
     cy.get("#aic-ct-metadata__description + output").should(
@@ -46,10 +46,10 @@ describe("<TourMetadata />", () => {
 
     // This is 40 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__description").type(descriptionText, { delay: 0 });
-    // 255 - 40 = 215
+    // 100 - 40 = 60
     cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
-      "(215 characters remaining)",
+      "(60 characters remaining)",
     );
     // 255 - 40 = 215
     cy.get("#aic-ct-metadata__description + output").should(
@@ -70,14 +70,14 @@ describe("<TourMetadata />", () => {
 
   it("Can add the maxLength text to an input field", () => {
     const titleText =
-      "Suspendisse posuere facilisis dignissim. Quisque feugiat dolor justo. Quisque nec interdum libero. Vivamus sapien sem, varius id facilisis lobortis, lobortis id leo. Morbi venenatis molestie ultricies. Sed efficitur accumsan risus, quis euismod metus dui.";
+      "Suspendisse posuere facilisis dignissim. Quisque feugiat dolor justo. Quisque nec interdum liberose.";
 
     cy.mount(
       <AppProvider>
         <TourMetadata />
       </AppProvider>,
     );
-    // This is 255 characters including spaces and punctuation
+    // This is 100 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__title").type(titleText, { delay: 0 });
 
     cy.get("#aic-ct-metadata__title + output").should(
@@ -98,14 +98,14 @@ describe("<TourMetadata />", () => {
     );
     // This is 257 characters including spaces and punctuation
     cy.get("#aic-ct-metadata__title").type(titleText, { delay: 0 });
-    // 255 - 257 = -2 (0)
+    // 100 - 257 = -157 (0)
     cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
       "(0 characters remaining)",
     );
     cy.get("#aic-ct-metadata__title").should(
       "have.value",
-      titleText.slice(0, 255),
+      titleText.slice(0, 100),
     );
   });
 });
