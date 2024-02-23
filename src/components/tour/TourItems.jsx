@@ -58,11 +58,13 @@ function TourItems() {
               <p>
                 To optimize your visit, we automatically arrange the order of
                 your tour based on the location of the artwork in the museum.
+                You&apos;ll see the new order when you finish building your
+                tour.
               </p>
               {tourItems.length === 6 && (
                 <p>
-                  You&apos;ve added 6 artworks, the maximum number allowed.
-                  Please remove one if you would like to include more artwork.
+                  You&apos;ve added 6 artworks, the maximum number allowed. You
+                  may remove one if you would like to choose a different work.
                 </p>
               )}
             </div>

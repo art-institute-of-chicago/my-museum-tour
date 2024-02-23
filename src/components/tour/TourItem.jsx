@@ -150,7 +150,7 @@ function TourItem(props) {
               id={`aic-ct-note-${itemData.id}`}
               onChange={cappedNote.onChange}
               rows="5"
-              placeholder="e.g. I love the colors in this one."
+              placeholder="e.g. This reminds me of our our vacation last year."
               value={cappedNote.value}
               maxLength={cappedNote.maxLength}
             />

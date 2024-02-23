@@ -60,7 +60,7 @@ describe("<MyMuseumTourBuilder />", () => {
     cy.get("#aic-ct-metadata__opt-in").click().should("be.checked");
     cy.get("#aic-ct-metadata__title + output").should(
       "contain.text",
-      "(243 characters remaining)",
+      "(88 characters remaining)",
     );
     cy.get("#aic-ct-metadata__description + output").should(
       "contain.text",

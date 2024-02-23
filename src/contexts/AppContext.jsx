@@ -57,7 +57,7 @@ export function AppProvider(props) {
   const limits = useMemo(
     () => ({
       objectNote: 255,
-      title: 255,
+      title: 100,
       creatorName: 140,
       recipientName: 140,
       description: 255,
