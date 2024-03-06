@@ -26,7 +26,6 @@ export function AppProvider(props) {
     navPages: navPagesValue,
     apiSaveEndpoint: apiSaveEndpointValue,
     iiifBaseUrl,
-    unloadHandler,
   } = props;
   const [tourTitle, setTourTitle] = useState(tourTitleValue || "");
   const [creatorEmail, setCreatorEmail] = useState(creatorEmailValue || "");
@@ -103,7 +102,6 @@ export function AppProvider(props) {
         setIsSaving,
         scrollY,
         setScrollY,
-        unloadHandler,
       }}
     >
       {children}
@@ -123,7 +121,6 @@ AppProvider.propTypes = {
   tourDescription: PropTypes.string,
   tourItems: PropTypes.instanceOf(Array),
   navPages: PropTypes.instanceOf(Array),
-  unloadHandler: PropTypes.func,
 };
 
 AppContext.Provider.propTypes = {
