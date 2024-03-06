@@ -49,14 +49,38 @@ export function createSearchUrl(queryParams) {
   // Build the query string
   // I've broken this up to make it easer to reason about and manipulate
   const url = new URL("https://api.artic.edu/api/v1/artworks/search");
-  url.searchParams.set("query[bool][should][0][bool][must][][exists][field]", "short_description");
-  url.searchParams.set("query[bool][should][0][bool][must][][term][is_on_view][value]", "true");
-  url.searchParams.set("query[bool][should][1][bool][must][][term][is_on_view]", "true");
-  url.searchParams.set("query[bool][should][1][bool][must][][exists][field]", "description");
-  url.searchParams.set("query[bool][should][1][bool][should][][exists][field]", "description");
-  url.searchParams.set("query[bool][should][1][bool][should][][exists][field]", "subject_id");
-  url.searchParams.set("query[bool][should][1][bool][should][][exists][field]", "style_id");
-  url.searchParams.set("query[bool][should][1][bool][should][][term][is_boosted]", "true");
+  url.searchParams.set(
+    "query[bool][should][0][bool][must][][exists][field]",
+    "short_description",
+  );
+  url.searchParams.set(
+    "query[bool][should][0][bool][must][][term][is_on_view][value]",
+    "true",
+  );
+  url.searchParams.set(
+    "query[bool][should][1][bool][must][][term][is_on_view]",
+    "true",
+  );
+  url.searchParams.set(
+    "query[bool][should][1][bool][must][][exists][field]",
+    "description",
+  );
+  url.searchParams.set(
+    "query[bool][should][1][bool][should][][exists][field]",
+    "description",
+  );
+  url.searchParams.set(
+    "query[bool][should][1][bool][should][][exists][field]",
+    "subject_id",
+  );
+  url.searchParams.set(
+    "query[bool][should][1][bool][should][][exists][field]",
+    "style_id",
+  );
+  url.searchParams.set(
+    "query[bool][should][1][bool][should][][term][is_boosted]",
+    "true",
+  );
   url.searchParams.set("query[bool][minimum_should_match]", "1");
   url.searchParams.set(
     "fields",

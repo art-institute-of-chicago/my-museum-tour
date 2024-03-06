@@ -194,7 +194,31 @@ function w(i, a, r = "", c = "", d = "full", s = !0) {
 }
 function A(i) {
   const a = new URL("https://api.artic.edu/api/v1/artworks/search");
-  a.searchParams.set("query[bool][should][0][bool][must][][exists][field]", "short_description"), a.searchParams.set("query[bool][should][0][bool][must][][term][is_on_view][value]", "true"), a.searchParams.set("query[bool][should][1][bool][must][][term][is_on_view]", "true"), a.searchParams.set("query[bool][should][1][bool][must][][exists][field]", "description"), a.searchParams.set("query[bool][should][1][bool][should][][exists][field]", "description"), a.searchParams.set("query[bool][should][1][bool][should][][exists][field]", "subject_id"), a.searchParams.set("query[bool][should][1][bool][should][][exists][field]", "style_id"), a.searchParams.set("query[bool][should][1][bool][should][][term][is_boosted]", "true"), a.searchParams.set("query[bool][minimum_should_match]", "1"), a.searchParams.set(
+  a.searchParams.set(
+    "query[bool][should][0][bool][must][][exists][field]",
+    "short_description"
+  ), a.searchParams.set(
+    "query[bool][should][0][bool][must][][term][is_on_view][value]",
+    "true"
+  ), a.searchParams.set(
+    "query[bool][should][1][bool][must][][term][is_on_view]",
+    "true"
+  ), a.searchParams.set(
+    "query[bool][should][1][bool][must][][exists][field]",
+    "description"
+  ), a.searchParams.set(
+    "query[bool][should][1][bool][should][][exists][field]",
+    "description"
+  ), a.searchParams.set(
+    "query[bool][should][1][bool][should][][exists][field]",
+    "subject_id"
+  ), a.searchParams.set(
+    "query[bool][should][1][bool][should][][exists][field]",
+    "style_id"
+  ), a.searchParams.set(
+    "query[bool][should][1][bool][should][][term][is_boosted]",
+    "true"
+  ), a.searchParams.set("query[bool][minimum_should_match]", "1"), a.searchParams.set(
     "fields",
     "artist_title,short_description,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id"
   ), a.searchParams.set("limit", "60"), typeof i.keywords < "u" && a.searchParams.set("q", i.keywords);
