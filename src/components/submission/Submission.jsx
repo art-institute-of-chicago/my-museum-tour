@@ -22,7 +22,6 @@ function Submission() {
     isSaving,
     setIsSaving,
     setActiveNavPage,
-    unloadHandler,
   } = useContext(AppContext);
   const [saveResponse, setSaveResponse] = useState(null);
 
@@ -128,13 +127,12 @@ function Submission() {
   useEffect(() => {
     // When the user sucessfully saves their tour perform a redirect
     if (saveResponse?.id) {
-      window.removeEventListener("beforeunload", unloadHandler);
       // Need to use wrapper function for our tests
       Location.assign(
         `/my-museum-tour/${saveResponse.id}?tourCreationComplete=true`,
       );
     }
-  }, [saveResponse, unloadHandler]);
+  }, [saveResponse]);
 
   return (
     <div className="aic-ct-validation">

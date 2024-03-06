@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import NavPages from "./components/navigation/NavPages";
@@ -26,12 +26,6 @@ const MyMuseumTourBuilder = (props) => {
 
   const iiifBaseUrl = "https://artic.edu/iiif/2";
 
-  // Define handler here and pass into AppProvider for use elsewhere
-  const unloadHandler = (e) => {
-    e.preventDefault();
-    e.returnValue = "";
-  };
-
   const AppProviderProps = {
     apiSaveEndpoint,
     tourTitle,
@@ -39,15 +33,7 @@ const MyMuseumTourBuilder = (props) => {
     tourItems,
     heroImageId,
     iiifBaseUrl,
-    unloadHandler,
   };
-
-  // Ask a user before they leave the page
-  useEffect(() => {
-    window.addEventListener("beforeunload", unloadHandler);
-    // Remove styles that interfere with position sticky
-    document.body.style.overflow = "unset";
-  }, []);
 
   return (
     <div id="my-museum-tour-builder" className="my-museum-tour">
