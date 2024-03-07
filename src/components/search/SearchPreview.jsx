@@ -119,8 +119,8 @@ function SearchPreview() {
                 ) : (
                   <p className="f-body">
                     You have already added {limits.items.max} artworks, the
-                    maximum number allowed. Please remove one if you would like to
-                    include this artwork.
+                    maximum number allowed. Please remove one if you would like
+                    to include this artwork.
                   </p>
                 )}
               </div>
@@ -174,10 +174,10 @@ function SearchPreview() {
         )}
       </div>
     );
-  }
-  else {
+  } else {
     return (
-      <div className="aic-ct-preview__core aic-ct-loader f-body">
+      <div className={containerClassNames} id="aic-ct-preview__content">
+        <>
           <div className="aic-ct-preview__header aic-ct-preview__core">
             <button
               id="aic-ct-preview__close"
@@ -191,7 +191,15 @@ function SearchPreview() {
               </svg>
             </button>
           </div>
-          <p>You have already added 6 artworks, the maximum number allowed. Please remove one if you would like to include this artwork.</p>
+
+          <div className="aic-ct-preview__core">
+            <p className="f-body">
+              You have already added 6 artworks, the maximum number allowed.
+              Please remove one if you would like to include this artwork.
+            </p>
+          </div>
+          <br />
+        </>
       </div>
     );
   }
