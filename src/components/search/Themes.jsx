@@ -43,6 +43,34 @@ function Themes() {
         subject_ids: ["TM-12218"],
       },
     },
+    {
+      label: "Drinking and Dining",
+      thumbnailId: "a2f4085a-6715-212a-c5fa-aa88a4692df0",
+      searchParams: {
+        theme_ids: ["PC-832"],
+      },
+    },
+    {
+      label: "Chicago Artists",
+      thumbnailId: "62f2ca7a-8c22-bb7e-9e3d-7453652a3350",
+      searchParams: {
+        theme_ids: ["PC-154"],
+      },
+    },
+    {
+      label: "Ancient",
+      thumbnailId: "677cb9ce-8e4c-119a-711e-9b5a98c834d9",
+      searchParams: {
+        style_ids: ["TM-8542"],
+      },
+    },
+    {
+      label: "Women Artists",
+      thumbnailId: "f7f9615d-2c2b-6b23-47b2-cd6cdc846504",
+      searchParams: {
+        theme_ids: ["PC-825"],
+      },
+    },
   ];
 
   return (
