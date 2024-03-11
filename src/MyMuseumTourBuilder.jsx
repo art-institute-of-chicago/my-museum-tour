@@ -49,8 +49,8 @@ const MyMuseumTourBuilder = (props) => {
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
                 Choose up to 6 artworks for your tour by searching for a
-                particular work or artist, browsing themes or selecting from the
-                list of artworks below.
+                particular work or artist, browsing themes, or selecting from
+                the list of artworks below.
               </p>
             </div>
             <SearchProvider>
@@ -65,7 +65,7 @@ const MyMuseumTourBuilder = (props) => {
           <NavPage
             id={1}
             title="Personalize"
-            tagline="your tour by adding notes to artworks"
+            tagline="your tour by adding a title and notes"
           >
             {heroImageId && (
               <div className="aic-ct-hero aic-ct-full-bleed">

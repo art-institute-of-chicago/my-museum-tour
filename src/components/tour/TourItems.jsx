@@ -56,13 +56,14 @@ function TourItems() {
             </header>
             <div className="f-body aic-ct-tour__intro">
               <p>
-                To optimize your visit, we automatically arrange the order of
-                your tour based on the location of the artwork in the museum.
-                You&apos;ll see the new order when you finish building your
-                tour.
+                Your artworks are listed below in the order that you selected
+                them. Your final tour will have them ordered based on their
+                location in the galleries to give you the easiest tour path.
               </p>
               {tourItems.length === 6 && (
                 <p>
+                  <br />
+                  <br />
                   You&apos;ve added 6 artworks, the maximum number allowed. You
                   may remove one if you would like to choose a different work.
                 </p>
@@ -99,14 +100,14 @@ function TourItems() {
                   className="f-buttons btn btn--secondary"
                   onClick={handleBrowseClick}
                 >
-                  Browse for more artworks
+                  Browse for More Artworks
                 </button>
                 <button
                   type="button"
                   className="f-buttons btn btn--primary"
                   onClick={handleFinishClick}
                 >
-                  Finish creating tour
+                  Finish My Tour
                 </button>
               </div>
             </>
@@ -124,7 +125,7 @@ function TourItems() {
                   className="f-buttons btn btn--primary"
                   onClick={handleFinishClick}
                 >
-                  Finish creating tour
+                  Finish My Tour
                 </button>
               </div>
             </>
@@ -142,7 +143,7 @@ function TourItems() {
                   className="f-buttons btn btn--secondary"
                   onClick={handleBrowseClick}
                 >
-                  Browse for more artworks
+                  Browse for More Artworks
                 </button>
               </div>
             </>

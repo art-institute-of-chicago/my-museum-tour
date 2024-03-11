@@ -65,7 +65,7 @@ function SearchBar() {
           id="aic-ct-search__input"
           className="f-secondary"
           type="text"
-          placeholder="Search by keyword, artist, or reference"
+          placeholder="Search by keyword, artist, or title"
           value={searchQuery}
           autoComplete="off"
           onChange={(e) => {

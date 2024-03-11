@@ -20,7 +20,7 @@ describe("<SearchBar />", () => {
       .should(
         "have.attr",
         "placeholder",
-        "Search by keyword, artist, or reference",
+        "Search by keyword, artist, or title",
       );
   });
 

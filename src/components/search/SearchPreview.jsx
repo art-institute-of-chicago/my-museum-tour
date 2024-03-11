@@ -114,7 +114,7 @@ function SearchPreview() {
                     aria-pressed={inTour ? "true" : "false"}
                     aria-label="Toggle from your tour"
                   >
-                    {inTour ? "Remove from your tour" : "Add to your tour"}
+                    {inTour ? "Remove from Your Tour" : "Add to Your Tour"}
                   </button>
                 ) : (
                   <p className="f-body">
@@ -195,7 +195,7 @@ function SearchPreview() {
           <div className="aic-ct-preview__core">
             <p className="f-body">
               You have already added 6 artworks, the maximum number allowed.
-              Please remove one if you would like to include this artwork.
+              Please remove one if you would like to choose a different work.
             </p>
           </div>
           <br />

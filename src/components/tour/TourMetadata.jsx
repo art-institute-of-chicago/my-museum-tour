@@ -194,8 +194,8 @@ function TourMetadata() {
             />
             <span className="f-body">
               <label htmlFor="aic-ct-metadata__opt-in" className="label">
-                Keep me in the loop. Please send me emails about museum
-                exhibitions and events.
+                Keep me in the loop. Please send me emails about exhibitions and
+                events at the Art Institute of Chicago.
               </label>
             </span>
           </span>
