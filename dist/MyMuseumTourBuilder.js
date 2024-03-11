@@ -25,7 +25,7 @@ function $(i) {
     navPages: o,
     apiSaveEndpoint: u,
     iiifBaseUrl: h
-  } = i, [p, E] = _(r || ""), [b, f] = _(c || ""), [y, S] = _(!1), [v, I] = _(d || ""), [T, Q] = _(s || ""), [z, J] = _(
+  } = i, [p, E] = _(r || ""), [b, f] = _(c || ""), [y, S] = _(!1), [v, I] = _(d || ""), [x, Q] = _(s || ""), [z, J] = _(
     l || !1
   ), [G, K] = _(
     n || ""
@@ -61,7 +61,7 @@ function $(i) {
         setValidCreatorEmail: S,
         creatorName: v,
         setCreatorName: I,
-        recipientName: P,
+        recipientName: x,
         setRecipientName: Q,
         tourDescription: G,
         setTourDescription: K,
@@ -413,8 +413,8 @@ F.propTypes = {
     t.object
   ]).isRequired
 };
-const x = D();
-function j(i) {
+const T = D();
+function M(i) {
   const {
     children: a,
     searchResultItems: r,
@@ -430,7 +430,7 @@ function j(i) {
     n || null
   ), I = C();
   return /* @__PURE__ */ e.createElement(
-    x.Provider,
+    T.Provider,
     {
       value: {
         searchResultItems: l,
@@ -451,7 +451,7 @@ function j(i) {
     a
   );
 }
-j.propTypes = {
+M.propTypes = {
   children: t.node.isRequired,
   searchResultItems: t.array,
   searchQuery: t.string,
@@ -459,7 +459,7 @@ j.propTypes = {
   searchError: t.oneOfType([t.string, t.bool]),
   searchPreviewId: t.number
 };
-x.Provider.propTypes = {
+T.Provider.propTypes = {
   value: t.shape({
     searchResultItems: t.array,
     setSearchResultItems: t.func,
@@ -477,7 +477,7 @@ x.Provider.propTypes = {
   }),
   children: t.node.isRequired
 };
-const M = (i) => {
+const j = (i) => {
   const [a, r] = _(null), [c, d] = _(!1), [s, n] = _(null), [l, m] = _(null), { dataSubSelector: o, dataSetter: u, fetchingSetter: h, errorSetter: p } = i || {}, E = () => {
     r(null), d(!1), n(null), m(null);
   }, b = async (f) => {
@@ -516,7 +516,7 @@ function ge() {
     setSearchFetching: c,
     setSearchError: d,
     setActiveTheme: s
-  } = N(x), [n, l] = _(!0), { fetchData: m } = M({
+  } = N(T), [n, l] = _(!0), { fetchData: m } = j({
     dataSubSelector: "data",
     dataSetter: r,
     fetchingSetter: c,
@@ -583,7 +583,7 @@ function Y(i) {
     setSearchQuery: o,
     activeTheme: u,
     setActiveTheme: h
-  } = N(x), { fetchData: p } = M({
+  } = N(T), { fetchData: p } = j({
     dataSubSelector: "data",
     dataSetter: n,
     fetchingSetter: l,
@@ -699,7 +699,7 @@ function ye() {
   )));
 }
 function H(i) {
-  const { setSearchPreviewId: a, searchPreviewRef: r } = N(x), { iiifBaseUrl: c, setScrollY: d, tourItems: s } = N(k), { itemData: n } = i, l = s.some((p) => p.id === n.id), m = C(null), o = C(), u = () => {
+  const { setSearchPreviewId: a, searchPreviewRef: r } = N(T), { iiifBaseUrl: c, setScrollY: d, tourItems: s } = N(k), { itemData: n } = i, l = s.some((p) => p.id === n.id), m = C(null), o = C(), u = () => {
     const p = document.documentElement.scrollTop;
     a(n.id), d(p), r.current.showModal(), setTimeout(() => {
       document.documentElement.classList.add(
@@ -806,7 +806,7 @@ H.propTypes = {
   })
 };
 function Ne() {
-  const { searchPreviewId: i, searchResultItems: a, searchPreviewRef: r } = N(x), { iiifBaseUrl: c, tourItems: d, tourItemsDispatch: s, limits: n } = N(k), [l, m] = _(!1), [o, u] = _(null), h = P({
+  const { searchPreviewId: i, searchResultItems: a, searchPreviewRef: r } = N(T), { iiifBaseUrl: c, tourItems: d, tourItemsDispatch: s, limits: n } = N(k), [l, m] = _(!1), [o, u] = _(null), h = P({
     "aic-ct-preview__content": !0,
     "aic-ct-preview--loading": !o
   });
@@ -893,7 +893,7 @@ function Ne() {
       onClick: E
     },
     /* @__PURE__ */ e.createElement("svg", { className: "icon--close--24", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close--24" }))
-  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__core" }, /* @__PURE__ */ e.createElement("p", { className: "f-body" }, "You have already added 6 artworks, the maximum number allowed. Please remove one if you would like to include this artwork.")), /* @__PURE__ */ e.createElement("br", null)));
+  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__core" }, /* @__PURE__ */ e.createElement("p", { className: "f-body" }, "You have already added 6 artworks, the maximum number allowed. Please remove one if you would like to choose a different work.")), /* @__PURE__ */ e.createElement("br", null)));
 }
 function we() {
   const {
@@ -904,7 +904,7 @@ function we() {
     setSearchPreviewId: d,
     activeTheme: s,
     searchQuery: n
-  } = N(x), { scrollY: l } = N(k), m = q(
+  } = N(T), { scrollY: l } = N(k), m = q(
     (u) => {
       var h;
       (u.type === "close" || (h = c == null ? void 0 : c.current) != null && h.open && u.target === (c == null ? void 0 : c.current)) && (c.current.close(), d(null), document.documentElement.scrollTop = l, document.documentElement.classList.remove(
@@ -1372,11 +1372,11 @@ function Ie() {
         throw new Error(
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know."
         );
-      const { message: I, my_museum_tour: P } = await v.json();
+      const { message: I, my_museum_tour: x } = await v.json();
       y({
         type: "success",
         message: I,
-        id: P.id
+        id: x.id
       });
     } catch (v) {
       y({
@@ -1391,8 +1391,8 @@ function Ie() {
     a.length || v.push("A tour title"), a.length > h.title && v.push("Tour title must not exceed the character limit"), n || v.push("A valid email address"), m.length > h.description && v.push(
       "Tour description must not exceed the character limit"
     ), l.length < h.items.min && v.push("At least one artwork is required for your tour"), l.length > h.items.max && v.push("Tour must not contain more than 6 artworks"), l.some((I) => {
-      var P;
-      return ((P = I.objectNote) == null ? void 0 : P.length) > h.objectNote ? (v.push("Notes must not exceed the character limit"), !0) : !1;
+      var x;
+      return ((x = I.objectNote) == null ? void 0 : x.length) > h.objectNote ? (v.push("Notes must not exceed the character limit"), !0) : !1;
     }), u(v);
   }, [
     a,
@@ -1523,7 +1523,7 @@ const Ce = (i) => {
       tagline: "for artworks to add to your tour"
     },
     /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct-intro--keyline aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Create your own tour"), /* @__PURE__ */ e.createElement("p", { className: "f-deck" }, "Choose up to 6 artworks for your tour by searching for a particular work or artist, browsing themes, or selecting from the list of artworks below.")),
-    /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(ge, null), /* @__PURE__ */ e.createElement(ye, null), /* @__PURE__ */ e.createElement(we, null)))
+    /* @__PURE__ */ e.createElement(M, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(ge, null), /* @__PURE__ */ e.createElement(ye, null), /* @__PURE__ */ e.createElement(we, null)))
   ), /* @__PURE__ */ e.createElement(
     F,
     {
