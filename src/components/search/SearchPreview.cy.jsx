@@ -42,8 +42,8 @@ describe("<SearchPreview />", () => {
       </AppProvider>,
     );
     cy.get("#aic-ct-preview__action-button-1")
-      .should("have.text", "Add to your tour")
+      .should("have.text", "Add to Your Tour")
       .click()
-      .should("have.text", "Remove from your tour");
+      .should("have.text", "Remove from Your Tour");
   });
 });

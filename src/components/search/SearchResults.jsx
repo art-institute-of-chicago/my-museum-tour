@@ -122,7 +122,8 @@ function SearchResults() {
           // Render the results if there are results
           <>
             <p className="aic-ct-pre-result-text f-body">
-              These artworks are currently on view and available for your tour.
+              The artworks below are currently on view and available to choose
+              for your tour.
             </p>
             <ul
               id="aic-ct-search-results__items"

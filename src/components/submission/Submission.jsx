@@ -194,9 +194,8 @@ function Submission() {
             >
               <h1 className="f-headline">Are you ready to finish your tour?</h1>
               <p className="f-body">
-                You won&apos;t be able to edit it once you save.
-                <br />
-                Your tour will be automatically emailed to you when finished.
+                You won&apos;t be able to edit it once you save, and your tour
+                will be immediately emailed to the provided address.
               </p>
               <div className="aic-ct-validation__actions">
                 <button
