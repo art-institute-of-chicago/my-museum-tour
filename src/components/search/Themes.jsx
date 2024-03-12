@@ -47,14 +47,14 @@ function Themes() {
       label: "Drinking and Dining",
       thumbnailId: "a2f4085a-6715-212a-c5fa-aa88a4692df0",
       searchParams: {
-        theme_ids: ["PC-832"],
+        theme_titles: ["Drinking and Dining"],
       },
     },
     {
       label: "Chicago Artists",
       thumbnailId: "62f2ca7a-8c22-bb7e-9e3d-7453652a3350",
       searchParams: {
-        theme_ids: ["PC-154"],
+        theme_titles: ["Chicago Artists"],
       },
     },
     {
@@ -68,7 +68,7 @@ function Themes() {
       label: "Women Artists",
       thumbnailId: "f7f9615d-2c2b-6b23-47b2-cd6cdc846504",
       searchParams: {
-        theme_ids: ["PC-825"],
+        theme_titles: ["Women artists"],
       },
     },
   ];
