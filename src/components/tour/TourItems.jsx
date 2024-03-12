@@ -63,7 +63,6 @@ function TourItems() {
               {tourItems.length === 6 && (
                 <p>
                   <br />
-                  <br />
                   You&apos;ve added 6 artworks, the maximum number allowed. You
                   may remove one if you would like to choose a different work.
                 </p>
@@ -116,8 +115,7 @@ function TourItems() {
             <>
               <p className="f-body">
                 You&apos;ve added {tourItems.length} artworks, the maximum
-                number allowed. Please remove one if you would like to include
-                more artwork
+                number allowed. Please remove one if you would like to choose a different work.
               </p>
               <div className="aic-ct-tour__cta-actions">
                 <button
