@@ -118,8 +118,9 @@ function SearchPreview() {
                   </button>
                 ) : (
                   <p className="f-body">
-                    You have already added {limits.items.max} artworks, the maximum number allowed.
-                    Please remove one if you would like to choose a different work.
+                    You have already added {limits.items.max} artworks, the
+                    maximum number allowed. Please remove one if you would like
+                    to choose a different work.
                   </p>
                 )}
               </div>
@@ -193,8 +194,9 @@ function SearchPreview() {
 
           <div className="aic-ct-preview__core">
             <p className="f-body">
-              You have already added {limits.items.max} artworks, the maximum number allowed.
-              Please remove one if you would like to choose a different work.
+              You have already added {limits.items.max} artworks, the maximum
+              number allowed. Please remove one if you would like to choose a
+              different work.
             </p>
           </div>
           <br />

@@ -96,9 +96,11 @@ export function createSearchUrl(queryParams) {
   for (const [key, value] of Object.entries(queryParams)) {
     if (key.includes("_ids")) {
       url.searchParams.set(`query[bool][must][][terms][${key}][]`, value);
-    }
-    else if (key.includes("_titles")) {
-      url.searchParams.set(`query[bool][must][][terms][${key}.keyword][]`, value);
+    } else if (key.includes("_titles")) {
+      url.searchParams.set(
+        `query[bool][must][][terms][${key}.keyword][]`,
+        value,
+      );
     }
   }
 
