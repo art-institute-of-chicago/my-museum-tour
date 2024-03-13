@@ -108,7 +108,7 @@ function SearchPreview() {
                 {tourItems.length < 6 || inTour ? (
                   <button
                     id={`aic-ct-preview__action-button-${previewData.id}`}
-                    className="btn f-buttons aic-ct-preview__action-button"
+                    className="btn btn--my-museum-tour f-buttons aic-ct-preview__action-button"
                     type="button"
                     onClick={handleAddRemove}
                     aria-pressed={inTour ? "true" : "false"}
