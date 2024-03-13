@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useCallback } from "react";
+import React, { useContext, useEffect, useRef, useCallback } from "react";
 import SearchResultItem from "./SearchResultItem";
 import SearchPreview from "./SearchPreview";
 import { AppContext } from "../../contexts/AppContext";
@@ -17,6 +17,7 @@ function SearchResults() {
     searchQuery,
   } = useContext(SearchContext);
   const { scrollY } = useContext(AppContext);
+  const pinboardRef = useRef(null);
 
   // Store a reference to the event listener callback to remove it later
   const handleClose = useCallback(
@@ -43,10 +44,35 @@ function SearchResults() {
 
   const handlePageUpdated = useCallback(() => {
     const evt = new Event("page:updated", { bubbles: true });
+    // The zero timeout should defer this to the back of the event loop
+    // Helping to ensure it runs after the DOM has been updated
     setTimeout(() => {
       document.dispatchEvent(evt);
     }, 0);
   }, []);
+
+  // When the search results change, if the ref has a value,
+  // And all other conditions which would render the pinboard are met
+  // Then dispatch the event to update the pinboard
+  // This was refactored from a useEffect on just searchResultItems
+  // And should help avoid having to add a delay to have the event dispatch after the DOM updates
+  // If this ever proves unreliable, consider adding a delay on the dispatch
+  useEffect(() => {
+    if (
+      pinboardRef.current &&
+      searchResultItems?.length > 0 &&
+      !searchFetching &&
+      !searchError
+    ) {
+      handlePageUpdated();
+    }
+  }, [
+    pinboardRef,
+    searchResultItems,
+    searchFetching,
+    searchError,
+    handlePageUpdated,
+  ]);
 
   useEffect(() => {
     const ref = searchPreviewRef.current;
@@ -62,25 +88,6 @@ function SearchResults() {
       }
     };
   }, [searchPreviewRef, handleClose]);
-
-  // This does dispatch multiple times, but it doesn't seem to cause any issues
-  // Might consider debouncing this
-  useEffect(() => {
-    // Relayout pinboard when results change
-    handlePageUpdated();
-  }, [searchResultItems, handlePageUpdated]);
-
-  // Safari in particular (but potentially unnoticed in other browsers)
-  // Would sometimes fire page:updated, and not be picked up by the pinboard listener
-  // Possibly some kind of race condition?
-  // Safest way to have this always fire regardless is when page finishes loading.
-  // (in addition to when search results change)
-  useEffect(() => {
-    window.addEventListener("load", handlePageUpdated);
-    return () => {
-      window.removeEventListener("load", handlePageUpdated);
-    };
-  }, [handlePageUpdated]);
 
   // Catch all for no results, error, and loading states
   if (!searchResultItems && !searchFetching && !searchError) {
@@ -126,6 +133,7 @@ function SearchResults() {
               for your tour.
             </p>
             <ul
+              ref={pinboardRef}
               id="aic-ct-search-results__items"
               className="o-pinboard o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--3-col@medium o-pinboard--4-col@large o-pinboard--4-col@xlarge"
               data-pinboard-option-layout="o-pinboard--2-col@xsmall o-pinboard--2-col@small o-pinboard--2-col@medium o-pinboard--3-col@large o-pinboard--3-col@xlarge"
