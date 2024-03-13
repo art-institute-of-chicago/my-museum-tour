@@ -63,25 +63,6 @@ function SearchResults() {
     };
   }, [searchPreviewRef, handleClose]);
 
-  // This does dispatch multiple times, but it doesn't seem to cause any issues
-  // Might consider debouncing this
-  useEffect(() => {
-    // Relayout pinboard when results change
-    handlePageUpdated();
-  }, [searchResultItems, handlePageUpdated]);
-
-  // Safari in particular (but potentially unnoticed in other browsers)
-  // Would sometimes fire page:updated, and not be picked up by the pinboard listener
-  // Possibly some kind of race condition?
-  // Safest way to have this always fire regardless is when page finishes loading.
-  // (in addition to when search results change)
-  useEffect(() => {
-    window.addEventListener("load", handlePageUpdated);
-    return () => {
-      window.removeEventListener("load", handlePageUpdated);
-    };
-  }, [handlePageUpdated]);
-
   // Catch all for no results, error, and loading states
   if (!searchResultItems && !searchFetching && !searchError) {
     return null;
