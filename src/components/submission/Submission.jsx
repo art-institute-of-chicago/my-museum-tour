@@ -200,7 +200,7 @@ function Submission() {
               <div className="aic-ct-validation__actions">
                 <button
                   id="aic-ct-save-button"
-                  className="btn btn--primary f-buttons"
+                  className="btn btn--my-museum-tour f-buttons"
                   type="button"
                   onClick={handleSave}
                   disabled={isSaving}

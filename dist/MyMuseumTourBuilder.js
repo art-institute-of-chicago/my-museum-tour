@@ -852,7 +852,7 @@ function Ne() {
     "button",
     {
       id: `aic-ct-preview__action-button-${o.id}`,
-      className: "btn f-buttons aic-ct-preview__action-button",
+      className: "btn btn--my-museum-tour f-buttons aic-ct-preview__action-button",
       type: "button",
       onClick: p,
       "aria-pressed": l ? "true" : "false",
@@ -1150,7 +1150,7 @@ function ke() {
     "button",
     {
       type: "button",
-      className: "f-buttons btn btn--primary",
+      className: "f-buttons btn btn--my-museum-tour",
       onClick: h
     },
     "Finish My Tour"
@@ -1461,7 +1461,7 @@ function Ie() {
         "button",
         {
           id: "aic-ct-save-button",
-          className: "btn btn--primary f-buttons",
+          className: "btn btn--my-museum-tour f-buttons",
           type: "button",
           onClick: S,
           disabled: p
