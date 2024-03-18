@@ -18,6 +18,7 @@ function SearchPreview() {
   const containerClassNames = classNames({
     "aic-ct-preview__content": true,
     "aic-ct-preview--loading": !previewData,
+    "aic-ct-preview__content-warning": tourItems.length >= 6,
   });
 
   useEffect(() => {
@@ -193,11 +194,13 @@ function SearchPreview() {
           </div>
 
           <div className="aic-ct-preview__core">
-            <p className="f-body">
-              You have already added {limits.items.max} artworks, the maximum
-              number allowed. Please remove one if you would like to choose a
-              different work.
-            </p>
+            <svg className="icon--max-artworks">
+              <use xlinkHref="#icon--max-artworks"></use>
+            </svg>
+            <p className="f-list-6">You have already added {limits.items.max} artworks, the maximum
+              number allowed.</p>
+            <p className="f-list-6">Please remove one if you would like to choose a
+              different work.</p>
           </div>
           <br />
         </>
