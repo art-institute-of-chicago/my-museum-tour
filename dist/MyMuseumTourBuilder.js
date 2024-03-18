@@ -1,4 +1,4 @@
-import e, { createContext as D, useState as _, useReducer as fe, useRef as I, useMemo as $, useContext as N, useEffect as y, useCallback as q } from "react";
+import e, { createContext as D, useState as _, useReducer as fe, useRef as I, useMemo as $, useContext as N, useEffect as E, useCallback as q } from "react";
 import t from "prop-types";
 const be = (i, a) => {
   switch (a.type) {
@@ -25,7 +25,7 @@ function O(i) {
     navPages: o,
     apiSaveEndpoint: h,
     iiifBaseUrl: d
-  } = i, [p, g] = _(r || ""), [f, b] = _(s || ""), [E, S] = _(!1), [v, T] = _(m || ""), [x, J] = _(c || ""), [W, G] = _(
+  } = i, [p, g] = _(r || ""), [f, b] = _(s || ""), [y, S] = _(!1), [v, T] = _(m || ""), [x, J] = _(c || ""), [W, G] = _(
     l || !1
   ), [K, X] = _(
     n || ""
@@ -57,7 +57,7 @@ function O(i) {
         setTourTitle: g,
         creatorEmail: f,
         setCreatorEmail: b,
-        validCreatorEmail: E,
+        validCreatorEmail: y,
         setValidCreatorEmail: S,
         creatorName: v,
         setCreatorName: T,
@@ -382,7 +382,7 @@ function ye() {
 function j({ children: i }) {
   var m, c, n;
   const { activeNavPage: a, navPages: r, setNavPages: s } = N(k);
-  return y(() => {
+  return E(() => {
     s(
       i ? i.map((l, u) => ({
         id: u,
@@ -390,7 +390,7 @@ function j({ children: i }) {
         tagline: l.props.tagline
       })) : []
     );
-  }, [i, s]), y(() => {
+  }, [i, s]), E(() => {
     var l;
     (l = document.querySelector("#my-museum-tour-builder")) == null || l.scrollIntoView();
   }, [a]), /* @__PURE__ */ e.createElement("div", { id: "aic-ct-nav-pages" }, /* @__PURE__ */ e.createElement("div", { className: "sr-only", "aria-live": "polite" }, "Step ", ((m = r[a]) == null ? void 0 : m.id) + 1, " ", (c = r[a]) == null ? void 0 : c.title, " ", (n = r[a]) == null ? void 0 : n.tagline), i);
@@ -434,7 +434,7 @@ function B(i) {
     r || null
   ), [o, h] = _(s || ""), [d, p] = _(
     m || !1
-  ), [g, f] = _(c || !1), [b, E] = _(null), [S, v] = _(
+  ), [g, f] = _(c || !1), [b, y] = _(null), [S, v] = _(
     n || null
   ), T = I();
   return /* @__PURE__ */ e.createElement(
@@ -450,7 +450,7 @@ function B(i) {
         searchError: g,
         setSearchError: f,
         activeTheme: b,
-        setActiveTheme: E,
+        setActiveTheme: y,
         searchPreviewId: S,
         setSearchPreviewId: v,
         searchPreviewRef: T
@@ -490,10 +490,10 @@ const M = (i) => {
     r(null), m(!1), n(null), u(null);
   }, f = async (b) => {
     m(!0);
-    const E = new AbortController();
-    u(E);
+    const y = new AbortController();
+    u(y);
     try {
-      const v = await (await fetch(b, { signal: E.signal })).json();
+      const v = await (await fetch(b, { signal: y.signal })).json();
       r(o ? v[o] : v), n(null), m(!1);
     } catch (S) {
       if (S.name === "AbortError") {
@@ -503,16 +503,16 @@ const M = (i) => {
       n("Error fetching results"), m(!1);
     }
   };
-  return y(() => {
+  return E(() => {
     const b = l;
     return () => {
       b && b.abort();
     };
-  }, [l]), y(() => {
+  }, [l]), E(() => {
     h && h(a);
-  }, [a, h]), y(() => {
+  }, [a, h]), E(() => {
     p && p(c);
-  }, [c, p]), y(() => {
+  }, [c, p]), E(() => {
     d && d(s);
   }, [s, d]), { data: a, fetching: s, error: c, fetchData: f, resetState: g };
 };
@@ -534,7 +534,7 @@ function Y(i) {
   }, p = I(null), g = C("m-search-bar aic-ct-search", {
     "s-autocomplete-active": a
   });
-  return y(() => {
+  return E(() => {
     l && (u(!1), o(R({ keywords: "" }, h)));
   }, [o, l, u]), /* @__PURE__ */ e.createElement(
     "form",
@@ -729,7 +729,7 @@ function Q(i) {
       "aic-ct-result--selected": l
     }
   );
-  return y(() => {
+  return E(() => {
     var p;
     (p = o == null ? void 0 : o.current) != null && p.includes("s-positioned") && u.current.classList.add("s-positioned"), o.current = u.current.className;
   }), /* @__PURE__ */ e.createElement(
@@ -827,7 +827,7 @@ function Ne() {
     "aic-ct-preview--loading": !o,
     "aic-ct-preview__content-warning": m.length >= 6
   });
-  y(() => {
+  E(() => {
     h(
       a.find((f) => f.id === i)
     );
@@ -842,7 +842,7 @@ function Ne() {
     var f;
     (f = r == null ? void 0 : r.current) == null || f.close();
   };
-  return y(() => {
+  return E(() => {
     o && u(m.find((f) => f.id === o.id));
   }, [m, o]), m.length < 6 || l ? /* @__PURE__ */ e.createElement("div", { className: d, id: "aic-ct-preview__content" }, o ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__header aic-ct-preview__core" }, /* @__PURE__ */ e.createElement(
     "button",
@@ -936,7 +936,7 @@ function we() {
       document.dispatchEvent(d);
     }, 0);
   }, []);
-  return y(() => {
+  return E(() => {
     u.current && (r == null ? void 0 : r.length) > 0 && !a && !i && h();
   }, [
     u,
@@ -944,7 +944,7 @@ function we() {
     a,
     i,
     h
-  ]), y(() => {
+  ]), E(() => {
     const d = s.current;
     return d && (d.addEventListener("close", o), d.addEventListener("click", o)), () => {
       d && (d.removeEventListener("close", o), d.removeEventListener("click", o));
@@ -1027,25 +1027,25 @@ function z(i) {
       payload: a.id
     });
   };
-  return y(() => {
+  return E(() => {
     l({
       type: "UPDATE_NOTE",
       payload: d
     });
-  }, [d, l]), y(() => {
+  }, [d, l]), E(() => {
     const f = o.current;
     return () => {
-      document.activeElement === f && (n.length > 1 ? n.find((b, E) => {
+      document.activeElement === f && (n.length > 1 ? n.find((b, y) => {
         b.id === a.id && s({
           flag: !0,
-          id: n[E !== n.length - 1 ? E + 1 : E - 1].id
+          id: n[y !== n.length - 1 ? y + 1 : y - 1].id
         });
       }) : s({
         flag: !0,
         id: null
       }));
     };
-  }, [n, a.id, s]), y(() => (m((f) => [...f, { id: a.id, ref: o }]), () => {
+  }, [n, a.id, s]), E(() => (m((f) => [...f, { id: a.id, ref: o }]), () => {
     m(
       (f) => f.filter((b) => b.id !== a.id)
     );
@@ -1138,7 +1138,7 @@ function ke() {
   }, h = () => {
     r(2), a.current.focus();
   };
-  return y(() => {
+  return E(() => {
     m.flag && (!i.length && (u != null && u.current) ? u.current.focus() : n.find((d) => d.id === m.id).ref.current.focus(), c(!1));
   }, [i, m, n, u]), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-tour" }, i.length > 0 && /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement("header", { className: "aic-ct-section-header f-body" }, /* @__PURE__ */ e.createElement("h2", { id: "aic-ct-tour__heading", className: "f-module-title-2" }, "Artworks in your tour")), /* @__PURE__ */ e.createElement("div", { className: "f-body aic-ct-tour__intro" }, /* @__PURE__ */ e.createElement("p", null, "Your artworks are listed below in the order that you selected them. Your final tour will have them ordered based on their location in the galleries to give you the easiest tour path."), i.length === 6 && /* @__PURE__ */ e.createElement("p", null, /* @__PURE__ */ e.createElement("br", null), "You've added 6 artworks, the maximum number allowed. You may remove one if you would like to choose a different work."))), /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-tour__results" }, i.map((d, p) => /* @__PURE__ */ e.createElement(
     z,
@@ -1209,7 +1209,7 @@ function Se() {
     initialValue: i,
     maxLength: f.title,
     valueSetter: a
-  }), E = A({
+  }), y = A({
     initialValue: n,
     maxLength: f.creatorName,
     valueSetter: l
@@ -1256,12 +1256,12 @@ function Se() {
     {
       className: "f-secondary",
       type: "text",
-      value: E.value,
-      onChange: E.onChange,
+      value: y.value,
+      onChange: y.onChange,
       id: "aic-ct-metadata__creator-name",
-      maxLength: E.maxLength
+      maxLength: y.maxLength
     }
-  ), E.counterEl))), /* @__PURE__ */ e.createElement("li", { className: "m-fieldset__field o-blocks" }, /* @__PURE__ */ e.createElement(
+  ), y.counterEl))), /* @__PURE__ */ e.createElement("li", { className: "m-fieldset__field o-blocks" }, /* @__PURE__ */ e.createElement(
     "label",
     {
       htmlFor: "aic-ct-metadata__creator-email",
@@ -1367,7 +1367,7 @@ function Te() {
     isSaving: p,
     setIsSaving: g,
     setActiveNavPage: f
-  } = N(k), [b, E] = _(null), S = async () => {
+  } = N(k), [b, y] = _(null), S = async () => {
     g(!0);
     try {
       const v = await fetch(`${i}`, {
@@ -1395,20 +1395,20 @@ function Te() {
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know."
         );
       const { message: T, my_museum_tour: x } = await v.json();
-      E({
+      y({
         type: "success",
         message: T,
         id: x.id
       });
     } catch (v) {
-      E({
+      y({
         type: "error",
         message: v.message
       });
     }
     g(!1);
   };
-  return y(() => {
+  return E(() => {
     const v = [];
     a.length || v.push("A tour title"), a.length > d.title && v.push("Tour title must not exceed the character limit"), n || v.push("A valid email address"), u.length > d.description && v.push(
       "Tour description must not exceed the character limit"
@@ -1423,7 +1423,7 @@ function Te() {
     h,
     d,
     n
-  ]), y(() => {
+  ]), E(() => {
     b != null && b.id && L.assign(
       `/my-museum-tour/${b.id}?tourCreationComplete=true`
     );
@@ -1540,7 +1540,9 @@ const Ie = (i) => {
   }, o = {
     hideFromTours: r
   };
-  return /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(O, { ...u }, /* @__PURE__ */ e.createElement(Ee, null), /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement(
+  return E(() => {
+    document.body.style.overflow = "unset";
+  }, []), /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(O, { ...u }, /* @__PURE__ */ e.createElement(Ee, null), /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement(
     F,
     {
       id: 0,

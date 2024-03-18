@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "./components/navigation/Header";
 import Footer from "./components/navigation/Footer";
 import NavPages from "./components/navigation/NavPages";
@@ -39,6 +39,11 @@ const MyMuseumTourBuilder = (props) => {
   const SearchProps = {
     hideFromTours,
   };
+
+  useEffect(() => {
+    // Remove styles that interfere with position sticky
+    document.body.style.overflow = "unset";
+  }, []);
 
   return (
     <div id="my-museum-tour-builder" className="my-museum-tour">
