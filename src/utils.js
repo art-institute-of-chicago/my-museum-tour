@@ -45,7 +45,7 @@ export function camelToSnakeCase(str) {
  * @param {QueryParams} queryParams - QueryParams object with keywords and/or themes
  * @returns {URL} - URL object for API query
  */
-export function createSearchUrl(queryParams) {
+export function createSearchUrl(queryParams, hideFromTours) {
   // Build the query string
   // I've broken this up to make it easer to reason about and manipulate
   const url = new URL("https://api.artic.edu/api/v1/artworks/search");
@@ -89,6 +89,15 @@ export function createSearchUrl(queryParams) {
   url.searchParams.set("limit", "60");
   if (typeof queryParams.keywords !== "undefined") {
     url.searchParams.set("q", queryParams.keywords);
+  }
+
+  if (hideFromTours) {
+    for (const val of Object.values(hideFromTours)) {
+      url.searchParams.set(
+        `query[bool][must_not][][term][id][value]=${val}`,
+        val,
+      );
+    }
   }
 
   // Uniform treatment for subject, category, and style ids

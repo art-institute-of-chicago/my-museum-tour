@@ -66,4 +66,31 @@ describe("<Themes />", () => {
         "&query%5Bbool%5D%5Bmust%5D%5B%5D%5Bterms%5D%5Bcategory_ids%5D%5B%5D=PC-154",
       );
   });
+
+  it("Requests the correct URL with hiding artworks", () => {
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+      delayMs: 80,
+    }).as("search");
+
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <ThemeToggle
+            id="0"
+            label="Test theme"
+            searchParams={{ category_ids: ["PC-154"] }}
+            hideFromTours={["111111"]}
+          />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-theme-toggle-0").click();
+    cy.get("@search")
+      .its("request.url")
+      .should(
+        "include",
+        "&query%5Bbool%5D%5Bmust_not%5D%5B%5D%5Bterm%5D%5Bid%5D%5Bvalue%5D%3D111111",
+      );
+  });
 });

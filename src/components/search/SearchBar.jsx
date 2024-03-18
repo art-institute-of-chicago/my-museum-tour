@@ -3,11 +3,12 @@ import { SearchContext } from "../../contexts/SearchContext";
 import useFetch from "../../hooks/useFetch";
 import { createSearchUrl } from "../../utils";
 import classNames from "classnames";
+import PropTypes from "prop-types";
 
 /**
  * SearchBar
  */
-function SearchBar() {
+function SearchBar(props) {
   const {
     searchQuery,
     setSearchQuery,
@@ -26,8 +27,10 @@ function SearchBar() {
     errorSetter: setSearchError,
   });
 
+  const { hideFromTours } = props;
+
   const handleSubmit = (event) => {
-    fetchData(createSearchUrl({ keywords: searchQuery }));
+    fetchData(createSearchUrl({ keywords: searchQuery }, hideFromTours));
     // Deselect any active theme
     setActiveTheme(null);
     event.preventDefault();
@@ -45,7 +48,7 @@ function SearchBar() {
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
-      fetchData(createSearchUrl({ keywords: "" }));
+      fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
     }
   }, [fetchData, initialRender, setInitialRender]);
 
@@ -94,7 +97,7 @@ function SearchBar() {
             setSearchResultItems(null);
             setActiveTheme(null);
             // Apply results for empty keyword search
-            fetchData(createSearchUrl({ keywords: "" }));
+            fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
             searchButtonRef.current.focus();
           }}
         >
@@ -106,5 +109,9 @@ function SearchBar() {
     </form>
   );
 }
+
+SearchBar.propTypes = {
+  hideFromTours: PropTypes.array,
+};
 
 export default SearchBar;

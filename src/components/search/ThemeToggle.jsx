@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
  * ThemeToggle
  */
 function ThemeToggle(props) {
-  const { id, label, thumbnailId, searchParams } = props;
+  const { id, label, thumbnailId, searchParams, hideFromTours } = props;
   const { iiifBaseUrl } = useContext(AppContext);
   const {
     setSearchResultItems,
@@ -32,9 +32,9 @@ function ThemeToggle(props) {
       // Deselect the theme
       setActiveTheme(null);
       // Apply results for empty keyword search
-      fetchData(createSearchUrl({ keywords: "" }));
+      fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
     } else {
-      fetchData(createSearchUrl(searchParams));
+      fetchData(createSearchUrl(searchParams, hideFromTours));
       // Clicking while active removes the theme
       setActiveTheme(label);
       // Empty the search field
@@ -85,6 +85,7 @@ ThemeToggle.propTypes = {
   label: PropTypes.string.isRequired,
   thumbnailId: PropTypes.string.isRequired,
   searchParams: PropTypes.object.isRequired,
+  hideFromTours: PropTypes.array,
 };
 
 export default ThemeToggle;

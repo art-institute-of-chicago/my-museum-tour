@@ -1,10 +1,13 @@
 import React from "react";
 import ThemeToggle from "./ThemeToggle";
+import PropTypes from "prop-types";
 
 /**
  * Themes
  */
-function Themes() {
+function Themes(props) {
+  const { hideFromTours } = props;
+
   // TODO: There's interest in having this in some way configurable
   // Best way to achieve this is TBD
   const themes = [
@@ -82,10 +85,15 @@ function Themes() {
           label={theme.label}
           thumbnailId={theme.thumbnailId}
           searchParams={theme.searchParams}
+          hideFromTours={hideFromTours}
         />
       ))}
     </ul>
   );
 }
+
+Themes.propTypes = {
+  hideFromTours: PropTypes.array,
+};
 
 export default Themes;

@@ -41,4 +41,28 @@ describe("<SearchBar />", () => {
     cy.get("#aic-ct-search__button").click();
     cy.get("@search").its("request.url").should("include", "q=test");
   });
+
+  it("Hides artwork from search", () => {
+    cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
+      fixture: "json/search.json",
+      delayMs: 80,
+    }).as("search");
+
+    cy.mount(
+      <AppProvider>
+        <SearchProvider>
+          <SearchBar hideFromTours={["111111"]} />
+        </SearchProvider>
+      </AppProvider>,
+    );
+    cy.get("#aic-ct-search__input").type("test");
+    cy.get("#aic-ct-search__button").click();
+    cy.get("@search").its("request.url").should("include", "q=test");
+    cy.get("@search")
+      .its("request.url")
+      .should(
+        "include",
+        "&query%5Bbool%5D%5Bmust_not%5D%5B%5D%5Bterm%5D%5Bid%5D%5Bvalue%5D%3D111111",
+      );
+  });
 });

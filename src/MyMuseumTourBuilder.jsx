@@ -18,6 +18,7 @@ const MyMuseumTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
   const {
     apiSaveEndpoint,
+    hideFromTours,
     tourTitle,
     tourDescription,
     tourItems,
@@ -33,6 +34,10 @@ const MyMuseumTourBuilder = (props) => {
     tourItems,
     heroImageId,
     iiifBaseUrl,
+  };
+
+  const SearchProps = {
+    hideFromTours,
   };
 
   return (
@@ -55,8 +60,8 @@ const MyMuseumTourBuilder = (props) => {
             </div>
             <SearchProvider>
               <div className="aic-ct__core">
-                <SearchBar />
-                <Themes />
+                <SearchBar {...SearchProps} />
+                <Themes {...SearchProps} />
                 <SearchResults />
               </div>
             </SearchProvider>
@@ -127,6 +132,7 @@ const MyMuseumTourBuilder = (props) => {
 
 MyMuseumTourBuilder.propTypes = {
   apiSaveEndpoint: PropTypes.string,
+  hideFromTours: PropTypes.array,
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,
