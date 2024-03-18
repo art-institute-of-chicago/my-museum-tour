@@ -1,6 +1,6 @@
-import e, { createContext as D, useState as _, useReducer as be, useRef as I, useMemo as $, useContext as N, useEffect as y, useCallback as q } from "react";
+import e, { createContext as D, useState as _, useReducer as fe, useRef as I, useMemo as $, useContext as N, useEffect as y, useCallback as q } from "react";
 import t from "prop-types";
-const fe = (i, a) => {
+const be = (i, a) => {
   switch (a.type) {
     case "ADD_ITEM":
       return a.payload.short_description && (a.payload.description = a.payload.short_description), delete a.payload.short_description, [...i, { ...a.payload, objectNote: "" }];
@@ -25,12 +25,12 @@ function O(i) {
     navPages: o,
     apiSaveEndpoint: h,
     iiifBaseUrl: d
-  } = i, [p, g] = _(r || ""), [b, f] = _(s || ""), [E, S] = _(!1), [v, T] = _(m || ""), [x, J] = _(c || ""), [W, G] = _(
+  } = i, [p, g] = _(r || ""), [f, b] = _(s || ""), [E, S] = _(!1), [v, T] = _(m || ""), [x, J] = _(c || ""), [W, G] = _(
     l || !1
   ), [K, X] = _(
     n || ""
-  ), [Z, ee] = _(o || []), [te, ae] = _(0), [re, ie] = be(
-    fe,
+  ), [Z, ee] = _(o || []), [te, ae] = _(0), [re, ie] = fe(
+    be,
     u || []
   ), se = I(null), ne = I(null), [ce, le] = _([]), oe = h || "/api/v1/my-museum-tour", [me, ue] = _(!1), [de, he] = _(0), pe = $(
     () => ({
@@ -55,8 +55,8 @@ function O(i) {
         limits: pe,
         tourTitle: p,
         setTourTitle: g,
-        creatorEmail: b,
-        setCreatorEmail: f,
+        creatorEmail: f,
+        setCreatorEmail: b,
         validCreatorEmail: E,
         setValidCreatorEmail: S,
         creatorName: v,
@@ -434,7 +434,7 @@ function B(i) {
     r || null
   ), [o, h] = _(s || ""), [d, p] = _(
     m || !1
-  ), [g, b] = _(c || !1), [f, E] = _(null), [S, v] = _(
+  ), [g, f] = _(c || !1), [b, E] = _(null), [S, v] = _(
     n || null
   ), T = I();
   return /* @__PURE__ */ e.createElement(
@@ -448,8 +448,8 @@ function B(i) {
         searchFetching: d,
         setSearchFetching: p,
         searchError: g,
-        setSearchError: b,
-        activeTheme: f,
+        setSearchError: f,
+        activeTheme: b,
         setActiveTheme: E,
         searchPreviewId: S,
         setSearchPreviewId: v,
@@ -488,12 +488,12 @@ P.Provider.propTypes = {
 const M = (i) => {
   const [a, r] = _(null), [s, m] = _(!1), [c, n] = _(null), [l, u] = _(null), { dataSubSelector: o, dataSetter: h, fetchingSetter: d, errorSetter: p } = i || {}, g = () => {
     r(null), m(!1), n(null), u(null);
-  }, b = async (f) => {
+  }, f = async (b) => {
     m(!0);
     const E = new AbortController();
     u(E);
     try {
-      const v = await (await fetch(f, { signal: E.signal })).json();
+      const v = await (await fetch(b, { signal: E.signal })).json();
       r(o ? v[o] : v), n(null), m(!1);
     } catch (S) {
       if (S.name === "AbortError") {
@@ -504,9 +504,9 @@ const M = (i) => {
     }
   };
   return y(() => {
-    const f = l;
+    const b = l;
     return () => {
-      f && f.abort();
+      b && b.abort();
     };
   }, [l]), y(() => {
     h && h(a);
@@ -514,7 +514,7 @@ const M = (i) => {
     p && p(c);
   }, [c, p]), y(() => {
     d && d(s);
-  }, [s, d]), { data: a, fetching: s, error: c, fetchData: b, resetState: g };
+  }, [s, d]), { data: a, fetching: s, error: c, fetchData: f, resetState: g };
 };
 function Y(i) {
   const {
@@ -529,8 +529,8 @@ function Y(i) {
     dataSetter: s,
     fetchingSetter: m,
     errorSetter: c
-  }), { hideFromTours: h } = i, d = (b) => {
-    o(R({ keywords: a }, h)), n(null), b.preventDefault();
+  }), { hideFromTours: h } = i, d = (f) => {
+    o(R({ keywords: a }, h)), n(null), f.preventDefault();
   }, p = I(null), g = C("m-search-bar aic-ct-search", {
     "s-autocomplete-active": a
   });
@@ -554,8 +554,8 @@ function Y(i) {
         placeholder: "Search by keyword, artist, or title",
         value: a,
         autoComplete: "off",
-        onChange: (b) => {
-          r(b.target.value);
+        onChange: (f) => {
+          r(f.target.value);
         }
       }
     ), /* @__PURE__ */ e.createElement(
@@ -599,9 +599,9 @@ function H(i) {
     dataSetter: l,
     fetchingSetter: u,
     errorSetter: o
-  }), b = () => {
+  }), f = () => {
     d === r ? (p(null), g(R({ keywords: "" }, c))) : (g(R(m, c)), p(r), h(""));
-  }, f = C(
+  }, b = C(
     "aic-ct-theme-toggle tag tag--senary tag--w-image",
     {
       "f-tag": d !== r,
@@ -612,9 +612,9 @@ function H(i) {
   return /* @__PURE__ */ e.createElement(e.Fragment, null, (d === null || d === r) && /* @__PURE__ */ e.createElement("li", null, /* @__PURE__ */ e.createElement(
     "button",
     {
-      className: f,
+      className: b,
       id: `aic-ct-theme-toggle-${a}`,
-      onClick: b,
+      onClick: f,
       "aria-pressed": d === r ? "true" : "false"
     },
     /* @__PURE__ */ e.createElement("span", { className: "aic-ct-theme-toggle__wrapper" }, /* @__PURE__ */ e.createElement(
@@ -824,25 +824,26 @@ Q.propTypes = {
 function Ne() {
   const { searchPreviewId: i, searchResultItems: a, searchPreviewRef: r } = N(P), { iiifBaseUrl: s, tourItems: m, tourItemsDispatch: c, limits: n } = N(k), [l, u] = _(!1), [o, h] = _(null), d = C({
     "aic-ct-preview__content": !0,
-    "aic-ct-preview--loading": !o
+    "aic-ct-preview--loading": !o,
+    "aic-ct-preview__content-warning": m.length >= 6
   });
   y(() => {
     h(
-      a.find((b) => b.id === i)
+      a.find((f) => f.id === i)
     );
   }, [i, a]);
   const p = () => {
-    var b;
+    var f;
     c({
       type: l ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: l ? o.id : o
-    }), (b = r == null ? void 0 : r.current) == null || b.close();
+    }), (f = r == null ? void 0 : r.current) == null || f.close();
   }, g = () => {
-    var b;
-    (b = r == null ? void 0 : r.current) == null || b.close();
+    var f;
+    (f = r == null ? void 0 : r.current) == null || f.close();
   };
   return y(() => {
-    o && u(m.find((b) => b.id === o.id));
+    o && u(m.find((f) => f.id === o.id));
   }, [m, o]), m.length < 6 || l ? /* @__PURE__ */ e.createElement("div", { className: d, id: "aic-ct-preview__content" }, o ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__header aic-ct-preview__core" }, /* @__PURE__ */ e.createElement(
     "button",
     {
@@ -909,7 +910,7 @@ function Ne() {
       onClick: g
     },
     /* @__PURE__ */ e.createElement("svg", { className: "icon--close--24", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close--24" }))
-  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__core" }, /* @__PURE__ */ e.createElement("p", { className: "f-body" }, "You have already added ", n.items.max, " artworks, the maximum number allowed. Please remove one if you would like to choose a different work.")), /* @__PURE__ */ e.createElement("br", null)));
+  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__core" }, /* @__PURE__ */ e.createElement("svg", { className: "icon--max-artworks" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--max-artworks" })), /* @__PURE__ */ e.createElement("p", { className: "f-list-6" }, "You have already added ", n.items.max, " artworks, the maximum number allowed."), /* @__PURE__ */ e.createElement("p", { className: "f-list-6" }, "Please remove one if you would like to choose a different work.")), /* @__PURE__ */ e.createElement("br", null)));
 }
 function we() {
   const {
@@ -1032,10 +1033,10 @@ function z(i) {
       payload: d
     });
   }, [d, l]), y(() => {
-    const b = o.current;
+    const f = o.current;
     return () => {
-      document.activeElement === b && (n.length > 1 ? n.find((f, E) => {
-        f.id === a.id && s({
+      document.activeElement === f && (n.length > 1 ? n.find((b, E) => {
+        b.id === a.id && s({
           flag: !0,
           id: n[E !== n.length - 1 ? E + 1 : E - 1].id
         });
@@ -1044,9 +1045,9 @@ function z(i) {
         id: null
       }));
     };
-  }, [n, a.id, s]), y(() => (m((b) => [...b, { id: a.id, ref: o }]), () => {
+  }, [n, a.id, s]), y(() => (m((f) => [...f, { id: a.id, ref: o }]), () => {
     m(
-      (b) => b.filter((f) => f.id !== a.id)
+      (f) => f.filter((b) => b.id !== a.id)
     );
   }), [m, n, a.id]), /* @__PURE__ */ e.createElement(
     "li",
@@ -1171,7 +1172,7 @@ function ke() {
     "button",
     {
       type: "button",
-      className: "f-buttons btn btn--primary",
+      className: "f-buttons btn btn--my-museum-tour",
       onClick: h
     },
     "Finish My Tour"
@@ -1203,22 +1204,22 @@ function Se() {
     setMarketingOptIn: d,
     tourDescription: p,
     setTourDescription: g,
-    limits: b
-  } = N(k), f = A({
+    limits: f
+  } = N(k), b = A({
     initialValue: i,
-    maxLength: b.title,
+    maxLength: f.title,
     valueSetter: a
   }), E = A({
     initialValue: n,
-    maxLength: b.creatorName,
+    maxLength: f.creatorName,
     valueSetter: l
   }), S = A({
     initialValue: u,
-    maxLength: b.recipientName,
+    maxLength: f.recipientName,
     valueSetter: o
   }), v = A({
     initialValue: p,
-    maxLength: b.description,
+    maxLength: f.description,
     valueSetter: g
   });
   return /* @__PURE__ */ e.createElement("fieldset", { className: "m-fieldset aic-ct-fieldset" }, /* @__PURE__ */ e.createElement("ol", { className: "m-fieldset__fieldset" }, /* @__PURE__ */ e.createElement("li", { className: "m-fieldset__field o-blocks" }, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__title", className: "label f-secondary" }, "Tour Title ", /* @__PURE__ */ e.createElement("span", { "aria-hidden": "true" }, " *")), /* @__PURE__ */ e.createElement("span", { className: "input" }, /* @__PURE__ */ e.createElement("span", { className: "input__io-container" }, /* @__PURE__ */ e.createElement(
@@ -1226,16 +1227,16 @@ function Se() {
     {
       className: "f-secondary",
       type: "text",
-      onChange: f.onChange,
-      value: f.value,
+      onChange: b.onChange,
+      value: b.value,
       id: "aic-ct-metadata__title",
-      maxLength: f.maxLength,
+      maxLength: b.maxLength,
       "aria-required": "true",
-      "aria-invalid": f.value ? "false" : "true",
-      "aria-describedby": f.value ? null : "aic-ct-metadata__invalid-title",
+      "aria-invalid": b.value ? "false" : "true",
+      "aria-describedby": b.value ? null : "aic-ct-metadata__invalid-title",
       required: !0
     }
-  ), f.counterEl), !f.value && /* @__PURE__ */ e.createElement(
+  ), b.counterEl), !b.value && /* @__PURE__ */ e.createElement(
     "span",
     {
       id: "aic-ct-metadata__invalid-title",
@@ -1365,8 +1366,8 @@ function Te() {
     limits: d,
     isSaving: p,
     setIsSaving: g,
-    setActiveNavPage: b
-  } = N(k), [f, E] = _(null), S = async () => {
+    setActiveNavPage: f
+  } = N(k), [b, E] = _(null), S = async () => {
     g(!0);
     try {
       const v = await fetch(`${i}`, {
@@ -1423,10 +1424,10 @@ function Te() {
     d,
     n
   ]), y(() => {
-    f != null && f.id && L.assign(
-      `/my-museum-tour/${f.id}?tourCreationComplete=true`
+    b != null && b.id && L.assign(
+      `/my-museum-tour/${b.id}?tourCreationComplete=true`
     );
-  }, [f]), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-validation" }, o.length ? /* @__PURE__ */ e.createElement(
+  }, [b]), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-validation" }, o.length ? /* @__PURE__ */ e.createElement(
     "div",
     {
       id: "aic-ct-validation__error",
@@ -1448,7 +1449,7 @@ function Te() {
         className: "btn btn--secondary f-buttons",
         type: "button",
         onClick: () => {
-          l.length ? b(1) : b(0);
+          l.length ? f(1) : f(0);
         }
       },
       "Go back"
@@ -1462,7 +1463,7 @@ function Te() {
       "aria-live": "polite"
     },
     p && /* @__PURE__ */ e.createElement("div", { className: "aic-ct-loader f-body" }, /* @__PURE__ */ e.createElement("p", null, "Saving..."), /* @__PURE__ */ e.createElement("div", { className: "loader" })),
-    !p && !f && /* @__PURE__ */ e.createElement(
+    !p && !b && /* @__PURE__ */ e.createElement(
       "div",
       {
         id: "aic-ct-validation__save",
@@ -1486,27 +1487,27 @@ function Te() {
           className: "btn btn--secondary f-buttons",
           type: "button",
           onClick: () => {
-            b(1);
+            f(1);
           }
         },
         "No, go back and edit"
       ))
     ),
-    f && (f.type === "success" && /* @__PURE__ */ e.createElement(
+    b && (b.type === "success" && /* @__PURE__ */ e.createElement(
       "div",
       {
         id: "aic-ct-validation__success",
         className: "aic-ct-validation__content"
       },
       /* @__PURE__ */ e.createElement("h1", { className: "f-headline" }, "Saved successfully!", /* @__PURE__ */ e.createElement("br", null), " Redirecting to your tour")
-    ) || f.type === "error" && /* @__PURE__ */ e.createElement(
+    ) || b.type === "error" && /* @__PURE__ */ e.createElement(
       "div",
       {
         id: "aic-ct-save-error",
         className: "aic-ct-validation__content"
       },
       /* @__PURE__ */ e.createElement("h1", { className: "f-headline" }, "Looks like there was a problem"),
-      /* @__PURE__ */ e.createElement("p", { className: "f-body" }, f.message),
+      /* @__PURE__ */ e.createElement("p", { className: "f-body" }, b.message),
       /* @__PURE__ */ e.createElement("div", { className: "aic-ct-validation__actions" }, /* @__PURE__ */ e.createElement(
         "button",
         {
