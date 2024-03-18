@@ -197,10 +197,13 @@ function SearchPreview() {
             <svg className="icon--max-artworks">
               <use xlinkHref="#icon--max-artworks"></use>
             </svg>
-            <p className="f-list-6">You have already added {limits.items.max} artworks, the maximum
-              number allowed.</p>
-            <p className="f-list-6">Please remove one if you would like to choose a
-              different work.</p>
+            <p className="f-list-6">
+              You have already added {limits.items.max} artworks, the maximum
+              number allowed.
+            </p>
+            <p className="f-list-6">
+              Please remove one if you would like to choose a different work.
+            </p>
           </div>
           <br />
         </>
