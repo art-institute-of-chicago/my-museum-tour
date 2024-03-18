@@ -121,7 +121,7 @@ function TourItems() {
               <div className="aic-ct-tour__cta-actions">
                 <button
                   type="button"
-                  className="f-buttons btn btn--primary"
+                  className="f-buttons btn btn--my-museum-tour"
                   onClick={handleFinishClick}
                 >
                   Finish My Tour
