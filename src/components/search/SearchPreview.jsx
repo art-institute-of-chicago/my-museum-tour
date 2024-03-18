@@ -193,7 +193,7 @@ function SearchPreview() {
             </button>
           </div>
 
-          <div className="aic-ct-preview__core">
+          <div className="aic-ct-preview__body aic-ct-preview__core">
             <svg className="icon--max-artworks">
               <use xlinkHref="#icon--max-artworks"></use>
             </svg>
