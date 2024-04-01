@@ -1,4 +1,4 @@
-import e, { createContext as D, useState as _, useReducer as fe, useRef as I, useMemo as $, useContext as N, useEffect as E, useCallback as q } from "react";
+import e, { createContext as D, useState as _, useReducer as fe, useRef as I, useMemo as $, useContext as N, useEffect as g, useCallback as q } from "react";
 import t from "prop-types";
 const be = (i, a) => {
   switch (a.type) {
@@ -25,7 +25,7 @@ function O(i) {
     navPages: o,
     apiSaveEndpoint: h,
     iiifBaseUrl: d
-  } = i, [p, g] = _(r || ""), [f, b] = _(s || ""), [y, S] = _(!1), [v, T] = _(m || ""), [x, J] = _(c || ""), [W, G] = _(
+  } = i, [p, E] = _(r || ""), [f, b] = _(s || ""), [y, S] = _(!1), [v, T] = _(m || ""), [x, J] = _(c || ""), [W, G] = _(
     l || !1
   ), [K, X] = _(
     n || ""
@@ -54,7 +54,7 @@ function O(i) {
         iiifBaseUrl: d,
         limits: pe,
         tourTitle: p,
-        setTourTitle: g,
+        setTourTitle: E,
         creatorEmail: f,
         setCreatorEmail: b,
         validCreatorEmail: y,
@@ -237,7 +237,7 @@ function R(i, a) {
 const L = {
   assign: (i) => window.location.assign(i)
 };
-function ge() {
+function Ee() {
   const {
     tourItems: i,
     limits: a,
@@ -286,7 +286,7 @@ function ge() {
     )
   )));
 }
-function Ee() {
+function ge() {
   const {
     limits: i,
     activeNavPage: a,
@@ -327,7 +327,7 @@ function Ee() {
         className: "aic-ct-item-info__count-num f-body"
       },
       n
-    ), " ", /* @__PURE__ */ e.createElement("span", null, "artworks of ", i.items.max, " ")), /* @__PURE__ */ e.createElement(ge, null)), /* @__PURE__ */ e.createElement(
+    ), " ", /* @__PURE__ */ e.createElement("span", null, "artworks of ", i.items.max, " ")), /* @__PURE__ */ e.createElement(Ee, null)), /* @__PURE__ */ e.createElement(
       "button",
       {
         ref: c,
@@ -382,7 +382,7 @@ function ye() {
 function j({ children: i }) {
   var m, c, n;
   const { activeNavPage: a, navPages: r, setNavPages: s } = N(k);
-  return E(() => {
+  return g(() => {
     s(
       i ? i.map((l, u) => ({
         id: u,
@@ -390,7 +390,7 @@ function j({ children: i }) {
         tagline: l.props.tagline
       })) : []
     );
-  }, [i, s]), E(() => {
+  }, [i, s]), g(() => {
     var l;
     (l = document.querySelector("#my-museum-tour-builder")) == null || l.scrollIntoView();
   }, [a]), /* @__PURE__ */ e.createElement("div", { id: "aic-ct-nav-pages" }, /* @__PURE__ */ e.createElement("div", { className: "sr-only", "aria-live": "polite" }, "Step ", ((m = r[a]) == null ? void 0 : m.id) + 1, " ", (c = r[a]) == null ? void 0 : c.title, " ", (n = r[a]) == null ? void 0 : n.tagline), i);
@@ -422,7 +422,7 @@ F.propTypes = {
   ]).isRequired
 };
 const P = D();
-function B(i) {
+function M(i) {
   const {
     children: a,
     searchResultItems: r,
@@ -434,7 +434,7 @@ function B(i) {
     r || null
   ), [o, h] = _(s || ""), [d, p] = _(
     m || !1
-  ), [g, f] = _(c || !1), [b, y] = _(null), [S, v] = _(
+  ), [E, f] = _(c || !1), [b, y] = _(null), [S, v] = _(
     n || null
   ), T = I();
   return /* @__PURE__ */ e.createElement(
@@ -447,7 +447,7 @@ function B(i) {
         setSearchQuery: h,
         searchFetching: d,
         setSearchFetching: p,
-        searchError: g,
+        searchError: E,
         setSearchError: f,
         activeTheme: b,
         setActiveTheme: y,
@@ -459,7 +459,7 @@ function B(i) {
     a
   );
 }
-B.propTypes = {
+M.propTypes = {
   children: t.node.isRequired,
   searchResultItems: t.array,
   searchQuery: t.string,
@@ -485,8 +485,8 @@ P.Provider.propTypes = {
   }),
   children: t.node.isRequired
 };
-const M = (i) => {
-  const [a, r] = _(null), [s, m] = _(!1), [c, n] = _(null), [l, u] = _(null), { dataSubSelector: o, dataSetter: h, fetchingSetter: d, errorSetter: p } = i || {}, g = () => {
+const B = (i) => {
+  const [a, r] = _(null), [s, m] = _(!1), [c, n] = _(null), [l, u] = _(null), { dataSubSelector: o, dataSetter: h, fetchingSetter: d, errorSetter: p } = i || {}, E = () => {
     r(null), m(!1), n(null), u(null);
   }, f = async (b) => {
     m(!0);
@@ -497,24 +497,24 @@ const M = (i) => {
       r(o ? v[o] : v), n(null), m(!1);
     } catch (S) {
       if (S.name === "AbortError") {
-        g();
+        E();
         return;
       }
       n("Error fetching results"), m(!1);
     }
   };
-  return E(() => {
+  return g(() => {
     const b = l;
     return () => {
       b && b.abort();
     };
-  }, [l]), E(() => {
+  }, [l]), g(() => {
     h && h(a);
-  }, [a, h]), E(() => {
+  }, [a, h]), g(() => {
     p && p(c);
-  }, [c, p]), E(() => {
+  }, [c, p]), g(() => {
     d && d(s);
-  }, [s, d]), { data: a, fetching: s, error: c, fetchData: f, resetState: g };
+  }, [s, d]), { data: a, fetching: s, error: c, fetchData: f, resetState: E };
 };
 function Y(i) {
   const {
@@ -524,17 +524,17 @@ function Y(i) {
     setSearchFetching: m,
     setSearchError: c,
     setActiveTheme: n
-  } = N(P), [l, u] = _(!0), { fetchData: o } = M({
+  } = N(P), [l, u] = _(!0), { fetchData: o } = B({
     dataSubSelector: "data",
     dataSetter: s,
     fetchingSetter: m,
     errorSetter: c
   }), { hideFromTours: h } = i, d = (f) => {
     o(R({ keywords: a }, h)), n(null), f.preventDefault();
-  }, p = I(null), g = C("m-search-bar aic-ct-search", {
+  }, p = I(null), E = C("m-search-bar aic-ct-search", {
     "s-autocomplete-active": a
   });
-  return E(() => {
+  return g(() => {
     l && (u(!1), o(R({ keywords: "" }, h)));
   }, [o, l, u]), /* @__PURE__ */ e.createElement(
     "form",
@@ -543,7 +543,7 @@ function Y(i) {
       role: "search",
       "aria-label": "Objects for your tour",
       onSubmit: d,
-      className: g
+      className: E
     },
     /* @__PURE__ */ e.createElement("div", { className: "m-search-bar__inner" }, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-search__input", className: "sr-only" }, "Search the collection"), /* @__PURE__ */ e.createElement(
       "input",
@@ -594,13 +594,13 @@ function H(i) {
     setSearchQuery: h,
     activeTheme: d,
     setActiveTheme: p
-  } = N(P), { fetchData: g } = M({
+  } = N(P), { fetchData: E } = B({
     dataSubSelector: "data",
     dataSetter: l,
     fetchingSetter: u,
     errorSetter: o
   }), f = () => {
-    d === r ? (p(null), g(R({ keywords: "" }, c))) : (g(R(m, c)), p(r), h(""));
+    d === r ? (p(null), E(R({ keywords: "" }, c))) : (E(R(m, c)), p(r), h(""));
   }, b = C(
     "aic-ct-theme-toggle tag tag--senary tag--w-image",
     {
@@ -679,7 +679,7 @@ function U(i) {
     },
     {
       label: "Chicago Artists",
-      thumbnailId: "62f2ca7a-8c22-bb7e-9e3d-7453652a3350",
+      thumbnailId: "cd6c543d-a649-8f25-d224-6d22e7f86dcd",
       searchParams: {
         theme_titles: ["Chicago Artists"]
       }
@@ -729,7 +729,7 @@ function Q(i) {
       "aic-ct-result--selected": l
     }
   );
-  return E(() => {
+  return g(() => {
     var p;
     (p = o == null ? void 0 : o.current) != null && p.includes("s-positioned") && u.current.classList.add("s-positioned"), o.current = u.current.className;
   }), /* @__PURE__ */ e.createElement(
@@ -827,7 +827,7 @@ function Ne() {
     "aic-ct-preview--loading": !o,
     "aic-ct-preview__content-warning": m.length >= 6
   });
-  E(() => {
+  g(() => {
     h(
       a.find((f) => f.id === i)
     );
@@ -838,11 +838,11 @@ function Ne() {
       type: l ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: l ? o.id : o
     }), (f = r == null ? void 0 : r.current) == null || f.close();
-  }, g = () => {
+  }, E = () => {
     var f;
     (f = r == null ? void 0 : r.current) == null || f.close();
   };
-  return E(() => {
+  return g(() => {
     o && u(m.find((f) => f.id === o.id));
   }, [m, o]), m.length < 6 || l ? /* @__PURE__ */ e.createElement("div", { className: d, id: "aic-ct-preview__content" }, o ? /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__header aic-ct-preview__core" }, /* @__PURE__ */ e.createElement(
     "button",
@@ -851,7 +851,7 @@ function Ne() {
       className: "btn btn--icon btn--transparent aic-ct-preview__close",
       type: "button",
       "aria-label": "Close",
-      onClick: g
+      onClick: E
     },
     /* @__PURE__ */ e.createElement("svg", { className: "icon--close--24", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close--24" }))
   )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__image" }, /* @__PURE__ */ e.createElement(
@@ -896,7 +896,7 @@ function Ne() {
     {
       className: "btn btn--transparent btn--w-icon f-buttons aic-ct-preview__close-trans",
       type: "button",
-      onClick: g
+      onClick: E
     },
     /* @__PURE__ */ e.createElement("svg", { className: "icon--close--24", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close--24" })),
     "Close and go back to results"
@@ -907,7 +907,7 @@ function Ne() {
       className: "btn btn--icon btn--transparent aic-ct-preview__close",
       type: "button",
       "aria-label": "Close",
-      onClick: g
+      onClick: E
     },
     /* @__PURE__ */ e.createElement("svg", { className: "icon--close--24", "aria-hidden": "true" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--close--24" }))
   )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-preview__body aic-ct-preview__core" }, /* @__PURE__ */ e.createElement("svg", { className: "icon--max-artworks" }, /* @__PURE__ */ e.createElement("use", { xlinkHref: "#icon--max-artworks" })), /* @__PURE__ */ e.createElement("p", { className: "f-list-6" }, "You have already added ", n.items.max, " artworks, the maximum number allowed."), /* @__PURE__ */ e.createElement("p", { className: "f-list-6" }, "Please remove one if you would like to choose a different work.")), /* @__PURE__ */ e.createElement("br", null)));
@@ -936,7 +936,7 @@ function we() {
       document.dispatchEvent(d);
     }, 0);
   }, []);
-  return E(() => {
+  return g(() => {
     u.current && (r == null ? void 0 : r.length) > 0 && !a && !i && h();
   }, [
     u,
@@ -944,7 +944,7 @@ function we() {
     a,
     i,
     h
-  ]), E(() => {
+  ]), g(() => {
     const d = s.current;
     return d && (d.addEventListener("close", o), d.addEventListener("click", o)), () => {
       d && (d.removeEventListener("close", o), d.removeEventListener("click", o));
@@ -1011,9 +1011,9 @@ function A(i = {}) {
   };
 }
 function z(i) {
-  var g;
+  var E;
   const { itemData: a, itemIndex: r, setShouldAssignFocus: s, setRemoveButtons: m } = i, { iiifBaseUrl: c, tourItems: n, tourItemsDispatch: l, limits: u } = N(k), o = I(null), h = A({
-    initialValue: (g = n[r]) == null ? void 0 : g.objectNote,
+    initialValue: (E = n[r]) == null ? void 0 : E.objectNote,
     maxLength: u.objectNote
   }), d = $(
     () => ({
@@ -1027,12 +1027,12 @@ function z(i) {
       payload: a.id
     });
   };
-  return E(() => {
+  return g(() => {
     l({
       type: "UPDATE_NOTE",
       payload: d
     });
-  }, [d, l]), E(() => {
+  }, [d, l]), g(() => {
     const f = o.current;
     return () => {
       document.activeElement === f && (n.length > 1 ? n.find((b, y) => {
@@ -1045,7 +1045,7 @@ function z(i) {
         id: null
       }));
     };
-  }, [n, a.id, s]), E(() => (m((f) => [...f, { id: a.id, ref: o }]), () => {
+  }, [n, a.id, s]), g(() => (m((f) => [...f, { id: a.id, ref: o }]), () => {
     m(
       (f) => f.filter((b) => b.id !== a.id)
     );
@@ -1138,7 +1138,7 @@ function ke() {
   }, h = () => {
     r(2), a.current.focus();
   };
-  return E(() => {
+  return g(() => {
     m.flag && (!i.length && (u != null && u.current) ? u.current.focus() : n.find((d) => d.id === m.id).ref.current.focus(), c(!1));
   }, [i, m, n, u]), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-tour" }, i.length > 0 && /* @__PURE__ */ e.createElement(e.Fragment, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement("header", { className: "aic-ct-section-header f-body" }, /* @__PURE__ */ e.createElement("h2", { id: "aic-ct-tour__heading", className: "f-module-title-2" }, "Artworks in your tour")), /* @__PURE__ */ e.createElement("div", { className: "f-body aic-ct-tour__intro" }, /* @__PURE__ */ e.createElement("p", null, "Your artworks are listed below in the order that you selected them. Your final tour will have them ordered based on their location in the galleries to give you the easiest tour path."), i.length === 6 && /* @__PURE__ */ e.createElement("p", null, /* @__PURE__ */ e.createElement("br", null), "You've added 6 artworks, the maximum number allowed. You may remove one if you would like to choose a different work."))), /* @__PURE__ */ e.createElement("ul", { id: "aic-ct-tour__results" }, i.map((d, p) => /* @__PURE__ */ e.createElement(
     z,
@@ -1203,7 +1203,7 @@ function Se() {
     marketingOptIn: h,
     setMarketingOptIn: d,
     tourDescription: p,
-    setTourDescription: g,
+    setTourDescription: E,
     limits: f
   } = N(k), b = A({
     initialValue: i,
@@ -1220,7 +1220,7 @@ function Se() {
   }), v = A({
     initialValue: p,
     maxLength: f.description,
-    valueSetter: g
+    valueSetter: E
   });
   return /* @__PURE__ */ e.createElement("fieldset", { className: "m-fieldset aic-ct-fieldset" }, /* @__PURE__ */ e.createElement("ol", { className: "m-fieldset__fieldset" }, /* @__PURE__ */ e.createElement("li", { className: "m-fieldset__field o-blocks" }, /* @__PURE__ */ e.createElement("label", { htmlFor: "aic-ct-metadata__title", className: "label f-secondary" }, "Tour Title ", /* @__PURE__ */ e.createElement("span", { "aria-hidden": "true" }, " *")), /* @__PURE__ */ e.createElement("span", { className: "input" }, /* @__PURE__ */ e.createElement("span", { className: "input__io-container" }, /* @__PURE__ */ e.createElement(
     "input",
@@ -1365,10 +1365,10 @@ function Te() {
     setValidityIssues: h,
     limits: d,
     isSaving: p,
-    setIsSaving: g,
+    setIsSaving: E,
     setActiveNavPage: f
   } = N(k), [b, y] = _(null), S = async () => {
-    g(!0);
+    E(!0);
     try {
       const v = await fetch(`${i}`, {
         method: "POST",
@@ -1406,9 +1406,9 @@ function Te() {
         message: v.message
       });
     }
-    g(!1);
+    E(!1);
   };
-  return E(() => {
+  return g(() => {
     const v = [];
     a.length || v.push("A tour title"), a.length > d.title && v.push("Tour title must not exceed the character limit"), n || v.push("A valid email address"), u.length > d.description && v.push(
       "Tour description must not exceed the character limit"
@@ -1423,7 +1423,7 @@ function Te() {
     h,
     d,
     n
-  ]), E(() => {
+  ]), g(() => {
     b != null && b.id && L.assign(
       `/my-museum-tour/${b.id}?tourCreationComplete=true`
     );
@@ -1540,66 +1540,46 @@ const Ie = (i) => {
   }, o = {
     hideFromTours: r
   };
-  return E(() => {
+  return g(() => {
     document.body.style.overflow = "unset";
-  }, []), /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(O, { ...u }, /* @__PURE__ */ e.createElement(Ee, null), /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement(
-    F,
+  }, []), /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(O, { ...u }, /* @__PURE__ */ e.createElement(ge, null), /* @__PURE__ */ e.createElement(j, null, /* @__PURE__ */ e.createElement(F, { id: 0, title: "Choose Your Artworks" }, /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct-intro--keyline aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Create your own tour"), /* @__PURE__ */ e.createElement("p", { className: "f-deck" }, "Choose up to 6 artworks for your tour by searching for a particular work or artist, browsing themes, or selecting from the list of artworks below.")), /* @__PURE__ */ e.createElement(M, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(Y, { ...o }), /* @__PURE__ */ e.createElement(U, { ...o }), /* @__PURE__ */ e.createElement(we, null)))), /* @__PURE__ */ e.createElement(F, { id: 1, title: "Personalize" }, n && /* @__PURE__ */ e.createElement("div", { className: "aic-ct-hero aic-ct-full-bleed" }, /* @__PURE__ */ e.createElement(
+    "img",
     {
-      id: 0,
-      title: "Browse",
-      tagline: "for artworks to add to your tour"
-    },
-    /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct-intro--keyline aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Create your own tour"), /* @__PURE__ */ e.createElement("p", { className: "f-deck" }, "Choose up to 6 artworks for your tour by searching for a particular work or artist, browsing themes, or selecting from the list of artworks below.")),
-    /* @__PURE__ */ e.createElement(B, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(Y, { ...o }), /* @__PURE__ */ e.createElement(U, { ...o }), /* @__PURE__ */ e.createElement(we, null)))
-  ), /* @__PURE__ */ e.createElement(
-    F,
-    {
-      id: 1,
-      title: "Personalize",
-      tagline: "your tour by adding a title and notes"
-    },
-    n && /* @__PURE__ */ e.createElement("div", { className: "aic-ct-hero aic-ct-full-bleed" }, /* @__PURE__ */ e.createElement(
-      "img",
-      {
-        src: w(l, n, 20, 20, "full"),
-        srcSet: `${w(
-          l,
-          n,
-          480,
-          480,
-          "full"
-        )} 320w, ${w(
-          l,
-          n,
-          640,
-          640,
-          "full"
-        )} 480w, ${w(
-          l,
-          n,
-          960,
-          960,
-          "full"
-        )} 640w, ${w(
-          l,
-          n,
-          1280,
-          1280,
-          "full"
-        )} 960w, ${w(
-          l,
-          n,
-          1920,
-          1920,
-          "full"
-        )} 1280w`,
-        alt: ""
-      }
-    )),
-    /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Personalize your tour")),
-    /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(Se, null)),
-    /* @__PURE__ */ e.createElement(ke, null)
-  ), /* @__PURE__ */ e.createElement(F, { id: 2, title: "Complete", tagline: "and share with friends" }, /* @__PURE__ */ e.createElement(Te, null))), /* @__PURE__ */ e.createElement(ye, null)));
+      src: w(l, n, 20, 20, "full"),
+      srcSet: `${w(
+        l,
+        n,
+        480,
+        480,
+        "full"
+      )} 320w, ${w(
+        l,
+        n,
+        640,
+        640,
+        "full"
+      )} 480w, ${w(
+        l,
+        n,
+        960,
+        960,
+        "full"
+      )} 640w, ${w(
+        l,
+        n,
+        1280,
+        1280,
+        "full"
+      )} 960w, ${w(
+        l,
+        n,
+        1920,
+        1920,
+        "full"
+      )} 1280w`,
+      alt: ""
+    }
+  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Personalize your tour")), /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(Se, null)), /* @__PURE__ */ e.createElement(ke, null)), /* @__PURE__ */ e.createElement(F, { id: 2, title: "Finish and Share" }, /* @__PURE__ */ e.createElement(Te, null))), /* @__PURE__ */ e.createElement(ye, null)));
 };
 Ie.propTypes = {
   apiSaveEndpoint: t.string,
