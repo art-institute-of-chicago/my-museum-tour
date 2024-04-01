@@ -55,7 +55,7 @@ function Themes(props) {
     },
     {
       label: "Chicago Artists",
-      thumbnailId: "62f2ca7a-8c22-bb7e-9e3d-7453652a3350",
+      thumbnailId: "cd6c543d-a649-8f25-d224-6d22e7f86dcd",
       searchParams: {
         theme_titles: ["Chicago Artists"],
       },
