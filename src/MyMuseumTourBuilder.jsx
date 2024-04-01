@@ -50,11 +50,7 @@ const MyMuseumTourBuilder = (props) => {
       <AppProvider {...AppProviderProps}>
         <Header />
         <NavPages>
-          <NavPage
-            id={0}
-            title="Browse"
-            tagline="for artworks to add to your tour"
-          >
+          <NavPage id={0} title="Choose Your Artworks">
             <div className="aic-ct-intro aic-ct-intro--keyline aic-ct__core">
               <h1 className="f-display-2">Create your own tour</h1>
               <p className="f-deck">
@@ -72,11 +68,7 @@ const MyMuseumTourBuilder = (props) => {
             </SearchProvider>
           </NavPage>
 
-          <NavPage
-            id={1}
-            title="Personalize"
-            tagline="your tour by adding a title and notes"
-          >
+          <NavPage id={1} title="Personalize">
             {heroImageId && (
               <div className="aic-ct-hero aic-ct-full-bleed">
                 <img
@@ -125,7 +117,7 @@ const MyMuseumTourBuilder = (props) => {
             <TourItems />
           </NavPage>
 
-          <NavPage id={2} title="Complete" tagline="and share with friends">
+          <NavPage id={2} title="Finish and Share">
             <Submission />
           </NavPage>
         </NavPages>
