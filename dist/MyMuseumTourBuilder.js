@@ -986,7 +986,7 @@ function we() {
       "data-behavior": "pinboard"
     },
     r.map((d) => /* @__PURE__ */ e.createElement(Q, { key: d.id, itemData: d }))
-  ), /* @__PURE__ */ e.createElement("p", { className: "aic-ct-pre-result-text f-body" }, "Looking for more artworks? Use the search field at the top of the page to see more."), /* @__PURE__ */ e.createElement(
+  ), /* @__PURE__ */ e.createElement("p", { className: "aic-ct-post-result-text f-body" }, "Looking for more artworks? Use the search field at the top of the page to see more."), /* @__PURE__ */ e.createElement(
     "dialog",
     {
       ref: n,
