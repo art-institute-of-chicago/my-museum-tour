@@ -144,6 +144,10 @@ function SearchResults() {
                 <SearchResultItem key={itemData.id} itemData={itemData} />
               ))}
             </ul>
+            <p className="aic-ct-pre-result-text f-body">
+              Looking for more artworks? Use the search field at the top of the
+              page to see more.
+            </p>
             <dialog
               ref={searchPreviewRef}
               id="aic-ct-search-preview"
