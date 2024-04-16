@@ -50,7 +50,7 @@ function SearchBar(props) {
       setInitialRender(false);
       fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
     }
-  }, [fetchData, initialRender, setInitialRender]);
+  }, [fetchData, initialRender, setInitialRender, hideFromTours]);
 
   return (
     <form
