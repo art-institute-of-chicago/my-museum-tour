@@ -536,7 +536,7 @@ function Y(i) {
   });
   return g(() => {
     l && (u(!1), o(R({ keywords: "" }, h)));
-  }, [o, l, u]), /* @__PURE__ */ e.createElement(
+  }, [o, l, u, h]), /* @__PURE__ */ e.createElement(
     "form",
     {
       id: "aic-ct-search",
@@ -1092,7 +1092,7 @@ function z(i) {
         id: `aic-ct-note-${a.id}`,
         onChange: h.onChange,
         rows: "5",
-        placeholder: "e.g. This reminds me of our our vacation last year.",
+        placeholder: "e.g. This reminds me of our vacation last year.",
         value: h.value,
         maxLength: h.maxLength
       }
