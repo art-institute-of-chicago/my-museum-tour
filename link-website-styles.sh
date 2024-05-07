@@ -31,8 +31,11 @@ if [[ $LINK_DIR != *"/" ]]; then
     LINK_DIR="$LINK_DIR"/
 fi
 
+mkdir dist/icons
 mkdir dist/scripts
 mkdir dist/styles
+
+ln -sv ../../../"$LINK_DIR"public/dist/icons/icons.svg dist/icons/icons.svg
 
 ln -sv ../../../"$LINK_DIR"public/dist/scripts/app.js dist/scripts/app.js
 ln -sv ../../../"$LINK_DIR"public/dist/scripts/head.js dist/scripts/head.js
