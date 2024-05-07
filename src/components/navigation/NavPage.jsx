@@ -21,7 +21,7 @@ function NavPage(props) {
 NavPage.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  tagline: PropTypes.string.isRequired,
+  tagline: PropTypes.string,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.element),
     PropTypes.object,
