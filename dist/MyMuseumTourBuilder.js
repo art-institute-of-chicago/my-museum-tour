@@ -1530,7 +1530,7 @@ const Ie = (i) => {
     tourDescription: m,
     tourItems: c,
     heroImageId: s
-  } = i, l = "https://artic.edu/iiif/2", u = {
+  } = i, l = "https://www.artic.edu/iiif/2", u = {
     apiSaveEndpoint: a,
     tourTitle: n,
     tourDescription: m,
