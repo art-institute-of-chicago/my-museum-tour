@@ -25,7 +25,7 @@ const MyMuseumTourBuilder = (props) => {
     heroImageId,
   } = props;
 
-  const iiifBaseUrl = "https://artic.edu/iiif/2";
+  const iiifBaseUrl = "https://www.artic.edu/iiif/2";
 
   const AppProviderProps = {
     apiSaveEndpoint,
