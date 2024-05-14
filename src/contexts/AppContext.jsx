@@ -70,11 +70,11 @@ export function AppProvider(props) {
 
   // Google Tag Manager pageview events indexed by NavPage ID
   const navPageEvents = useMemo(
-    () => ([
-     'mmt_builder_pageview',
-     'mmt_personalize_pageview',
-     'mmt_ready_to_save_pageview',
-    ]),
+    () => [
+      "mmt_builder_pageview",
+      "mmt_personalize_pageview",
+      "mmt_ready_to_save_pageview",
+    ],
     [],
   );
 

@@ -4,12 +4,13 @@ import PropTypes from "prop-types";
 import { triggerCustomEvent } from "@area17/a17-helpers";
 
 function NavPages({ children }) {
-  const { activeNavPage, navPages, setNavPages, navPageEvents} = useContext(AppContext);
+  const { activeNavPage, navPages, setNavPages, navPageEvents } =
+    useContext(AppContext);
 
   useEffect(() => {
-    triggerCustomEvent(document, 'gtm:push', {
-      'event': navPageEvents[activeNavPage],
-      'count': 1,
+    triggerCustomEvent(document, "gtm:push", {
+      event: navPageEvents[activeNavPage],
+      count: 1,
     });
     setNavPages(
       children

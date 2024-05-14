@@ -1,7 +1,7 @@
 import React, { useContext, useRef } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import useCappedInput from "../../hooks/useCappedInput";
-import { triggerCustomEvent } from "@area17/a17-helpers"
+import { triggerCustomEvent } from "@area17/a17-helpers";
 
 /**
  * TourMetadata
@@ -31,34 +31,34 @@ function TourMetadata() {
   let hasRecipientName = useRef(false);
 
   const handleCreatorName = (name) => {
-    if (hasCreatorName.current == (name === '')) {
+    if (hasCreatorName.current == (name === "")) {
       hasCreatorName.current = !hasCreatorName.current;
-      triggerCustomEvent(document, 'gtm:push', {
-        'event': 'mmt_personalization',
-        'fieldPopulated': hasCreatorName.current,
+      triggerCustomEvent(document, "gtm:push", {
+        event: "mmt_personalization",
+        fieldPopulated: hasCreatorName.current,
       });
     }
     setCreatorName(name);
-  }
+  };
 
   const handleRecipientName = (name) => {
-    if (hasRecipientName.current == (name === '')) {
+    if (hasRecipientName.current == (name === "")) {
       hasRecipientName.current = !hasRecipientName.current;
-      triggerCustomEvent(document, 'gtm:push', {
-        'event': 'mmt_tribute',
-        'fieldPopulated': hasRecipientName.current,
+      triggerCustomEvent(document, "gtm:push", {
+        event: "mmt_tribute",
+        fieldPopulated: hasRecipientName.current,
       });
     }
     setRecipientName(name);
-  }
+  };
 
   const handleMarketingOptIn = (isOptedIn) => {
-    triggerCustomEvent(document, 'gtm:push', {
-      'event': 'mmt_email_optin',
-      'optInStatus': isOptedIn,
+    triggerCustomEvent(document, "gtm:push", {
+      event: "mmt_email_optin",
+      optInStatus: isOptedIn,
     });
     setMarketingOptIn(isOptedIn);
-  }
+  };
 
   const cappedTitle = useCappedInput({
     initialValue: tourTitle,
