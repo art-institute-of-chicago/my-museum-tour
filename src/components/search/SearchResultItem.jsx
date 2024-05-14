@@ -4,6 +4,7 @@ import { SearchContext } from "../../contexts/SearchContext";
 import { AppContext } from "../../contexts/AppContext";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { triggerCustomEvent } from "@area17/a17-helpers"
 
 /**
  * SearchResultItem
@@ -19,6 +20,10 @@ function SearchResultItem(props) {
 
   const handleClick = () => {
     const _scrollY = document.documentElement.scrollTop;
+    triggerCustomEvent(document, 'gtm:push', {
+      'event': 'mmt_artwork_modal',
+      'artworkTitle': itemData.title,
+    });
     setSearchPreviewId(itemData.id);
     // Counteract the scroll lock on the body resetting the scroll position
     setScrollY(_scrollY);

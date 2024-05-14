@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import { createSearchUrl } from "../../utils";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { triggerCustomEvent } from "@area17/a17-helpers"
 
 /**
  * SearchBar
@@ -30,6 +31,10 @@ function SearchBar(props) {
   const { hideFromTours } = props;
 
   const handleSubmit = (event) => {
+    triggerCustomEvent(document, 'gtm:push', {
+      'event': 'mmt_keyword_search',
+      'keyword': searchQuery,
+    });
     fetchData(createSearchUrl({ keywords: searchQuery }, hideFromTours));
     // Deselect any active theme
     setActiveTheme(null);

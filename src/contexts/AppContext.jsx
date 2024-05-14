@@ -68,6 +68,16 @@ export function AppProvider(props) {
     [],
   );
 
+  // Google Tag Manager pageview events indexed by NavPage ID
+  const navPageEvents = useMemo(
+    () => ([
+     'mmt_builder_pageview',
+     'mmt_personalize_pageview',
+     'mmt_ready_to_save_pageview',
+    ]),
+    [],
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -94,6 +104,7 @@ export function AppProvider(props) {
         setNavPages,
         activeNavPage,
         setActiveNavPage,
+        navPageEvents,
         headerPrevButtonRef,
         headerNextButtonRef,
         validityIssues,
@@ -158,6 +169,7 @@ AppContext.Provider.propTypes = {
     setNavPages: PropTypes.func,
     activeNavPage: PropTypes.number,
     setActiveNavPage: PropTypes.func,
+    navPageEvents: PropTypes.instanceOf(Array),
     headerPrevButtonRef: PropTypes.shape({
       current: PropTypes.instanceOf(Element),
     }),

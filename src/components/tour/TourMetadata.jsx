@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import useCappedInput from "../../hooks/useCappedInput";
+import { triggerCustomEvent } from "@area17/a17-helpers"
 
 /**
  * TourMetadata
@@ -26,6 +27,39 @@ function TourMetadata() {
     limits,
   } = useContext(AppContext);
 
+  let hasCreatorName = useRef(false);
+  let hasRecipientName = useRef(false);
+
+  const handleCreatorName = (name) => {
+    if (hasCreatorName.current == (name === '')) {
+      hasCreatorName.current = !hasCreatorName.current;
+      triggerCustomEvent(document, 'gtm:push', {
+        'event': 'mmt_personalization',
+        'fieldPopulated': hasCreatorName.current,
+      });
+    }
+    setCreatorName(name);
+  }
+
+  const handleRecipientName = (name) => {
+    if (hasRecipientName.current == (name === '')) {
+      hasRecipientName.current = !hasRecipientName.current;
+      triggerCustomEvent(document, 'gtm:push', {
+        'event': 'mmt_tribute',
+        'fieldPopulated': hasRecipientName.current,
+      });
+    }
+    setRecipientName(name);
+  }
+
+  const handleMarketingOptIn = (isOptedIn) => {
+    triggerCustomEvent(document, 'gtm:push', {
+      'event': 'mmt_email_optin',
+      'optInStatus': isOptedIn,
+    });
+    setMarketingOptIn(isOptedIn);
+  }
+
   const cappedTitle = useCappedInput({
     initialValue: tourTitle,
     maxLength: limits.title,
@@ -34,12 +68,12 @@ function TourMetadata() {
   const cappedCreatorName = useCappedInput({
     initialValue: creatorName,
     maxLength: limits.creatorName,
-    valueSetter: setCreatorName,
+    valueSetter: handleCreatorName,
   });
   const cappedRecipientName = useCappedInput({
     initialValue: recipientName,
     maxLength: limits.recipientName,
-    valueSetter: setRecipientName,
+    valueSetter: handleRecipientName,
   });
   const cappedDescription = useCappedInput({
     initialValue: tourDescription,
@@ -189,7 +223,7 @@ function TourMetadata() {
               name="aic-ct-metadata__opt-in"
               checked={marketingOptIn}
               onChange={(e) => {
-                setMarketingOptIn(e.target.checked);
+                handleMarketingOptIn(e.target.checked);
               }}
             />
             <span className="f-body">

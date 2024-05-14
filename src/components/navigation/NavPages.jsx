@@ -1,11 +1,16 @@
 import React, { useEffect, useContext } from "react";
 import { AppContext } from "../../contexts/AppContext";
 import PropTypes from "prop-types";
+import { triggerCustomEvent } from "@area17/a17-helpers";
 
 function NavPages({ children }) {
-  const { activeNavPage, navPages, setNavPages } = useContext(AppContext);
+  const { activeNavPage, navPages, setNavPages, navPageEvents} = useContext(AppContext);
 
   useEffect(() => {
+    triggerCustomEvent(document, 'gtm:push', {
+      'event': navPageEvents[activeNavPage],
+      'count': 1,
+    });
     setNavPages(
       children
         ? children.map((child, index) => {
@@ -17,7 +22,7 @@ function NavPages({ children }) {
           })
         : [],
     );
-  }, [children, setNavPages]);
+  }, [children, setNavPages, activeNavPage, navPageEvents]);
 
   useEffect(() => {
     // Navigating while scrolled down should reset the scroll position
