@@ -16,6 +16,7 @@
     "test:gui": "cypress open --component --port=30001"
   },
   "dependencies": {
+    "@area17/a17-helpers": "^0.6.7",
     "classnames": "^2.3.2",
     "prop-types": "^15.8.1"
   },

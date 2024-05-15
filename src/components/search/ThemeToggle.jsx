@@ -5,6 +5,7 @@ import { createSearchUrl, iiifUrl } from "../../utils";
 import useFetch from "../../hooks/useFetch";
 import classNames from "classnames";
 import PropTypes from "prop-types";
+import { triggerCustomEvent } from "@area17/a17-helpers";
 
 /**
  * ThemeToggle
@@ -34,6 +35,10 @@ function ThemeToggle(props) {
       // Apply results for empty keyword search
       fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
     } else {
+      triggerCustomEvent(document, "gtm:push", {
+        event: "mmt_quickfilter",
+        mmt_filterTitle: label,
+      });
       fetchData(createSearchUrl(searchParams, hideFromTours));
       // Clicking while active removes the theme
       setActiveTheme(label);

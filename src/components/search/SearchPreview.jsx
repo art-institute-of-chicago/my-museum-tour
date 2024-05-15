@@ -31,7 +31,7 @@ function SearchPreview() {
     // Remove the item if it existed before
     tourItemsDispatch({
       type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
-      payload: inTour ? previewData.id : previewData,
+      payload: previewData,
     });
     searchPreviewRef?.current?.close();
   };

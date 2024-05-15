@@ -32,7 +32,7 @@ function TourItem(props) {
     // Remove the item from the tour
     tourItemsDispatch({
       type: "REMOVE_ITEM",
-      payload: itemData.id,
+      payload: itemData,
     });
   };
 
