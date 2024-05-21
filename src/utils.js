@@ -50,6 +50,10 @@ export function createSearchUrl(queryParams, hideFromTours) {
   // I've broken this up to make it easer to reason about and manipulate
   const url = new URL("https://api.artic.edu/api/v1/artworks/search");
   url.searchParams.set(
+    "query[bool][must_not][][term][gallery_id][value]",
+    "2147475902",
+  );
+  url.searchParams.set(
     "query[bool][should][0][bool][must][][exists][field]",
     "short_description",
   );
