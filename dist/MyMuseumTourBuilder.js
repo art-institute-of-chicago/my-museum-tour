@@ -306,6 +306,9 @@ function T(s, a, r = "", n = "", d = "full", l = !0) {
 function L(s, a) {
   const r = new URL("https://api.artic.edu/api/v1/artworks/search");
   if (r.searchParams.set(
+    "query[bool][must_not][][term][gallery_id][value]",
+    "2147475902"
+  ), r.searchParams.set(
     "query[bool][should][0][bool][must][][exists][field]",
     "short_description"
   ), r.searchParams.set(
@@ -535,7 +538,7 @@ V.propTypes = {
     t.object
   ]).isRequired
 };
-const M = H();
+const q = H();
 function W(s) {
   const {
     children: a,
@@ -552,7 +555,7 @@ function W(s) {
     c || null
   ), k = C();
   return /* @__PURE__ */ e.createElement(
-    M.Provider,
+    q.Provider,
     {
       value: {
         searchResultItems: u,
@@ -581,7 +584,7 @@ W.propTypes = {
   searchError: t.oneOfType([t.string, t.bool]),
   searchPreviewId: t.number
 };
-M.Provider.propTypes = {
+q.Provider.propTypes = {
   value: t.shape({
     searchResultItems: t.array,
     setSearchResultItems: t.func,
@@ -638,7 +641,7 @@ function J(s) {
     setSearchFetching: d,
     setSearchError: l,
     setActiveTheme: c
-  } = S(M), [u, m] = E(!0), { fetchData: o } = G({
+  } = S(q), [u, m] = E(!0), { fetchData: o } = G({
     dataSubSelector: "data",
     dataSetter: n,
     fetchingSetter: d,
@@ -711,7 +714,7 @@ function K(s) {
     setSearchQuery: p,
     activeTheme: i,
     setActiveTheme: h
-  } = S(M), { fetchData: g } = G({
+  } = S(q), { fetchData: g } = G({
     dataSubSelector: "data",
     dataSetter: u,
     fetchingSetter: m,
@@ -835,7 +838,7 @@ X.propTypes = {
   hideFromTours: t.array
 };
 function Z(s) {
-  const { setSearchPreviewId: a, searchPreviewRef: r } = S(M), { iiifBaseUrl: n, setScrollY: d, tourItems: l } = S(P), { itemData: c } = s, u = l.some((h) => h.id === c.id), m = C(null), o = C(), p = () => {
+  const { setSearchPreviewId: a, searchPreviewRef: r } = S(q), { iiifBaseUrl: n, setScrollY: d, tourItems: l } = S(P), { itemData: c } = s, u = l.some((h) => h.id === c.id), m = C(null), o = C(), p = () => {
     const h = document.documentElement.scrollTop;
     F(document, "gtm:push", {
       event: "mmt_artwork_modal",
@@ -945,7 +948,7 @@ Z.propTypes = {
   })
 };
 function Te() {
-  const { searchPreviewId: s, searchResultItems: a, searchPreviewRef: r } = S(M), { iiifBaseUrl: n, tourItems: d, tourItemsDispatch: l, limits: c } = S(P), [u, m] = E(!1), [o, p] = E(null), i = O({
+  const { searchPreviewId: s, searchResultItems: a, searchPreviewRef: r } = S(q), { iiifBaseUrl: n, tourItems: d, tourItemsDispatch: l, limits: c } = S(P), [u, m] = E(!1), [o, p] = E(null), i = O({
     "aic-ct-preview__content": !0,
     "aic-ct-preview--loading": !o,
     "aic-ct-preview__content-warning": d.length >= 6
@@ -1044,7 +1047,7 @@ function Pe() {
     setSearchPreviewId: d,
     activeTheme: l,
     searchQuery: c
-  } = S(M), { scrollY: u } = S(P), m = C(null), o = B(
+  } = S(q), { scrollY: u } = S(P), m = C(null), o = B(
     (i) => {
       var h;
       (i.type === "close" || (h = n == null ? void 0 : n.current) != null && h.open && i.target === (n == null ? void 0 : n.current)) && (n.current.close(), d(null), document.documentElement.scrollTop = u, document.documentElement.classList.remove(
@@ -1119,7 +1122,7 @@ function Pe() {
     /* @__PURE__ */ e.createElement(Te, null)
   ))), /* @__PURE__ */ e.createElement("p", { className: "u-hide", id: "aic-ct-search__in-your-tour" }, "This object is in your tour", " "), /* @__PURE__ */ e.createElement("p", { className: "sr-only", "aria-live": "polite" }, a ? "Loading" : l ? `Showing results for ${l}` : c ? `Showing results for ${c}` : "Showing default results"));
 }
-function q(s = {}) {
+function M(s = {}) {
   const { initialValue: a, maxLength: r, valueSetter: n } = s, [d, l] = E(a || ""), c = C(null), u = r - d.length;
   return {
     value: d,
@@ -1143,7 +1146,7 @@ function ee(s) {
       event: "mmt_artwork_note",
       fieldPopulated: p.current
     }));
-  }, h = q({
+  }, h = M({
     initialValue: (b = c[r]) == null ? void 0 : b.objectNote,
     maxLength: m.objectNote,
     valueSetter: i
@@ -1359,19 +1362,19 @@ function Ce() {
       event: "mmt_email_optin",
       optInStatus: N
     }), i(N);
-  }, I = q({
+  }, I = M({
     initialValue: s,
     maxLength: f.title,
     valueSetter: a
-  }), R = q({
+  }), R = M({
     initialValue: c,
     maxLength: f.creatorName,
     valueSetter: v
-  }), D = q({
+  }), D = M({
     initialValue: m,
     maxLength: f.recipientName,
     valueSetter: _
-  }), x = q({
+  }), x = M({
     initialValue: h,
     maxLength: f.description,
     valueSetter: k
