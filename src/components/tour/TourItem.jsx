@@ -3,6 +3,7 @@ import { iiifUrl } from "../../utils";
 import { AppContext } from "../../contexts/AppContext";
 import useCappedInput from "../../hooks/useCappedInput";
 import PropTypes from "prop-types";
+import { triggerCustomEvent } from "@area17/a17-helpers";
 
 /**
  * TourItem
@@ -13,9 +14,25 @@ function TourItem(props) {
     useContext(AppContext);
   const buttonRef = useRef(null);
 
+  let hasNote = useRef(false);
+
+  const handleNote = (note) => {
+    let anyTourItemsHaveNotes = tourItems.reduce((any, tourItem) => {
+      return (tourItem?.objectNote.length > 0) || any;
+    }, false);
+    if (hasNote.current == (note === "") && !anyTourItemsHaveNotes) {
+      hasNote.current = !hasNote.current;
+      triggerCustomEvent(document, "gtm:push", {
+        event: "mmt_artwork_note",
+        fieldPopulated: hasNote.current,
+      });
+    }
+  };
+
   const cappedNote = useCappedInput({
     initialValue: tourItems[itemIndex]?.objectNote,
     maxLength: limits.objectNote,
+    valueSetter: handleNote,
   });
 
   // payload needs to be memoized so that it doesn't change on every render
