@@ -27,15 +27,15 @@ function TourMetadata() {
     limits,
   } = useContext(AppContext);
 
-  let hasCreatorName = useRef(false);
+  let hasPersonalization = useRef(false);
   let hasRecipientName = useRef(false);
 
   const handleCreatorName = (name) => {
-    if (hasCreatorName.current == (name === "")) {
-      hasCreatorName.current = !hasCreatorName.current;
+    if (hasPersonalization.current == (name === "")) {
+      hasPersonalization.current = !hasPersonalization.current;
       triggerCustomEvent(document, "gtm:push", {
         event: "mmt_personalization",
-        fieldPopulated: hasCreatorName.current,
+        fieldPopulated: hasPersonalization.current,
       });
     }
     setCreatorName(name);
@@ -50,6 +50,17 @@ function TourMetadata() {
       });
     }
     setRecipientName(name);
+  };
+
+  const handleTourDescription = (description) => {
+    if (hasPersonalization.current == (description === "")) {
+      hasPersonalization.current = !hasPersonalization.current;
+      triggerCustomEvent(document, "gtm:push", {
+        event: "mmt_personalization",
+        fieldPopulated: hasPersonalization.current,
+      });
+    }
+    setTourDescription(description);
   };
 
   const handleMarketingOptIn = (isOptedIn) => {
@@ -78,7 +89,7 @@ function TourMetadata() {
   const cappedDescription = useCappedInput({
     initialValue: tourDescription,
     maxLength: limits.description,
-    valueSetter: setTourDescription,
+    valueSetter: handleTourDescription,
   });
 
   return (
