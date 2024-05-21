@@ -1353,7 +1353,7 @@ function Ce() {
     b.current == (N === "") && (b.current = !b.current, F(document, "gtm:push", {
       event: "mmt_personalization",
       fieldPopulated: b.current
-    })), g(name);
+    })), g(N);
   }, A = (N) => {
     F(document, "gtm:push", {
       event: "mmt_email_optin",
