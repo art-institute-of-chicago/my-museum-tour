@@ -18,7 +18,7 @@ function TourItem(props) {
 
   const handleNote = (note) => {
     let anyTourItemsHaveNotes = tourItems.reduce((any, tourItem) => {
-      return (tourItem?.objectNote.length > 0) || any;
+      return tourItem?.objectNote.length > 0 || any;
     }, false);
     if (hasNote.current == (note === "") && !anyTourItemsHaveNotes) {
       hasNote.current = !hasNote.current;
