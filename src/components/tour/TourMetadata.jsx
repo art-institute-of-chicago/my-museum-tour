@@ -60,7 +60,7 @@ function TourMetadata() {
         fieldPopulated: hasPersonalization.current,
       });
     }
-    setTourDescription(name);
+    setTourDescription(description);
   };
 
   const handleMarketingOptIn = (isOptedIn) => {
