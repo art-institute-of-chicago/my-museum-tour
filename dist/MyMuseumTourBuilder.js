@@ -1,118 +1,13 @@
-import e, { createContext as H, useState as E, useReducer as ve, useRef as C, useMemo as j, useContext as S, useEffect as w, useCallback as B } from "react";
+import e, { createContext as H, useState as E, useReducer as _e, useRef as C, useMemo as j, useContext as S, useEffect as w, useCallback as B } from "react";
 import t from "prop-types";
-var F = function(s, a, r) {
-  var n = document.createEvent("HTMLEvents");
-  n.initEvent(a, !0, !0), n.data = r || {}, n.eventName = a, s.dispatchEvent(n);
-}, _e = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
-function ge(s) {
-  return s && s.__esModule && Object.prototype.hasOwnProperty.call(s, "default") ? s.default : s;
-}
-var Ee = { exports: {} };
-(function(s, a) {
-  (function(r, n) {
-    s.exports = n();
-  })(_e, function() {
-    var r = "AxmTYklsjo190QW", n = "sans-serif", d = "serif", l = {
-      tolerance: 2,
-      // px
-      delay: 100,
-      glyphs: "",
-      success: function() {
-      },
-      error: function() {
-      },
-      timeout: 5e3,
-      weight: "400",
-      // normal
-      style: "normal",
-      window
-    }, c = [
-      "display:block",
-      "position:absolute",
-      "top:-999px",
-      "left:-999px",
-      "font-size:48px",
-      "width:auto",
-      "height:auto",
-      "line-height:normal",
-      "margin:0",
-      "padding:0",
-      "font-variant:normal",
-      "white-space:nowrap"
-    ], u = '<div style="%s" aria-hidden="true">' + r + "</div>", m = function() {
-      this.fontFamily = "", this.appended = !1, this.serif = void 0, this.sansSerif = void 0, this.parent = void 0, this.options = {};
-    };
-    m.prototype.getMeasurements = function() {
-      return {
-        sansSerif: {
-          width: this.sansSerif.offsetWidth,
-          height: this.sansSerif.offsetHeight
-        },
-        serif: {
-          width: this.serif.offsetWidth,
-          height: this.serif.offsetHeight
-        }
-      };
-    }, m.prototype.load = function() {
-      var p = /* @__PURE__ */ new Date(), i = this, h = i.serif, g = i.sansSerif, f = i.parent, b = i.appended, y, v = i.options, _ = v.reference;
-      function k(x) {
-        return c.concat(["font-weight:" + v.weight, "font-style:" + v.style]).concat("font-family:" + x).join(";");
-      }
-      var A = u.replace(/\%s/, k(n)), I = u.replace(/\%s/, k(d));
-      f || (f = i.parent = v.window.document.createElement("div")), f.innerHTML = A + I, g = i.sansSerif = f.firstChild, h = i.serif = g.nextSibling, v.glyphs && (g.innerHTML += v.glyphs, h.innerHTML += v.glyphs);
-      function R(x, N, $) {
-        return Math.abs(x.width - N.offsetWidth) > $ || Math.abs(x.height - N.offsetHeight) > $;
-      }
-      function D() {
-        return (/* @__PURE__ */ new Date()).getTime() - p.getTime() > v.timeout;
-      }
-      (function x() {
-        _ || (_ = v.window.document.body), !b && _ && (_.appendChild(f), b = i.appended = !0, y = i.getMeasurements(), g.style.fontFamily = i.fontFamily + ", " + n, h.style.fontFamily = i.fontFamily + ", " + d), b && y && (R(y.sansSerif, g, v.tolerance) || R(y.serif, h, v.tolerance)) ? v.success() : D() ? v.error() : !b && "requestAnimationFrame" in v.window ? v.window.requestAnimationFrame(x) : v.window.setTimeout(x, v.delay);
-      })();
-    }, m.prototype.cleanFamilyName = function(p) {
-      return p.replace(/[\'\"]/g, "").toLowerCase();
-    }, m.prototype.cleanWeight = function(p) {
-      var i = {
-        normal: "400",
-        bold: "700"
-      };
-      return "" + (i[p] || p);
-    }, m.prototype.checkFontFaces = function(p) {
-      var i = this;
-      i.options.window.document.fonts.forEach(function(h) {
-        i.cleanFamilyName(h.family) === i.cleanFamilyName(i.fontFamily) && i.cleanWeight(h.weight) === i.cleanWeight(i.options.weight) && h.style === i.options.style && h.load().then(function() {
-          i.options.success(h), i.options.window.clearTimeout(p);
-        });
-      });
-    }, m.prototype.init = function(p, i) {
-      var h;
-      for (var g in l)
-        i.hasOwnProperty(g) || (i[g] = l[g]);
-      this.options = i, this.fontFamily = p, !i.glyphs && "fonts" in i.window.document ? (i.timeout && (h = i.window.setTimeout(function() {
-        i.error();
-      }, i.timeout)), this.checkFontFaces(h)) : this.load();
-    };
-    var o = function(p, i) {
-      var h = new m();
-      return h.init(p, i), h;
-    };
-    return o;
-  });
-})(Ee);
-const ye = (s, a) => {
+const ve = (s, a) => {
   switch (a.type) {
     case "ADD_ITEM":
-      return F(document, "gtm:push", {
-        event: "mmt_add_artwork",
-        artworkTitle: a.payload.title
-      }), a.payload.short_description && (a.payload.description = a.payload.short_description), delete a.payload.short_description, [...s, { ...a.payload, objectNote: "" }];
+      return a.payload.short_description && (a.payload.description = a.payload.short_description), delete a.payload.short_description, [...s, { ...a.payload, objectNote: "" }];
     case "UPDATE_NOTE":
       return s.map((r) => r.id === a.payload.id ? { ...r, objectNote: a.payload.objectNote } : r);
     case "REMOVE_ITEM":
-      return F(document, "gtm:push", {
-        event: "mmt_remove_artwork",
-        artworkTitle: a.payload.title
-      }), s.filter(({ id: r }) => r !== a.payload.id);
+      return s.filter(({ id: r }) => r !== a.payload.id);
     default:
       return s;
   }
@@ -130,12 +25,12 @@ function Y(s) {
     navPages: o,
     apiSaveEndpoint: p,
     iiifBaseUrl: i
-  } = s, [h, g] = E(r || ""), [f, b] = E(n || ""), [y, v] = E(!1), [_, k] = E(d || ""), [A, I] = E(l || ""), [R, D] = E(
+  } = s, [h, g] = E(r || ""), [f, b] = E(n || ""), [y, _] = E(!1), [v, k] = E(d || ""), [A, I] = E(l || ""), [R, D] = E(
     u || !1
   ), [x, N] = E(
     c || ""
-  ), [$, te] = E(o || []), [ae, re] = E(0), [ie, ne] = ve(
-    ye,
+  ), [$, te] = E(o || []), [ae, re] = E(0), [ie, ne] = _e(
+    ve,
     m || []
   ), se = C(null), ce = C(null), [le, oe] = E([]), me = p || "/api/v1/my-museum-tour", [ue, de] = E(!1), [he, pe] = E(0), fe = j(
     () => ({
@@ -170,8 +65,8 @@ function Y(s) {
         creatorEmail: f,
         setCreatorEmail: b,
         validCreatorEmail: y,
-        setValidCreatorEmail: v,
-        creatorName: _,
+        setValidCreatorEmail: _,
+        creatorName: v,
         setCreatorName: k,
         recipientName: A,
         setRecipientName: I,
@@ -262,6 +157,10 @@ P.Provider.propTypes = {
     setScrollY: t.func
   })
 };
+var ge = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof global < "u" ? global : typeof self < "u" ? self : {};
+function Ee(s) {
+  return s && s.__esModule && Object.prototype.hasOwnProperty.call(s, "default") ? s.default : s;
+}
 var U = { exports: {} };
 /*!
 	Copyright (c) 2018 Jed Watson.
@@ -298,8 +197,8 @@ var U = { exports: {} };
     s.exports ? (r.default = r, s.exports = r) : window.classNames = r;
   })();
 })(U);
-var Ne = U.exports;
-const O = /* @__PURE__ */ ge(Ne);
+var ye = U.exports;
+const O = /* @__PURE__ */ Ee(ye);
 function T(s, a, r = "", n = "", d = "full", l = !0) {
   return `${s}/${a}/${d}/${l ? "!" : ""}${r},${n}/0/default.jpg`;
 }
@@ -351,7 +250,7 @@ function L(s, a) {
 const Q = {
   assign: (s) => window.location.assign(s)
 };
-function we() {
+function Ne() {
   const {
     tourItems: s,
     limits: a,
@@ -400,7 +299,7 @@ function we() {
     )
   )));
 }
-function ke() {
+function we() {
   const {
     limits: s,
     activeNavPage: a,
@@ -441,7 +340,7 @@ function ke() {
         className: "aic-ct-item-info__count-num f-body"
       },
       c
-    ), " ", /* @__PURE__ */ e.createElement("span", null, "artworks of ", s.items.max, " ")), /* @__PURE__ */ e.createElement(we, null)), /* @__PURE__ */ e.createElement(
+    ), " ", /* @__PURE__ */ e.createElement("span", null, "artworks of ", s.items.max, " ")), /* @__PURE__ */ e.createElement(Ne, null)), /* @__PURE__ */ e.createElement(
       "button",
       {
         ref: l,
@@ -458,7 +357,7 @@ function ke() {
     ))
   );
 }
-function Se() {
+function ke() {
   const { navPages: s, activeNavPage: a, setActiveNavPage: r, isSaving: n } = S(P), d = (l) => O("aic-ct-nav__button btn f-buttons btn--transparent", {
     "aic-ct-nav__button--active": a === l,
     "aic-ct-nav__button--done": a > l
@@ -493,6 +392,101 @@ function Se() {
     )
   );
 }
+var F = function(s, a, r) {
+  var n = document.createEvent("HTMLEvents");
+  n.initEvent(a, !0, !0), n.data = r || {}, n.eventName = a, s.dispatchEvent(n);
+}, Se = { exports: {} };
+(function(s, a) {
+  (function(r, n) {
+    s.exports = n();
+  })(ge, function() {
+    var r = "AxmTYklsjo190QW", n = "sans-serif", d = "serif", l = {
+      tolerance: 2,
+      // px
+      delay: 100,
+      glyphs: "",
+      success: function() {
+      },
+      error: function() {
+      },
+      timeout: 5e3,
+      weight: "400",
+      // normal
+      style: "normal",
+      window
+    }, c = [
+      "display:block",
+      "position:absolute",
+      "top:-999px",
+      "left:-999px",
+      "font-size:48px",
+      "width:auto",
+      "height:auto",
+      "line-height:normal",
+      "margin:0",
+      "padding:0",
+      "font-variant:normal",
+      "white-space:nowrap"
+    ], u = '<div style="%s" aria-hidden="true">' + r + "</div>", m = function() {
+      this.fontFamily = "", this.appended = !1, this.serif = void 0, this.sansSerif = void 0, this.parent = void 0, this.options = {};
+    };
+    m.prototype.getMeasurements = function() {
+      return {
+        sansSerif: {
+          width: this.sansSerif.offsetWidth,
+          height: this.sansSerif.offsetHeight
+        },
+        serif: {
+          width: this.serif.offsetWidth,
+          height: this.serif.offsetHeight
+        }
+      };
+    }, m.prototype.load = function() {
+      var p = /* @__PURE__ */ new Date(), i = this, h = i.serif, g = i.sansSerif, f = i.parent, b = i.appended, y, _ = i.options, v = _.reference;
+      function k(x) {
+        return c.concat(["font-weight:" + _.weight, "font-style:" + _.style]).concat("font-family:" + x).join(";");
+      }
+      var A = u.replace(/\%s/, k(n)), I = u.replace(/\%s/, k(d));
+      f || (f = i.parent = _.window.document.createElement("div")), f.innerHTML = A + I, g = i.sansSerif = f.firstChild, h = i.serif = g.nextSibling, _.glyphs && (g.innerHTML += _.glyphs, h.innerHTML += _.glyphs);
+      function R(x, N, $) {
+        return Math.abs(x.width - N.offsetWidth) > $ || Math.abs(x.height - N.offsetHeight) > $;
+      }
+      function D() {
+        return (/* @__PURE__ */ new Date()).getTime() - p.getTime() > _.timeout;
+      }
+      (function x() {
+        v || (v = _.window.document.body), !b && v && (v.appendChild(f), b = i.appended = !0, y = i.getMeasurements(), g.style.fontFamily = i.fontFamily + ", " + n, h.style.fontFamily = i.fontFamily + ", " + d), b && y && (R(y.sansSerif, g, _.tolerance) || R(y.serif, h, _.tolerance)) ? _.success() : D() ? _.error() : !b && "requestAnimationFrame" in _.window ? _.window.requestAnimationFrame(x) : _.window.setTimeout(x, _.delay);
+      })();
+    }, m.prototype.cleanFamilyName = function(p) {
+      return p.replace(/[\'\"]/g, "").toLowerCase();
+    }, m.prototype.cleanWeight = function(p) {
+      var i = {
+        normal: "400",
+        bold: "700"
+      };
+      return "" + (i[p] || p);
+    }, m.prototype.checkFontFaces = function(p) {
+      var i = this;
+      i.options.window.document.fonts.forEach(function(h) {
+        i.cleanFamilyName(h.family) === i.cleanFamilyName(i.fontFamily) && i.cleanWeight(h.weight) === i.cleanWeight(i.options.weight) && h.style === i.options.style && h.load().then(function() {
+          i.options.success(h), i.options.window.clearTimeout(p);
+        });
+      });
+    }, m.prototype.init = function(p, i) {
+      var h;
+      for (var g in l)
+        i.hasOwnProperty(g) || (i[g] = l[g]);
+      this.options = i, this.fontFamily = p, !i.glyphs && "fonts" in i.window.document ? (i.timeout && (h = i.window.setTimeout(function() {
+        i.error();
+      }, i.timeout)), this.checkFontFaces(h)) : this.load();
+    };
+    var o = function(p, i) {
+      var h = new m();
+      return h.init(p, i), h;
+    };
+    return o;
+  });
+})(Se);
 function z({ children: s }) {
   var l, c, u;
   const { activeNavPage: a, navPages: r, setNavPages: n, navPageEvents: d } = S(P);
@@ -551,7 +545,7 @@ function W(s) {
     r || null
   ), [o, p] = E(n || ""), [i, h] = E(
     d || !1
-  ), [g, f] = E(l || !1), [b, y] = E(null), [v, _] = E(
+  ), [g, f] = E(l || !1), [b, y] = E(null), [_, v] = E(
     c || null
   ), k = C();
   return /* @__PURE__ */ e.createElement(
@@ -568,8 +562,8 @@ function W(s) {
         setSearchError: f,
         activeTheme: b,
         setActiveTheme: y,
-        searchPreviewId: v,
-        setSearchPreviewId: _,
+        searchPreviewId: _,
+        setSearchPreviewId: v,
         searchPreviewRef: k
       }
     },
@@ -610,10 +604,10 @@ const G = (s) => {
     const y = new AbortController();
     m(y);
     try {
-      const _ = await (await fetch(b, { signal: y.signal })).json();
-      r(o ? _[o] : _), c(null), d(!1);
-    } catch (v) {
-      if (v.name === "AbortError") {
+      const v = await (await fetch(b, { signal: y.signal })).json();
+      r(o ? v[o] : v), c(null), d(!1);
+    } catch (_) {
+      if (_.name === "AbortError") {
         g();
         return;
       }
@@ -963,6 +957,9 @@ function Te() {
     l({
       type: u ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: o
+    }), F(document, "gtm:push", {
+      event: u ? "mmt_remove_artwork" : "mmt_add_artwork",
+      artworkTitle: o.title
     }), (f = r == null ? void 0 : r.current) == null || f.close();
   }, g = () => {
     var f;
@@ -1141,8 +1138,8 @@ function ee(s) {
   const { itemData: a, itemIndex: r, setShouldAssignFocus: n, setRemoveButtons: d } = s, { iiifBaseUrl: l, tourItems: c, tourItemsDispatch: u, limits: m } = S(P), o = C(null);
   let p = C(!1);
   const i = (y) => {
-    let v = c.reduce((_, k) => (k == null ? void 0 : k.objectNote.length) > 0 || _, !1);
-    p.current == (y === "") && !v && (p.current = !p.current, F(document, "gtm:push", {
+    let _ = c.reduce((v, k) => (k == null ? void 0 : k.objectNote.length) > 0 || v, !1);
+    p.current == (y === "") && !_ && (p.current = !p.current, F(document, "gtm:push", {
       event: "mmt_artwork_note",
       fieldPopulated: p.current
     }));
@@ -1160,6 +1157,9 @@ function ee(s) {
     u({
       type: "REMOVE_ITEM",
       payload: a
+    }), F(document, "gtm:push", {
+      event: "mmt_remove_artwork",
+      artworkTitle: a.title
     });
   };
   return w(() => {
@@ -1170,10 +1170,10 @@ function ee(s) {
   }, [g, u]), w(() => {
     const y = o.current;
     return () => {
-      document.activeElement === y && (c.length > 1 ? c.find((v, _) => {
-        v.id === a.id && n({
+      document.activeElement === y && (c.length > 1 ? c.find((_, v) => {
+        _.id === a.id && n({
           flag: !0,
-          id: c[_ !== c.length - 1 ? _ + 1 : _ - 1].id
+          id: c[v !== c.length - 1 ? v + 1 : v - 1].id
         });
       }) : n({
         flag: !0,
@@ -1182,7 +1182,7 @@ function ee(s) {
     };
   }, [c, a.id, n]), w(() => (d((y) => [...y, { id: a.id, ref: o }]), () => {
     d(
-      (y) => y.filter((v) => v.id !== a.id)
+      (y) => y.filter((_) => _.id !== a.id)
     );
   }), [d, c, a.id]), /* @__PURE__ */ e.createElement(
     "li",
@@ -1342,12 +1342,12 @@ function Ce() {
     limits: f
   } = S(P);
   let b = C(!1), y = C(!1);
-  const v = (N) => {
+  const _ = (N) => {
     b.current == (N === "") && (b.current = !b.current, F(document, "gtm:push", {
       event: "mmt_personalization",
       fieldPopulated: b.current
     })), u(N);
-  }, _ = (N) => {
+  }, v = (N) => {
     y.current == (N === "") && (y.current = !y.current, F(document, "gtm:push", {
       event: "mmt_tribute",
       fieldPopulated: y.current
@@ -1369,11 +1369,11 @@ function Ce() {
   }), R = M({
     initialValue: c,
     maxLength: f.creatorName,
-    valueSetter: v
+    valueSetter: _
   }), D = M({
     initialValue: m,
     maxLength: f.recipientName,
-    valueSetter: _
+    valueSetter: v
   }), x = M({
     initialValue: h,
     maxLength: f.description,
@@ -1524,10 +1524,10 @@ function Ie() {
     isSaving: h,
     setIsSaving: g,
     setActiveNavPage: f
-  } = S(P), [b, y] = E(null), v = async () => {
+  } = S(P), [b, y] = E(null), _ = async () => {
     g(!0);
     try {
-      const _ = await fetch(`${s}`, {
+      const v = await fetch(`${s}`, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -1547,32 +1547,32 @@ function Ie() {
           }
         })
       });
-      if (!_.ok)
+      if (!v.ok)
         throw new Error(
           "There was a problem saving your tour, please try again. If the problem persists, please contact us and let us know."
         );
-      const { message: k, my_museum_tour: A } = await _.json();
+      const { message: k, my_museum_tour: A } = await v.json();
       y({
         type: "success",
         message: k,
         id: A.id
       });
-    } catch (_) {
+    } catch (v) {
       y({
         type: "error",
-        message: _.message
+        message: v.message
       });
     }
     g(!1);
   };
   return w(() => {
-    const _ = [];
-    a.length || _.push("A tour title"), a.length > i.title && _.push("Tour title must not exceed the character limit"), c || _.push("A valid email address"), m.length > i.description && _.push(
+    const v = [];
+    a.length || v.push("A tour title"), a.length > i.title && v.push("Tour title must not exceed the character limit"), c || v.push("A valid email address"), m.length > i.description && v.push(
       "Tour description must not exceed the character limit"
-    ), u.length < i.items.min && _.push("At least one artwork is required for your tour"), u.length > i.items.max && _.push("Tour must not contain more than 6 artworks"), u.some((k) => {
+    ), u.length < i.items.min && v.push("At least one artwork is required for your tour"), u.length > i.items.max && v.push("Tour must not contain more than 6 artworks"), u.some((k) => {
       var A;
-      return ((A = k.objectNote) == null ? void 0 : A.length) > i.objectNote ? (_.push("Notes must not exceed the character limit"), !0) : !1;
-    }), p(_);
+      return ((A = k.objectNote) == null ? void 0 : A.length) > i.objectNote ? (v.push("Notes must not exceed the character limit"), !0) : !1;
+    }), p(v);
   }, [
     a,
     m,
@@ -1598,7 +1598,7 @@ function Ie() {
         id: "aic-ct-validation__errors",
         className: "aic-ct-validation__errors aic-ct-validation__content o-blocks"
       },
-      /* @__PURE__ */ e.createElement("ul", null, o.map((_, k) => /* @__PURE__ */ e.createElement("li", { className: "f-body", key: k }, _)))
+      /* @__PURE__ */ e.createElement("ul", null, o.map((v, k) => /* @__PURE__ */ e.createElement("li", { className: "f-body", key: k }, v)))
     ),
     /* @__PURE__ */ e.createElement("div", { className: "aic-ct-validation__actions" }, /* @__PURE__ */ e.createElement(
       "button",
@@ -1634,7 +1634,7 @@ function Ie() {
           id: "aic-ct-save-button",
           className: "btn btn--my-museum-tour f-buttons",
           type: "button",
-          onClick: v,
+          onClick: _,
           disabled: h
         },
         "Yes, save my tour"
@@ -1671,7 +1671,7 @@ function Ie() {
           id: "aic-ct-save-button",
           className: "btn btn--primary f-buttons",
           type: "button",
-          onClick: v,
+          onClick: _,
           disabled: h
         },
         "Try again"
@@ -1699,7 +1699,7 @@ const Fe = (s) => {
   };
   return w(() => {
     document.body.style.overflow = "unset";
-  }, []), /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(Y, { ...m }, /* @__PURE__ */ e.createElement(ke, null), /* @__PURE__ */ e.createElement(z, null, /* @__PURE__ */ e.createElement(V, { id: 0, title: "Choose Your Artworks" }, /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct-intro--keyline aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Create your own tour"), /* @__PURE__ */ e.createElement("p", { className: "f-deck" }, "Choose up to 6 artworks for your tour by searching for a particular work or artist, browsing themes, or selecting from the list of artworks below.")), /* @__PURE__ */ e.createElement(W, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(J, { ...o }), /* @__PURE__ */ e.createElement(X, { ...o }), /* @__PURE__ */ e.createElement(Pe, null)))), /* @__PURE__ */ e.createElement(V, { id: 1, title: "Personalize" }, c && /* @__PURE__ */ e.createElement("div", { className: "aic-ct-hero aic-ct-full-bleed" }, /* @__PURE__ */ e.createElement(
+  }, []), /* @__PURE__ */ e.createElement("div", { id: "my-museum-tour-builder", className: "my-museum-tour" }, /* @__PURE__ */ e.createElement(Y, { ...m }, /* @__PURE__ */ e.createElement(we, null), /* @__PURE__ */ e.createElement(z, null, /* @__PURE__ */ e.createElement(V, { id: 0, title: "Choose Your Artworks" }, /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct-intro--keyline aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Create your own tour"), /* @__PURE__ */ e.createElement("p", { className: "f-deck" }, "Choose up to 6 artworks for your tour by searching for a particular work or artist, browsing themes, or selecting from the list of artworks below.")), /* @__PURE__ */ e.createElement(W, null, /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(J, { ...o }), /* @__PURE__ */ e.createElement(X, { ...o }), /* @__PURE__ */ e.createElement(Pe, null)))), /* @__PURE__ */ e.createElement(V, { id: 1, title: "Personalize" }, c && /* @__PURE__ */ e.createElement("div", { className: "aic-ct-hero aic-ct-full-bleed" }, /* @__PURE__ */ e.createElement(
     "img",
     {
       src: T(u, c, 20, 20, "full"),
@@ -1736,7 +1736,7 @@ const Fe = (s) => {
       )} 1280w`,
       alt: ""
     }
-  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Personalize your tour")), /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(Ce, null)), /* @__PURE__ */ e.createElement(xe, null)), /* @__PURE__ */ e.createElement(V, { id: 2, title: "Finish and Share" }, /* @__PURE__ */ e.createElement(Ie, null))), /* @__PURE__ */ e.createElement(Se, null)));
+  )), /* @__PURE__ */ e.createElement("div", { className: "aic-ct-intro aic-ct__core" }, /* @__PURE__ */ e.createElement("h1", { className: "f-display-2" }, "Personalize your tour")), /* @__PURE__ */ e.createElement("div", { className: "aic-ct__core" }, /* @__PURE__ */ e.createElement(Ce, null)), /* @__PURE__ */ e.createElement(xe, null)), /* @__PURE__ */ e.createElement(V, { id: 2, title: "Finish and Share" }, /* @__PURE__ */ e.createElement(Ie, null))), /* @__PURE__ */ e.createElement(ke, null)));
 };
 Fe.propTypes = {
   apiSaveEndpoint: t.string,

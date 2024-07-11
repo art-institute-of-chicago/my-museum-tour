@@ -1,5 +1,3 @@
-import { triggerCustomEvent } from "@area17/a17-helpers";
-
 /**
  * Tour Items Reducer
  * @param {React.ReducerState} state
@@ -9,10 +7,6 @@ import { triggerCustomEvent } from "@area17/a17-helpers";
 const tourItemsReducer = (state, action) => {
   switch (action.type) {
     case "ADD_ITEM":
-      triggerCustomEvent(document, "gtm:push", {
-        event: "mmt_add_artwork",
-        artworkTitle: action.payload.title,
-      });
       // Payload for add is the entire item JSON from the API
       // Reassign short_description to description
       if (action.payload.short_description) {
@@ -30,10 +24,6 @@ const tourItemsReducer = (state, action) => {
         return item;
       });
     case "REMOVE_ITEM":
-      triggerCustomEvent(document, "gtm:push", {
-        event: "mmt_remove_artwork",
-        artworkTitle: action.payload.title,
-      });
       // Filter out by non-matching ids
       return state.filter(({ id }) => id !== action.payload.id);
     default:

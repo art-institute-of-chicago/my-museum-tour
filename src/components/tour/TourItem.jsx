@@ -51,6 +51,10 @@ function TourItem(props) {
       type: "REMOVE_ITEM",
       payload: itemData,
     });
+    triggerCustomEvent(document, "gtm:push", {
+      event: "mmt_remove_artwork",
+      artworkTitle: itemData.title,
+    });
   };
 
   // Update a note on an item when it changes
@@ -96,7 +100,7 @@ function TourItem(props) {
   }, [tourItems, itemData.id, setShouldAssignFocus]);
 
   // Add remove button ref to the array of remove buttons
-  // This is used externall to move focus to the next item when an item is removed
+  // This is used externally to move focus to the next item when an item is removed
   useEffect(() => {
     setRemoveButtons((prev) => [...prev, { id: itemData.id, ref: buttonRef }]);
     return () => {

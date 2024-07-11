@@ -3,6 +3,7 @@ import { AppContext } from "../../contexts/AppContext";
 import { SearchContext } from "../../contexts/SearchContext";
 import { iiifUrl } from "../../utils";
 import classNames from "classnames";
+import { triggerCustomEvent } from "@area17/a17-helpers";
 /**
  * SearchPreview
  */
@@ -32,6 +33,10 @@ function SearchPreview() {
     tourItemsDispatch({
       type: inTour ? "REMOVE_ITEM" : "ADD_ITEM",
       payload: previewData,
+    });
+    triggerCustomEvent(document, "gtm:push", {
+      event: inTour ? "mmt_remove_artwork" : "mmt_add_artwork",
+      artworkTitle: previewData.title,
     });
     searchPreviewRef?.current?.close();
   };
