@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
  * @typedef {object} useFetchOptions
  * @property {string} dataSubSelector - The key to use when setting the data state
  * @property {function} dataSetter - Function to call when setting the data state
+ * @property {string} paginationSelector - The key to use when setting the pagination state
+ * @property {function} paginationSetter - Function to call when setting the pagination state
  * @property {function} fetchingSetter - Function to call when setting the fetching state
  * @property {function} errorSetter - Function to call when setting the error state
  */
@@ -12,19 +14,27 @@ import { useEffect, useState } from "react";
  * useFetch
  * Custom hook for fetching data from the API
  * @param {useFetchOptions} options
- * @returns {object} { data, fetching, error, fetchData, resetState }
+ * @returns {object} { data, pagination, fetching, error, fetchData, resetState }
  */
 const useFetch = (options) => {
   const [data, setData] = useState(null);
+  const [pagination, setPagination] = useState(null);
   const [fetching, setFetching] = useState(false);
   const [error, setError] = useState(null);
   const [abortController, setAbortController] = useState(null);
-  const { dataSubSelector, dataSetter, fetchingSetter, errorSetter } =
-    options || {};
+  const {
+    dataSubSelector,
+    dataSetter,
+    paginationSelector,
+    paginationSetter,
+    fetchingSetter,
+    errorSetter,
+  } = options || {};
 
   // Reset the state to the initial values
   const resetState = () => {
     setData(null);
+    setPagination(null);
     setFetching(false);
     setError(null);
     setAbortController(null);
@@ -51,6 +61,7 @@ const useFetch = (options) => {
       const res = await fetch(url, { signal: newAbortController.signal });
       const data = await res.json();
       setData(dataSubSelector ? data[dataSubSelector] : data);
+      setPagination(paginationSelector ? data[paginationSelector] : {});
       setError(null);
       setFetching(false);
     } catch (error) {
@@ -84,6 +95,11 @@ const useFetch = (options) => {
   }, [data, dataSetter]);
 
   useEffect(() => {
+    if (!paginationSetter) return;
+    paginationSetter(pagination);
+  }, [pagination, paginationSetter]);
+
+  useEffect(() => {
     if (!errorSetter) return;
     errorSetter(error);
   }, [error, errorSetter]);
@@ -93,7 +109,7 @@ const useFetch = (options) => {
     fetchingSetter(fetching);
   }, [fetching, fetchingSetter]);
 
-  return { data, fetching, error, fetchData, resetState };
+  return { data, pagination, fetching, error, fetchData, resetState };
 };
 
 export default useFetch;
