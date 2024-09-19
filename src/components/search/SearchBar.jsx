@@ -35,7 +35,9 @@ function SearchBar(props) {
       event: "mmt_keyword_search",
       keyword: searchQuery,
     });
-    fetchData(createSearchUrl({ keywords: searchQuery }, hideFromTours));
+    fetchData(
+      createSearchUrl({ keywords: searchQuery, page: 1 }, hideFromTours),
+    );
     // Deselect any active theme
     setActiveTheme(null);
     event.preventDefault();
@@ -53,7 +55,7 @@ function SearchBar(props) {
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
-      fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
+      fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
     }
   }, [fetchData, initialRender, setInitialRender, hideFromTours]);
 
@@ -102,7 +104,9 @@ function SearchBar(props) {
             setSearchResultItems(null);
             setActiveTheme(null);
             // Apply results for empty keyword search
-            fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
+            fetchData(
+              createSearchUrl({ keywords: "", page: 1 }, hideFromTours),
+            );
             searchButtonRef.current.focus();
           }}
         >

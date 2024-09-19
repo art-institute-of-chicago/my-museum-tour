@@ -33,7 +33,7 @@ function ThemeToggle(props) {
       // Deselect the theme
       setActiveTheme(null);
       // Apply results for empty keyword search
-      fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
+      fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
     } else {
       triggerCustomEvent(document, "gtm:push", {
         event: "mmt_quickfilter",
