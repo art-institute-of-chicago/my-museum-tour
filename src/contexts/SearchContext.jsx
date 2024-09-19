@@ -14,6 +14,7 @@ export function SearchProvider(props) {
     searchFetching: searchFetchingValue,
     searchError: searchErrorValue,
     searchPreviewId: searchPreviewIdValue,
+    pagination: paginationValue,
   } = props;
   const [searchResultItems, setSearchResultItems] = useState(
     searchResultItemsValue || null,
@@ -28,6 +29,7 @@ export function SearchProvider(props) {
     searchPreviewIdValue || null,
   );
   const searchPreviewRef = useRef();
+  const [pagination, setPagination] = useState(paginationValue || null);
 
   return (
     <SearchContext.Provider
@@ -45,6 +47,8 @@ export function SearchProvider(props) {
         searchPreviewId,
         setSearchPreviewId,
         searchPreviewRef,
+        pagination,
+        setPagination,
       }}
     >
       {children}
@@ -59,6 +63,7 @@ SearchProvider.propTypes = {
   searchFetching: PropTypes.bool,
   searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   searchPreviewId: PropTypes.number,
+  pagination: PropTypes.object,
 };
 
 SearchContext.Provider.propTypes = {
@@ -76,6 +81,8 @@ SearchContext.Provider.propTypes = {
     searchPreviewId: PropTypes.number,
     setSearchPreviewId: PropTypes.func,
     searchPreviewRef: PropTypes.object,
+    pagination: PropTypes.object,
+    setPagination: PropTypes.func,
   }),
   children: PropTypes.node.isRequired,
 };
