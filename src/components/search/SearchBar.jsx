@@ -14,6 +14,7 @@ function SearchBar(props) {
     searchQuery,
     setSearchQuery,
     setSearchResultItems,
+    setPagination,
     setSearchFetching,
     setSearchError,
     setActiveTheme,
@@ -24,6 +25,8 @@ function SearchBar(props) {
   const { fetchData } = useFetch({
     dataSubSelector: "data",
     dataSetter: setSearchResultItems,
+    paginationSelector: "pagination",
+    paginationSetter: setPagination,
     fetchingSetter: setSearchFetching,
     errorSetter: setSearchError,
   });

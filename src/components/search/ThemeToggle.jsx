@@ -15,6 +15,7 @@ function ThemeToggle(props) {
   const { iiifBaseUrl } = useContext(AppContext);
   const {
     setSearchResultItems,
+    setPagination,
     setSearchFetching,
     setSearchError,
     setSearchQuery,
@@ -24,6 +25,8 @@ function ThemeToggle(props) {
   const { fetchData } = useFetch({
     dataSubSelector: "data",
     dataSetter: setSearchResultItems,
+    paginationSelector: "pagination",
+    paginationSetter: setPagination,
     fetchingSetter: setSearchFetching,
     errorSetter: setSearchError,
   });
