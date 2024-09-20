@@ -12,6 +12,7 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={null}
           searchFetching={false}
+          pagination={{ current_page: 1 }}
         >
           <SearchResults />
         </SearchProvider>
@@ -27,6 +28,7 @@ describe("<SearchResults />", () => {
           searchError={"Error loading results"}
           searchResultItems={null}
           searchFetching={false}
+          pagination={{ current_page: 1 }}
         >
           <SearchResults />
         </SearchProvider>
@@ -45,6 +47,7 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={null}
           searchFetching={true}
+          pagination={{ current_page: 1 }}
         >
           <SearchResults />
         </SearchProvider>
@@ -60,6 +63,7 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={[]}
           searchFetching={false}
+          pagination={{ current_page: 1 }}
         >
           <SearchResults />
         </SearchProvider>
@@ -75,6 +79,7 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={[item]}
           searchFetching={false}
+          pagination={{ current_page: 1 }}
         >
           <SearchResults />
         </SearchProvider>
