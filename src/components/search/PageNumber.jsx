@@ -3,7 +3,9 @@ import PropTypes from "prop-types";
 
 function PageNumber({ page, is_current_page }) {
   return (
-    <li className={is_current_page ? "s-active" : ""}><a href="">{page}</a></li>
+    <li className={is_current_page ? "s-active" : ""}>
+      <a href="">{page}</a>
+    </li>
   );
 }
 
