@@ -1,3 +1,4 @@
+import Pagination from "./Pagination";
 import React, { useContext, useEffect, useRef, useCallback } from "react";
 import SearchResultItem from "./SearchResultItem";
 import SearchPreview from "./SearchPreview";
@@ -144,6 +145,7 @@ function SearchResults() {
                 <SearchResultItem key={itemData.id} itemData={itemData} />
               ))}
             </ul>
+            <Pagination />
             <p className="aic-ct-post-result-text f-body">
               Looking for more artworks? Use the search field at the top of the
               page to see more.
