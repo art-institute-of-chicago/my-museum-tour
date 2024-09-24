@@ -43,6 +43,7 @@ export function camelToSnakeCase(str) {
  * createSearchURL
  * Takes a QueryParams object and returns a URL object
  * @param {QueryParams} queryParams - QueryParams object with keywords and/or themes
+ * @param {string[]} hideFromTours - Array of artwork ids to exclude from the search
  * @returns {URL} - URL object for API query
  */
 export function createSearchUrl(queryParams, hideFromTours) {
