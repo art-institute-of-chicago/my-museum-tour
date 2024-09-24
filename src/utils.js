@@ -122,6 +122,16 @@ export function createSearchUrl(queryParams, hideFromTours) {
 }
 
 /**
+ * Creates an array of numbers within the specified range
+ * @param {number} start - The first number of the range
+ * @param {number} end - The last numbef of the range
+ * @returns {number[]}
+ */
+export function range(start, end) {
+  return Array.from(Array(end), (_, index) => index + start);
+}
+
+/**
  * Wrapper for window.location.assign
  * Useful for stubbing during tests
  */
