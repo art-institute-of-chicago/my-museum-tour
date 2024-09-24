@@ -1,24 +1,40 @@
 import React, { useContext, useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types";
 import SearchResultItem from "./SearchResultItem";
+import Pagination from "./Pagination";
 import SearchPreview from "./SearchPreview";
 import { AppContext } from "../../contexts/AppContext";
 import { SearchContext } from "../../contexts/SearchContext";
+import useFetch from "../../hooks/useFetch";
+import { createSearchUrl } from "../../utils";
+
 /**
  * SearchResults
  */
 function SearchResults({ hideFromTours }) {
   const {
     searchError,
+    setSearchError,
     searchFetching,
+    setSearchFetching,
     searchResultItems,
+    setSearchResultItems,
     searchPreviewRef,
     setSearchPreviewId,
     activeTheme,
     searchQuery,
+    setPagination,
   } = useContext(SearchContext);
   const { scrollY } = useContext(AppContext);
   const pinboardRef = useRef(null);
+  const { fetchData } = useFetch({
+    dataSubSelector: "data",
+    dataSetter: setSearchResultItems,
+    paginationSelector: "pagination",
+    paginationSetter: setPagination,
+    fetchingSetter: setSearchFetching,
+    errorSetter: setSearchError,
+  });
 
   // Store a reference to the event listener callback to remove it later
   const handleClose = useCallback(
@@ -51,6 +67,12 @@ function SearchResults({ hideFromTours }) {
       document.dispatchEvent(evt);
     }, 0);
   }, []);
+
+  const goToPage = (page) => {
+    fetchData(
+      createSearchUrl({ keywords: searchQuery, page: page }, hideFromTours),
+    );
+  };
 
   // When the search results change, if the ref has a value,
   // And all other conditions which would render the pinboard are met
