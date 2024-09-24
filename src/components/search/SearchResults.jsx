@@ -1,5 +1,5 @@
-import Pagination from "./Pagination";
 import React, { useContext, useEffect, useRef, useCallback } from "react";
+import PropTypes from "prop-types";
 import SearchResultItem from "./SearchResultItem";
 import SearchPreview from "./SearchPreview";
 import { AppContext } from "../../contexts/AppContext";
@@ -7,7 +7,7 @@ import { SearchContext } from "../../contexts/SearchContext";
 /**
  * SearchResults
  */
-function SearchResults() {
+function SearchResults({ hideFromTours }) {
   const {
     searchError,
     searchFetching,
@@ -178,5 +178,9 @@ function SearchResults() {
     </>
   );
 }
+
+SearchResults.propTypes = {
+  hideFromTours: PropTypes.array,
+};
 
 export default SearchResults;
