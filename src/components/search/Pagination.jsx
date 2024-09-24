@@ -2,13 +2,12 @@ import React, { useContext } from "react";
 import { SearchContext } from "../../contexts/SearchContext";
 import PageNumber from "./PageNumber";
 
-function Pagination() {
   const { pagination } = useContext(SearchContext);
-  const pages = Array.from(
-    Array(pagination?.total_pages ?? 1),
-    (_, index) => index + 1,
-  );
-  console.log(pages);
+
+  const pages = useMemo(() => {
+    return range(1, pagination.total_pages ?? 1);
+  }, [pagination]);
+
 
   return (
     <nav className="m-paginator">
