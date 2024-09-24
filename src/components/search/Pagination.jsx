@@ -1,6 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useMemo } from "react";
+import PropTypes from "prop-types";
 import { SearchContext } from "../../contexts/SearchContext";
 import PageNumber from "./PageNumber";
+import { range } from "./../../utils";
+
+function Pagination({ goToPage }) {
 
   const { pagination } = useContext(SearchContext);
 
@@ -8,12 +12,27 @@ import PageNumber from "./PageNumber";
     return range(1, pagination.total_pages ?? 1);
   }, [pagination]);
 
+  const handleNextClick = () => {
+    if (pagination.current_page < pagination.total_pages) {
+      goToPage(pagination.current_page + 1);
+    }
+  };
+
+  const handlePreviousClick = () => {
+    if (pagination.current_page > 1) {
+      goToPage(pagination.current_page - 1);
+    }
+  };
 
   return (
     <nav className="m-paginator">
       <ul className="m-paginator__prev-next">
-        <li>Next</li>
-        <li>Previous</li>
+        <li>
+          <a onClick={handleNextClick}>Next</a>
+        </li>
+        <li>
+          <a onClick={handlePreviousClick}>Previous</a>
+        </li>
       </ul>
       <ul className="m-paginator__pages">
         {pages.map((page) => (
@@ -21,6 +40,7 @@ import PageNumber from "./PageNumber";
             key={page}
             page={page}
             is_current_page={page === pagination?.current_page}
+            goToPage={goToPage}
           />
         ))}
       </ul>
@@ -30,5 +50,9 @@ import PageNumber from "./PageNumber";
     </nav>
   );
 }
+
+Pagination.propTypes = {
+  goToPage: PropTypes.func,
+};
 
 export default Pagination;

@@ -167,7 +167,7 @@ function SearchResults({ hideFromTours }) {
                 <SearchResultItem key={itemData.id} itemData={itemData} />
               ))}
             </ul>
-            <Pagination />
+            <Pagination goToPage={goToPage} />
             <p className="aic-ct-post-result-text f-body">
               Looking for more artworks? Use the search field at the top of the
               page to see more.
