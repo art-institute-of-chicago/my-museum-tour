@@ -13,24 +13,9 @@ import { triggerCustomEvent } from "@area17/a17-helpers";
 function ThemeToggle(props) {
   const { id, label, thumbnailId, searchParams, hideFromTours } = props;
   const { iiifBaseUrl } = useContext(AppContext);
-  const {
-    setSearchResultItems,
-    setPagination,
-    setSearchFetching,
-    setSearchError,
-    setSearchParams,
-    setSearchQuery,
-    activeTheme,
-    setActiveTheme,
-  } = useContext(SearchContext);
-  const { fetchData } = useFetch({
-    dataSubSelector: "data",
-    dataSetter: setSearchResultItems,
-    paginationSelector: "pagination",
-    paginationSetter: setPagination,
-    fetchingSetter: setSearchFetching,
-    errorSetter: setSearchError,
-  });
+  const { setSearchParams, setSearchQuery, activeTheme, setActiveTheme } =
+    useContext(SearchContext);
+  const { fetchData } = useFetch();
 
   const handleClick = () => {
     if (activeTheme === label) {

@@ -14,28 +14,17 @@ import { createSearchUrl } from "../../utils";
 function SearchResults({ hideFromTours }) {
   const {
     searchError,
-    setSearchError,
     searchFetching,
-    setSearchFetching,
     searchResultItems,
-    setSearchResultItems,
     searchPreviewRef,
     setSearchPreviewId,
     activeTheme,
     searchParams,
     searchQuery,
-    setPagination,
   } = useContext(SearchContext);
   const { scrollY } = useContext(AppContext);
   const pinboardRef = useRef(null);
-  const { fetchData } = useFetch({
-    dataSubSelector: "data",
-    dataSetter: setSearchResultItems,
-    paginationSelector: "pagination",
-    paginationSetter: setPagination,
-    fetchingSetter: setSearchFetching,
-    errorSetter: setSearchError,
-  });
+  const { fetchData } = useFetch();
 
   // Store a reference to the event listener callback to remove it later
   const handleClose = useCallback(

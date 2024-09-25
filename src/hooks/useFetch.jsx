@@ -1,42 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
+import { SearchContext } from "../contexts/SearchContext";
 
 /**
  * @typedef {object} useFetchOptions
- * @property {string} dataSubSelector - The key to use when setting the data state
- * @property {function} dataSetter - Function to call when setting the data state
+ * @property {string} dataSelector - The key to use when setting the data state
  * @property {string} paginationSelector - The key to use when setting the pagination state
- * @property {function} paginationSetter - Function to call when setting the pagination state
- * @property {function} fetchingSetter - Function to call when setting the fetching state
- * @property {function} errorSetter - Function to call when setting the error state
  */
 
 /**
  * useFetch
  * Custom hook for fetching data from the API
  * @param {useFetchOptions} options
- * @returns {object} { data, pagination, fetching, error, fetchData, resetState }
+ * @returns {object} { fetchData, resetState }
  */
 const useFetch = (options) => {
-  const [data, setData] = useState(null);
-  const [pagination, setPagination] = useState(null);
-  const [fetching, setFetching] = useState(false);
-  const [error, setError] = useState(null);
   const [abortController, setAbortController] = useState(null);
   const {
-    dataSubSelector,
-    dataSetter,
-    paginationSelector,
-    paginationSetter,
-    fetchingSetter,
-    errorSetter,
-  } = options || {};
+    setSearchError,
+    setSearchFetching,
+    setSearchResultItems,
+    setPagination,
+  } = useContext(SearchContext);
+  const { dataSelector, paginationSelector } = options || {
+    dataSelector: "data",
+    paginationSelector: "pagination",
+  };
 
   // Reset the state to the initial values
   const resetState = () => {
-    setData(null);
+    setSearchResultItems(null);
     setPagination(null);
-    setFetching(false);
-    setError(null);
+    setSearchFetching(false);
+    setSearchError(null);
     setAbortController(null);
   };
 
@@ -47,7 +42,7 @@ const useFetch = (options) => {
    * @returns
    */
   const fetchData = async (url) => {
-    setFetching(true);
+    setSearchFetching(true);
     // Provide an AbortController to cancel the fetch request
     // if this function runs again before the request completes
 
@@ -60,10 +55,10 @@ const useFetch = (options) => {
     try {
       const res = await fetch(url, { signal: newAbortController.signal });
       const data = await res.json();
-      setData(dataSubSelector ? data[dataSubSelector] : data);
+      setSearchResultItems(dataSelector ? data[dataSelector] : data);
       setPagination(paginationSelector ? data[paginationSelector] : {});
-      setError(null);
-      setFetching(false);
+      setSearchError(null);
+      setSearchFetching(false);
     } catch (error) {
       // Explicity ignore AbortError's as they aren't really errors as far as we're concerned
       if (error.name === "AbortError") {
@@ -71,8 +66,8 @@ const useFetch = (options) => {
         return;
       }
 
-      setError("Error fetching results");
-      setFetching(false);
+      setSearchError("Error fetching results");
+      setSearchFetching(false);
     }
   };
 
@@ -89,27 +84,7 @@ const useFetch = (options) => {
     };
   }, [abortController]);
 
-  useEffect(() => {
-    if (!dataSetter) return;
-    dataSetter(data);
-  }, [data, dataSetter]);
-
-  useEffect(() => {
-    if (!paginationSetter) return;
-    paginationSetter(pagination);
-  }, [pagination, paginationSetter]);
-
-  useEffect(() => {
-    if (!errorSetter) return;
-    errorSetter(error);
-  }, [error, errorSetter]);
-
-  useEffect(() => {
-    if (!fetchingSetter) return;
-    fetchingSetter(fetching);
-  }, [fetching, fetchingSetter]);
-
-  return { data, pagination, fetching, error, fetchData, resetState };
+  return { fetchData, resetState };
 };
 
 export default useFetch;

@@ -10,26 +10,12 @@ import { triggerCustomEvent } from "@area17/a17-helpers";
  * SearchBar
  */
 function SearchBar(props) {
-  const {
-    searchQuery,
-    setSearchQuery,
-    setSearchResultItems,
-    setPagination,
-    setSearchFetching,
-    setSearchError,
-    setActiveTheme,
-  } = useContext(SearchContext);
+  const { searchQuery, setSearchQuery, setSearchResultItems, setActiveTheme } =
+    useContext(SearchContext);
 
   const [initialRender, setInitialRender] = useState(true);
 
-  const { fetchData } = useFetch({
-    dataSubSelector: "data",
-    dataSetter: setSearchResultItems,
-    paginationSelector: "pagination",
-    paginationSetter: setPagination,
-    fetchingSetter: setSearchFetching,
-    errorSetter: setSearchError,
-  });
+  const { fetchData } = useFetch();
 
   const { hideFromTours } = props;
 
