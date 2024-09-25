@@ -18,7 +18,7 @@ describe("<SearchResults />", () => {
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search-results").should("not.exist");
+    cy.get(".aic-ct-search-results").should("not.exist");
   });
 
   it("Renders error message", () => {
