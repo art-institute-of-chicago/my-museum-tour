@@ -21,10 +21,8 @@ const useFetch = (options) => {
     setSearchResultItems,
     setPagination,
   } = useContext(SearchContext);
-  const { dataSelector, paginationSelector } = options || {
-    dataSelector: "data",
-    paginationSelector: "pagination",
-  };
+  const { dataSelector = "data", paginationSelector = "pagination" } =
+    options || {};
 
   // Reset the state to the initial values
   const resetState = () => {
