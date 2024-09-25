@@ -22,6 +22,7 @@ function SearchResults({ hideFromTours }) {
     searchPreviewRef,
     setSearchPreviewId,
     activeTheme,
+    searchParams,
     searchQuery,
     setPagination,
   } = useContext(SearchContext);
@@ -69,8 +70,12 @@ function SearchResults({ hideFromTours }) {
   }, []);
 
   const goToPage = (page) => {
+    let searchKeywordsAndPage = { keywords: searchQuery, page: page };
     fetchData(
-      createSearchUrl({ keywords: searchQuery, page: page }, hideFromTours),
+      createSearchUrl(
+        { ...searchKeywordsAndPage, ...searchParams },
+        hideFromTours,
+      ),
     );
   };
 

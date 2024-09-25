@@ -18,6 +18,7 @@ function ThemeToggle(props) {
     setPagination,
     setSearchFetching,
     setSearchError,
+    setSearchParams,
     setSearchQuery,
     activeTheme,
     setActiveTheme,
@@ -35,6 +36,8 @@ function ThemeToggle(props) {
     if (activeTheme === label) {
       // Deselect the theme
       setActiveTheme(null);
+      // Nullify search params
+      setSearchParams(null);
       // Apply results for empty keyword search
       fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
     } else {
@@ -43,6 +46,8 @@ function ThemeToggle(props) {
         mmt_filterTitle: label,
       });
       fetchData(createSearchUrl(searchParams, hideFromTours));
+      // Set search params
+      setSearchParams(searchParams);
       // Clicking while active removes the theme
       setActiveTheme(label);
       // Empty the search field

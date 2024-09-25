@@ -11,6 +11,7 @@ export function SearchProvider(props) {
     children,
     searchResultItems: searchResultItemsValue,
     searchQuery: searchQueryValue,
+    searchParams: searchParamsValue,
     searchFetching: searchFetchingValue,
     searchError: searchErrorValue,
     searchPreviewId: searchPreviewIdValue,
@@ -20,6 +21,7 @@ export function SearchProvider(props) {
     searchResultItemsValue || null,
   );
   const [searchQuery, setSearchQuery] = useState(searchQueryValue || "");
+  const [searchParams, setSearchParams] = useState(searchParamsValue || null);
   const [searchFetching, setSearchFetching] = useState(
     searchFetchingValue || false,
   );
@@ -38,6 +40,8 @@ export function SearchProvider(props) {
         setSearchResultItems,
         searchQuery,
         setSearchQuery,
+        searchParams,
+        setSearchParams,
         searchFetching,
         setSearchFetching,
         searchError,
@@ -60,6 +64,7 @@ SearchProvider.propTypes = {
   children: PropTypes.node.isRequired,
   searchResultItems: PropTypes.array,
   searchQuery: PropTypes.string,
+  searchParams: PropTypes.object,
   searchFetching: PropTypes.bool,
   searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   searchPreviewId: PropTypes.number,
@@ -72,6 +77,8 @@ SearchContext.Provider.propTypes = {
     setSearchResultItems: PropTypes.func,
     searchQuery: PropTypes.string,
     setSearchQuery: PropTypes.func,
+    searchParams: PropTypes.object,
+    setSearchParams: PropTypes.func,
     searchFetching: PropTypes.bool,
     setSearchFetching: PropTypes.func,
     searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
