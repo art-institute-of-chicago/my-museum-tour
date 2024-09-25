@@ -125,11 +125,11 @@ export function createSearchUrl(queryParams, hideFromTours) {
 /**
  * Creates an array of numbers within the specified range
  * @param {number} start - The first number of the range
- * @param {number} end - The last numbef of the range
+ * @param {number} end - The last number of the range (inclusive)
  * @returns {number[]}
  */
 export function range(start, end) {
-  return Array.from(Array(end), (_, index) => index + start);
+  return Array.from(Array(end + 1 - start), (_, index) => index + start);
 }
 
 /**
