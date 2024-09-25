@@ -25,29 +25,20 @@ function Pagination({ goToPage }) {
   };
 
   return (
-    <nav className="m-paginator">
-      <ul className="m-paginator__prev-next">
-        <li>
-          <a onClick={handleNextClick}>Next</a>
-        </li>
-        <li>
-          <a onClick={handlePreviousClick}>Previous</a>
-        </li>
-      </ul>
-      <ul className="m-paginator__pages">
-        {pages.map((page) => (
-          <PageNumber
-            key={page}
-            page={page}
-            is_current_page={page === pagination?.current_page}
-            goToPage={goToPage}
-          />
-        ))}
-      </ul>
-      <p className="m-paginator__current-page">
-        Page {pagination.current_page}
-      </p>
-    </nav>
+      {hasPages() && (
+        <nav className="m-paginator">
+          <ul className="m-paginator__prev-next">
+            <li>
+              <a className="f-buttons" onClick={handleNextClick}>
+                Next
+              </a>
+            </li>
+            <li>
+              <a className="f-buttons" onClick={handlePreviousClick}>
+                Previous
+              </a>
+            </li>
+          </ul>
   );
 }
 
