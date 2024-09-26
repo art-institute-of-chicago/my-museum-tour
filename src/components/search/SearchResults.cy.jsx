@@ -12,12 +12,13 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={null}
           searchFetching={false}
+          pagination={null}
         >
-          <SearchResults />
+          <SearchResults hideFromTours={[]} />
         </SearchProvider>
       </AppProvider>,
     );
-    cy.get("#aic-ct-search-results__items").should("not.exist");
+    cy.get(".aic-ct-search-results").should("not.exist");
   });
 
   it("Renders error message", () => {
@@ -27,8 +28,9 @@ describe("<SearchResults />", () => {
           searchError={"Error loading results"}
           searchResultItems={null}
           searchFetching={false}
+          pagination={null}
         >
-          <SearchResults />
+          <SearchResults hideFromTours={[]} />
         </SearchProvider>
       </AppProvider>,
     );
@@ -45,8 +47,9 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={null}
           searchFetching={true}
+          pagination={null}
         >
-          <SearchResults />
+          <SearchResults hideFromTours={[]} />
         </SearchProvider>
       </AppProvider>,
     );
@@ -60,8 +63,9 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={[]}
           searchFetching={false}
+          pagination={{ current_page: 1, total_pages: 1 }}
         >
-          <SearchResults />
+          <SearchResults hideFromTours={[]} />
         </SearchProvider>
       </AppProvider>,
     );
@@ -75,8 +79,9 @@ describe("<SearchResults />", () => {
           searchError={false}
           searchResultItems={[item]}
           searchFetching={false}
+          pagination={{ current_page: 1, total_pages: 1 }}
         >
-          <SearchResults />
+          <SearchResults hideFromTours={[]} />
         </SearchProvider>
       </AppProvider>,
     );

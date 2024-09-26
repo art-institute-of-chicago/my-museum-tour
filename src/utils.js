@@ -43,6 +43,7 @@ export function camelToSnakeCase(str) {
  * createSearchURL
  * Takes a QueryParams object and returns a URL object
  * @param {QueryParams} queryParams - QueryParams object with keywords and/or themes
+ * @param {string[]} hideFromTours - Array of artwork ids to exclude from the search
  * @returns {URL} - URL object for API query
  */
 export function createSearchUrl(queryParams, hideFromTours) {
@@ -91,6 +92,7 @@ export function createSearchUrl(queryParams, hideFromTours) {
     "artist_title,short_description,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id",
   );
   url.searchParams.set("limit", "60");
+  url.searchParams.set("page", queryParams.page ?? 1);
   if (typeof queryParams.keywords !== "undefined") {
     url.searchParams.set("q", queryParams.keywords);
   }
@@ -118,6 +120,16 @@ export function createSearchUrl(queryParams, hideFromTours) {
   }
 
   return url;
+}
+
+/**
+ * Creates an array of numbers within the specified range
+ * @param {number} start - The first number of the range
+ * @param {number} end - The last number of the range (inclusive)
+ * @returns {number[]}
+ */
+export function range(start, end) {
+  return Array.from(Array(end + 1 - start), (_, index) => index + start);
 }
 
 /**

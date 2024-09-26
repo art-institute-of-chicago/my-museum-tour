@@ -1,12 +1,17 @@
 import React, { useContext, useEffect, useRef, useCallback } from "react";
+import PropTypes from "prop-types";
 import SearchResultItem from "./SearchResultItem";
+import Pagination from "./Pagination";
 import SearchPreview from "./SearchPreview";
 import { AppContext } from "../../contexts/AppContext";
 import { SearchContext } from "../../contexts/SearchContext";
+import useFetch from "../../hooks/useFetch";
+import { createSearchUrl } from "../../utils";
+
 /**
  * SearchResults
  */
-function SearchResults() {
+function SearchResults({ hideFromTours }) {
   const {
     searchError,
     searchFetching,
@@ -14,10 +19,12 @@ function SearchResults() {
     searchPreviewRef,
     setSearchPreviewId,
     activeTheme,
+    searchParams,
     searchQuery,
   } = useContext(SearchContext);
   const { scrollY } = useContext(AppContext);
   const pinboardRef = useRef(null);
+  const { fetchData } = useFetch();
 
   // Store a reference to the event listener callback to remove it later
   const handleClose = useCallback(
@@ -50,6 +57,16 @@ function SearchResults() {
       document.dispatchEvent(evt);
     }, 0);
   }, []);
+
+  const goToPage = (page) => {
+    let searchKeywordsAndPage = { keywords: searchQuery, page: page };
+    fetchData(
+      createSearchUrl(
+        { ...searchKeywordsAndPage, ...searchParams },
+        hideFromTours,
+      ),
+    );
+  };
 
   // When the search results change, if the ref has a value,
   // And all other conditions which would render the pinboard are met
@@ -144,6 +161,7 @@ function SearchResults() {
                 <SearchResultItem key={itemData.id} itemData={itemData} />
               ))}
             </ul>
+            <Pagination goToPage={goToPage} />
             <p className="aic-ct-post-result-text f-body">
               Looking for more artworks? Use the search field at the top of the
               page to see more.
@@ -176,5 +194,9 @@ function SearchResults() {
     </>
   );
 }
+
+SearchResults.propTypes = {
+  hideFromTours: PropTypes.array,
+};
 
 export default SearchResults;

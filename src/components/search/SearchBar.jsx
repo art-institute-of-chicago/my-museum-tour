@@ -10,23 +10,12 @@ import { triggerCustomEvent } from "@area17/a17-helpers";
  * SearchBar
  */
 function SearchBar(props) {
-  const {
-    searchQuery,
-    setSearchQuery,
-    setSearchResultItems,
-    setSearchFetching,
-    setSearchError,
-    setActiveTheme,
-  } = useContext(SearchContext);
+  const { searchQuery, setSearchQuery, setSearchResultItems, setActiveTheme } =
+    useContext(SearchContext);
 
   const [initialRender, setInitialRender] = useState(true);
 
-  const { fetchData } = useFetch({
-    dataSubSelector: "data",
-    dataSetter: setSearchResultItems,
-    fetchingSetter: setSearchFetching,
-    errorSetter: setSearchError,
-  });
+  const { fetchData } = useFetch();
 
   const { hideFromTours } = props;
 
@@ -35,7 +24,9 @@ function SearchBar(props) {
       event: "mmt_keyword_search",
       keyword: searchQuery,
     });
-    fetchData(createSearchUrl({ keywords: searchQuery }, hideFromTours));
+    fetchData(
+      createSearchUrl({ keywords: searchQuery, page: 1 }, hideFromTours),
+    );
     // Deselect any active theme
     setActiveTheme(null);
     event.preventDefault();
@@ -53,7 +44,7 @@ function SearchBar(props) {
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
-      fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
+      fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
     }
   }, [fetchData, initialRender, setInitialRender, hideFromTours]);
 
@@ -102,7 +93,9 @@ function SearchBar(props) {
             setSearchResultItems(null);
             setActiveTheme(null);
             // Apply results for empty keyword search
-            fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
+            fetchData(
+              createSearchUrl({ keywords: "", page: 1 }, hideFromTours),
+            );
             searchButtonRef.current.focus();
           }}
         >

@@ -13,33 +13,26 @@ import { triggerCustomEvent } from "@area17/a17-helpers";
 function ThemeToggle(props) {
   const { id, label, thumbnailId, searchParams, hideFromTours } = props;
   const { iiifBaseUrl } = useContext(AppContext);
-  const {
-    setSearchResultItems,
-    setSearchFetching,
-    setSearchError,
-    setSearchQuery,
-    activeTheme,
-    setActiveTheme,
-  } = useContext(SearchContext);
-  const { fetchData } = useFetch({
-    dataSubSelector: "data",
-    dataSetter: setSearchResultItems,
-    fetchingSetter: setSearchFetching,
-    errorSetter: setSearchError,
-  });
+  const { setSearchParams, setSearchQuery, activeTheme, setActiveTheme } =
+    useContext(SearchContext);
+  const { fetchData } = useFetch();
 
   const handleClick = () => {
     if (activeTheme === label) {
       // Deselect the theme
       setActiveTheme(null);
+      // Nullify search params
+      setSearchParams(null);
       // Apply results for empty keyword search
-      fetchData(createSearchUrl({ keywords: "" }, hideFromTours));
+      fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
     } else {
       triggerCustomEvent(document, "gtm:push", {
         event: "mmt_quickfilter",
         mmt_filterTitle: label,
       });
       fetchData(createSearchUrl(searchParams, hideFromTours));
+      // Set search params
+      setSearchParams(searchParams);
       // Clicking while active removes the theme
       setActiveTheme(label);
       // Empty the search field

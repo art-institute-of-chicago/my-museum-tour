@@ -63,7 +63,7 @@ const MyMuseumTourBuilder = (props) => {
               <div className="aic-ct__core">
                 <SearchBar {...SearchProps} />
                 <Themes {...SearchProps} />
-                <SearchResults />
+                <SearchResults {...SearchProps} />
               </div>
             </SearchProvider>
           </NavPage>

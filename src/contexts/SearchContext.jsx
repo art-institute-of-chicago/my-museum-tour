@@ -11,14 +11,17 @@ export function SearchProvider(props) {
     children,
     searchResultItems: searchResultItemsValue,
     searchQuery: searchQueryValue,
+    searchParams: searchParamsValue,
     searchFetching: searchFetchingValue,
     searchError: searchErrorValue,
     searchPreviewId: searchPreviewIdValue,
+    pagination: paginationValue,
   } = props;
   const [searchResultItems, setSearchResultItems] = useState(
     searchResultItemsValue || null,
   );
   const [searchQuery, setSearchQuery] = useState(searchQueryValue || "");
+  const [searchParams, setSearchParams] = useState(searchParamsValue || null);
   const [searchFetching, setSearchFetching] = useState(
     searchFetchingValue || false,
   );
@@ -28,6 +31,7 @@ export function SearchProvider(props) {
     searchPreviewIdValue || null,
   );
   const searchPreviewRef = useRef();
+  const [pagination, setPagination] = useState(paginationValue || null);
 
   return (
     <SearchContext.Provider
@@ -36,6 +40,8 @@ export function SearchProvider(props) {
         setSearchResultItems,
         searchQuery,
         setSearchQuery,
+        searchParams,
+        setSearchParams,
         searchFetching,
         setSearchFetching,
         searchError,
@@ -45,6 +51,8 @@ export function SearchProvider(props) {
         searchPreviewId,
         setSearchPreviewId,
         searchPreviewRef,
+        pagination,
+        setPagination,
       }}
     >
       {children}
@@ -56,9 +64,11 @@ SearchProvider.propTypes = {
   children: PropTypes.node.isRequired,
   searchResultItems: PropTypes.array,
   searchQuery: PropTypes.string,
+  searchParams: PropTypes.object,
   searchFetching: PropTypes.bool,
   searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
   searchPreviewId: PropTypes.number,
+  pagination: PropTypes.object,
 };
 
 SearchContext.Provider.propTypes = {
@@ -67,6 +77,8 @@ SearchContext.Provider.propTypes = {
     setSearchResultItems: PropTypes.func,
     searchQuery: PropTypes.string,
     setSearchQuery: PropTypes.func,
+    searchParams: PropTypes.object,
+    setSearchParams: PropTypes.func,
     searchFetching: PropTypes.bool,
     setSearchFetching: PropTypes.func,
     searchError: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
@@ -76,6 +88,8 @@ SearchContext.Provider.propTypes = {
     searchPreviewId: PropTypes.number,
     setSearchPreviewId: PropTypes.func,
     searchPreviewRef: PropTypes.object,
+    pagination: PropTypes.object,
+    setPagination: PropTypes.func,
   }),
   children: PropTypes.node.isRequired,
 };
