@@ -10,7 +10,7 @@ function PageNumber({ page, is_current_page, goToPage }) {
 
   return (
     <li className={is_current_page ? "s-active" : ""}>
-      <a className="f-buttons" onClick={handleClick}>
+      <a className="m-paginator__page f-buttons" onClick={handleClick}>
         {page}
       </a>
     </li>

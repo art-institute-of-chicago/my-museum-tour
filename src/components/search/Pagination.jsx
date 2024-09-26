@@ -145,12 +145,18 @@ function Pagination({ goToPage }) {
         <nav className="m-paginator">
           <ul className="m-paginator__prev-next">
             <li>
-              <a className="f-buttons" onClick={handleNextClick}>
+              <a
+                className="m-paginator__next f-buttons"
+                onClick={handleNextClick}
+              >
                 Next
               </a>
             </li>
             <li>
-              <a className="f-buttons" onClick={handlePreviousClick}>
+              <a
+                className="m-paginator__prev f-buttons"
+                onClick={handlePreviousClick}
+              >
                 Previous
               </a>
             </li>
