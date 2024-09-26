@@ -234,7 +234,7 @@ function L(i, a) {
   ), n.searchParams.set("query[bool][minimum_should_match]", "1"), n.searchParams.set(
     "fields",
     "artist_title,short_description,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id"
-  ), n.searchParams.set("limit", "60"), n.searchParams.set("page", i.page ?? 1), typeof i.keywords < "u" && n.searchParams.set("q", i.keywords), a)
+  ), n.searchParams.set("limit", "60"), typeof i.page < "u" && n.searchParams.set("page", i.page), typeof i.keywords < "u" && n.searchParams.set("q", i.keywords), a)
     for (const r of Object.values(a))
       n.searchParams.set(
         `query[bool][must_not][][term][id][value]=${r}`,

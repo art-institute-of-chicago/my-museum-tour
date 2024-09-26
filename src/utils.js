@@ -92,7 +92,9 @@ export function createSearchUrl(queryParams, hideFromTours) {
     "artist_title,short_description,description,id,image_id,thumbnail,title,date_display,gallery_title,gallery_id",
   );
   url.searchParams.set("limit", "60");
-  url.searchParams.set("page", queryParams.page ?? 1);
+  if (typeof queryParams.page !== "undefined") {
+    url.searchParams.set("page", queryParams.page);
+  }
   if (typeof queryParams.keywords !== "undefined") {
     url.searchParams.set("q", queryParams.keywords);
   }
