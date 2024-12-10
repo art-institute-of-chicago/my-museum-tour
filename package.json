@@ -1,6 +1,6 @@
 {
   "name": "my-museum-tour",
-  "version": "0.1.0",
+  "version": "1.17.0",
   "description": "![Art Institute of Chicago](https://raw.githubusercontent.com/Art-Institute-of-Chicago/template/master/aic-logo.gif)",
   "main": "dist/MyMuseumTourBuilder.js",
   "files": [

@@ -14,7 +14,10 @@ describe("<SearchResults />", () => {
           searchFetching={false}
           pagination={null}
         >
-          <SearchResults hideFromTours={[]} />
+          <SearchResults
+            hideObjectsFromTours={[]}
+            hideGalleriesFromTours={[]}
+          />
         </SearchProvider>
       </AppProvider>,
     );
@@ -30,7 +33,10 @@ describe("<SearchResults />", () => {
           searchFetching={false}
           pagination={null}
         >
-          <SearchResults hideFromTours={[]} />
+          <SearchResults
+            hideObjectsFromTours={[]}
+            hideGalleriesFromTours={[]}
+          />
         </SearchProvider>
       </AppProvider>,
     );
@@ -49,7 +55,10 @@ describe("<SearchResults />", () => {
           searchFetching={true}
           pagination={null}
         >
-          <SearchResults hideFromTours={[]} />
+          <SearchResults
+            hideObjectsFromTours={[]}
+            hideGalleriesFromTours={[]}
+          />
         </SearchProvider>
       </AppProvider>,
     );
@@ -65,7 +74,10 @@ describe("<SearchResults />", () => {
           searchFetching={false}
           pagination={{ current_page: 1, total_pages: 1 }}
         >
-          <SearchResults hideFromTours={[]} />
+          <SearchResults
+            hideObjectsFromTours={[]}
+            hideGalleriesFromTours={[]}
+          />
         </SearchProvider>
       </AppProvider>,
     );
@@ -81,7 +93,10 @@ describe("<SearchResults />", () => {
           searchFetching={false}
           pagination={{ current_page: 1, total_pages: 1 }}
         >
-          <SearchResults hideFromTours={[]} />
+          <SearchResults
+            hideObjectsFromTours={[]}
+            hideGalleriesFromTours={[]}
+          />
         </SearchProvider>
       </AppProvider>,
     );

@@ -17,7 +17,7 @@ function SearchBar(props) {
 
   const { fetchData } = useFetch();
 
-  const { hideFromTours } = props;
+  const { hideObjectsFromTours, hideGalleriesFromTours } = props;
 
   const handleSubmit = (event) => {
     triggerCustomEvent(document, "gtm:push", {
@@ -25,7 +25,11 @@ function SearchBar(props) {
       keyword: searchQuery,
     });
     fetchData(
-      createSearchUrl({ keywords: searchQuery, page: 1 }, hideFromTours),
+      createSearchUrl(
+        { keywords: searchQuery, page: 1 },
+        hideObjectsFromTours,
+        hideGalleriesFromTours,
+      ),
     );
     // Deselect any active theme
     setActiveTheme(null);
@@ -44,9 +48,21 @@ function SearchBar(props) {
   useEffect(() => {
     if (initialRender) {
       setInitialRender(false);
-      fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
+      fetchData(
+        createSearchUrl(
+          { keywords: "", page: 1 },
+          hideObjectsFromTours,
+          hideGalleriesFromTours,
+        ),
+      );
     }
-  }, [fetchData, initialRender, setInitialRender, hideFromTours]);
+  }, [
+    fetchData,
+    initialRender,
+    setInitialRender,
+    hideObjectsFromTours,
+    hideGalleriesFromTours,
+  ]);
 
   return (
     <form
@@ -94,7 +110,11 @@ function SearchBar(props) {
             setActiveTheme(null);
             // Apply results for empty keyword search
             fetchData(
-              createSearchUrl({ keywords: "", page: 1 }, hideFromTours),
+              createSearchUrl(
+                { keywords: "", page: 1 },
+                hideObjectsFromTours,
+                hideGalleriesFromTours,
+              ),
             );
             searchButtonRef.current.focus();
           }}
@@ -109,7 +129,8 @@ function SearchBar(props) {
 }
 
 SearchBar.propTypes = {
-  hideFromTours: PropTypes.array,
+  hideObjectsFromTours: PropTypes.array,
+  hideGalleriesFromTours: PropTypes.array,
 };
 
 export default SearchBar;

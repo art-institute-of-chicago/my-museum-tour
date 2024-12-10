@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
  * Themes
  */
 function Themes(props) {
-  const { hideFromTours } = props;
+  const { hideObjectsFromTours, hideGalleriesFromTours } = props;
 
   // TODO: There's interest in having this in some way configurable
   // Best way to achieve this is TBD
@@ -85,7 +85,8 @@ function Themes(props) {
           label={theme.label}
           thumbnailId={theme.thumbnailId}
           searchParams={theme.searchParams}
-          hideFromTours={hideFromTours}
+          hideObjectsFromTours={hideObjectsFromTours}
+          hideGalleriesFromTours={hideGalleriesFromTours}
         />
       ))}
     </ul>
@@ -93,7 +94,8 @@ function Themes(props) {
 }
 
 Themes.propTypes = {
-  hideFromTours: PropTypes.array,
+  hideObjectsFromTours: PropTypes.array,
+  hideGalleriesFromTours: PropTypes.array,
 };
 
 export default Themes;

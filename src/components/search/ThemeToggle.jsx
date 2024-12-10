@@ -11,7 +11,14 @@ import { triggerCustomEvent } from "@area17/a17-helpers";
  * ThemeToggle
  */
 function ThemeToggle(props) {
-  const { id, label, thumbnailId, searchParams, hideFromTours } = props;
+  const {
+    id,
+    label,
+    thumbnailId,
+    searchParams,
+    hideObjectsFromTours,
+    hideGalleriesFromTours,
+  } = props;
   const { iiifBaseUrl } = useContext(AppContext);
   const { setSearchParams, setSearchQuery, activeTheme, setActiveTheme } =
     useContext(SearchContext);
@@ -24,13 +31,25 @@ function ThemeToggle(props) {
       // Nullify search params
       setSearchParams(null);
       // Apply results for empty keyword search
-      fetchData(createSearchUrl({ keywords: "", page: 1 }, hideFromTours));
+      fetchData(
+        createSearchUrl(
+          { keywords: "", page: 1 },
+          hideObjectsFromTours,
+          hideGalleriesFromTours,
+        ),
+      );
     } else {
       triggerCustomEvent(document, "gtm:push", {
         event: "mmt_quickfilter",
         mmt_filterTitle: label,
       });
-      fetchData(createSearchUrl(searchParams, hideFromTours));
+      fetchData(
+        createSearchUrl(
+          searchParams,
+          hideObjectsFromTours,
+          hideGalleriesFromTours,
+        ),
+      );
       // Set search params
       setSearchParams(searchParams);
       // Clicking while active removes the theme
@@ -83,7 +102,8 @@ ThemeToggle.propTypes = {
   label: PropTypes.string.isRequired,
   thumbnailId: PropTypes.string.isRequired,
   searchParams: PropTypes.object.isRequired,
-  hideFromTours: PropTypes.array,
+  hideObjectsFromTours: PropTypes.array,
+  hideGalleriesFromTours: PropTypes.array,
 };
 
 export default ThemeToggle;
