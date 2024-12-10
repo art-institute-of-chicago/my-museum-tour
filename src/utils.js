@@ -43,17 +43,18 @@ export function camelToSnakeCase(str) {
  * createSearchURL
  * Takes a QueryParams object and returns a URL object
  * @param {QueryParams} queryParams - QueryParams object with keywords and/or themes
- * @param {string[]} hideFromTours - Array of artwork ids to exclude from the search
+ * @param {string[]} hideObjectsFromTours - Array of artwork ids to exclude from the search
+ * @param {string[]} hideGalleriesFromTours - Array of gallery ids to exclude from the search
  * @returns {URL} - URL object for API query
  */
-export function createSearchUrl(queryParams, hideFromTours) {
+export function createSearchUrl(
+  queryParams,
+  hideObjectsFromTours,
+  hideGalleriesFromTours,
+) {
   // Build the query string
   // I've broken this up to make it easer to reason about and manipulate
   const url = new URL("https://api.artic.edu/api/v1/artworks/search");
-  url.searchParams.set(
-    "query[bool][must_not][][term][gallery_id][value]",
-    "2147475902",
-  );
   url.searchParams.set(
     "query[bool][should][0][bool][must][][exists][field]",
     "short_description",
@@ -99,10 +100,19 @@ export function createSearchUrl(queryParams, hideFromTours) {
     url.searchParams.set("q", queryParams.keywords);
   }
 
-  if (hideFromTours) {
-    for (const val of Object.values(hideFromTours)) {
+  if (hideObjectsFromTours) {
+    for (const val of Object.values(hideObjectsFromTours)) {
       url.searchParams.set(
         `query[bool][must_not][][term][id][value]=${val}`,
+        val,
+      );
+    }
+  }
+
+  if (hideGalleriesFromTours) {
+    for (const val of Object.values(hideGalleriesFromTours)) {
+      url.searchParams.set(
+        `query[bool][must_not][][term][gallery_id][value]=${val}`,
         val,
       );
     }

@@ -11,7 +11,7 @@ import { createSearchUrl } from "../../utils";
 /**
  * SearchResults
  */
-function SearchResults({ hideFromTours }) {
+function SearchResults({ hideObjectsFromTours, hideGalleriesFromTours }) {
   const {
     searchError,
     searchFetching,
@@ -63,7 +63,8 @@ function SearchResults({ hideFromTours }) {
     fetchData(
       createSearchUrl(
         { ...searchKeywordsAndPage, ...searchParams },
-        hideFromTours,
+        hideObjectsFromTours,
+        hideGalleriesFromTours,
       ),
     );
   };
@@ -196,7 +197,8 @@ function SearchResults({ hideFromTours }) {
 }
 
 SearchResults.propTypes = {
-  hideFromTours: PropTypes.array,
+  hideObjectsFromTours: PropTypes.array,
+  hideGalleriesFromTours: PropTypes.array,
 };
 
 export default SearchResults;

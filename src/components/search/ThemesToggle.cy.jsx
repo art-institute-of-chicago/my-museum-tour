@@ -80,7 +80,7 @@ describe("<Themes />", () => {
             id="0"
             label="Test theme"
             searchParams={{ category_ids: ["PC-154"] }}
-            hideFromTours={["111111"]}
+            hideObjectsFromTours={["111111"]}
           />
         </SearchProvider>
       </AppProvider>,
@@ -94,7 +94,7 @@ describe("<Themes />", () => {
       );
   });
 
-  it("Requests the correct URL with hiding Regenstein artworks", () => {
+  it("Requests the correct URL with hiding galleries", () => {
     cy.intercept("GET", "https://api.artic.edu/api/v1/artworks/search*", {
       fixture: "json/search.json",
       delayMs: 80,
@@ -107,6 +107,7 @@ describe("<Themes />", () => {
             id="0"
             label="Test theme"
             searchParams={{ category_ids: ["PC-154"] }}
+            hideGalleriesFromTours={["222222"]}
           />
         </SearchProvider>
       </AppProvider>,
@@ -116,7 +117,7 @@ describe("<Themes />", () => {
       .its("request.url")
       .should(
         "include",
-        "query%5Bbool%5D%5Bmust_not%5D%5B%5D%5Bterm%5D%5Bgallery_id%5D%5Bvalue%5D=2147475902",
+        "&query%5Bbool%5D%5Bmust_not%5D%5B%5D%5Bterm%5D%5Bgallery_id%5D%5Bvalue%5D%3D222222",
       );
   });
 });

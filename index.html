@@ -29,8 +29,9 @@
           React.StrictMode,
           null,
           React.createElement(MyMuseumTourBuilder, {
-            apiSaveEndpoint: "http://www-dev.artic.edu/api/v1/my-museum-tour",
-            hideFromTours: []
+            apiSaveEndpoint: "https://staging.artic.edu/api/v1/my-museum-tour",
+            hideObjectsFromTours: [],
+            hideGalleriesFromTours: []
           }),
         ),
         document.querySelector("#root"),

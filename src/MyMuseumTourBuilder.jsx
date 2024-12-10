@@ -18,7 +18,8 @@ const MyMuseumTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
   const {
     apiSaveEndpoint,
-    hideFromTours,
+    hideObjectsFromTours,
+    hideGalleriesFromTours,
     tourTitle,
     tourDescription,
     tourItems,
@@ -37,7 +38,8 @@ const MyMuseumTourBuilder = (props) => {
   };
 
   const SearchProps = {
-    hideFromTours,
+    hideObjectsFromTours,
+    hideGalleriesFromTours,
   };
 
   useEffect(() => {
@@ -129,7 +131,8 @@ const MyMuseumTourBuilder = (props) => {
 
 MyMuseumTourBuilder.propTypes = {
   apiSaveEndpoint: PropTypes.string,
-  hideFromTours: PropTypes.array,
+  hideObjectsFromTours: PropTypes.array,
+  hideGalleriesFromTours: PropTypes.array,
   tourTitle: PropTypes.string,
   tourDescription: PropTypes.string,
   tourItems: PropTypes.array,
