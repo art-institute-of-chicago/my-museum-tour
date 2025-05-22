@@ -69,7 +69,7 @@ function Themes(props) {
     },
     {
       label: "Women Artists",
-      thumbnailId: "f7f9615d-2c2b-6b23-47b2-cd6cdc846504",
+      thumbnailId: "33d04b6a-3ebe-f577-444c-969cb208ad8d",
       searchParams: {
         theme_titles: ["Women artists"],
       },
