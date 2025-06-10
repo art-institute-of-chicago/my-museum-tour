@@ -650,14 +650,30 @@ function J(i) {
       event: "mmt_keyword_search",
       keyword: r
     }), u(
-      q({ keywords: r, page: 1 }, m, d)
+      q(
+        { keywords: r, page: 1 },
+        m,
+        d
+      )
     ), s(null), _.preventDefault();
   }, o = F(null), p = D("m-search-bar aic-ct-search", {
     "s-autocomplete-active": r
   });
   return S(() => {
-    c && (l(!1), u(q({ keywords: "", page: 1 }, m, d)));
-  }, [u, c, l, m, d]), /* @__PURE__ */ e.createElement(
+    c && (l(!1), u(
+      q(
+        { keywords: "", page: 1 },
+        m,
+        d
+      )
+    ));
+  }, [
+    u,
+    c,
+    l,
+    m,
+    d
+  ]), /* @__PURE__ */ e.createElement(
     "form",
     {
       id: "aic-ct-search",
@@ -698,7 +714,11 @@ function J(i) {
         type: "reset",
         onClick: () => {
           n(""), a(null), s(null), u(
-            q({ keywords: "", page: 1 }, m, d)
+            q(
+              { keywords: "", page: 1 },
+              m,
+              d
+            )
           ), o.current.focus();
         }
       },
@@ -711,11 +731,30 @@ J.propTypes = {
   hideGalleriesFromTours: t.array
 };
 function X(i) {
-  const { id: r, label: n, thumbnailId: a, searchParams: s, hideObjectsFromTours: c, hideGalleriesFromTours: l } = i, { iiifBaseUrl: u } = T(I), { setSearchParams: m, setSearchQuery: d, activeTheme: h, setActiveTheme: o } = T(j), { fetchData: p } = H(), _ = () => {
-    h === n ? (o(null), m(null), p(q({ keywords: "", page: 1 }, c, l))) : (R(document, "gtm:push", {
+  const {
+    id: r,
+    label: n,
+    thumbnailId: a,
+    searchParams: s,
+    hideObjectsFromTours: c,
+    hideGalleriesFromTours: l
+  } = i, { iiifBaseUrl: u } = T(I), { setSearchParams: m, setSearchQuery: d, activeTheme: h, setActiveTheme: o } = T(j), { fetchData: p } = H(), _ = () => {
+    h === n ? (o(null), m(null), p(
+      q(
+        { keywords: "", page: 1 },
+        c,
+        l
+      )
+    )) : (R(document, "gtm:push", {
       event: "mmt_quickfilter",
       mmt_filterTitle: n
-    }), p(q(s, c, l)), m(s), o(n), d(""));
+    }), p(
+      q(
+        s,
+        c,
+        l
+      )
+    ), m(s), o(n), d(""));
   }, b = D(
     "aic-ct-theme-toggle tag tag--senary tag--w-image",
     {
@@ -767,7 +806,7 @@ function Z(i) {
     },
     {
       label: "Portraits",
-      thumbnailId: "83375479-f7a9-bac3-44a8-e705ab6e423c",
+      thumbnailId: "19b70c5d-fc14-79fc-f501-97e3c36ec0b1",
       searchParams: {
         subject_ids: ["TM-8658"]
       }
@@ -809,7 +848,7 @@ function Z(i) {
     },
     {
       label: "Women Artists",
-      thumbnailId: "f7f9615d-2c2b-6b23-47b2-cd6cdc846504",
+      thumbnailId: "33d04b6a-3ebe-f577-444c-969cb208ad8d",
       searchParams: {
         theme_titles: ["Women artists"]
       }
