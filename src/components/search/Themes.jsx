@@ -24,7 +24,7 @@ function Themes() {
     },
     {
       label: "Portraits",
-      thumbnailId: "83375479-f7a9-bac3-44a8-e705ab6e423c",
+      thumbnailId: "3eaab3a3-2b47-9fdd-121c-050f6b8d9ccb",
       searchParams: {
         subject_ids: ["TM-8658"],
       },
