@@ -806,7 +806,7 @@ function Z(i) {
     },
     {
       label: "Portraits",
-      thumbnailId: "19b70c5d-fc14-79fc-f501-97e3c36ec0b1",
+      thumbnailId: "3eaab3a3-2b47-9fdd-121c-050f6b8d9ccb",
       searchParams: {
         subject_ids: ["TM-8658"]
       }
