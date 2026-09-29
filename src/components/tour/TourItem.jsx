@@ -30,6 +30,7 @@ function TourItem(props) {
   };
 
   const cappedNote = useCappedInput({
+    id: `aic-ct-note-${itemData.id}`,
     initialValue: tourItems[itemIndex]?.objectNote,
     maxLength: limits.objectNote,
     valueSetter: handleNote,
@@ -174,9 +175,14 @@ function TourItem(props) {
               placeholder="e.g. This reminds me of our vacation last year."
               value={cappedNote.value}
               maxLength={cappedNote.maxLength}
+              aria-invalid={cappedNote.hasMarkup ? "true" : "false"}
+              aria-describedby={
+                cappedNote.hasMarkup ? cappedNote.markupErrorId : null
+              }
             />
             {cappedNote.counterEl}
           </span>
+          {cappedNote.markupErrorEl}
         </span>
       </div>
       <button

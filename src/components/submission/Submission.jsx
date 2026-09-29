@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../contexts/AppContext";
-import { Location } from "../../utils";
+import { containsMarkup, Location } from "../../utils";
 
 /**
  * Submission
@@ -114,9 +114,36 @@ function Submission() {
       return false;
     });
 
+    // Disallow HTML markup in any free-text field
+    if (containsMarkup(tourTitle)) {
+      newValidityIssues.push("Tour title must not contain HTML");
+    }
+
+    if (containsMarkup(creatorName)) {
+      newValidityIssues.push("Your name must not contain HTML");
+    }
+
+    if (containsMarkup(recipientName)) {
+      newValidityIssues.push(
+        "Recipient name must not contain HTML",
+      );
+    }
+
+    if (containsMarkup(tourDescription)) {
+      newValidityIssues.push(
+        "Tour description must not contain HTML",
+      );
+    }
+
+    if (tourItems.some((item) => containsMarkup(item.objectNote))) {
+      newValidityIssues.push("Notes must not contain HTML");
+    }
+
     setValidityIssues(newValidityIssues);
   }, [
     tourTitle,
+    creatorName,
+    recipientName,
     tourDescription,
     tourItems,
     setValidityIssues,

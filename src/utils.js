@@ -145,6 +145,26 @@ export function range(start, end) {
 }
 
 /**
+ * Matches HTML
+ */
+const markupPattern = /<[a-z!/?]/i;
+
+/**
+ * Message shown to users when a field contains disallowed markup
+ */
+export const markupErrorMessage =
+  "HTML is not allowed";
+
+/**
+ * Checks whether a string contains HTML markup (and therefore could be used to inject scripts)
+ * @param {string} str - String to check
+ * @returns {boolean}
+ */
+export function containsMarkup(str) {
+  return typeof str === "string" && markupPattern.test(str);
+}
+
+/**
  * Wrapper for window.location.assign
  * Useful for stubbing during tests
  */

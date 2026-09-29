@@ -72,21 +72,25 @@ function TourMetadata() {
   };
 
   const cappedTitle = useCappedInput({
+    id: "aic-ct-metadata__title",
     initialValue: tourTitle,
     maxLength: limits.title,
     valueSetter: setTourTitle,
   });
   const cappedCreatorName = useCappedInput({
+    id: "aic-ct-metadata__creator-name",
     initialValue: creatorName,
     maxLength: limits.creatorName,
     valueSetter: handleCreatorName,
   });
   const cappedRecipientName = useCappedInput({
+    id: "aic-ct-metadata__recipient-name",
     initialValue: recipientName,
     maxLength: limits.recipientName,
     valueSetter: handleRecipientName,
   });
   const cappedDescription = useCappedInput({
+    id: "aic-ct-metadata__description",
     initialValue: tourDescription,
     maxLength: limits.description,
     valueSetter: handleTourDescription,
@@ -109,9 +113,15 @@ function TourMetadata() {
                 id="aic-ct-metadata__title"
                 maxLength={cappedTitle.maxLength}
                 aria-required="true"
-                aria-invalid={cappedTitle.value ? "false" : "true"}
+                aria-invalid={
+                  cappedTitle.value && !cappedTitle.hasMarkup ? "false" : "true"
+                }
                 aria-describedby={
-                  !cappedTitle.value ? "aic-ct-metadata__invalid-title" : null
+                  !cappedTitle.value
+                    ? "aic-ct-metadata__invalid-title"
+                    : cappedTitle.hasMarkup
+                    ? cappedTitle.markupErrorId
+                    : null
                 }
                 required
               />
@@ -125,6 +135,7 @@ function TourMetadata() {
                 Please enter a title for your tour
               </span>
             )}
+            {cappedTitle.markupErrorEl}
           </span>
         </li>
         <li className="m-fieldset__field o-blocks">
@@ -143,9 +154,16 @@ function TourMetadata() {
                 onChange={cappedCreatorName.onChange}
                 id="aic-ct-metadata__creator-name"
                 maxLength={cappedCreatorName.maxLength}
+                aria-invalid={cappedCreatorName.hasMarkup ? "true" : "false"}
+                aria-describedby={
+                  cappedCreatorName.hasMarkup
+                    ? cappedCreatorName.markupErrorId
+                    : null
+                }
               />
               {cappedCreatorName.counterEl}
             </span>
+            {cappedCreatorName.markupErrorEl}
           </span>
         </li>
         <li className="m-fieldset__field o-blocks">
@@ -199,9 +217,16 @@ function TourMetadata() {
                 onChange={cappedRecipientName.onChange}
                 id="aic-ct-metadata__recipient-name"
                 maxLength={cappedRecipientName.maxLength}
+                aria-invalid={cappedRecipientName.hasMarkup ? "true" : "false"}
+                aria-describedby={
+                  cappedRecipientName.hasMarkup
+                    ? cappedRecipientName.markupErrorId
+                    : null
+                }
               />
               {cappedRecipientName.counterEl}
             </span>
+            {cappedRecipientName.markupErrorEl}
           </span>
         </li>
         <li className="m-fieldset__field o-blocks">
@@ -220,9 +245,16 @@ function TourMetadata() {
                 rows="5"
                 value={cappedDescription.value}
                 maxLength={cappedDescription.maxLength}
+                aria-invalid={cappedDescription.hasMarkup ? "true" : "false"}
+                aria-describedby={
+                  cappedDescription.hasMarkup
+                    ? cappedDescription.markupErrorId
+                    : null
+                }
               />
               {cappedDescription.counterEl}
             </span>
+            {cappedDescription.markupErrorEl}
           </span>
         </li>
         <li className="m-fieldset__field o-blocks">
