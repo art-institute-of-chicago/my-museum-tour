@@ -21,10 +21,10 @@
     </div>
     <script type="module">
       import React from "react";
-      import ReactDOM from "react-dom";
+      import { createRoot } from "react-dom/client";
       import MyMuseumTourBuilder from "./src/MyMuseumTourBuilder.jsx";
 
-      ReactDOM.render(
+      createRoot(document.querySelector("#root")).render(
         React.createElement(
           React.StrictMode,
           null,
@@ -34,7 +34,6 @@
             hideGalleriesFromTours: []
           }),
         ),
-        document.querySelector("#root"),
       );
     </script>
   </body>

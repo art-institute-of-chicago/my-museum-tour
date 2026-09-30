@@ -87,6 +87,27 @@ describe("<TourMetadata />", () => {
     cy.get("#aic-ct-metadata__title").should("have.value", titleText);
   });
 
+  it("Shows an error when a field contains HTML", () => {
+    cy.mount(
+      <AppProvider>
+        <TourMetadata />
+      </AppProvider>,
+    );
+    const fields = [
+      "aic-ct-metadata__title",
+      "aic-ct-metadata__creator-name",
+      "aic-ct-metadata__recipient-name",
+      "aic-ct-metadata__description",
+    ];
+    fields.forEach((id) => {
+      cy.get(`#${id}`).type("<script>alert(1)</script>", { delay: 0 });
+      cy.get(`#${id}-invalid-markup`).should("exist");
+      cy.get(`#${id}`)
+        .should("have.attr", "aria-invalid", "true")
+        .and("have.attr", "aria-describedby", `${id}-invalid-markup`);
+    });
+  });
+
   it("Will stop allowing input after the maxLength", () => {
     const titleText =
       "Nullam aliquet fringilla dolor, vitae malesuada massa rutrum eget. Quisque sed nibh augue. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque tristique finibus sapien, condimentum condimentum magna biam.";
