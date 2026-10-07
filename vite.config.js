@@ -36,8 +36,10 @@ export default defineConfig({
   plugins: [react({ jsxRuntime: "classic" })],
   // Have static port for documentation purposes
   server: {
+    host: "127.0.0.1",
     port: 43110,
     strictPort: true,
+    allowedHosts: [".artic.edu"],
   },
   publicDir: resolve(__dirname, "cypress", "fixtures"),
 });
