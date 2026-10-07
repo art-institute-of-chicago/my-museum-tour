@@ -18,6 +18,7 @@ const MyMuseumTourBuilder = (props) => {
   // Mainly used for testing, but could be used for hydrating the app
   const {
     apiSaveEndpoint,
+    iiifBaseUrl: iiifBaseUrlValue,
     hideObjectsFromTours,
     hideGalleriesFromTours,
     tourTitle,
@@ -26,7 +27,7 @@ const MyMuseumTourBuilder = (props) => {
     heroImageId,
   } = props;
 
-  const iiifBaseUrl = "https://www.artic.edu/iiif/2";
+  const iiifBaseUrl = iiifBaseUrlValue || "https://www.artic.edu/iiif/2";
 
   const AppProviderProps = {
     apiSaveEndpoint,
@@ -131,6 +132,7 @@ const MyMuseumTourBuilder = (props) => {
 
 MyMuseumTourBuilder.propTypes = {
   apiSaveEndpoint: PropTypes.string,
+  iiifBaseUrl: PropTypes.string,
   hideObjectsFromTours: PropTypes.array,
   hideGalleriesFromTours: PropTypes.array,
   tourTitle: PropTypes.string,

@@ -28,9 +28,10 @@ It's decoupled from [artic.edu](https://github.com/art-institute-of-chicago/arti
 
 ## Configuration
 
-The `<MyMuseumTourBuilder />` React component can take in two `props`.
+The `<MyMuseumTourBuilder />` React component can take in the following `props`.
 
 - `apiSaveEndpoint` (optional) - which should be the path to the `my-museum-tour` save endpoint. If not provided it will default to `/api/v1/my-museum-tour`
+- `iiifBaseUrl` (optional) - which should be the base URL of the IIIF image server. If not provided it will default to `https://www.artic.edu/iiif/2`
 - `heroImageId` (optional) - which should be a string forming part of a IIIF image identifier that will be concatenated into a IIIF URL. If not provided there will be no hero image rendered on the customization screen.
 
 
