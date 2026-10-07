@@ -141,8 +141,8 @@ function TourItem(props) {
             src={iiifUrl(
               iiifBaseUrl,
               itemData.image_id,
-              "128",
-              "128",
+              "200",
+              "200",
               "square",
               true,
             )}

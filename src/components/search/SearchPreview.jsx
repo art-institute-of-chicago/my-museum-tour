@@ -76,7 +76,7 @@ function SearchPreview() {
 
             <div className="aic-ct-preview__image">
               <img
-                src={iiifUrl(iiifBaseUrl, previewData.image_id, 680, 680)}
+                src={iiifUrl(iiifBaseUrl, previewData.image_id, 800, 800)}
                 width={previewData.thumbnail.width}
                 height={previewData.thumbnail.height}
                 alt={previewData.thumbnail.alt_text || ""}
